@@ -74,11 +74,11 @@ https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-gui
 
 这个类图强调的是模型之间的关系，这些线条和箭头最终会在稍后转换为字段。
 
-对于**版块（Board）**模型，我们将从两个字段开始：name和description。 name字段必须是唯一的，为了避免有重复板的名称。description 用于说明这个版块是做什么用的。
+对于 ** 版块（Board）** 模型，我们将从两个字段开始：name和description。 name字段必须是唯一的，为了避免有重复板的名称。description 用于说明这个版块是做什么用的。
 
-**话题（Topic）**模型包括四个字段：subject，last_update 将用来定义话题的排序，starters 用来识别谁发起的话题，board 用于指定它属于哪个版块。
+** 话题（Topic）** 模型包括四个字段：subject，last_update 将用来定义话题的排序，starters 用来识别谁发起的话题，board 用于指定它属于哪个版块。
 
-**帖子（Post）** 模型有一个 message 字段，用于存储回复的内容，created_at 在一个话题里面排序时候用（最先发表的帖子排最前面），updated_at 告诉用户是否更新了内容，同时，还需要有对应的 User 模型的引用，由谁创建的和谁更新的。
+** 帖子（Post）** 模型有一个 message 字段，用于存储回复的内容，created_at 在一个话题里面排序时候用（最先发表的帖子排最前面），updated_at 告诉用户是否更新了内容，同时，还需要有对应的 User 模型的引用，由谁创建的和谁更新的。
 
 最后是 User 模型。在类图中，我只提到了字段username，password，email， is_superuser 标志，因为这几乎是我们现在要使用的所有东西。需要注意的是，我们不需要创建 User 模型，因为Django已经在contrib包中内置了User模型，我们将使用它。
 
