@@ -1,7 +1,9 @@
->译者：vimiix
+# 一个完整的Django入门指南  - 第1部分
+
+> 译者：[vimiix](https://github.com/vimiix)
+> 
 > 原文地址：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)
 
-# 一个完整的Django入门指南  - 第1部分
 
 ![](./statics/1-1.jpg)
 
@@ -248,7 +250,7 @@ python manage.py runserver
 
 在Django的哲学中，我们有两个重要的概念：
 
-* **app**：是一个可以做完成某件事情的Web应用程序。一个应用程序通常由一组**models**（数据库表），**views(视图)**，**templates(模板)**，**tests(测试)**组成。
+* **app**：是一个可以做完成某件事情的Web应用程序。一个应用程序通常由一组**models(数据库表)**，**views(视图)**，**templates(模板)**，**tests(测试)** 组成。
 * **project**：是配置和应用程序的集合。一个项目可以由多个应用程序或一个应用程序组成。
 
 请注意，如果没有一个**project**，你就无法运行Django应用程序。像博客这样的简单网站可以完全在单个应用程序中编写，例如可以将其命名为**blog**或**weblog**。
@@ -351,7 +353,7 @@ def home(request):
 
 ```
 
-视图是接收`httprequest`对象并返回一个`httpresponse`对象的Python函数。接收*request*作为参数并返回*response*作为结果。这个流程你必须记住！
+视图是接收`httprequest`对象并返回一个`httpresponse`对象的Python函数。接收 *request* 作为参数并返回 *response* 作为结果。这个流程你必须记住！
 
 我们在这里定义了一个简单的视图，命名为**home**，它只是简单地返回一个信息，一个字符串**hello，world!**。
 
@@ -375,7 +377,7 @@ urlpatterns = [
 
 和我之前提到的一样，我们将在稍后详细探讨这些概念。
 
-现在，Django使用**正则表达式**来匹配请求的URL。对于我们的**home**视图，我使用`^$` 正则，它将匹配一个空路径，也就是主页（这个URL：http://127.0.0.1:8000 ）。如果我想匹配的URL是 **http://127.0.0.1:8000/homepage/** ，那么我的URL正则表达式就会是：`url(r'^homepage/$', views.home, name='home')`。
+现在，Django使用**正则表达式**来匹配请求的URL。对于我们的**home**视图，我使用`^$` 正则，它将匹配一个空路径，也就是主页（这个URL：[http://127.0.0.1:8000](http://127.0.0.1:8000) ）。如果我想匹配的URL是 **[http://127.0.0.1:8000/homepage/](http://127.0.0.1:8000/homepage/)** ，那么我的URL正则表达式就会是：`url(r'^homepage/$', views.home, name='home')`。
 
 我们来看看会发生什么：
 
@@ -383,7 +385,7 @@ urlpatterns = [
 python manage.py runserver
 ```
 
-在一个Web浏览器中，打开 **http://127.0.0.1:8000** 这个链接：
+在一个Web浏览器中，打开 **[http://127.0.0.1:8000](http://127.0.0.1:8000)** 这个链接：
 
 ![](./statics/1-14.png)
 
