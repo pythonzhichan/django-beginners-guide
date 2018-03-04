@@ -1,3 +1,4 @@
+>译者：vimiix
 > 原文地址：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)
 
 # 一个完整的Django入门指南  - 第1部分
@@ -6,7 +7,7 @@
 
 ----
 
-## 介绍
+## 前言
 
 ![](./statics/1-2.jpg)
 
@@ -158,7 +159,7 @@ virtualenv venv -p python3
 source venv/bin/activate
 ```
 
-如果你在命令行前面看到**（venv）**，就代表激活成功了，就像这样：
+如果你在命令行前面看到 **(venv)**，就代表激活成功了，就像这样：
 
 ![](./statics/1-9.png)
 
@@ -374,7 +375,7 @@ urlpatterns = [
 
 和我之前提到的一样，我们将在稍后详细探讨这些概念。
 
-现在，Django使用**正则表达式**来匹配请求的URL。对于我们的**home**视图，我使用`^$` 正则，它将匹配一个空路径，也就是主页（这个URL：http://127.0.0.1:8000）。如果我想匹配的URL是**http://127.0.0.1:8000/homepage/**，那么我的URL正则表达式就会是：`url(r'^homepage/$', views.home, name='home')`。
+现在，Django使用**正则表达式**来匹配请求的URL。对于我们的**home**视图，我使用`^$` 正则，它将匹配一个空路径，也就是主页（这个URL：http://127.0.0.1:8000 ）。如果我想匹配的URL是 **http://127.0.0.1:8000/homepage/** ，那么我的URL正则表达式就会是：`url(r'^homepage/$', views.home, name='home')`。
 
 我们来看看会发生什么：
 
@@ -382,7 +383,7 @@ urlpatterns = [
 python manage.py runserver
 ```
 
-在一个Web浏览器中，打开**http://127.0.0.1:8000**这个链接：
+在一个Web浏览器中，打开 **http://127.0.0.1:8000** 这个链接：
 
 ![](./statics/1-14.png)
 
