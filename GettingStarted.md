@@ -184,7 +184,10 @@ deactivate
 很简单，现在我们已经启动了**venv**，运行以下命令来安装django：
 
 ```bash
-pip install django
+pip install django==1.11.4
+
+# 译注：目前django已经升级到2.x版本，这里为了跟后续教程内容保持一直，所以必须指定版本号进行安装
+# 除非你有能力 debug，否则不建议你使用django 2.x
 ```
 
 ![](./statics/1-10.png)
