@@ -463,22 +463,313 @@ Board.objects.get(name='django')
 boards.models.DoesNotExist: Board matching query does not exist.
 ```
 ### 模型操作总结
+下面是我们在本节中关于模型学到的方法和操作总结，并使用Board模型作为参考。大写的 **Board`指类，小写的**board**指**Board**的一个实例（或对象）
 
+|操作|代码示例|
+|:----|:-----|
+|创建一个对象而不保存|	board = Board()|
+|保存一个对象（创建或更新）|	board.save()|
+|数据库中创建并保存一个对象|	Board.objects.create(name='...', description='...')|
+|列出所有对象|	Board.objects.all()|
+|通过字段标识获取单个对象|Board.objects.get(id=1)|
 
+在下一小节中，我们将开始编写视图并在HTML页面中显示我们的版块。
 
-
-
-
-
-### 模型总结
 
 ### 视图、模板、静态文件
+
+目前我们已经有一个视图函数叫`home`,这个视图在我们的应用程序主页上显示为“Hello，World！” 
+
+**myproject/urls.py**
+
+```python
+from django.conf.urls import url
+from django.contrib import admin
+
+from boards import views
+
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^admin/', admin.site.urls),
+]
+```
+
+**boards/views.py**
+
+```python
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse('Hello, World!')
+```
+
+我们可以从这里开始写。如果你回想起我们的原型图，图5显示了主页应该是什么样子。我们想要做的是在表格中列出一些版块的名单以及其他一些描述信息。
+
+![board](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-boards.png)
+
+首先要做的是导入Board模型并列出所有现有的boards
+
+**boards/views.py**
+
+```python
+from django.http import HttpResponse
+from .models import Board
+
+def home(request):
+    boards = Board.objects.all()
+    boards_names = list()
+
+    for board in boards:
+        boards_names.append(board.name)
+
+    response_html = '<br>'.join(boards_names)
+
+    return HttpResponse(response_html)
+ ```
+
+ 结果就是这个简单的HTML页面：
+
+![boards](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-httpresponse.png)
+
+等等，我们在这里先停一下。真正的项目里面我们不会这样去渲染HTML。对于这个简单视图函数，我们做的就是列出所有版块，然后渲染部分是Django模板引擎的职责。
 
 
 ### Django 模板引擎设置
 
+在manage.py所在的目录创建一个名为 **templates**的新文件夹：
 
-### 首页测试
+```python
+myproject/
+ |-- myproject/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- templates/   <-- 这里
+ |    +-- manage.py
+ +-- venv/
+```
+在templates文件夹中，创建一个名为home.html的HTML文件：
+
+
+**templates/home.html**
+
+```python
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+  </head>
+  <body>
+    <h1>Boards</h1>
+
+    {% for board in boards %}
+      {{ board.name }} <br>
+    {% endfor %}
+
+  </body>
+</html>
+```
+
+在上面的例子中，我们混入了原始HTML和一些特殊标签 `{% for ... in ... %}` 和 `{{ variable }}` 。它们是Django模板语言的一部分。上面的例子展示了如何使用 `for`遍历列表对象。`{{ board.name }}`会在 HTML 模板中会被渲染成版块的名称，最后生成动态HTML文档。
+
+在我们可以使用这个HTML页面之前，我们必须告诉Django在哪里可以找到我们应用程序的模板。
+
+打开**myproject**目录下面的**settings.py**文件，搜索`TEMPLATES`变量，并设置`DIRS` 的值为 `os.path.join(BASE_DIR, 'templates')`：
+
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+本质上，刚添加的这一行所做的事情就是找到项目的完整路径并在后面附加“/templates”
+
+我们可以使用Python shell进行调试：
+
+```python
+python manage.py shell
+
+```
+
+```python
+from django.conf import settings
+
+settings.BASE_DIR
+'/Users/vitorfs/Development/myproject'
+
+import os
+
+os.path.join(settings.BASE_DIR, 'templates')
+'/Users/vitorfs/Development/myproject/templates'
+```
+看到了吗？它只是指向我们在前面步骤中创建的**templates**文件夹。
+
+现在我们可以更新**home**视图：
+
+**boards/views.py**
+
+```python
+from django.shortcuts import render
+from .models import Board
+
+def home(request):
+    boards = Board.objects.all()
+    return render(request, 'home.html', {'boards': boards})
+```
+
+生成的HTML：
+
+![html](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render.png)
+
+我们可以table表示替换，改进HTML模板：
+
+**templates/home.html**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+  </head>
+  <body>
+    <h1>Boards</h1>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Board</th>
+          <th>Posts</th>
+          <th>Topics</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for board in boards %}
+          <tr>
+            <td>
+              {{ board.name }}<br>
+              <small style="color: #888">{{ board.description }}</small>
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
+
+```
+
+![table](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render-2.png)
+
+
+
+### 测试主页
+
+![2-5](./statics/2-5.jpg)
+
+测试将是一个反复出现的主题，我们将在整个教程系列中一起探讨不同的概念和策略。
+
+我们来开始写第一个测试。现在，我们将在**boards**应用程序内的**tests.py**文件中操作
+
+**boards/tests.py**
+
+```ptyhon
+from django.core.urlresolvers import reverse
+from django.test import TestCase
+
+class HomeTests(TestCase):
+    def test_home_view_status_code(self):
+        url = reverse('home')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+```
+
+这是一个非常简单但非常有用的测试用例，我们测试的是请求该URL后返回的响应状态码。状态码200意味着成功。
+
+请求一下主页后，我们可以在控制台中看到响应的状态代码：
+
+![code](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/test-homepage-view-status-code-200.png)
+
+如果出现未捕获的异常，语法错误或其他任何情况，Django会返回状态代码500，这意味着**内部服务器错误**。现在，想象我们的应用程序有100个视图。如果我们为所有视图编写这个简单的测试，只需一个命令，我们就能够测试所有视图是否返回成功代码，因此用户在任何地方都看不到任何错误消息。如果没有自动化测试，我们需要逐一检查每个页面。
+
+执行Django的测试套件：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.041s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+现在我们可以测试Django是否在请求的URL的时候返回了正确的视图函数。这也是一个有用的测试，因为随着开发的进展，您会发现urls.py模块可能变得非常庞大而复杂。URL conf 全部是关于解析正则表达式的。有些情况下有一个非常宽容的URL（译注：本来不应该匹配的，却因为正则表达式写的过于宽泛而错误的匹配了），所以Django最终可能返回错误的视图函数。
+
+我们可以这样做：
+
+**boards/tests.py**
+
+```python
+from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.test import TestCase
+from .views import home
+
+class HomeTests(TestCase):
+    def test_home_view_status_code(self):
+        url = reverse('home')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_home_url_resolves_home_view(self):
+        view = resolve('/')
+        self.assertEquals(view.func, home)
+```
+
+在第二个测试中，我们使用了`resolve`函数。Django使用它来将浏览器发起请求的URL与urls.py模块中列出的URL进行匹配。该测试用于确定URL `/` 返回 home 视图。
+
+再次测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.027s
+
+OK
+Destroying test database for alias 'default'...
+```
+
 
 
 ### 静态文件测试
