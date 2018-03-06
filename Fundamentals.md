@@ -222,8 +222,253 @@ Django自动创建这种反向关系，`related_name`是可选项。但是，如
 ```python
 python manage.py makemigrations
 ```
+你会看到输出的内容是：
 
-### 模型API操作
+```
+Migrations for 'boards':
+  boards/migrations/0001_initial.py
+    - Create model Board
+    - Create model Post
+    - Create model Topic
+    - Add field topic to post
+    - Add field updated_by to post
+
+```
+
+此时，Django 在 boards/migrations 目录创建了一个名为 `0001_initial.py`的文件。它代表了应用程序模型的当前状态。在下一步，Django将使用该文件创建表和列。
+
+
+迁移文件将被翻译成SQL语句。如果您熟悉SQL，则可以运行以下命令来检验将是要被数据库执行的SQL指令
+
+```python
+python manage.py sqlmigrate boards 0001
+
+```
+
+如果你不熟悉SQL，也不要担心。在本系列教程中，我们不会直接使用SQL。所有的工作都将使用Django ORM来完成，它是一个与数据库进行通信的抽象层。
+
+下一步是将我们生成的迁移文件应用到数据库：
+
+```python
+python manage.py migrate
+
+```
+
+输出内容应该是这样的：
+
+```python
+Operations to perform:
+  Apply all migrations: admin, auth, boards, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying boards.0001_initial... OK
+  Applying sessions.0001_initial... OK
+```
+
+因为这是我们第一次迁移数据库，所以`migrate`命令把Django contrib app 中现有的迁移文件也执行了，这些内置app列在了`INSTALLED_APPS`。这是预料之中的。
+
+`Applying boards.0001_initial... OK`是我们在上一步中生成的迁移脚本。
+
+好了！我们的数据库已经可以使用了。
+
+![featured](./statics/2-3.jpg)
+
+>需要注意的是SQLite是一个产品级数据库。SQLite被许多公司用于成千上万的产品，如所有Android和iOS设备，主流的Web浏览器，Windows 10，MacOS等。
+
+>但这不适合所有情况。SQLite不能与MySQL，PostgreSQL或Oracle等数据库进行比较。大容量的网站，密集型写入的应用程序，大的数据集，高并发性的应用使用SQLite最终都会导致问题。
+
+>我们将在开发项目期间使用SQLite，因为它很方便，不需要安装其他任何东西。当我们将项目部署到生产环境时，再将切换到PostgreSQL（译注：后续，我们后面可能使用MySQL）。对于简单的网站这种做法没什么问题。但对于复杂的网站，建议在开发和生产中使用相同的数据库。
+
+
+### 试验 Models API
+
+使用Python进行开发的一个重要优点是交互式shell。我一直在使用它。这是一种快速尝试和试验API的方法。
+
+您可以使用manage.py 工具加载我们的项目来启动 Python shell ：
+
+```python
+python manage.py shell
+
+```
+
+```python
+Python 3.6.2 (default, Jul 17 2017, 16:44:45)
+[GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+```
+
+这与直接输入`python`指令来调用交互式控制台是非常相似的，除此之外，项目将被添加到`sys.path`并加载Django。这意味着我们可以在项目中导入我们的模型和其他资源并使用它。
+
+让我们从导入Board类开始：
+
+```python
+from boards.models import Board
+
+```
+
+要创建新的 boarrd 对象，我们可以执行以下操作：
+
+```python
+board = Board(name='Django', description='This is a board about Django.')
+
+```
+
+为了将这个对象保存在数据库中，我们必须调用save方法：
+
+
+```python
+board.save()
+
+```
+
+`save`方法用于创建和更新对象。这里Django创建了一个新对象，因为这时Board 实例没有id。第一次保存后，Django会自动设置ID：
+
+```python
+board.id
+1
+```
+
+您可以将其余的字段当做Python属性访问：
+
+```python
+board.name
+'Django'
+```
+
+```python
+board.description
+'This is a board about Django.'
+```
+
+要更新一个值，我们可以这样做：
+
+```python
+board.description = 'Django discussion board.'
+board.save()
+```
+
+每个Django模型都带有一个特殊的属性; 我们称之为**模型管理器(Model Manager)**。n你可以访问它的objects属性。它主要用于数据库操作。例如，我们可以使用它来直接创建一个新的Board对象：
+
+
+```python
+board = Board.objects.create(name='Python', description='General discussion about Python.')
+
+```
+
+```python
+board.id
+2
+```
+
+```python
+board.name
+'Python'
+```
+
+所以，现在我们有两个版块了。我们可以使用`objects`列出数据库中所有现有的版块：
+
+```python
+Board.objects.all()
+<QuerySet [<Board: Board object>, <Board: Board object>]>
+```
+
+结果是一个QuerySet。稍后我们会进一步了解。基本上，它是从数据库中查询的对象列表。我们看到有两个对象，但显示的名称是 Board object。这是因为我们尚未实现 Board 的`__str__` 方法。
+
+
+`__str__`方法是对象的字符串表示形式。我们可以使用版块的名称来表示它。
+
+首先，退出交互式控制台：
+
+```python
+exit()
+
+```
+
+现在编辑boards app 中的 models.py 文件：
+
+```python
+class Board(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+    description = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+ ```
+
+ 让我们重新查询，再次打开交互式控制台：
+
+```python
+ python manage.py shell
+```
+
+```python
+from boards.models import Board
+
+Board.objects.all()
+<QuerySet [<Board: Django>, <Board: Python>]>
+```
+
+好多了，对吧？
+
+我们可以将这个QuerySet看作一个列表。假设我们想遍历它并打印每个版块的描述：
+
+```python
+boards_list = Board.objects.all()
+for board in boards_list:
+    print(board.description)
+```
+结果是：
+```python
+Django discussion board.
+General discussion about Python.
+```
+同样，我们可以使用模型的 **Manager** 来查询数据库并返回单个对象。为此，我们要使用 `get` 方法：
+```python
+django_board = Board.objects.get(id=1)
+
+django_board.name
+'Django'
+```
+
+但我们必须小心这种操作。如果我们试图查找一个不存在的对象，例如，查找id=3的版块，它会引发一个异常：
+
+```python
+board = Board.objects.get(id=3)
+
+boards.models.DoesNotExist: Board matching query does not exist.
+```
+
+我们可以在`get`上使用模型的任何字段，但最好使用可唯一标识对象的字段来查询。否则，查询可能会返回多个对象，这也会导致异常。
+```python
+Board.objects.get(name='Django')
+<Board: Django>
+```
+请注意，查询区分大小写，小写“django”不匹配：
+
+```python
+Board.objects.get(name='django')
+boards.models.DoesNotExist: Board matching query does not exist.
+```
+### 模型操作总结
+
+
+
+
+
+
 
 ### 模型总结
 
