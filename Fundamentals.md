@@ -157,7 +157,7 @@ Post 必须有一个并且只有一个与之关联的用户，用户可以有许
 ### 模型
 
 
-这些模型基本上代表了应用程序的数据库设计。我们在本节中要做的是创建 Django 所表示的类，这些类就是在上一节中建模的类：Board，Topic和Post。User 模型被命名为内置应用叫 **auth*，它以命名空间 django.contrib.auth 的形式出现在 `INSTALLED_APPS` 配置中。
+这些模型基本上代表了应用程序的数据库设计。我们在本节中要做的是创建 Django 所表示的类，这些类就是在上一节中建模的类：Board，Topic和Post。User 模型被命名为内置应用叫 **auth**，它以命名空间 django.contrib.auth 的形式出现在 `INSTALLED_APPS` 配置中。
 
 我们要做的工作都在 boards/models.py 文件中。以下是我们在Django应用程序中如何表示类图的代码：
 
@@ -282,7 +282,7 @@ Running migrations:
 
 好了！我们的数据库已经可以使用了。
 
-![featured](./statics/2-3.jpg)
+![featured](./statics/2-4.jpg)
 
 >需要注意的是SQLite是一个产品级数据库。SQLite被许多公司用于成千上万的产品，如所有Android和iOS设备，主流的Web浏览器，Windows 10，MacOS等。
 
@@ -297,12 +297,12 @@ Running migrations:
 
 您可以使用manage.py 工具加载我们的项目来启动 Python shell ：
 
-```python
+```sh
 python manage.py shell
 
 ```
 
-```python
+```
 Python 3.6.2 (default, Jul 17 2017, 16:44:45)
 [GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -314,7 +314,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 让我们从导入Board类开始：
 
-```python
+```sh
 from boards.models import Board
 
 ```
@@ -538,7 +538,7 @@ def home(request):
 
 在manage.py所在的目录创建一个名为 **templates**的新文件夹：
 
-```python
+```sh
 myproject/
  |-- myproject/
  |    |-- boards/
@@ -552,7 +552,7 @@ myproject/
 
 **templates/home.html**
 
-```python
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -601,7 +601,7 @@ TEMPLATES = [
 
 我们可以使用Python shell进行调试：
 
-```python
+```sh
 python manage.py shell
 
 ```
@@ -713,11 +713,11 @@ class HomeTests(TestCase):
 
 执行Django的测试套件：
 
-```python
+```sh
 python manage.py test
 ```
 
-```python
+```sh
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .
@@ -755,11 +755,11 @@ class HomeTests(TestCase):
 
 再次测试：
 
-```python
+```sh
 python manage.py test
 ```
 
-```python
+```sh
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ..
@@ -770,10 +770,261 @@ OK
 Destroying test database for alias 'default'...
 ```
 
+要查看有关测试执行时更详细的信息，可将**verbosity**的级别设置得更高一点：
 
 
-### 静态文件测试
+```sh
+python manage.py test --verbosity=2
+```
 
-### Django Admin 介绍
+```sh
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, boards, contenttypes, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying boards.0001_initial... OK
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).
+test_home_url_resolves_home_view (boards.tests.HomeTests) ... ok
+test_home_view_status_code (boards.tests.HomeTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.017s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+```
+Verbosity决定了将要打印到控制台的通知和调试信息量; 0是无输出，1是正常输出，2是详细输出。
+
+
+### 静态文件设置
+
+静态文件是指 CSS，JavaScript，字体，图片或者是用来组成用户界面的任何其他资源。
+
+实际上，Django 本身是不负责处理这些文件的，为了让我们的开发过程更轻松，Django 提供了一些功能来帮助我们管理静态文件。这些功能可在 `INSTALLED_APPS` 的 **django.contrib.staticfiles** 应用程序中找到（译者：Django为了使得开发方便，也负责处理静态文件，而在生产环境下，静态文件直接由Nginx等反向代理服务器处理，而应用工服务器专心负责处理它擅长的业务逻辑）。
+
+市面上这么多的前端组件库，我们没有理由继续渲染基本的HTML文档。我们可以轻松地将Bootstrap 4添加到我们的项目中。Bootstrap是一个用HTML，CSS和JavaScript开发的开源工具包。
+
+在项目根目录中，除了 boards, templates 和myproject文件夹外，再创建一个名为static的新文件夹，并在static文件夹内创建另一个名为css的文件夹：
+
+```sh
+myproject/
+ |-- myproject/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- templates/
+ |    |-- static/       <-- here
+ |    |    +-- css/     <-- and here
+ |    +-- manage.py
+ +-- venv/
+ ```
+
+ 转到[getbootstrap.com](https://getbootstrap.com/docs/4.0/getting-started/download/#compiled-css-and-js)并下载最新版本：
+
+
+![bootstrap](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/bootstrap-download.png)
+
+
+下载编译版本的CSS和JS
+
+在你的计算机中，解压 bootstrap-4.0.0-beta-dist.zip 文件，将文件 css/bootstrap.min.css 复制到我们项目的css文件夹中：
+
+```python
+myproject/
+ |-- myproject/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- templates/
+ |    |-- static/
+ |    |    +-- css/
+ |    |         +-- bootstrap.min.css    <-- here
+ |    +-- manage.py
+ +-- venv/
+ ```
+
+ 下一步是告诉Django在哪里可以找到静态文件。打开settings.py，拉到文件的底部，在**STATIC_URL**后面添加以下内容：
+
+ ```python
+ STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+```
+
+还记得 **TEMPLATES**目录吗，和这个配置是一样的
+
+现在我们必须在模板中加载静态文件（Bootstrap CSS文件）：
+
+
+**templates/home.html**
+
+```html
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <!-- body suppressed for brevity ... -->
+  </body>
+</html>
+```
+
+首先，我们在模板的开头使用了 Static Files App 模板标签 `{% load static %}`。
+
+
+模板标签`{% static %}`用于组成资源所在的URL。在这种情况下，`{% static 'css/bootstrap.min.css' %}`将返回 **/static/css/bootstrap.min.css**，它相当于 **http://127.0.0.1:8000/static/css/bootstrap.min.css**。
+
+`{% static %}`模板标签使用 settings.py文件中的 `STATIC_URL` 配置来组成最终的URL，例如，如果您将静态文件托管在像 https://static.example.com/这样的子域中 ，那么我们将设置 `STATIC_URL=https://static.example.com/` ，然后 `{% static 'css/bootstrap.min.css' %}`返回的是 **https://static.example.com/css/bootstrap.min.css**
+
+如果目前这些对你来说搞不懂也不要担心。只要记得但凡是需要引用CSS，JavaScript或图片文件的地方就使用`{% static %}`。稍后，当我们开始部署项目到正式环境时，我们将讨论更多。现在，我们都设置好了。
+
+刷新页面 127.0.0.1:8000 ，我们可以看到它可以正常运行：
+
+![b](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap.png)
+
+现在我们可以编辑模板，以利用Bootstrap CSS：
+
+```html
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Boards</li>
+      </ol>
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Board</th>
+            <th>Posts</th>
+            <th>Topics</th>
+            <th>Last Post</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for board in boards %}
+            <tr>
+              <td>
+                {{ board.name }}
+                <small class="text-muted d-block">{{ board.description }}</small>
+              </td>
+              <td class="align-middle">0</td>
+              <td class="align-middle">0</td>
+              <td></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+```
+
+显示效果：
+
+![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-2.png)
+
+
+到目前为止，我们使用交互式控制台（python manage.py shell）添加新的版块。但我们需要一个更好的方式来实现。在下一节中，我们将为网站管理员实现一个管理界面来管理这些数据。
+
+### Django Admin 简介
+当我们开始一个新项目时，Django已经配置了Django Admin，这个应用程序列出的INSTALLED_APPS。
+
+![2-5](./statics/2-6.jpg)
+
+
+使用 Django Admin的一个很好的例子就是用在博客中; 它可以被作者用来编写和发布文章。另一个例子是电子商务网站，工作人员可以创建，编辑，删除产品。
+
+现在，我们将配置 Django Admin 来维护我们应用程序的版块。
+
+我们首先创建一个管理员帐户：
+
+```sh
+python manage.py createsuperuser
+```
+按照说明操作：
+
+```sh
+Username (leave blank to use 'vitorfs'): admin
+Email address: admin@example.com
+Password:
+Password (again):
+Superuser created successfully.
+```
+在浏览器中打开该URL：http://127.0.0.1:8000/admin/
+
+![https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-login.png](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-login.png)
+
+
+输入用户名和密码登录到管理界面：
+
+![admin](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin.png)
+
+它已经配置了一些功能。在这里，我们可以添加用户和组来管理权限。这些概念在后面我们将探讨更多。
+
+添加Board模型非常简单。打开boards目录中的admin.py文件，并添加以下代码：
+
+**boards/admin.py**
+
+```python
+
+from django.contrib import admin
+from .models import Board
+
+admin.site.register(Board)
+```
+
+保存admin.py文件，然后刷新网页浏览器中的页面：
+
+![baords](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards.png)
+
+对！它已准备好被使用了。点击Boards链接查看现有版块列表：
+
+![name](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-list.png)
+
+我们可以通过点击 Add Board 按钮添加一个新的版块：
+
+![new](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-add.png)
+
+点击保存按钮：
+
+![save](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-list-2.png)
+
+我们可以检查一切是否正常，打开URL http://127.0.0.1:8000 
+
+![home](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-3.png)
 
 ### 总结
+
+在本教程中，我们探讨了许多新概念。我们为项目定义了一些需求，创建了第一个模型，迁移了数据库，开始玩 Models API。我们创建了第一个视图并编写了一些单元测试。同时我们还配置了Django模板引擎，静态文件，并将Bootstrap 4库添加到项目中。最后，我们简要介绍了Django Admin界面。
+
+我希望你喜欢本系列教程的第二部分！下一部分，我们将探索Django的URL路由，表单API，可重用模板以及更多测试。
+
+该项目的源代码在GitHub上可用。本来的代码可以在发布标签v0.2-lw下找到。下面的链接将带你到正确的地方：
+
+https://github.com/sibtc/django-beginners-guide/tree/v0.2-lw
