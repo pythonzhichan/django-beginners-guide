@@ -15,3 +15,9 @@
 * Part 7 - [Deployment](./Deployment.md)
 
 
+* [Django入门指南-第2部分（系统设计）](./Fundamentals-1.md)
+* [Django入门指南-第2部分（模型设计）](./Fundamentals-2.md)
+* [Django入门指南-第2部分（视图、模板、静态文件）](./Fundamentals-3.md)
+* [Django入门指南-第2部分（Django Admin）](./Fundamentals-4.md)
+
+
