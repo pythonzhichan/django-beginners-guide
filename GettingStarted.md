@@ -80,7 +80,7 @@ Django的开发得到了[Django软件基金会](https://www.djangoproject.com/fo
 
 当你看到以下消息时，就代表安装完成了：
 
-```bash
+```
 ==> Installation successful!
 
 ==> Homebrew has enabled anonymous aggregate user behaviour analytics.
@@ -212,7 +212,7 @@ django-admin startproject myproject
 
 现在，我们的**myproject**目录结构如下所示：
 
-```bash
+```
 myproject/                  <-- 高级别的文件夹
  |-- myproject/             <-- Django项目文件夹
  |    |-- myproject/
@@ -376,7 +376,7 @@ urlpatterns = [
 ]
 ```
 
-如果你将上面的代码片段与你的**urls.py**文件进行比较，你会注意到我添加了以下新代码：`url（r'^ $'，views.home，name ='home'）`并从我们的应用程序**boards**中导入了**views**模块通过`from boards import views`。
+如果你将上面的代码片段与你的**urls.py**文件进行比较，你会注意到我添加了以下新代码：`url（r'^ $'，views.home，name ='home'）`并通过`from boards import views`从我们的应用程序**boards**中导入了**views**模块。
 
 和我之前提到的一样，我们将在稍后详细探讨这些概念。
 
@@ -392,7 +392,7 @@ python manage.py runserver
 
 ![](./statics/1-14.png)
 
-就是这样！你刚刚创建成功了你的第一个视图，
+就是这样！你刚刚成功创建了你的第一个视图。
 
 ----
 
