@@ -223,7 +223,7 @@ def home(request):
 **boards/tests.py**
 
 ```ptyhon
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 
 class HomeTests(TestCase):
