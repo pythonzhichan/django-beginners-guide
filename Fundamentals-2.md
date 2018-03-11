@@ -287,7 +287,7 @@ for board in boards_list:
 Django discussion board.
 General discussion about Python.
 ```
-同样，我们可以使用模型的 **Manager** 来查询数据库并返回单个对象。为此，我们要使用 `get` 方法：
+同样，我们可以使用模型的 **管理器（Manager）** 来查询数据库并返回单个对象。为此，我们要使用 `get` 方法：
 ```python
 django_board = Board.objects.get(id=1)
 
@@ -303,7 +303,7 @@ board = Board.objects.get(id=3)
 boards.models.DoesNotExist: Board matching query does not exist.
 ```
 
-我们可以在`get`上使用模型的任何字段，但最好使用可唯一标识对象的字段来查询。否则，查询可能会返回多个对象，这也会导致异常。
+`get`方法的参数可以是模型的任何字段，但最好使用可唯一标识对象的字段来查询。否则，查询可能会返回多个对象，这也会导致异常。
 ```python
 Board.objects.get(name='Django')
 <Board: Django>
@@ -314,8 +314,8 @@ Board.objects.get(name='Django')
 Board.objects.get(name='django')
 boards.models.DoesNotExist: Board matching query does not exist.
 ```
-### 模型操作总结
-下面是我们在本节中关于模型学到的方法和操作总结，并使用Board模型作为参考。大写的 **Board`指类，小写的**board**指**Board**的一个实例（或对象）
+### 总结
+下面是我们在本节中关于模型学到的方法和操作，使用Board模型作为参考。大写的 **Board**指的是类，小写的**board**指**Board**的一个实例（或对象）
 
 |操作|代码示例|
 |:----|:-----|
