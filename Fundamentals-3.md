@@ -258,14 +258,14 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-现在我们可以测试Django是否在请求的URL的时候返回了正确的视图函数。这也是一个有用的测试，因为随着开发的进展，您会发现urls.py模块可能变得非常庞大而复杂。URL conf 全部是关于解析正则表达式的。有些情况下有一个非常宽容的URL（译注：本来不应该匹配的，却因为正则表达式写的过于宽泛而错误的匹配了），所以Django最终可能返回错误的视图函数。
+现在我们可以测试Django是否在请求的URL的时候返回了正确的视图函数。这也是一个有用的测试，因为随着开发的进展，您会发现urls.py模块可能变得非常庞大而复杂，Django可能返回错误的视图函数。
 
 我们可以这样做：
 
 **boards/tests.py**
 
 ```python
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.urls import resolve
 from django.test import TestCase
 from .views import home
