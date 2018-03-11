@@ -179,15 +179,13 @@ deactivate
 
 但是，我们现在先保持激活状态来进行下一步。
 
-## 安装 Django 1.11.4
+## 安装 Django 2.0
 
 很简单，现在我们已经启动了**venv**，运行以下命令来安装django：
 
 ```bash
-pip install django==1.11.4
+pip install django==2.0.3
 
-# 译注：目前django已经升级到2.x版本，这里为了跟后续教程内容保持一直，所以必须指定版本号进行安装
-# 除非你有能力 debug，否则不建议你使用django 2.x
 ```
 
 ![](./statics/1-10.png)

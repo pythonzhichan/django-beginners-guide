@@ -53,7 +53,7 @@ python manage.py runserver
 
 现在在Web浏览器中打开URL：**[http://127.0.0.1:8000](http://127.0.0.1:8000)**，你应该看到下面的页面：
 
-![](./statics/1-12.png)
+![](./statics/django-init.png)
 
 使用组合键 `Control + C`来终止开发服务器。
 
@@ -136,14 +136,13 @@ INSTALLED_APPS = [
 
 ```python
 INSTALLED_APPS = [
+    'boards.apps.BoardsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'boards',  # 译者注：建议和作者一样空一行来区别内置app和自定义的app
 ]
 ```
 
@@ -182,16 +181,16 @@ from django.contrib import admin
 from boards import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^admin/', admin.site.urls),
+    path(r'', views.home, name='home'),
+    path('admin/', admin.site.urls),
 ]
 ```
 
-如果你将上面的代码片段与你的**urls.py**文件进行比较，你会注意到我添加了以下新代码：`url（r'^ $'，views.home，name ='home'）`并通过`from boards import views`从我们的应用程序**boards**中导入了**views**模块。
+如果你将上面的代码片段与你的**urls.py**文件进行比较，你会注意到我添加了以下新代码：`path(r'', views.home, name='home'),`并通过`from boards import views`从我们的应用程序**boards**中导入了**views**模块。
 
 和我之前提到的一样，我们将在稍后详细探讨这些概念。
 
-现在，Django使用**正则表达式**来匹配请求的URL。对于我们的**home**视图，我使用`^$` 正则，它将匹配一个空路径，也就是主页（这个URL：[http://127.0.0.1:8000](http://127.0.0.1:8000) ）。如果我想匹配的URL是 **[http://127.0.0.1:8000/homepage/](http://127.0.0.1:8000/homepage/)** ，那么我的URL正则表达式就会是：`url(r'^homepage/$', views.home, name='home')`。
+现在，Django使用**路径**来匹配请求的URL。对于我们的**home**视图，我使用``匹配一个空路径，也就是主页（这个URL：[http://127.0.0.1:8000](http://127.0.0.1:8000) ）。如果我想匹配的URL是 **[http://127.0.0.1:8000/homepage/](http://127.0.0.1:8000/homepage/)** ，那么我的URL就会是：`path(r'homepage/', views.home, name='home')`。
 
 我们来看看会发生什么：
 
