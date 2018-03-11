@@ -22,4 +22,6 @@
 * Part 6 - [Class-Based Views](./ClassBasedViews.md)
 * Part 7 - [Deployment](./Deployment.md)
 
+前五部分已被认领翻译
+
 

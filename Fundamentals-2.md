@@ -52,11 +52,24 @@ class Post(models.Model):
 
 在`Post`模型中，`created_at`字段有一个可选参数，`auto_now_add`设置为`True`。这将告诉Django创建`Post`对象时为当前日期和时间。
 
-模型之间的关系使用`ForeignKey`字段。它将在模型之间创建一个连接，并在数据库级别创建适当的关系（译注：外键关联）。该`ForeignKey`字段需要一个位置参数`related_name`，用于引用它关联的模型。（译注：例如 created_by 是外键字段，关联的User模型，表明这个帖子是谁创建的，related_name=posts 表示在 User 那边可以使用 user.posts 来查看这个用户创建了哪些帖子）
+模型之间的关系使用`ForeignKey`字段。它将在模型之间创建一个连接，并在数据库级别创建适当的关系（译注：外键关联）。该`ForeignKey`字段需要一个位置参数`related_name`，用于引用它关联的模型。（译注：例如 created_by 是外键字段，关联的User模型，表明这个帖子是谁创建的，related_name=posts 表示在 User 那边可以使用 user.posts 来查看这个用户创建的帖子列表）。
 
 例如，在`Topic`模型中，`board`字段是`Board`模型的`ForeignKey`。它告诉Django，一个`Topic`实例只涉及一个Board实例。`related_name`参数将用于创建反向关系，`Board`实例通过属性`topics`访问属于这个版块下的`Topic`列表。
 
 Django自动创建这种反向关系，`related_name`是可选项。但是，如果我们不为它设置一个名称，Django会自动生成它：`(class_name)_set`。例如，在`Board`模型中，所有`Topic`列表将用`topic_set`属性表示。而这里我们将其重新命名为了`topics`，以使其感觉更自然。
+
+在django2.0中，`ForeignKey` 还有一个必选参数是 `on_delete`，表示当外键对应的对象删除时，该对象进行的操作，它的可选值有：
+
+* CASCADE：级联删除
+* PROTECT：不允许删除
+* SET_NULL：设置为空值
+* SET_DEFAULT：设置为默认值
+* DO_NOTHING：什么也不做
+
+例如，在 `Topic`模型中，当它关联的 `board` 删除了，topic 采取的操作取决于 `on_delete`的值，如果是 **CASCADE**，那么该boad下面所有的主题都将被删除，而PROTECT表示不允许这样操作，必选先将关联的主题全部删除之后，才能把 board 删除。
+
+
+
 
 在`Post`模型中，该`updated_by`字段设置`related_name='+'`。这指示Django我们不需要这种反向关系，所以它会被忽略（译注：也就是说我们不需要关系用户修改过哪些帖子）。
 
