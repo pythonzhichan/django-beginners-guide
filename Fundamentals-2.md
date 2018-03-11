@@ -212,7 +212,7 @@ board.description = 'Django discussion board.'
 board.save()
 ```
 
-每个Django模型都带有一个特殊的属性; 我们称之为**模型管理器(Model Manager)**。你可以访问管理器的objects属性，它主要用于数据库操作。例如，我们可以使用它来直接创建一个新的Board对象：
+每个Django模型都带有一个特殊的属性; 我们称之为**模型管理器(Model Manager)**。你可以通过属性`objects` 来访问这个管理器，它主要用于数据库操作。例如，我们可以使用它来直接创建一个新的Board对象：
 
 
 ```python
