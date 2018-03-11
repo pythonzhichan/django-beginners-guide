@@ -4,7 +4,7 @@
 >原文：
 https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
 
-
+![featured](./statics/2-1.jpg)
 
 ### 视图、模板、静态文件
 
@@ -13,14 +13,14 @@ https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-gui
 **myproject/urls.py**
 
 ```python
-from django.conf.urls import url
 from django.contrib import admin
+from django.urls import path
 
 from boards import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^admin/', admin.site.urls),
+    path(r'', views.home, name='home'),
+    path('admin/', admin.site.urls),
 ]
 ```
 
