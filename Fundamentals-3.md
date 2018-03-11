@@ -37,7 +37,7 @@ def home(request):
 
 ![board](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-boards.png)
 
-首先要做的是导入Board模型并列出所有现有的boards
+首先要做的是导入Board模型并列出所有的版块
 
 **boards/views.py**
 
@@ -166,7 +166,7 @@ def home(request):
 
 ![html](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render.png)
 
-我们可以table表示替换，改进HTML模板：
+我们可以用一个更漂亮的表格来替换，改进HTML模板：
 
 **templates/home.html**
 
@@ -239,7 +239,7 @@ class HomeTests(TestCase):
 
 ![code](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/test-homepage-view-status-code-200.png)
 
-如果出现未捕获的异常，语法错误或其他任何情况，Django会返回状态代码500，这意味着**内部服务器错误**。现在，想象我们的应用程序有100个视图。如果我们为所有视图编写这个简单的测试，只需一个命令，我们就能够测试所有视图是否返回成功代码，因此用户在任何地方都看不到任何错误消息。如果没有自动化测试，我们需要逐一检查每个页面。
+如果出现未捕获的异常，语法错误或其他任何情况，Django会返回状态代码500，这意味着是**内部服务器错误**。现在，想象我们的应用程序有100个视图函数。如果我们为所有视图编写这个简单的测试，只需一个命令，我们就能够测试所有视图是否返回成功代码，因此用户在任何地方都看不到任何错误消息。如果没有自动化测试，我们需要逐一检查每个页面是否有错误。
 
 执行Django的测试套件：
 
