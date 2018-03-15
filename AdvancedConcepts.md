@@ -1,3 +1,8 @@
+-AdvancedConcepts.md
+-
+-https://simpleisbetterthancomplex.com/series/2017/09/18/a-complete-beginners-guide-to-django-part-3.html
+-
+
 在这个课程，我们将深入两个基本概念: URLs 和 Forms。在这个过程中，我们将学习一些其他的概念，如创建可重用模板和安装第三方库。我们还将编写大量单元测试。
 如果你是从这个系列教程的 part 1 跟着这个教程一步步地编写的你的项目，你可能需要在开始之前更新你的 **models.py**:
     
