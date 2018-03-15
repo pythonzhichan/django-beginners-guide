@@ -1,7 +1,3 @@
-AdvancedConcepts.md
-
-https://simpleisbetterthancomplex.com/series/2017/09/18/a-complete-beginners-guide-to-django-part-3.html
-
 在这个课程，我们将深入两个基本概念: URLs 和 Forms。在这个过程中，我们将学习一些其他的概念，如创建可重用模板和安装第三方库。我们还将编写大量单元测试。
 如果你是从这个系列教程的 part 1 跟着这个教程一步步地编写的你的项目，你可能需要在开始之前更新你的 **models.py**:
     
@@ -225,7 +221,420 @@ def board_topics(request, id):
 
 名字无关紧要，但是使用命名参数是一个很好的做法，因为当我们开始编写需要匹配大量的 ID 和变量的更大规模的 URLs 时，这会更便于我们阅读。
 
+**Using the URLs API**
+
+现在到了写代码的时候了。让我们来实现我在 **URL** 部分开头提到的 topic 列表页面（参见[Figure 1][5]）
+
+首先，编辑 **urls.py**， 添加我们新的 URL 路由
+
+**myproject/urls.py**
+```python
+from django.conf.urls import url
+from django.contrib import admin
+
+from boards import views
+
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
+    url(r'^admin/', admin.site.urls),
+]
+```
+
+现在，让我们来创建 view function(视图函数) `board_topics`：
+
+**boards/views.py**
+```python
+from django.shortcuts import render
+from .models import Board
+
+def home(request):
+    # code suppressed for brevity
+
+def board_topics(request, pk):
+    board = Board.objects.get(pk=pk)
+    return render(request, 'topics.html', {'board': board})
+```
+
+在 **templates** 文件夹里面，创建一个新的名为 **topics.html** 的模板：
+
+**templates/topics.html**
+```html
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ board.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item">Boards</li>
+        <li class="breadcrumb-item active">{{ board.name }}</li>
+      </ol>
+    </div>
+  </body>
+</html>
+```
+`注意：我们现在只是创建新的 HTML 模板。不用担心，在下一节中我会向你展示如何创建可重用模板。`
+
+现在在浏览器中打开 URL **http://127.0.0.1:8000/boards/1/**，结果应该是下面这个页面：
+
+![此处输入图片的描述][6]
+
+现在到了写一些测试的时候了！编辑 **test.py**，在文件底部添加下面的测试：
+
+**boards/tests.py**
+```python 
+from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.test import TestCase
+from .views import home, board_topics
+from .models import Board
+
+class HomeTests(TestCase):
+    # ...
+
+class BoardTopicsTests(TestCase):
+    def setUp(self):
+        Board.objects.create(name='Django', description='Django board.')
+
+    def test_board_topics_view_success_status_code(self):
+        url = reverse('board_topics', kwargs={'pk': 1})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_board_topics_view_not_found_status_code(self):
+        url = reverse('board_topics', kwargs={'pk': 99})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 404)
+
+    def test_board_topics_url_resolves_board_topics_view(self):
+        view = resolve('/boards/1/')
+        self.assertEquals(view.func, board_topics)
+```
+
+这里需要注意几件事情。这次我们使用了 `setUp` 方法。在这个方法中，我们创建了一个 **Board** 实例来用于测试。我们必须这样做，因为 Django 的测试机制不会针对当前数据库跑你的测试。运行 Django 测试时会即时创建一个新的数据库，使用所有的迁移 model(模型)，运行测试，完成后销毁这个用于测试的数据库。
+
+因此在 `setUp` 方法中，我们准备了运行测试的环境，用来模拟场景。
+
+ - `test_board_topics_view_success_status_code` 方法：测试 Django 是否对于现有的 **Board** 返回 status code(状态码) 200(成功)。
+ - `test_board_topics_view_not_found_status_code` 方法：测试 Django 是否对于不存在与数据库的 **Board** 返回 status code 404(页面未找到)。
+ - `test_board_topics_url_resolves_board_topics_view ` 方法：测试 Django 是否使用正确的视图函数去渲染 topics。
+
+现在来运行一下测试：
+
+```python
+python manage.py test
+```
+
+输出如下：
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.E...
+======================================================================
+ERROR: test_board_topics_view_not_found_status_code (boards.tests.BoardTopicsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+# ...
+boards.models.DoesNotExist: Board matching query does not exist.
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.093s
+
+FAILED (errors=1)
+Destroying test database for alias 'default'...
+```
+
+测试 **test_board_topics_view_not_found_status_code** 失败。我们可以在 Traceback 中看到他返回了一个 exception(异常) “boards.models.DoesNotExist: Board matching query does not exist.”
+
+![此处输入图片的描述][7]
+
+在 `DEBUG=False` 的生产环境中，访问者会看到一个 **500 Internal Server Error** 的页面。但是这不是我们希望得到的。
+
+我们想要一个 **404 Page Not Found** 的页面。让我们来重写我们的 view。
+
+**boards/views.py**
+
+```python
+from django.shortcuts import render
+from django.http import Http404
+from .models import Board
+
+def home(request):
+    # code suppressed for brevity
+
+def board_topics(request, pk):
+    try:
+        board = Board.objects.get(pk=pk)
+    except Board.DoesNotExist:
+        raise Http404
+    return render(request, 'topics.html', {'board': board})
+```
+
+重新测试一下：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.042s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+好极了！现在它按照预期工作。
+
+![此处输入图片的描述][8]
+
+这是 Django 在 `DEBUG=False` 的情况下显示的默认页面。稍后，我们可以自定义 404 页面去显示一些其他的东西。
+
+这是一个常见的用法。事实上， Django 有一个快捷方式去得到一个对象，或者返回一个不存在的对象 404。
+
+因此让我们再来重写一下 **board_topics**：
+
+```python
+from django.shortcuts import render, get_object_or_404
+from .models import Board
+
+def home(request):
+    # code suppressed for brevity
+
+def board_topics(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+    return render(request, 'topics.html', {'board': board})
+```
+
+修改了代码？测试一下。
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.052s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+没有破坏任何东西。我们可以继续我们的开发。
+
+下一步是在屏幕上创建一个导航链接。主页应该有一个链接指引访问者去访问给出的 **Board** 的 topics 页面。同样的，topics 页面也应当有一个返回主页的链接。
+
+![此处输入图片的描述][9]
+
+我们可以先为 `HomeTests` 类编写一些测试：
+
+**boards/test.py**
+
+```python
+class HomeTests(TestCase):
+    def setUp(self):
+        self.board = Board.objects.create(name='Django', description='Django board.')
+        url = reverse('home')
+        self.response = self.client.get(url)
+
+    def test_home_view_status_code(self):
+        self.assertEquals(self.response.status_code, 200)
+
+    def test_home_url_resolves_home_view(self):
+        view = resolve('/')
+        self.assertEquals(view.func, home)
+
+    def test_home_view_contains_link_to_topics_page(self):
+        board_topics_url = reverse('board_topics', kwargs={'pk': self.board.pk})
+        self.assertContains(self.response, 'href="{0}"'.format(board_topics_url))
+```
+
+注意到现在我们同样在 **HomeTests** 中添加了 **setUp** 方法。这是因为我们现在需要一个 **Board** 实例，并且我们将 **url** 和 **response** 移到了 **setUp**，所以我们能在新测试中重用相同的 response。
+
+这里的新测试是 **test_home_view_contains_link_to_topics_page**。这里我们使用 **assertContains** 方法来测试 response 主体部分是否包含给定的文本。我们在测试中使用的文本是 `a` 标签的 `href` 部分。所以基本上我们是在测试 response 主体是否包含文本 `href="/boards/1/"`。
+
+让我们运行这个测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+....F.
+======================================================================
+FAIL: test_home_view_contains_link_to_topics_page (boards.tests.HomeTests)
+----------------------------------------------------------------------
+# ...
+
+AssertionError: False is not true : Couldn't find 'href="/boards/1/"' in response
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.034s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'...
+```
+
+现在我们可以编写能通过这个测试的代码。
+
+编写 **home.html** 模板：
+
+**templates/home.html**
+
+```html
+<!-- code suppressed for brevity -->
+<tbody>
+  {% for board in boards %}
+    <tr>
+      <td>
+        <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+        <small class="text-muted d-block">{{ board.description }}</small>
+      </td>
+      <td class="align-middle">0</td>
+      <td class="align-middle">0</td>
+      <td></td>
+    </tr>
+  {% endfor %}
+</tbody>
+<!-- code suppressed for brevity -->
+```
+
+基本上我们是改动了这一行：
+
+```python
+{{ board.name }}
+```
+
+变为：
+
+```html
+<a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+```
+
+始终使用 `{% url %}` 模板标签去写应用的 URL。第一个参数是 URL 的名字(定义在 URLconf， 即 **urls.py**)，然后你可以根据需求传递任意数量的参数。
+
+如果是一个像主页这种简单的 URL, 那就是 `{% url 'home' %}`。
+保存文件然后再运行一下测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.037s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+很棒！现在我们可以看到它在浏览器是什么样子。
+
+![此处输入图片的描述][10]
+
+现在轮到返回的链接了，我们可以先写测试：
+
+**boards/tests.py**
+
+```python
+class BoardTopicsTests(TestCase):
+    # code suppressed for brevity...
+
+    def test_board_topics_view_contains_link_back_to_homepage(self):
+        board_topics_url = reverse('board_topics', kwargs={'pk': 1})
+        response = self.client.get(board_topics_url)
+        homepage_url = reverse('home')
+        self.assertContains(response, 'href="{0}"'.format(homepage_url))
+```
+
+运行测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.F.....
+======================================================================
+FAIL: test_board_topics_view_contains_link_back_to_homepage (boards.tests.BoardTopicsTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+# ...
+
+AssertionError: False is not true : Couldn't find 'href="/"' in response
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.054s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'...
+```
+
+更新 board topics template：
+
+**templates/topics.html**
+
+```python
+{% load static %}<!DOCTYPE html>
+<html>
+  <head><!-- code suppressed for brevity --></head>
+  <body>
+    <div class="container">
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+        <li class="breadcrumb-item active">{{ board.name }}</li>
+      </ol>
+    </div>
+  </body>
+</html>
+```
+
+运行测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.061s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+![此处输入图片的描述][11]
+
+就如我之前所说的， URL 路由是一个 web 应用程序的基本组成部分。有了这些知识，我们才能继续开发。下一步是完成 URL 的部分，你会看到一些总结的有用的 URL patterns。
+
+
   [1]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [2]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [3]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_URL_Patterns.png
   [4]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_The_Order_Matters.png
+  [5]: https://simpleisbetterthancomplex.com/series/2017/09/18/a-complete-beginners-guide-to-django-part-3.html#figure-1
+  [6]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-1.png
+  [7]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-error-500.png
+  [8]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-error-404.png
+  [9]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-links.png
+  [10]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/boards.png
+  [11]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/board_topics.png
