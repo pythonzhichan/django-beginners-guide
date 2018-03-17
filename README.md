@@ -1,6 +1,6 @@
 # django-beginners-guide
 
-[A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/) 翻译计划，由公众号「Python之禅」 发起，可能是史上最浅显易懂的Django教程。
+[A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/) 翻译计划，由公众号「Python之禅」 发起，可能是史上最浅显易懂的Django教程。适合没有任何实践经验的同学作为练手项目
 
 
 教程将围绕一个论坛项目展开，从基本的开发环境搭建开始讲解，再到领域模型的设计，模板、视图、URL、模型，Django Admin，单元测试的基本介绍。

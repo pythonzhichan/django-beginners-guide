@@ -44,7 +44,7 @@ Superuser created successfully.
 
 ![admin](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin.png)
 
-它已经配置了一些功能。在这里，我们可以添加用户和组来管理权限。这些概念在后面我们将探讨更多。
+它已经配置了一些功能。在这里，我们可以添加用户和组的权限管理，这些概念在后面我们将探讨更多。
 
 添加Board模型非常简单。打开boards目录中的admin.py文件，并添加以下代码：
 
