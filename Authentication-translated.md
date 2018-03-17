@@ -2,15 +2,17 @@
 
 # 一个完整的Django入门指南 - 第4部分
 
-> 译者：wangzhihao
->
+> 译者：wangzhihao、CasualJi 
+> 校稿：liuzhijun  
 > 原文：https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 
-![A Complete Beginner's Guide to Django - Part 4](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/featured.jpg)
+![4-1.jpg](./statics/4-1.jpg)
 
-### 说明
+### 前言
 
-这一章的教程将会全面介绍一下Django的身份验证系统，我们将执行整套流程：注册、登录、注销、密码重置和密码修改。
+这一章节将会全面介绍 Django 的身份认证系统，我们将实现 注册、登录、注销、密码重置和密码修改的整套流程。
+
+同时你还会了解到如何保护某些试图以防未授权的用户访问，以及
 
 你也将会知道关于如何保护未授权用户视图以及如何访问登录用户信息的简要介绍。
 
