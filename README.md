@@ -13,6 +13,8 @@
 * [Django入门指南-第6章：Django Admin](./Fundamentals-4.md)
 * [Django入门指南-第4部分](./Authentication.md)
 
+* [Django入门指南-第4部分：用户注册](./Authentication-2.md)
+
 
 ### TODO
 
