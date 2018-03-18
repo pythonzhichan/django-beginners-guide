@@ -20,39 +20,39 @@
 
 我们必须更新一下应用程序的线框图。首先，我们要添加顶部菜单的新选项。如果用户未通过身份验证，我们应该由两个按钮：注册和登录。
 
-![Wireframe Top Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-menu-not-authenticated.png)
+![](./statics/4-1.jpg)
 
-​     					       		·		 图1: 游客的顶部菜单
+​图1: 游客的顶部菜单
 
 如果用户是授权用户，我们应该显示他们的名字以及下拉菜单，并提供三个选项：我的账户，更改密码和注销。
 
 ![Wireframe Top Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-menu-authenticated.png)
 
-​									图2: 注册用户的顶部菜单
+​图2: 注册用户的顶部菜单
 
 在登录页面上面，我们需要一个带有**username**和**password**的表单，一个带有主要操作（登录）的按钮和两个备用路径：注册页面和密码重置页面。
 
 ![Wireframe log in page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-login.png)
 
-​								图3：注册页面
+​图3：注册页面
 
 在注册页面上，我们应该有一个包含四个字段的表单：**username，email address, password**和**password confirmation**。用户也应该能够访问登录页面。
 
 ![Wireframe sign up page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-signup.png)
 
-图4：注册页面
+​图4：注册页面
 
 在密码重置页面上，我们将有一个只有**email address**的表单。
 
 ![Wireframe password reset page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-reset.png)
 
-​	图5: 密码重置
+​图5: 密码重置
 
 之后，在点击特殊的token链接以后，用户将被重定向到一个页面，在那里他们可以设置一个新的密码。
 
 ![Wireframe change password page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-change-password.png)
 
-图6：修改密码
+​图6：修改密码
 
 ### 初始设置
 
