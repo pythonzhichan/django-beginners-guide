@@ -247,7 +247,7 @@ Destroying test database for alias 'default'...
 
 ![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-2.png)
 
-![Too Empty](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Empty.png)
+[](./statics/4-9.jpg)
 
 时候创建注册表单了。Django有一个名为UserCreationForm的内置表单，让我们开始使用它吧：
 
