@@ -15,6 +15,7 @@
 你也将会知道关于如何保护未授权用户视图以及如何访问登录用户信息的简要介绍。
 
 再下一个小节中，我们将会再教程中放入实现身份验证相关页面的线框图（原型图）。之后，你会发现一个新的Django应用的初始设置。到目前为止，我们一直在研究一个名为boards的应用程序。在认证这个内容中，所有与认证相关的东西都可以存在于不同的应用程序中，以便更好地组织代码。
+![](./statics/4-2.jpg)
 
 ### 线框图（原型图）
 
@@ -100,7 +101,7 @@ INSTALLED_APPS = [
 现在开始，我们将会在accounts这个应用下操作。
 
 ### 注册
-
+![](./statics/4-9.jpg)
 我们从创建注册视图开始。首先，在`urls.py` 文件中创建一个新的路径：
 
 **myproject/urls.py**
@@ -247,7 +248,7 @@ Destroying test database for alias 'default'...
 
 ![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-2.png)
 
-[](./statics/4-9.jpg)
+[](./statics/4-12.jpg)
 
 时候创建注册表单了。Django有一个名为UserCreationForm的内置表单，让我们开始使用它吧：
 
@@ -713,7 +714,7 @@ class SignUpFormTest(TestCase):
 
 它看起来非常严格对吧，例如，如果将来我们必须更改SignUpForm，以包含用户的名字和姓氏，那么即使我们没有破坏任何东西，我们也可能最终不得不修复一些测试用例。
 
-![Test Case Alert](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Test_Alerts.png)
+!![](./statics/4-20.jpg)
 
 这些警报很有用，因为它们有助于提高认识，特别是新手第一次接触代码，它可以帮助他们自信地编码。
 
@@ -1476,7 +1477,7 @@ Destroying test database for alias 'default'...
 
 在我们开始之前另一件重要的事情是，对于密码重置过程，我们需要发送电子邮件。一开始有点复杂，因为我们需要外部服务。目前，我们不会配置生产质量的电子邮件服务。实际上，在开发阶段，我们可以使用Django的调试工具检查电子邮件是否正确发送。
 
-![Comic Email](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Email.png)
+![](./statics/4-31.jpg)
 
 #### 控制台电子邮件后端
 
