@@ -6,7 +6,7 @@
 >
 > 原文：https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 
-![A Complete Beginner's Guide to Django - Part 4](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/featured.jpg)
+![](./statics/4-1.jpg)
 
 ### 说明
 
@@ -20,7 +20,7 @@
 
 我们必须更新一下应用程序的线框图。首先，我们要添加顶部菜单的新选项。如果用户未通过身份验证，我们应该由两个按钮：注册和登录。
 
-![](./statics/4-1.jpg)
+![Wireframe Top Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-menu-not-authenticated.png) 
 
 ​图1: 游客的顶部菜单
 
