@@ -2,7 +2,7 @@
 
 # 一个完整的Django入门指南 - 第4部分
 
-> 译者：wangzhihao、CasualJi 
+> 译者：wangzhihao、CasualJi   
 > 校稿：liuzhijun  
 > 原文：https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 
@@ -10,57 +10,53 @@
 
 ### 前言
 
-这一章节将会全面介绍 Django 的身份认证系统，我们将实现 注册、登录、注销、密码重置和密码修改的整套流程。
+这一章节将会全面介绍 Django 的身份认证系统，我们将实现注册、登录、注销、密码重置和密码修改的整套流程。
 
-同时你还会了解到如何保护某些试图以防未授权的用户访问，以及
+同时你还会了解到如何保护某些试图以防未授权的用户访问，以及如何访问已登录用户的个人信息。
 
-你也将会知道关于如何保护未授权用户视图以及如何访问登录用户信息的简要介绍。
 
-再下一个小节中，我们将会再教程中放入实现身份验证相关页面的线框图（原型图）。之后，你会发现一个新的Django应用的初始设置。到目前为止，我们一直在研究一个名为boards的应用程序。在认证这个内容中，所有与认证相关的东西都可以存在于不同的应用程序中，以便更好地组织代码。
+在接下来的部分，你会看到一些和身份验证有关线框图，将在本教程中实现。之后是一个全新Django 应用的初始化设置。至今为止我们一直在一个名叫boards的应用中开发。不过，所有身份认证相关的内容都将在另一个应用中，这样能更良好的组织代码。
 
 ### 线框图（原型图）
 
-我们必须更新一下应用程序的线框图。首先，我们要添加顶部菜单的新选项。如果用户未通过身份验证，我们应该由两个按钮：注册和登录。
+我们必须更新一下应用的线框图。首先，我们需要在顶部菜单添加一些新选项，如果用户未通过身份验证，应该有两个按钮：分别是注册和登录按钮。
+![Wireframe Top Menu](./statics/4-2.png)
 
-![Wireframe Top Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-menu-not-authenticated.png)
+图1: 未认证用户的菜单顶部
 
-​     					       		·		 图1: 游客的顶部菜单
+如果用户已经通过身份认证，我们应该显示他们的名字，和带有“我的账户”，“修改密码”，“登出”这三个选项的下拉框
 
-如果用户是授权用户，我们应该显示他们的名字以及下拉菜单，并提供三个选项：我的账户，更改密码和注销。
+![Wireframe Top Menu](./statics/4-3.png)
 
-![Wireframe Top Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-menu-authenticated.png)
+图2: 认证用户的顶部菜单
 
-​									图2: 注册用户的顶部菜单
+在登录页面，我们需要一个带有**username**和**password**的表单， 一个登录的按钮和可跳转到注册页面和密码重置页面的链接。
 
-在登录页面上面，我们需要一个带有**username**和**password**的表单，一个带有主要操作（登录）的按钮和两个备用路径：注册页面和密码重置页面。
+![Wireframe log in page](./statics/4-4.png)
 
-![Wireframe log in page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-login.png)
+图3：登录页面
 
-​								图3：注册页面
+在注册页面，我们应该有包含四个字段的表单：**username，email address, password**和**password confirmation**。同时，也应该有一个能够访问登录页面链接。
 
-在注册页面上，我们应该有一个包含四个字段的表单：**username，email address, password**和**password confirmation**。用户也应该能够访问登录页面。
-
-![Wireframe sign up page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-signup.png)
+![Wireframe sign up page](./statics/4-5.png)
 
 图4：注册页面
 
-在密码重置页面上，我们将有一个只有**email address**的表单。
+在密码重置页面上，只有**email address**字段的表单。
 
-![Wireframe password reset page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-reset.png)
+![Wireframe password reset page](./statics/4-6.png)
 
 ​	图5: 密码重置
 
-之后，在点击特殊的token链接以后，用户将被重定向到一个页面，在那里他们可以设置一个新的密码。
+之后，用户在点击带有特殊token的重置密码链接以后，用户将被重定向到一个页面，在那里他们可以设置新的密码。
 
-![Wireframe change password page](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/wireframe-change-password.png)
+![Wireframe change password page](./statics/4-7.png)
 
 图6：修改密码
 
-### 初始设置
+## 初始设置
 
-
-
-要管理所有的这些信息，我们可以在另一个应用程序中将其分解。在项目根目录中，在manage.py文件所在的同一目录下，运行以下命令以启动新的应用程序：
+要管理这些功能，我们可以在另一个app中将其拆解。在项目根目录中的 manage.py 文件所在的同一目录下，运行以下命令以创建一个新的app：
 
 ```shell
 django-admin startapp accounts
@@ -71,7 +67,7 @@ django-admin startapp accounts
 ```shell
 myproject/
  |-- myproject/
- |    |-- accounts/     <-- our new django app!
+ |    |-- accounts/     <-- 新创建的app
  |    |-- boards/
  |    |-- myproject/
  |    |-- static/
@@ -81,7 +77,7 @@ myproject/
  +-- venv/
 ```
 
-下一步，在settings.py文件中将账户应用添加到`INSTALLED_APPS`：
+下一步，在 settings.py 文件中将 **accounts** app 添加到`INSTALLED_APPS`：
 
 ```python
 INSTALLED_APPS = [
@@ -99,15 +95,15 @@ INSTALLED_APPS = [
 ]
 ```
 
-现在开始，我们将会在accounts这个应用下操作。
+现在开始，我们将会在 **accounts** 这个app下操作。
 
-### 注册
+## 注册
 
-我们从创建注册视图开始。首先，在`urls.py` 文件中创建一个新的路径：
+我们从创建注册视图开始。首先，在`urls.py` 文件中创建一个新的路由：
 
 **myproject/urls.py**
 
-```shell
+```python
 from django.conf.urls import url
 from django.contrib import admin
 
@@ -123,13 +119,15 @@ urlpatterns = [
 ]
 ```
 
-注意我们如何以不同的方式从`accounts`应用导入`views`模块
+注意，我们以不同的方式从`accounts` app 导入了`views`模块
 
-`from accounts import views as accounts_views`
+```python
+from accounts import views as accounts_views
+```
 
-我们正在将`views` 命名别名，否则他会与`boards` 的`views` 模块发生冲突。稍后我们可以改进`urls.py` 设计，但现在，让我们关注身份验证功能。
+我们给 accounts 的 `views` 指定了别名，否则它会与`boards` 的`views` 模块发生冲突。稍后我们可以改进`urls.py` 的设计，但现在，我们只关注身份验证功能。
 
-在accounts应用程序中编辑views.py中创建一个名为signup的新视图：
+现在，我们在 accounts app 中编辑 **views.py**，新创建一个名为**signup**的视图函数：
 
 **accounts/views.py**
 
@@ -140,11 +138,11 @@ def signup(request):
     return render(request, 'signup.html')
 ```
 
-创建一个新的template，取名为**signup.html**：
+接着创建一个新的模板，取名为**signup.html**：
 
 **templates/signup.html**
 
-```shell
+```html
 {% extends 'base.html' %}
 
 {% block content %}
@@ -152,9 +150,9 @@ def signup(request):
 {% endblock %}
 ```
 
-在浏览器中打开http://127.0.0.1:8000/signup/，看看是否程序运转了起来：
+在浏览器中打开 http://127.0.0.1:8000/signup/ ，看看是否程序运行了起来：
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup.png)
+![Sign up](./statics/4-10.png)
 
 接下来写点测试用例：
 
@@ -177,11 +175,12 @@ class SignUpTests(TestCase):
         self.assertEquals(view.func, signup)
 ```
 
-测试状态码（200=success）以及URL/signup是否返回了正确的视图功能。
+测试状态码（200=success）以及 URL **/signup/** 是否返回了正确的视图函数。
 
 
-
-`python manage.py test`
+```shell
+python manage.py test
+```
 
 ```shell
 Creating test database for alias 'default'...
@@ -194,13 +193,13 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-对于认证视图（注册、登录、密码重置等），我们不会使用顶部栏和breadcrumb。我们仍然能够使用**base.html** 模板.不过我们需要对它做出一些修改：
+对于认证视图（注册、登录、密码重置等），我们不会顶部导航栏。但我们仍然能够使用**base.html** 模板.不过我们需要对它做出一些修改：
 
 
 
 **templates/base.html**
 
-```
+```html
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -209,10 +208,10 @@ Destroying test database for alias 'default'...
     <link href="https://fonts.googleapis.com/css?family=Peralta" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
-    {% block stylesheet %}{% endblock %}  <!-- HERE -->
+    {% block stylesheet %}{% endblock %}  <!-- 这里 -->
   </head>
   <body>
-    {% block body %}  <!-- HERE -->
+    {% block body %}  <!-- 这里 -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -226,14 +225,14 @@ Destroying test database for alias 'default'...
         {% block content %}
         {% endblock %}
       </div>
-    {% endblock body %}  <!-- AND HERE -->
+    {% endblock body %}  <!-- 这里 -->
   </body>
 </html>
 ```
 
-我在base.html模板中标注了新的评论。这块代码`{% block stylesheet %}{% endblock %}` 将会用户添加用于某些特定页面的额外的CSS。
+我在 **base.html** 模板中标注了注释，表示新加的代码。块代码`{% block stylesheet %}{% endblock %}` 表示添加一些额外的CSS，用于某些特定的页面。
 
-代码块`{% block body %}` 包装了整个HTML文档。我们能够使用它来利用**base.html**头部的空文档。注意一下我们是如何命名结束部分的代码`{% endblock body %}`.在这种情况下，命名结束标签是一种很好的方法，这样恩家容易确定结束标记的位置。
+代码块`{% block body %}` 包装了整个HTML文档。我们可以只有一个空的文档结构，以充分利用**base.html**头部。注意，还有一个结束的代码块`{% endblock body %}`，在这种情况下，命名结束标签是一种很好的实践方法，这样更容易确定结束标记的位置。
 
 现在，在**signup.html**模板中，我们使用`{% block body %}`代替了 `{% block content %}`
 
@@ -247,15 +246,15 @@ Destroying test database for alias 'default'...
 {% endblock %}
 ```
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-2.png)
+![Sign up](./statics/4-11.png)
 
-![Too Empty](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Empty.png)
+![Too Empty](./statics/4-12.png)
 
-时候创建注册表单了。Django有一个名为UserCreationForm的内置表单，让我们开始使用它吧：
+是时候创建注册表单了。Django有一个名为 **UserCreationForm**的内置表单，我们就使用它吧：
 
 **accounts/views.py**
 
-```
+```python
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 
@@ -266,7 +265,7 @@ def signup(request):
 
 **templates/signup.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% block body %}
@@ -281,13 +280,13 @@ def signup(request):
 {% endblock %}
 ```
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-3.png)
+![Sign up](./statics/4-13.png)
 
-看起来有一点乱糟糟的是吧，我们可以使用我们的**form.html**模板来使它看起来更好：
+看起来有一点乱糟糟,是吧？我们可以使用**form.html**模板使它看起来更好：
 
 **templates/signup.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% block body %}
@@ -302,34 +301,13 @@ def signup(request):
 {% endblock %}
 ```
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-3.png)
+![Sign up](./statics/4-14.png)
 
-看起来有一点乱糟糟的是吧，我们可以使用我们的**form.html**模板来使它看起来更好：
-
-**templates/signup.html**
-
-```
-{% extends 'base.html' %}
-
-{% block body %}
-  <div class="container">
-    <h2>Sign up</h2>
-    <form method="post" novalidate>
-      {% csrf_token %}
-      {% include 'includes/form.html' %}
-      <button type="submit" class="btn btn-primary">Create an account</button>
-    </form>
-  </div>
-{% endblock %}
-```
-
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-4.png)
-
-目前，我们的**form.html**部分模板正在显示一些原始的HTML。这是一项安全功能。在默认的情况下，Django将所有字符串视为不安全的，会转义所有可能导致问题的特殊字符。但在这种情况下，我们可以信任它。
+哈？非常接近目标了，目前，我们的**form.html**部分模板显示了一些原生的HTML代码。这是django出于安全考虑的特性。在默认的情况下，Django将所有字符串视为不安全的，会转义所有可能导致问题的特殊字符。但在这种情况下，我们可以信任它。
 
 **templates/includes/form.html**
 
-```
+```html
 {% load widget_tweaks %}
 
 {% for field in form %}
@@ -340,24 +318,24 @@ def signup(request):
 
     {% if field.help_text %}
       <small class="form-text text-muted">
-        {{ field.help_text|safe }}  <!-- new code here -->
+        {{ field.help_text|safe }}  <!-- 新的代码 -->
       </small>
     {% endif %}
   </div>
 {% endfor %}
 ```
 
-基本上，在之前的模板中，我们将选项`safe` 添加到`field.help_text`: `{{ field.help_text|safe }}`.
+我们主要在之前的模板中，将选项`safe` 添加到`field.help_text`: `{{ field.help_text|safe }}`.
 
 保存**form.html**文件，然后再次检测注册页面：
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-5.png)
+![Sign up](./statics/4-15.png)
 
-现在，让我们在signup视图中实现业务逻辑：
+现在，让我们在**signup**视图中实现业务逻辑：
 
 **accounts/views.py**
 
-```
+```python
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
@@ -374,21 +352,23 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 ```
 
-一个基本的表单处理有一个小细节：登录功能（重命名为**auth_login**以避免与内置登录视图冲突）。
+表单处理有一个小细节：**login**函数重命名为**auth_login**以避免与内置login视图冲突）。
 
-（编者注：我重命名了`login` 函数重命名为`auth_login` ，但后来我意识到Django1.11对登录视图LoginView具有基于类的视图，因此不存在与名称冲突的风险。在比较旧的版本中，有一个`auth.login`和`auth.view.login` ，这会导致一些混淆，因为一个是用户登录的功能，另一个是视图。长话短说：如果你愿意，你可以像`login` 一样导入它，这样做不会造成任何问题。）
+>（编者注：我重命名了`login` 函数重命名为`auth_login` ，但后来我意识到Django1.11对登录视图LoginView具有基于类的视图，因此不存在与名称冲突的风险。在比较旧的版本中，有一个`auth.login`和`auth.view.login` ，这会导致一些混淆，因为一个是用户登录的功能，另一个是视图。
+
+>简单来说：如果你愿意，你可以像`login` 一样导入它，这样做不会造成任何问题。）
 
 如果表单是有效的，那么我们通过`user=form.save()`创建一个User实例。然后将创建的用户作为参数传递给`auth_login`函数，手动验证用户。之后，视图将用户重定向到主页，保持应用程序的流程。
 
 让我们来试试吧，首先，提交一些无效数据，无论是空表单，不匹配的字段还是已有的用户名。
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-6.png)
+![Sign up](./statics/4-16.png)
 
 现在填写表单并提交，检查用户是否已创建并重定向到主页。
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-7.png)
+![Sign up](./statics/4-17.png)
 
-#### 在模板中引用已验证的用户
+## 在模板中引用已认证的用户
 
 我们要怎么才能知道上述操作是否有效呢？我们可以编辑**base.html**模板来在顶部栏上添加用户名称：
 
@@ -396,7 +376,7 @@ def signup(request):
 
 **templates/base.html**
 
-```
+```html
 {% block body %}
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
@@ -425,15 +405,16 @@ def signup(request):
 {% endblock body %}
 ```
 
+![4-17](./statics/4-18.png)
 
 
-#### 测试注册视图
+## 测试注册视图
 
-现在让我们来改进我们的测试用例：
+我们来改进测试用例：
 
 **accounts/tests.py**
 
-```
+```python
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -460,13 +441,13 @@ class SignUpTests(TestCase):
         self.assertIsInstance(form, UserCreationForm)
 ```
 
-我们稍微改变了SighUpTests类，定义了一个setUp方法，将响应对象移到那里，那么现在我们也在测试响应中是否有表单和CSRF令牌。
+我们稍微改变了**SighUpTests**类，定义了一个**setUp**方法，将response对象移到那里，现在我们测试响应中是否有表单和CSRF令牌。
 
-现在我们要测试一个成功的注册。这次，让我们来创建一个新类，以便于更好地组织测试。
+现在我们要测试一个成功的注册功能。这次，让我们来创建一个新类，以便于更好地组织测试。
 
 **accounts/tests.py**
 
-```
+```python
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
@@ -510,9 +491,10 @@ class SuccessfulSignUpTests(TestCase):
 
 运行这个测试用例。
 
-使用类似地策略，现在让我们在数据无效地时候为注册测试用例创建一个新类。
+使用类似地策略，创建一个新的类，用于数据无效的注册用例
 
-```shell
+
+```python
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
@@ -545,15 +527,15 @@ class InvalidSignUpTests(TestCase):
         self.assertFalse(User.objects.exists())
 ```
 
-#### 将Email字段添加到表单
+## 将Email字段添加到表单
 
-一切都正常，但是email address字段丢失。那么，UserCreationForm不会提供一个email字段，但是我们可以拓展它。
+一切都正常，但还缺失 **email address**字段。**UserCreationForm**不提供 email 字段，但是我们可以对它进行扩展。
 
 在**accounts** 文件夹中创建一个名为**forms.py**的文件：
 
 **accounts/forms.py**
 
-```
+```python
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -565,11 +547,11 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 ```
 
-现在，我们不需要在`views.py` 中使用UserCreationForm，而是导入新的表单SignUpForm，然后使用它：
+现在，我们不需要在`views.py` 中使用UserCreationForm，而是导入新的表单**SignUpForm**，然后使用它：
 
 **accounts/views.py**
 
-```
+```python
 from django.contrib.auth import login as auth_login
 from django.shortcuts import render, redirect
 
@@ -587,7 +569,9 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 ```
 
-只用这个小小的改变，我们的SignUp模块就可以运作了：
+只用这个小小的改变，可以运作了：
+
+![signup](./statics/4-19.png)
 
 请记住更改测试用例以使用SignUpForm而不是UserCreationForm：
 
@@ -620,13 +604,13 @@ class SuccessfulSignUpTests(TestCase):
 
 之前的测试用例仍然会通过，因为SignUpForm扩展了UserCreationForm，它是UserCreationForm的一个实例。
 
-现在让我们想想发生了什么。我们添加了一个新的表单：
+添加了新的表单后，让我们想想发生了什么：
 
 ```
 fields = ('username', 'email', 'password1', 'password2')
 ```
 
-它会自动反应在HTML模板中。这很好吗？这要视情况而定。如果将来会有新的开发人员想要重新使用SignUpForm来做其他事情，并为其添加一些额外的字段。那么这些新的字段也会出现在signup.html中，这可能不是所期望的行为。这种改变可能会被忽略，我们不希望有任何意外。
+它会自动映射到HTML模板中。这很好吗？这要视情况而定。如果将来会有新的开发人员想要重新使用SignUpForm来做其他事情，并为其添加一些额外的字段。那么这些新的字段也会出现在signup.html中，这可能不是所期望的行为。这种改变可能会被忽略，我们不希望有任何意外。
 
 那么让我们来创建一个新的测试，验证模板中的HTML输入：
 
@@ -647,7 +631,7 @@ class SignUpTests(TestCase):
         self.assertContains(self.response, 'type="password"', 2)
 ```
 
-#### 改进测试设计
+## 改进测试代码的组织结构
 
 好的，现在我们正在测试输入和所有的功能，但是我们仍然必须测试表单本身。不要只是继续向`accounts/tests.py` 文件添加测试，我们稍微改进一下项目设计。
 
