@@ -33,11 +33,11 @@ def home(request):
     return HttpResponse('Hello, World!')
 ```
 
-我们可以从这里开始写。如果你回想起我们的原型图，图5显示了主页应该是什么样子。我们想要做的是在表格中列出一些版块的名单以及其他一些描述信息。
+我们可以从这里开始写。如果你回想起我们的原型图，图5显示了主页应该是什么样子。我们想要做的是在表格中列出一些版块的名单以及它们的描述信息。
 
 ![board](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-boards.png)
 
-首先要做的是导入Board模型并列出所有现有的boards
+首先要做的是导入Board模型并列出所有的版块
 
 **boards/views.py**
 
@@ -166,7 +166,7 @@ def home(request):
 
 ![html](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render.png)
 
-我们可以table表示替换，改进HTML模板：
+我们可以用一个更漂亮的表格来替换，改进HTML模板：
 
 **templates/home.html**
 
@@ -239,7 +239,7 @@ class HomeTests(TestCase):
 
 ![code](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/test-homepage-view-status-code-200.png)
 
-如果出现未捕获的异常，语法错误或其他任何情况，Django会返回状态代码500，这意味着**内部服务器错误**。现在，想象我们的应用程序有100个视图。如果我们为所有视图编写这个简单的测试，只需一个命令，我们就能够测试所有视图是否返回成功代码，因此用户在任何地方都看不到任何错误消息。如果没有自动化测试，我们需要逐一检查每个页面。
+如果出现未捕获的异常，语法错误或其他任何情况，Django会返回状态代码500，这意味着是**内部服务器错误**。现在，想象我们的应用程序有100个视图函数。如果我们为所有视图编写这个简单的测试，只需一个命令，我们就能够测试所有视图是否返回成功代码，因此用户在任何地方都看不到任何错误消息。如果没有自动化测试，我们需要逐一检查每个页面是否有错误。
 
 执行Django的测试套件：
 
@@ -348,13 +348,13 @@ Verbosity决定了将要打印到控制台的通知和调试信息量; 0是无�
 
 静态文件是指 CSS，JavaScript，字体，图片或者是用来组成用户界面的任何其他资源。
 
-实际上，Django 本身是不负责处理这些文件的，为了让我们的开发过程更轻松，Django 提供了一些功能来帮助我们管理静态文件。这些功能可在 `INSTALLED_APPS` 的 **django.contrib.staticfiles** 应用程序中找到（译者：Django为了使得开发方便，也负责处理静态文件，而在生产环境下，静态文件直接由Nginx等反向代理服务器处理，而应用工服务器专心负责处理它擅长的业务逻辑）。
+实际上，Django 本身是不负责处理这些文件的，但是为了让我们的开发过程更轻松，Django 提供了一些功能来帮助我们管理静态文件。这些功能可在 `INSTALLED_APPS` 的 **django.contrib.staticfiles** 应用程序中找到（译者：Django为了使得开发方便，也可以处理静态文件，而在生产环境下，静态文件一般直接由 Nginx 等反向代理服务器处理，而应用工服务器专心负责处理它擅长的业务逻辑）。
 
-市面上这么多的前端组件库，我们没有理由继续渲染基本的HTML文档。我们可以轻松地将Bootstrap 4添加到我们的项目中。Bootstrap是一个用HTML，CSS和JavaScript开发的开源工具包。
+市面上很多优秀前端组件框架，我们没有理由继续用简陋的HTML文档来渲染】。我们可以轻松地将Bootstrap 4添加到我们的项目中。Bootstrap是一个用HTML，CSS和JavaScript开发的前端开源工具包。
 
 在项目根目录中，除了 boards, templates 和myproject文件夹外，再创建一个名为static的新文件夹，并在static文件夹内创建另一个名为css的文件夹：
 
-```sh
+```shell
 myproject/
  |-- myproject/
  |    |-- boards/
@@ -415,21 +415,45 @@ STATICFILES_DIRS = [
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   </head>
   <body>
-    <!-- body suppressed for brevity ... -->
-  </body>
+   <h1>Boards</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Board</th>
+        <th>Posts</th>
+        <th>Topics</th>
+        <th>Last Post</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for board in boards %}
+        <tr>
+            <td>
+                {{ board.name }}<br>
+                <small style="color: #888">{{ board.description }}</small>
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
 </html>
 ```
 
 首先，我们在模板的开头使用了 Static Files App 模板标签 `{% load static %}`。
 
 
-模板标签`{% static %}`用于组成资源所在的URL。在这种情况下，`{% static 'css/bootstrap.min.css' %}`将返回 **/static/css/bootstrap.min.css**，它相当于 **http://127.0.0.1:8000/static/css/bootstrap.min.css**。
+模板标签`{% static %}`用于构成资源文件完整URL。在这种情况下，`{% static 'css/bootstrap.min.css' %}`将返回 **/static/css/bootstrap.min.css**，它相当于 http://127.0.0.1:8000/static/css/bootstrap.min.css。
 
-`{% static %}`模板标签使用 settings.py文件中的 `STATIC_URL` 配置来组成最终的URL，例如，如果您将静态文件托管在像 https://static.example.com/这样的子域中 ，那么我们将设置 `STATIC_URL=https://static.example.com/` ，然后 `{% static 'css/bootstrap.min.css' %}`返回的是 **https://static.example.com/css/bootstrap.min.css**
+`{% static %}`模板标签使用 settings.py文件中的 `STATIC_URL` 配置来组成最终的URL，例如，如果您将静态文件托管在像 https://static.example.com/ 这样的子域中 ，那么我们将设置 `STATIC_URL=https://static.example.com/` ，然后 `{% static 'css/bootstrap.min.css' %}`返回的是 **https://static.example.com/css/bootstrap.min.css**
 
-如果目前这些对你来说搞不懂也不要担心。只要记得但凡是需要引用CSS，JavaScript或图片文件的地方就使用`{% static %}`。稍后，当我们开始部署项目到正式环境时，我们将讨论更多。现在，我们都设置好了。
+如果目前这些对你来说搞不懂也不要担心。只要记得但凡是需要引用CSS，JavaScript或图片文件的地方就使用`{% static %}`。稍后，当我们开始部署项目到正式环境时，我们将讨论更多。现在都设置好了。
 
-刷新页面 127.0.0.1:8000 ，我们可以看到它可以正常运行：
+刷新页面 http://127.0.0.1:8000 ，我们可以看到它可以正常运行：
 
 ![b](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap.png)
 
@@ -481,4 +505,4 @@ STATICFILES_DIRS = [
 ![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-2.png)
 
 
-到目前为止，我们使用交互式控制台（python manage.py shell）添加新的版块。但我们需要一个更好的方式来实现。在下一节中，我们将为网站管理员实现一个管理界面来管理这些数据。
+到目前为止，我们使用交互式控制台（python manage.py shell）添加了几个新的版块。但我们需要一个更好的方式来实现。在下一节中，我们将为网站管理员实现一个管理界面来管理这些数据。
