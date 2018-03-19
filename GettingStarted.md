@@ -1,8 +1,7 @@
 # 一个完整的Django入门指南  - 第1部分
 
-> 译者：[vimiix](https://github.com/vimiix)
-> 
-> 原文地址：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)
+> 译者：[vimiix](https://github.com/vimiix)  
+> 原文：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)
 
 
 ![](./statics/1-1.jpg)
@@ -13,7 +12,7 @@
 
 ![](./statics/1-2.jpg)
 
-今天我将开始一个关于 Django 基础知识的全新系列教程。这是一个开始学习 Django 的完整入门指南。教程材料一共会被分为七个部分。我们将从安装，开发环境的准备，模型，视图，模板，URL到更高级的主题（如迁移，测试和部署）中详细探讨所有基本概念。
+今天我将开始一个关于 Django 基础知识的全新系列教程。这是一个开始学习 Django 的完整入门指南。教程材料一共会被分为七个部分。我们将从安装，开发环境的准备、模型、视图、模板、URL到更高级的主题（如迁移、测试和部署）中详细探讨所有基本概念。
 
 我想做一些不一样的事情。一个容易学习，内容丰富且不失趣味的教程。我的想法是在文章中穿插一些漫画的方式来演示说明相应的概念和场景。我希望大家能够享受这种阅读！
 
