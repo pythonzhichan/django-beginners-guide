@@ -95,9 +95,9 @@ def url(regex, view, kwargs=None, name=None):
  - **name:**：给定 URL 的唯一标识符。他是一个非常重要的特征。要始终记得为你的 URLs 命名。所以，很重要的一点是：不要在 views(视图) 或者 templates(模板) 中写很复杂的 URLs 代码, 并始终通过它的名字去引用 URLs。
 
 ![此处输入图片的描述][3]
- 图2.1：在练习中你不需要成为正则表达式专家
- 图2.2：你只需要学会怎么样去匹配简单的 patterns
- 图2.3：我在后面会向你展示实用的 URL patterns
+ 图1：在练习中你不需要成为正则表达式专家
+ 图2：你只需要学会怎么样去匹配简单的 patterns
+ 图3：我在后面会向你展示实用的 URL patterns
  
 ----------
 
@@ -178,9 +178,9 @@ urlpatterns = [
 这有一些副作用。例如，从现在开始，我们要把 "about" 视为禁止使用的用户名，因为如果有用户将 "about" 作为他们的用户名，他们将永远不能看到他们的个人资料页面。
 
 ![此处输入图片的描述][4]
-图3.1：*urlpatterns* 中 URLs 的顺序很重要
-图3.2：匹配规则宽松的 URL 正则表达式应该总是放在后面
-图3.3：所以，记住这几点！要经常测试你的路由。
+图1：*urlpatterns* 中 URLs 的顺序很重要
+图2：匹配规则宽松的 URL 正则表达式应该总是放在后面
+图3：所以，记住这几点！要经常测试你的路由。
 
 
 ----------
@@ -976,6 +976,401 @@ Destroying test database for alias 'default'...
 ![此处输入图片的描述][18]
 
 
+**Forms**
+
+Forms(表单) 用来处理我们的输入。这在任何 web 应用或者网站中都是很常见的任务。标准的做法是通过 HTML 表单实现，用户输入一些数据，将其提交给服务器，然后服务器处理它。
+
+![此处输入图片的描述][19]
+图1：你会在这个 *Django Boards* 应用中取什么用户名？
+图2：我想会是 **Ball');DROP TABLE auth_user;--**。 哈哈哈！
+图3：**所有的输入都是恶意非法的！**我们不能相信用户的输入。
+
+表单处理是一项非常复杂的任务，因为它涉及到与应用多个层面的交互。有很多需要关心的问题。例如，提交给服务器的所有数据都是字符串的形式，所以在我们使用它之前需要将其转换为需要的数据类型(整形，浮点型，日期等)。我们必须验证有关应用程序业务逻辑的数据。我们还需要妥善地清理和审查数据，以避免一些诸如 SQL 注入和 XSS 攻击等安全问题。
+
+好消息是，Django Forms API 使整个过程变的更加简单，从而实现了大量工作的自动化。而且，最终的结果比大多数程序员自己去实现的代码更加安全。所以，不管 HTML 的表单多么简单，总是使用表单 API。
+
+
+**How Not Implement a Form**
+
+起初，我想直接跳到表单 API。但是我觉得花点时间去了解一下表单处理的基本细节是一个不错的主意。否则，这玩意儿将会看起来像魔术一样，这是一件坏事，因为当出现错误时，你将不知道怎么去找到问题所在。
+
+随着对一些编程概念的深入理解，我们可以感觉到自己能更好地掌控一些情况。掌控是很重要的，因为它让我们写代码的时候更有信心。一旦我们能确切地知道发生了什么，实现可预见行为的代码就容易多了。调试和查找错误也变得很容易，因为你知道在哪里去查找。
+
+无论如何，让我们开始实现下面的表单：
+
+![此处输入图片的描述][20]
+
+这是我们在前一个教程绘制的一个线框图。我现在意识到这个可能是一个不好的例子，因为这个特殊的表单涉及到处理两个不同 model 的数据：**Topic**(subject) 和 **Post**(message)。
+
+还有一点很重要的我们到现在为止还没讨论过，就是用户认证。我们应该只为认证过的用户去显示这个页面。通过这种方式，我们能知道是创建了 **Topic** 或者 **Post**。
+
+现在让我们抽象一些细节，重点了解一下怎么在数据库中保存用户的输入。
+
+首先，先创建一个新的 URL 路由，命名为 **new_topic**：
+
+**myproject/urls.py**
+
+```python
+from django.conf.urls import url
+from django.contrib import admin
+
+from boards import views
+
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics'),
+    url(r'^boards/(?P<pk>\d+)/new/$', views.new_topic, name='new_topic'),
+    url(r'^admin/', admin.site.urls),
+]
+```
+
+我们创建的这个 URL 能帮我们确定正确的 **Board**
+
+现在来创建 **new_topic** 的 view function(视图函数)：
+
+**boards/views.py**
+
+```python
+from django.shortcuts import render, get_object_or_404
+from .models import Board
+
+def new_topic(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+    return render(request, 'new_topic.html', {'board': board})
+```
+
+目前为止， **new_topic** 的视图函数看起来和 **board_topics** 恰好相同。这是故意的，让我们一步步地来。
+
+现在我们需要一个名为 **new_topic.html** 的模板：
+
+**templates/new_topic.html**
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+```
+
+现在我们只有 breadcrumb 保证了导航。注意我们在 URL 中包含了 **board_topics** 视图的返回。
+
+打开 URL **http://127.0.0.1:8000/boards/1/new/**。显示结果是下面这个页面：
+
+![此处输入图片的描述][21]
+
+我们依然还没有实现到达这个新页面的方法，但是如果我们将 URL 改为 **http://127.0.0.1:8000/boards/2/new/**，它会把我们带到 **Python Board** 的页面：
+
+![此处输入图片的描述][22]
+
+`注意：
+如果你没有跟着上一节课程一步步地做，你的结果和我的可能有些不一样。在我这个例子中，我的数据库有 3 个 **Board** 实例，分别是 Django = 1, Python = 2, 和 Random = 3。这些数字是数据库中的 ID，用来找到正确的资源。
+`
+
+我们可以增加一些测试了：
+
+**boards/tests.py**
+
+```python
+from django.core.urlresolvers import reverse
+from django.urls import resolve
+from django.test import TestCase
+from .views import home, board_topics, new_topic
+from .models import Board
+
+class HomeTests(TestCase):
+    # ...
+
+class BoardTopicsTests(TestCase):
+    # ...
+
+class NewTopicTests(TestCase):
+    def setUp(self):
+        Board.objects.create(name='Django', description='Django board.')
+
+    def test_new_topic_view_success_status_code(self):
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+    def test_new_topic_view_not_found_status_code(self):
+        url = reverse('new_topic', kwargs={'pk': 99})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 404)
+
+    def test_new_topic_url_resolves_new_topic_view(self):
+        view = resolve('/boards/1/new/')
+        self.assertEquals(view.func, new_topic)
+
+    def test_new_topic_view_contains_link_back_to_board_topics_view(self):
+        new_topic_url = reverse('new_topic', kwargs={'pk': 1})
+        board_topics_url = reverse('board_topics', kwargs={'pk': 1})
+        response = self.client.get(new_topic_url)
+        self.assertContains(response, 'href="{0}"'.format(board_topics_url))
+```
+
+关于我们的测试中新的 NewTopicTests 类的快速总结：
+
+ - **setUp**：创建一个测试中使用的 **Board** 实例
+ - **test_new_topic_view_success_status_cod**：检查发给 view 的请求是否成功
+ - **test_new_topic_view_not_found_status_code**：检查当 **Board** 不存在时 view 是否会抛出一个 404 的错误
+ - **test_new_topic_url_resolves_new_topic_view**：检查是否正在使用正确的 view
+ - **test_new_topic_view_contains_link_back_to_board_topics_view**：确保导航能回到 topics 的列表
+
+运行测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.076s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+成功，现在我们可以去开始创建表单了。
+
+**templates/new_topic.html**
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_subject">Subject</label>
+      <input type="text" class="form-control" id="id_subject" name="subject">
+    </div>
+    <div class="form-group">
+      <label for="id_message">Message</label>
+      <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Post</button>
+  </form>
+{% endblock %}
+```
+
+这是一个使用 Bootstrap 4 提供的 CSS 类手动创建的 HTML 表单。它看起来是这个样子：
+
+![此处输入图片的描述][23]
+
+在 `<form>` 标签中，我们定义了 `method` 属性。它会告诉浏览器我们想如何与服务器通信。HTTP 规范定义了几种 request methods(请求方法)。但是在大部分情况下，我们只需要使用 **GET** 和 **POST** 两种 request(请求)类型。
+
+**GET** 可能是最常见的请求类型了。它用于从服务器请求数据。每当你点击了一个连接或者直接在浏览器中输入了一个网址时，你就创建一个一个 **GET** 请求。
+
+**POST** 用于当我们想更改服务器上的数据的时候。一般来说，每次我们发送数据给服务器都会导致资源状态的变化，我们应该使用 **POST** 请求发送数据。
+
+Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 **POST** 请求。这是一个避免外部站点或者应用程序向我们的应用程序提交数据的安全措施。应用程序每次接收一个 **POST** 时，都会先检查 **CSRF Token**。如果这个 request 没有 token，或者这个 token() 是无效的，它就会抛弃提交的数据。
+
+**csrf_token** 的模板标签：
+
+```html
+{% csrf_token %}
+```
+
+它是与其他表单数据一起提交的隐藏字段：
+
+```html
+<input type="hidden" name="csrfmiddlewaretoken" value="jG2o6aWj65YGaqzCpl0TYTg5jn6SctjzRZ9KmluifVx0IVaxlwh97YarZKs54Y32">
+```
+
+另外一件事是，我们需要设置 HTML 输入的 **name**，**name** 将被用来在服务器检索数据。
+
+```html
+<input type="text" class="form-control" id="id_subject" name="subject">
+<textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
+```
+
+下面是示范我们如何检索数据：
+
+```python
+subject = request.POST['subject']
+message = request.POST['message']
+```
+
+所以，从 HTML 获取数据并且开始一个新的 topic 视图的简单实现可以这样写：
+
+```python
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Board, Topic, Post
+
+def new_topic(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+
+    if request.method == 'POST':
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        user = User.objects.first()  # TODO: get the currently logged in user
+
+        topic = Topic.objects.create(
+            subject=subject,
+            board=board,
+            starter=user
+        )
+
+        post = Post.objects.create(
+            message=message,
+            topic=topic,
+            created_by=user
+        )
+
+        return redirect('board_topics', pk=board.pk)  # TODO: redirect to the created topic page
+
+    return render(request, 'new_topic.html', {'board': board})
+```
+
+这个视图函数只考虑能接收数据并且保存进数据库的乐观合法的 path，但是还缺少一些部分。我们没有验证数据。用户可以提交空表单或者提交一个大于 255 个字符的 **subject**。
+
+到目前为止我们都在对 **User** 字段进行硬编码，因为我们还没有实现身份验证。有一个简单的方法来识别登录的用户。我们会在下一个课程将这一块。此外，我们还没有实现列出 topic 的所有 posts 的视图，实现了它，我们就可以将用户重定向到列出所有 board topics 的页面。
+
+![此处输入图片的描述][24]
+
+点击 **Post** 按钮提交表单：
+
+![此处输入图片的描述][25]
+
+看起来成功了。但是我们还没有实现 topic 的列表页面，所以没有东西可以看。让我们来编辑 **templates/topics.html** 来实现一个合适的列表：
+
+**templates/topics.html**
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Topic</th>
+        <th>Starter</th>
+        <th>Replies</th>
+        <th>Views</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for topic in board.topics.all %}
+        <tr>
+          <td>{{ topic.subject }}</td>
+          <td>{{ topic.starter.username }}</td>
+          <td>0</td>
+          <td>0</td>
+          <td>{{ topic.last_updated }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+```
+
+![此处输入图片的描述][26]
+
+我们创建的 **Topic** 显示在这上面了。
+
+这里有两个新概念。
+
+我们首次使用 **Board** model 中的 **topics** 属性。**topics** 属性由 Django 使用反向关系自动创建。在之前的步骤中，我们创建了一个 **Topic** 实例：
+
+```python
+def new_topic(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+
+    # ...
+
+    topic = Topic.objects.create(
+        subject=subject,
+        board=board,
+        starter=user
+    )
+```
+
+在 `board=board` 这行，我们设置了 **Topic** model 中的 board 字段，它是 `ForeignKey(Board)`。因此，我们的 **Board** 实例就知道了与它关联的 **Topic** 实例。
+
+之所以我们使用 `board.topics.all` 而不是 `board.topics`，是因为 `board.topics` 是一个 **Related Manager**,它与 **Model Manager** 很相似，通常在 `board.objects` 可得到。所以，要返回给定 board 的所有 topic 我们必须使用 `board.topics.all()`，要过滤一些数据，我们可以这样用 `board.topics.filter(subject__contains='Hello')`。
+
+另一个需要注意的是，在 Python 代码中，我们必须使用括号：`board.topics.all()`，因为 `all()` 是一个方法。在使用 Django 模板语言写代码的时候，在一个 HTML 模板文件里面，我们不使用括号，就只是 `board.topics.all`。
+
+第二件事是我们在使用 `ForeignKey`：
+
+```html
+{{ topic.starter.username }}
+```
+
+使用一个点加上属性这种写法，我们几乎可以访问 **User** model 的所有属性。如果我们想得到用户的 email，我们可以使用 `topic.starter.email`。
+
+我们已经修改了 **topics.html** 模板，让我们创建一个能让我们转到 **new topic** 页面的按钮：
+
+**templates/topics.html**
+
+```html
+{% block content %}
+  <div class="mb-4">
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+  </div>
+
+  <table class="table">
+    <!-- code suppressed for brevity -->
+  </table>
+{% endblock %}
+```
+
+![此处输入图片的描述][27]
+
+我们可以写一个测试以确保用户可以通过此页面访问到 **New Topic** 页面：
+
+**boards/tests.py**
+
+```python
+class BoardTopicsTests(TestCase):
+    # ...
+
+    def test_board_topics_view_contains_navigation_links(self):
+        board_topics_url = reverse('board_topics', kwargs={'pk': 1})
+        homepage_url = reverse('home')
+        new_topic_url = reverse('new_topic', kwargs={'pk': 1})
+
+        response = self.client.get(board_topics_url)
+
+        self.assertContains(response, 'href="{0}"'.format(homepage_url))
+        self.assertContains(response, 'href="{0}"'.format(new_topic_url))
+```
+
+我在这里基本上重命名了 **test_board_topics_view_contains_link_back_to_homepage** 方法并添加了一个额外的 `assertContains`。这个测试现在负责确保我们的 view 包含所需的导航链接。
+
+
   [1]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [2]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [3]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_URL_Patterns.png
@@ -994,3 +1389,12 @@ Destroying test database for alias 'default'...
   [16]: https://fonts.google.com/
   [17]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/google-fonts.png
   [18]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/boards-logo.png
+  [19]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_All_Input.png
+  [20]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-new-topic.png
+  [21]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/start-a-new-topic.png
+  [22]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/start-a-new-topic-python.png
+  [23]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/start-a-new-topic-form.png
+  [24]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/start-a-new-topic-form-submit.png
+  [25]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-2.png
+  [26]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-3.png
+  [27]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-4.png
