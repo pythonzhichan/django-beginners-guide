@@ -6,7 +6,8 @@
 > 校稿：liuzhijun  
 > 原文：https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
 
-![4-1.jpg](./statics/4-1.jpg)
+![](./statics/4-1.jpg)
+
 
 ### 前言
 
@@ -16,6 +17,8 @@
 
 
 在接下来的部分，你会看到一些和身份验证有关线框图，将在本教程中实现。之后是一个全新Django 应用的初始化设置。至今为止我们一直在一个名叫boards的应用中开发。不过，所有身份认证相关的内容都将在另一个应用中，这样能更良好的组织代码。
+![](./statics/4-2.jpg)
+
 
 ### 线框图（原型图）
 
@@ -39,14 +42,13 @@
 在注册页面，我们应该有包含四个字段的表单：**username，email address, password**和**password confirmation**。同时，也应该有一个能够访问登录页面链接。
 
 ![Wireframe sign up page](./statics/4-5.png)
-
 图4：注册页面
 
 在密码重置页面上，只有**email address**字段的表单。
 
 ![Wireframe password reset page](./statics/4-6.png)
 
-​	图5: 密码重置
+图5: 密码重置
 
 之后，用户在点击带有特殊token的重置密码链接以后，用户将被重定向到一个页面，在那里他们可以设置新的密码。
 
@@ -97,6 +99,7 @@ INSTALLED_APPS = [
 
 现在开始，我们将会在 **accounts** 这个app下操作。
 
+![](./statics/4-9.jpg)
 ## 注册
 
 我们从创建注册视图开始。首先，在`urls.py` 文件中创建一个新的路由：
@@ -699,7 +702,7 @@ class SignUpFormTest(TestCase):
 
 它看起来非常严格对吧，例如，如果将来我们必须更改SignUpForm，以包含用户的名字和姓氏，那么即使我们没有破坏任何东西，我们也可能最终不得不修复一些测试用例。
 
-![Test Case Alert](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Test_Alerts.png)
+!![](./statics/4-20.jpg)
 
 这些警报很有用，因为它们有助于提高认识，特别是新手第一次接触代码，它可以帮助他们自信地编码。
 
@@ -1462,7 +1465,7 @@ Destroying test database for alias 'default'...
 
 在我们开始之前另一件重要的事情是，对于密码重置过程，我们需要发送电子邮件。一开始有点复杂，因为我们需要外部服务。目前，我们不会配置生产质量的电子邮件服务。实际上，在开发阶段，我们可以使用Django的调试工具检查电子邮件是否正确发送。
 
-![Comic Email](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/Pixton_Comic_Email.png)
+![](./statics/4-31.jpg)
 
 #### 控制台电子邮件后端
 
