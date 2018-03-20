@@ -6,13 +6,15 @@
 教程将围绕一个论坛项目展开，从基本的开发环境搭建开始讲解，再到领域模型的设计，模板、视图、URL、模型，Django Admin，单元测试的基本介绍。
 
 * [Django入门指南-第1章：环境搭建](./GettingStarted.md)
-* [Django入门指南-第2章：项目创建](./GettingStarted-2.md)
-* [Django入门指南-第3章：系统设计](./Fundamentals.md)
+* [Django入门指南-第2章：创建项目](./GettingStarted-2.md)
+* [Django入门指南-第3章：系统设计](./Fundamentals1.md)
 * [Django入门指南-第4章：模型设计](./Fundamentals-2.md)
-* [Django入门指南-第5章：视图、模板、静态文件）](./Fundamentals-3.md)
-* [Django入门指南-第6章：Django Admin](./Fundamentals-4.md)
+* [Django入门指南-第5章：第一个视图函数](./Fundamentals-3-0.md)
+* [Django入门指南-第6章：模板引擎设置](./Fundamentals-3-1.md)
+* [Django入门指南-第7章：第一个单元测试](./Fundamentals-3-1-1.md)
+* [Django入门指南-第8章：静态文件设置](./Fundamentals-3-2.md)
+* [Django入门指南-第9章：Django Admin 介绍](./Fundamentals-4.md)
 * [Django入门指南-第4部分](./Authentication.md)
-
 * [Django入门指南-第4部分：用户注册](./Authentication-2.md)
 
 

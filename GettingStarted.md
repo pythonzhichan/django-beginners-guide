@@ -1,4 +1,4 @@
-# 一个完整的Django入门指南  - 第1部分
+# Django入门指南-第1章：环境搭建
 
 > 译者：[vimiix](https://github.com/vimiix)  
 > 原文：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)

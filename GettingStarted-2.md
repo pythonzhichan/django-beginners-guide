@@ -1,4 +1,4 @@
-# 一个完整的Django入门指南  - 第1部分
+# Django入门指南-第2章：创建项目
 
 > 译者：[vimiix](https://github.com/vimiix)
 > 

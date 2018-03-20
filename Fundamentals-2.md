@@ -1,4 +1,4 @@
-# Django入门指南-第2部分（Django 模型设计）
+# Django入门指南-第4章：模型设计
 
 >译者：liuzhijun  
 >原文：

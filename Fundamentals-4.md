@@ -1,4 +1,4 @@
-# 一个完整的 Django 入门指南 - 第2部分
+# Django入门指南-第9章：Django Admin 介绍
 
 >译者：liuzhijun  
 >原文：
