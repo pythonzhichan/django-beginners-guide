@@ -1371,6 +1371,302 @@ class BoardTopicsTests(TestCase):
 我在这里基本上重命名了 **test_board_topics_view_contains_link_back_to_homepage** 方法并添加了一个额外的 `assertContains`。这个测试现在负责确保我们的 view 包含所需的导航链接。
 
 
+**Testing The Form View**
+
+在我们使用 Django 的方式编写之前的表单示例之前, 让我们先为表单处理写一些测试：
+
+**boards/tests.py**
+
+```python
+''' new imports below '''
+from django.contrib.auth.models import User
+from .views import new_topic
+from .models import Board, Topic, Post
+
+class NewTopicTests(TestCase):
+    def setUp(self):
+        Board.objects.create(name='Django', description='Django board.')
+        User.objects.create_user(username='john', email='john@doe.com', password='123')  # <- included this line here
+
+    # ...
+
+    def test_csrf(self):
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.get(url)
+        self.assertContains(response, 'csrfmiddlewaretoken')
+
+    def test_new_topic_valid_post_data(self):
+        url = reverse('new_topic', kwargs={'pk': 1})
+        data = {
+            'subject': 'Test title',
+            'message': 'Lorem ipsum dolor sit amet'
+        }
+        response = self.client.post(url, data)
+        self.assertTrue(Topic.objects.exists())
+        self.assertTrue(Post.objects.exists())
+
+    def test_new_topic_invalid_post_data(self):
+        '''
+        Invalid post data should not redirect
+        The expected behavior is to show the form again with validation errors
+        '''
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.post(url, {})
+        self.assertEquals(response.status_code, 200)
+
+    def test_new_topic_invalid_post_data_empty_fields(self):
+        '''
+        Invalid post data should not redirect
+        The expected behavior is to show the form again with validation errors
+        '''
+        url = reverse('new_topic', kwargs={'pk': 1})
+        data = {
+            'subject': '',
+            'message': ''
+        }
+        response = self.client.post(url, data)
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse(Topic.objects.exists())
+        self.assertFalse(Post.objects.exists())
+```
+
+首先， **test.py** 文件变的越来越大。我们会尽快改进它，将测试分为几个文件。但现在，让我们先保持这个状态。
+
+ - **setUp**：包含 `User.objects.create_user` 以创建用于测试的 **User** 实例。
+ - 
+ - **test_csrf**：由于 **CSRF Token** 是处理 **Post** 请求的基本部分，我们需要保证我们的 HTML 包含 token。
+ - 
+ - **test_new_topic_valid_post_data**：发送有效的数据并检查视图函数是否创建了 **Topic** 和 **Post** 实例。
+ - 
+ - **test_new_topic_invalid_post_data**：发送一个空字典来检查应用的行为。
+ - 
+ - **test_new_topic_invalid_post_data_empty_fields**：类似于上一个测试，但是这次我们发送一些数据。预期应用程序会验证并且拒绝空的 subject 和 message。
+
+运行这些测试：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+........EF.....
+======================================================================
+ERROR: test_new_topic_invalid_post_data (boards.tests.NewTopicTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+...
+django.utils.datastructures.MultiValueDictKeyError: "'subject'"
+
+======================================================================
+FAIL: test_new_topic_invalid_post_data_empty_fields (boards.tests.NewTopicTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/vitorfs/Development/myproject/django-beginners-guide/boards/tests.py", line 115, in test_new_topic_invalid_post_data_empty_fields
+    self.assertEquals(response.status_code, 200)
+AssertionError: 302 != 200
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.512s
+
+FAILED (failures=1, errors=1)
+Destroying test database for alias 'default'...
+```
+
+有一个失败的测试和一个错误。两个都与验证用户的输入有关。不要试图用当前的实现来修复它，让我们通过使用 Django Forms API 来通过这些测试
+
+
+**Creating Forms The Right Way**
+
+自从我们开始使用 Forms，我们已经走了很长一段路。终于，是时候使用 Forms API 了。
+
+Forms API 可在模块 `django.forms` 中得到。Django 使用两种类型的 form：`forms.Form` 和 `forms.ModelForm`。`Form` 类是通用的表单实现。我们可以使用它来处理与应用程序 model 没有直接关联的数据。`ModelForm` 是 `Form` 的子类，它与 model 类相关联。
+ 
+在 **boards** 文件夹下创建一个新的文件 `forms.py`：
+
+**boards/forms.py**
+
+```python
+from django import forms
+from .models import Topic
+
+class NewTopicForm(forms.ModelForm):
+    message = forms.CharField(widget=forms.Textarea(), max_length=4000)
+
+    class Meta:
+        model = Topic
+        fields = ['subject', 'message']
+```
+
+这是我们的第一个 form。它是一个与 **Topic** model 相关联的 `ModelForm `。**Meta** 类里面 `fields` 列表中的 `subject` 引用 **Topic** 类中的 **subject** field(字段)。现在注意到我们定义了一个叫做 `message` 的额外字段。它用来引用 **Post** 中我们想要保存的 message。
+
+现在我们需要重写我们的 **views.py**：
+
+**boards/views.py**
+
+```python
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import NewTopicForm
+from .models import Board, Topic, Post
+
+def new_topic(request, pk):
+    board = get_object_or_404(Board, pk=pk)
+    user = User.objects.first()  # TODO: get the currently logged in user
+    if request.method == 'POST':
+        form = NewTopicForm(request.POST)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.board = board
+            topic.starter = user
+            topic.save()
+            post = Post.objects.create(
+                message=form.cleaned_data.get('message'),
+                topic=topic,
+                created_by=user
+            )
+            return redirect('board_topics', pk=board.pk)  # TODO: redirect to the created topic page
+    else:
+        form = NewTopicForm()
+    return render(request, 'new_topic.html', {'board': board, 'form': form})
+```
+
+这是我们在 view(视图) 中处理 form(表单) 的方式。让我们去掉一些多余的部分，只看表单处理的核心部分：
+
+```python
+if request.method == 'POST':
+    form = NewTopicForm(request.POST)
+    if form.is_valid():
+        topic = form.save()
+        return redirect('board_topics', pk=board.pk)
+else:
+    form = NewTopicForm()
+return render(request, 'new_topic.html', {'form': form})
+```
+
+首先我们判断请求是 **POST** 还是 **GET**。如果请求是 **POST**，这意味着用户向服务器提交了一些数据。所以我们实例化一个将 **POST** 数据传递给 form 的 form 实例：`form = NewTopicForm(request.POST)`。
+
+然后，我们让 Django 验证数据，检查 form 是否有效，我们能否将其存入数据库：`if form.is_valid():`。如果表单有效，我们使用 `form.save()` 将数据存入数据库。`save()` 方法返回一个存入数据库的 Model 实例。
+所以，因为这是一个 **Topic** form, 所以它会返回 `topic = form.save()` 创建的 **Topic**。然后，通用的路径是把用户重定向到其他地方，以避免用户通过按 F5 重新提交表单，并且保证应用程序的流程走向。
+
+现在，如果数据是无效的，Django 会给 form 添加错误列表。然后，视图函数不会做任何处理并且返回最后一句：
+`return render(request, 'new_topic.html', {'form': form})`。这意味着我们需要更新 **new_topic.html** 以显示错误。
+
+如果请求是 **GET**，我们只需要使用 `form = NewTopicForm()` 初始化一个新的空表单。
+
+让我们运行测试并观察情况：
+
+```python
+python manage.py test
+```
+
+```python
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 0.522s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+我们甚至修复了最后两个测试。
+
+Django Forms API 不仅仅是处理和验证数据。它还为我们生成 HTML。
+
+**templates/new_topic.html**
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Post</button>
+  </form>
+{% endblock %}
+```
+
+这个 `form` 有三个渲染选项：`form.as_table`，`form.as_ul` 和 `form.as_p`。这是一个快速的渲染表单所有字段的方法。顾名思义，`as_table` 使用 table 标签来格式化输入，`as_ul` 创建一个输入的 HTML 列表等等。
+
+看看效果：
+
+![此处输入图片的描述][28]
+
+我们以前的 form 看起来更好，是吧？我们将立即修复它。
+
+它看起来很破，但是相信我；它背后有很多东西。它非常强大。比如，如果我们的表单有 50 个字段，我们可以通过键入 `{{ form.as_p }}` 来显示所有字段。
+
+此外，使用 Forms API，Django 会验证数据并且向每个字段添加错误消息。让我们尝试提交一个空的表单：
+
+![此处输入图片的描述][29]
+
+`注意：
+如果你提交表单时看到类似这样的东西：![此处输入图片的描述][30]，这不是 Django 做的。这是你的浏览器进行预验证。要禁用它可以在你的表单标签中添加 **novalidate** 属性：**<form method="post" novalidate>**
+
+你可以不修改它，不会有问题。这只是因为我们的表单现在非常简单，而且我们没有太多的数据验证可以看到。
+
+另外一件需要注意的事情是：没有 “客户端验证” 这样的事情。JavaScript 验证或者浏览器验证仅用于可用性目的。同时也减少了对服务器的请求数量。数据验证应该始终在服务器端完成，这样我们可以完全掌控数据。
+`
+
+它还可以处理在 **Form** 类或者 **Model** 类中定义的 help texts(帮助文本)。
+
+**boards/forms.py**
+
+```python
+from django import forms
+from .models import Topic
+
+class NewTopicForm(forms.ModelForm):
+    message = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=4000,
+        help_text='The max length of the text is 4000.'
+    )
+
+    class Meta:
+        model = Topic
+        fields = ['subject', 'message']
+```
+
+![此处输入图片的描述][31]
+  
+我们也可以为表单字段设置额外的属性：
+
+**boards/forms.py**
+
+```python
+from django import forms
+from .models import Topic
+
+class NewTopicForm(forms.ModelForm):
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'rows': 5, 'placeholder': 'What is on your mind?'}
+        ),
+        max_length=4000,
+        help_text='The max length of the text is 4000.'
+    )
+
+    class Meta:
+        model = Topic
+        fields = ['subject', 'message']
+```
+
+![此处输入图片的描述][32]
+
+
   [1]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [2]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [3]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_URL_Patterns.png
@@ -1398,3 +1694,8 @@ class BoardTopicsTests(TestCase):
   [25]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-2.png
   [26]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-3.png
   [27]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/topics-4.png
+  [28]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/start-a-new-topic-form-django.png
+  [29]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/form-validation.png
+  [30]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/novalidate.png
+  [31]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/help-text.png
+  [32]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/form-placeholder.png
