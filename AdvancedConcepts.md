@@ -1667,6 +1667,281 @@ class NewTopicForm(forms.ModelForm):
 ![此处输入图片的描述][32]
 
 
+**Renderint Bootstrap Forms**
+
+让我们把事情做得更完善。
+
+当使用 Bootstrap 或者其他的前端库时，我比较喜欢使用一个叫做 **django-widget-tweaks** 的 Django 包。它可以让我们更好地控制渲染的处理，保证默认值，只需在上面添加额外的自定义设置。
+
+让我们开始安装它：
+
+```python
+pip install django-widget-tweaks
+```
+
+添加到 `INSTALLED_APPS`：
+
+**myproject/settings.py**
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'widget_tweaks',
+
+    'boards',
+]
+```
+
+现在可以使用它了：
+
+**templates/new_topic.html**
+
+```python
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+
+        {% render_field field class="form-control" %}
+
+        {% if field.help_text %}
+          <small class="form-text text-muted">
+            {{ field.help_text }}
+          </small>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Post</button>
+  </form>
+{% endblock %}
+```
+
+![此处输入图片的描述][33]
+
+这就是我们使用的 **django-widget-tweaks** 的效果。首先，我们使用 **{% load widget_tweaks %}** 模板标签将其加载到模板。然后这样使用它：
+
+```html
+{% render_field field class="form-control" %}
+```
+
+`render_field` 不属于 Django；它存在于我们安装的包里面。要使用它，我们需要传递一个表单域实例作为第一个参数，然后我们可以添加任意的 HTML 属性去补充它。这很有用因为我们可以根据特定的条件指定类。
+
+一些 `render_field` 模板标签的例子：
+
+```html
+{% render_field form.subject class="form-control" %}
+{% render_field form.message class="form-control" placeholder=form.message.label %}
+{% render_field field class="form-control" placeholder="Write a message!" %}
+{% render_field field style="font-size: 20px" %}
+```
+
+现在要实现 Bootstrap 4 验证标签，我们可以修改 **new_topic.html** 模板。
+
+**templates/new_topic.html**
+
+```html
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group">
+      {{ field.label_tag }}
+
+      {% if form.is_bound %}
+        {% if field.errors %}
+
+          {% render_field field class="form-control is-invalid" %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+
+        {% else %}
+          {% render_field field class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field field class="form-control" %}
+      {% endif %}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">
+          {{ field.help_text }}
+        </small>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-success">Post</button>
+</form>
+```
+
+效果是：
+
+![此处输入图片的描述][34]
+
+![此处输入图片的描述][35]
+
+所以，我们有三种不同的渲染状态：
+
+ - **Initial state**：表单没有数据(不受约束)
+ - **Invalid**：我们添加了 `.is-invalid` 这个 CSS class 并将错误消息添加到具有 `.invalid-feedback` class 的元素中
+ - **Valid**：我们添加了 `.is-valid` 的 CSS class，以绿色绘制表单域，并向用户反馈它是否可行。
+
+**Reusable Forms Templates**
+
+模板看起来有点复杂，是吧？有个好消息是我们可以在项目中重复使用它。
+
+在 **templates** 文件夹中，创建一个新的文件夹命名为 **includes**：
+
+```
+myproject/
+ |-- myproject/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- templates/
+ |    |    |-- includes/    <-- here!
+ |    |    |-- base.html
+ |    |    |-- home.html
+ |    |    |-- new_topic.html
+ |    |    +-- topics.html
+ |    +-- manage.py
+ +-- venv/
+```
+ 
+在 **includes** 文件夹中，创建一个 **form.html**：
+
+**templates/includes/form.html**
+
+```html
+{% load widget_tweaks %}
+
+{% for field in form %}
+  <div class="form-group">
+    {{ field.label_tag }}
+
+    {% if form.is_bound %}
+      {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% render_field field class="form-control is-valid" %}
+      {% endif %}
+    {% else %}
+      {% render_field field class="form-control" %}
+    {% endif %}
+
+    {% if field.help_text %}
+      <small class="form-text text-muted">
+        {{ field.help_text }}
+      </small>
+    {% endif %}
+  </div>
+{% endfor %}
+```
+
+现在来修改我们的 **new_topic.html** 模板：
+
+**templates/new_topic.html**
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Start a New Topic{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-success">Post</button>
+  </form>
+{% endblock %}
+```
+
+顾名思义，`{% include %}` 用来在其他的模板中包含 HTML 模板。这是在项目中重用 HTML 组件的常用方法。
+
+在下一个我们实现的表单，我们可以简单地使用 `{% include 'includes/form.html' %}` 去渲染它。
+
+**Adding More Tests**
+
+现在我们在使用 **Django 表单**；我们可以添加更多的测试以确保它能运行顺利
+
+**boards/tests.py**
+
+```python
+# ... other imports
+from .forms import NewTopicForm
+
+class NewTopicTests(TestCase):
+    # ... other tests
+
+    def test_contains_form(self):  # <- new test
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.get(url)
+        form = response.context.get('form')
+        self.assertIsInstance(form, NewTopicForm)
+
+    def test_new_topic_invalid_post_data(self):  # <- updated this one
+        '''
+        Invalid post data should not redirect
+        The expected behavior is to show the form again with validation errors
+        '''
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.post(url, {})
+        form = response.context.get('form')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue(form.errors)
+```
+
+这是我们第一次使用 `assertIsInstance` 方法。基本上我们的处理是抓取上下文的表单实例，检查它是否是一个 `NewTopicForm`。在最后的测试中，我添加了 `self.assertTrue(form.errors)` 以确保数据无效的时候表单会显示错误。
+
+**Conclusions**
+
+在这个课程，我们学习了 URLs, 可重用模板和表单。像往常一样，我们也实现了几个测试用例。这能使我们开发中更自信。
+
+我们的测试文件变的越来越大，所以在下一节中，我们重构了它以提高它的可维护性，从而维持我们代码的增加。
+
+我们也达到了我们需要与登录的用户进行交互的目的。在下一节，我们学习了关于认证的一切知识和怎么去保护我们的视图和资源。
+
+该项目的源代码在 GitHub 可用。项目的当前状态可以在发布标签 **v0.3-lw** 下找到。下面是链接：
+
+[https://github.com/sibtc/django-beginners-guide/tree/v0.3-lw][36]
+
+ 
+
+
   [1]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [2]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
   [3]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/Pixton_Comic_URL_Patterns.png
@@ -1699,3 +1974,7 @@ class NewTopicForm(forms.ModelForm):
   [30]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/novalidate.png
   [31]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/help-text.png
   [32]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/form-placeholder.png
+  [33]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/bootstrap-form.png
+  [34]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/bootstrap-invalid-1.png
+  [35]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/bootstrap-invalid-2.png
+  [36]: https://github.com/sibtc/django-beginners-guide/tree/v0.3-lw
