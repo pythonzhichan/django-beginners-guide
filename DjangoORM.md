@@ -19,7 +19,7 @@
 
 在上图中，用户是还没有登录的，即使他们可以看到页面和表单。
 
-Django 有一个内置的*视图装饰器*来避免这个问题：
+Django 有一个内置的 *视图装饰器* 来避免这个问题：
 
 **boards/views.py**（[完整代码](https://gist.github.com/vitorfs/4d3334a0daa9e7a872653a22ff39320a#file-models-py-L19)）
 
@@ -35,7 +35,7 @@ def new_topic(request, pk):
 
 ![5-3.png](./statics/5-3.png)
 
-注意查询字符串**?next=/boards/1/new/**，我们可以改进登录模板以便利用**next**变量来改进我们的用户体验
+注意查询字符串 **?next=/boards/1/new/** ，我们可以改进登录模板以便利用 **next**变量来改进我们的用户体验
 
 ### 配置登录Next重定向
 
@@ -49,12 +49,75 @@ def new_topic(request, pk):
   <button type="submit" class="btn btn-primary btn-block">Log in</button>
 </form>
 ```
+（译注：实际上这步操作不加也没问题）
 
-然后，如果我们现在尝试登录，那么应用程序将指引我们回到我们所在的位置。
+然后，如果我们现在尝试登录，那么应用程序将指引我们回到我们原来所在的位置。
 
 ![5-4.png](./statics/5-4.png)
 
-所以，**next**参数是内置功能的一部分
+**next** 参数是内置功能的一部分（译注：详情请参考Django[官方文档](https://docs.djangoproject.com/en/2.0/topics/auth/default/#the-login-required-decorator)）
+
+## 测试 Login Required
+
+现在添加一个测试用例确保这个页面被 `@login_required`装饰器保护的，不过，我们先来重构一下 **boards/tests/test_views.py** 文件。
+
+把**test_views.py**拆分成3个文件：
+
+
+* **test_view_home.py** 包含 HomeTests 类 （[完整代码](https://gist.github.com/vitorfs/6ac3aad244c856d418f18890efcb4a7e#file-test_view_home-py)）
+* **test_view_board_topics.py** 包含 **BoardTopicsTests** 类（[完整代码](https://gist.github.com/vitorfs/6ac3aad244c856d418f18890efcb4a7e#file-test_view_board_topics-py)）
+* **test_view_new_topic.py** 包含 **NewTopicTests** 类（[完整代码](https://gist.github.com/vitorfs/6ac3aad244c856d418f18890efcb4a7e#file-test_view_new_topic-py)）
+
+
+```python
+myproject/
+ |-- myproject/
+ |    |-- accounts/
+ |    |-- boards/
+ |    |    |-- migrations/
+ |    |    |-- templatetags/
+ |    |    |-- tests/
+ |    |    |    |-- __init__.py
+ |    |    |    |-- test_templatetags.py
+ |    |    |    |-- test_view_home.py          <-- here
+ |    |    |    |-- test_view_board_topics.py  <-- here
+ |    |    |    +-- test_view_new_topic.py     <-- and here
+ |    |    |-- __init__.py
+ |    |    |-- admin.py
+ |    |    |-- apps.py
+ |    |    |-- models.py
+ |    |    +-- views.py
+ |    |-- myproject/
+ |    |-- static/
+ |    |-- templates/
+ |    |-- db.sqlite3
+ |    +-- manage.py
+ +-- venv/
+ ```
+
+ 重新运行测试，确保一切正常。
+
+ 现在在**test_view_new_topic.py**中添加一个新的测试用例，用来检查试图是否被`@login_required`保护：
+
+ **boards/tests/test_view_new_topic.py** （[完成代码](https://gist.github.com/itorfs/13e75451396d76354b476edaefadbdab#file-test_view_new_topic-py-L84)）
+
+
+ ```python
+ from django.test import TestCase
+from django.urls import reverse
+from ..models import Board
+
+class LoginRequiredNewTopicTests(TestCase):
+    def setUp(self):
+        Board.objects.create(name='Django', description='Django board.')
+        self.url = reverse('new_topic', kwargs={'pk': 1})
+        self.response = self.client.get(self.url)
+
+    def test_redirection(self):
+        login_url = reverse('login')
+        self.assertRedirects(self.response, '{login_url}?next={url}'.format(login_url=login_url, url=self.url))
+
+```
 
 
 
