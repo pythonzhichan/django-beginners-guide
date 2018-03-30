@@ -190,7 +190,7 @@ def topic_posts(request, pk, topic_pk):
 ```
 
 
-注意我们正在间接地获取当然的版块，记住，主题（topic）模型关联到版块（Board）模型，所以我们可以访问当前的版块，你将在下一个代码段中看到：
+注意我们正在间接地获取当前的版块，记住，主题（topic）模型是关联版块（Board）模型的，所以我们可以访问当前的版块，你将在下一个代码段中看到：
 
 **templates/topic_posts.html**([完整代码](https://gist.github.com/vitorfs/17e583f4f0068850c5929bd307dd436a))
 
@@ -246,7 +246,7 @@ class TopicPostsTests(TestCase):
 
 注意到，setup函数变得越来越复杂，我们可以创建一个 minxin 或者抽象类来重用这些代码，我们也可以使用第三方库来初始化设置一些测试数据，来减少这些样板代码。
 
-同时，我们已经有了大量的测试用例，运行速度开始逐渐变得慢起来，我们可以通过用测试套件的方式通过指定的app。
+同时，我们已经有了大量的测试用例，运行速度开始逐渐变得慢起来，我们可以通过用测试套件的方式测试指定的app。
 
 ```shell
 python manage.py test boards
@@ -282,7 +282,7 @@ Destroying test database for alias 'default'...
 
 ```
 
-抑或是指定一个测试用例
+抑或是指定单个测试用例
 
 ```shell
 python manage.py test boards.tests.test_view_topic_posts.TopicPostsTests.test_status_code
@@ -362,7 +362,7 @@ Destroying test database for alias 'default'...
 因为我们现在还没有任何方法去上传用户图片，所以先放一张空的图片，我从[ IconFinder](https://www.iconfinder.com/search/?q=user&license=2&price=free)下载了一张免费图片，然后保存在项目的 static/img 目录。
 
 
-我们还没有真正探索过Django的ORM，但代码`{{ post.created_by.posts.count }}` 在数据库中会执行一个`select count`查询。尽管结果是正确的，但不是一个好方法。因为它在数据库中造成了多次不必要的查询。不过现在不用担心，先专注于如何与应用程序进行交互。稍后，我们将改进此代码，以及如何诊断那些复杂笨重的查询。（译注：过早优化是万恶之源）
+我们还没有真正探索过Django的ORM，但代码`{{ post.created_by.posts.count }}` 在数据库中会执行一个`select count`查询。尽管结果是正确的，但不是一个好方法。因为它在数据库中造成了多次不必要的查询。不过现在不用担心，先专注于如何与应用程序进行交互。稍后，我们将改进此代码，以及如何改进那些复杂笨重的查询。（译注：过早优化是万恶之源）
 
 
 另一个有意思的地方是我们正在测试当前帖子是否属于当前登录用户：`{% if post.created_by == user %}`，我们只给帖子的拥有者显示编辑按钮。
@@ -383,9 +383,9 @@ Destroying test database for alias 'default'...
 {% endfor %}
 ```
 
-## 回帖视图
+## 主题回复功能
 
-现在让我们来实现回复帖子的视图，以便我们可以添加更多的数据和改进功能实现与单元测试。
+现在让我们来实现回复帖子的功能，以便我们可以添加更多的数据和改进功能实现与单元测试。
 
 ![5-9.png](./statics/5-9.png)
 
@@ -527,7 +527,7 @@ def new_topic(request, pk):
 
 ![5-12.png](./statics/5-12.png)
 
-现在对于测试，已经实现标准化流程了，就像我们迄今为止所做的一样。 在boards / tests 木兰中中创建一个新文件 **test_view_reply_topic.py**：
+现在对于测试，已经实现标准化流程了，就像我们迄今为止所做的一样。 在boards/tests 目录中创建一个新文件 **test_view_reply_topic.py**：
 
 **boards/tests/test_view_reply_topic.py** ([完整代码](https://gist.github.com/vitorfs/7148fcb95075fb6641e638214b751cf1))
 
@@ -571,7 +571,7 @@ class InvalidReplyTopicTests(ReplyTopicTestCase):
 
 ## QuerySets（查询结果集）
 
-现在，让我们花点时间来探索一些关于模型的 API。首先，我们来改进主页：
+现在我们花点时间来探索关于模型的 API。首先，我们来改进主页：
 
 ![5-13.png](./statics/5-13.png)
 
@@ -583,7 +583,7 @@ class InvalidReplyTopicTests(ReplyTopicTestCase):
 
 在实现这些功能前，我们先使用Python终端
 
-因为我们要在Python终端尝试，把所有的models定义一个 `__str__` 方法是个好主意
+因为我们要在Python终端尝试，所以，把所有的 models 定义一个 `__str__` 方法是个好主意
 
 **boards/models.py**([完整代码](https://gist.github.com/vitorfs/9524eb42005697fbb79836285b50b1f4))
 
@@ -614,6 +614,7 @@ class Post(models.Model):
 
 ```shell
 python manage.py shell
+from boards.models import Board
 
 # First get a board instance from the database
 board = Board.objects.get(name='Django')
@@ -631,7 +632,7 @@ board.topics.count()
 
 就这样子。
 
-现在统计一个版块下面的回复数量有点麻烦，因为回复并没有直接和Board关联
+现在统计一个版块下面的回复数量有点麻烦，因为回复并没有和 Board 直接关联
 
 ```shell
 from boards.models import Post
@@ -665,7 +666,7 @@ Post.objects.filter(topic__board=board).count()
 7
 ```
 
-双下划线的`topic_board`用于通过模板关系来定位，在内部，Django 在 Board-Topic-Post之间构建了桥梁，构建SQ查询来获取属于指定版块下面的帖子回复。
+双下划线的`topic__board`用于通过模型关系来定位，在内部，Django 在 Board-Topic-Post之间构建了桥梁，构建SQL查询来获取属于指定版块下面的帖子回复。
 
 
 最后一个任务是标识版块下面的最后一条回复
@@ -865,10 +866,10 @@ for topic in topics:
 ```
 
 
-这里我们使用`annotate` QuerySet方法将即时生成一个新的列，这个新的列，将被翻译成一个属性，可通过 `topic.replies`来访问，它包含了指定主题下的回复数。
+这里我们使用`annotate` ，QuerySet将即时生成一个新的列，这个新的列，将被翻译成一个属性，可通过 `topic.replies`来访问，它包含了指定主题下的回复数。
 
 
-我们做一个小小的修复，因为回复里面补一个个包括发起者的帖子
+我们来做一个小小的修复，因为回复里面不应该包括发起者的帖子
 
 
 ```python
@@ -924,7 +925,7 @@ def board_topics(request, pk):
 
 当我们第一次运行命令 `python manage.py migrate`的时候，Django 会抓取所有迁移文件然后生成数据库 schema。
 
-当Django应用了迁移之后，有一个特殊的表叫做**django_migrations**，在这个表中，Django注册了所有已经迁移。
+当Django应用了迁移之后，有一个特殊的表叫做**django_migrations**，在这个表中，Django注册了所有已经的迁移记录。
 
 所以，如果我们重新运行命令：
 
@@ -939,7 +940,7 @@ Running migrations:
   No migrations to apply.
 ```
 
-Django 知道什么事可做的。
+Django 知道没什么事可做了。
 
 现在我们添加在 Topic 模型中添加一个新的字段：
 
@@ -1020,6 +1021,11 @@ def topic_posts(request, pk, topic_pk):
 
 ## 总结
 
+在这节课中，我们在留言板的基础功能上取得了一些进步，还剩下一些东西等待去实现，比如：编辑帖子、我的账户（更改个人信息）等等。之后我们将提供markdown语法和列表的分页功能。
+
+下一节主要使用基于类的视图来解决这些问题，在之后，我们将学习到如何部署应用程序到Web服务器中去。
+
+这部分的完整代码可以访问：[https://github.com/sibtc/django-beginners-guide/tree/v0.5-lw](https://github.com/sibtc/django-beginners-guide/tree/v0.5-lw)
 
 
 
