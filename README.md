@@ -20,11 +20,11 @@
 
 ### TODO
 
-* Part 3 - [Advanced Concepts][13]
-* Part 4 - [Authentication][14]
-* Part 5 - [Django ORM][15]
-* Part 6 - [Class-Based Views][16]
-* Part 7 - [Deployment][17]
+* Part 3 - [Advanced Concepts][13]  待校稿
+* Part 4 - [Authentication][14]   待校稿
+* Part 5 - [Django ORM][15]  已完成
+* Part 6 - [Class-Based Views][16]  已完成
+* Part 7 - [Deployment][17]  待认领
 
 前五部分已被认领翻译
 
