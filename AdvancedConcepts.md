@@ -177,33 +177,33 @@ urlpatterns = [
 > 如果你想给用户个人主页设置一个很酷的主页的URL，那么避免冲突最简单的方法是添加一个前缀，例如：/u/vitorfs，或者像 Medium 一样使用 @ 作为前缀 /@vitorfs/。
 
 
-这些 URL 路由的主要思想是当 URL 的一部分被当作某些资源(这些资源用来构成某个页面)的标识的时候就去创建一个动态的页面。比如说，这个标识可以是一个整数的 ID 或者是一个字符串。
+这些 URL 路由的主要思想是当 URL 的一部分被当作某些资源(这些资源用来构成某个页面)的标识的时候就去创建一个动态页面。比如说，这个标识可以是一个整数的 ID 或者是一个字符串。
 
 
-原来的时候，我们使用使用 **Board** ID 去创建 **Topics** 的动态页面。让我们再来看一下我在 **URLs** 开头的部分给出的例子：
+开始的时候，我们使用 **Board** ID 去创建 **Topics**列表的动态页面。让我们再来看一下我在 **URLs** 开头的部分给出的例子：
 
 ```python
 url(r'^boards/(?P<pk>\d+)/$', views.board_topics, name='board_topics')
 ```
 
-正则表达式中的 `\d+` 会匹配一个任意大小的整数值。这个整数值用来从数据库中取到 **Board**。现在注意我们这样写这个正则表达式 `(?P<pk>\d+)`，这是告诉 Django 将捕获到的值放入名为 **pk** 的关键字参数中。
+正则表达式中的 `\d+` 会匹配一个任意大小的整数值。这个整数值用来从数据库中取到 指定的 **Board**。现在注意我们这样写这个正则表达式 `(?P<pk>\d+)`，这是告诉 Django 将捕获到的值放入名为 **pk** 的关键字参数中。
 
-这是我们为它写的一个 view function(视图函数)：
+这时我们为它写的一个视图函数：
 
 ```python
 def board_topics(request, pk):
     # do something...
 ```
 
-因为我们使用了 `(?P<pk>\d+)` 正则表达式，在 `board_topics` 中的关键字参数必须命名为 **pk**。
+因为我们使用了 `(?P<pk>\d+)` 正则表达式，在 `board_topics`函数中，关键字参数必须命名为 **pk**。
 
-如果我们想使用任意的名字，我们可以这样做：
+如果你想在视图函数使用任意名字的参数，那么可以这样定义：
 
 ```python
 url(r'^boards/(\d+)/$', views.board_topics, name='board_topics')
 ```
 
-然后 view function(视图函数) 可以这样定义：
+然后在视图函数可以这样定义：
 
 ```python
 def board_topics(request, board_id):
@@ -217,13 +217,19 @@ def board_topics(request, id):
     # do something...
 ```
 
-名字无关紧要，但是使用命名参数是一个很好的做法，因为当我们开始编写需要匹配大量的 ID 和变量的更大规模的 URLs 时，这会更便于我们阅读。
+名字无关紧要，但是使用命名参数是一个很好的做法，因为，当我们有个更大的URL去捕获多个 ID 和变量时，这会更便于我们阅读。
 
-**Using the URLs API**
+> PK or ID？
+> PK 表示主键（Primary key），这是访问模型的主键ID的简写方法，所有Django模型都有这个属性，更多的时候，使用pk属性和使用id是一样的，这是因为如果我们没有给model定义主键时，Django将自动创建一个 AutoField 类型的字段，名字叫做 id，它就是主键。  
+> 如果你给model定义了一个不同的主键，例如，假设 email 是你的主键，你就可以这样访问：obj.email 或者 obj.pk，二者是等价的。
 
-现在到了写代码的时候了。让我们来实现我在 **URL** 部分开头提到的 topic 列表页面（参见[Figure 1][5]）
 
-首先，编辑 **urls.py**， 添加我们新的 URL 路由
+## 使用 URLs API
+
+
+现在到了写代码的时候了。我们来实现我在开头提到的主题列表页面
+
+首先，编辑 **urls.py**， 添加新的 URL 路由
 
 **myproject/urls.py**
 ```python
@@ -239,7 +245,7 @@ urlpatterns = [
 ]
 ```
 
-现在，让我们来创建 view function(视图函数) `board_topics`：
+现在创建视图函数 `board_topics`：
 
 **boards/views.py**
 ```python
@@ -254,7 +260,7 @@ def board_topics(request, pk):
     return render(request, 'topics.html', {'board': board})
 ```
 
-在 **templates** 文件夹里面，创建一个新的名为 **topics.html** 的模板：
+在 **templates** 目录中，创建一个名为 **topics.html** 的模板：
 
 **templates/topics.html**
 ```html
@@ -275,11 +281,12 @@ def board_topics(request, pk):
   </body>
 </html>
 ```
-`注意：我们现在只是创建新的 HTML 模板。不用担心，在下一节中我会向你展示如何创建可重用模板。`
 
-现在在浏览器中打开 URL **http://127.0.0.1:8000/boards/1/**，结果应该是下面这个页面：
+>注意：我们现在只是创建新的 HTML 模板。不用担心，在下一节中我会向你展示如何创建可重用模板。
 
-![此处输入图片的描述][6]
+现在在浏览器中打开 URL **http://127.0.0.1:8000/boards/1/** ，结果应该是下面这个页面：
+
+![3-5.png](./statics/3-5.png)
 
 现在到了写一些测试的时候了！编辑 **test.py**，在文件底部添加下面的测试：
 
@@ -313,22 +320,22 @@ class BoardTopicsTests(TestCase):
         self.assertEquals(view.func, board_topics)
 ```
 
-这里需要注意几件事情。这次我们使用了 `setUp` 方法。在这个方法中，我们创建了一个 **Board** 实例来用于测试。我们必须这样做，因为 Django 的测试机制不会针对当前数据库跑你的测试。运行 Django 测试时会即时创建一个新的数据库，使用所有的迁移 model(模型)，运行测试，完成后销毁这个用于测试的数据库。
+这里需要注意几件事情。这次我们使用了 `setUp` 方法。在这个方法中，我们创建了一个 **Board** 实例来用于测试。我们必须这样做，因为 Django 的测试机制不会针对当前数据库跑你的测试。运行 Django 测试时会即时创建一个新的数据库，应用所有的model(模型)迁移 ，运行测试完成后会销毁这个用于测试的数据库。
 
 因此在 `setUp` 方法中，我们准备了运行测试的环境，用来模拟场景。
 
  - `test_board_topics_view_success_status_code` 方法：测试 Django 是否对于现有的 **Board** 返回 status code(状态码) 200(成功)。
- - `test_board_topics_view_not_found_status_code` 方法：测试 Django 是否对于不存在与数据库的 **Board** 返回 status code 404(页面未找到)。
- - `test_board_topics_url_resolves_board_topics_view ` 方法：测试 Django 是否使用正确的视图函数去渲染 topics。
+ - `test_board_topics_view_not_found_status_code` 方法：测试 Django 是否对于不存在于数据库的 **Board** 返回 status code 404(页面未找到)。
+ - `test_board_topics_url_resolves_board_topics_view ` 方法：测试 Django 是否使用了正确的视图函数去渲染 topics。
 
 现在来运行一下测试：
 
-```python
+```shell
 python manage.py test
 ```
 
 输出如下：
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .E...
@@ -346,13 +353,13 @@ FAILED (errors=1)
 Destroying test database for alias 'default'...
 ```
 
-测试 **test_board_topics_view_not_found_status_code** 失败。我们可以在 Traceback 中看到他返回了一个 exception(异常) “boards.models.DoesNotExist: Board matching query does not exist.”
+测试 **test_board_topics_view_not_found_status_code** 失败。我们可以在 Traceback 中看到返回了一个 exception(异常) “boards.models.DoesNotExist: Board matching query does not exist.”
 
-![此处输入图片的描述][7]
+![3-6.png](./statics/3-6.png)
 
 在 `DEBUG=False` 的生产环境中，访问者会看到一个 **500 Internal Server Error** 的页面。但是这不是我们希望得到的。
 
-我们想要一个 **404 Page Not Found** 的页面。让我们来重写我们的 view。
+我们想要一个 **404 Page Not Found** 的页面。让我们来重写我们的视图函数。
 
 **boards/views.py**
 
@@ -391,13 +398,13 @@ Destroying test database for alias 'default'...
 
 好极了！现在它按照预期工作。
 
-![此处输入图片的描述][8]
+![3-7.png](./statics/3-7.png)
 
 这是 Django 在 `DEBUG=False` 的情况下显示的默认页面。稍后，我们可以自定义 404 页面去显示一些其他的东西。
 
 这是一个常见的用法。事实上， Django 有一个快捷方式去得到一个对象，或者返回一个不存在的对象 404。
 
-因此让我们再来重写一下 **board_topics**：
+因此让我们再来重写一下 **board_topics** 函数：
 
 ```python
 from django.shortcuts import render, get_object_or_404
@@ -411,12 +418,12 @@ def board_topics(request, pk):
     return render(request, 'topics.html', {'board': board})
 ```
 
-修改了代码？测试一下。
-```python
+修改了代码，测试一下。
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .....
@@ -429,9 +436,9 @@ Destroying test database for alias 'default'...
 
 没有破坏任何东西。我们可以继续我们的开发。
 
-下一步是在屏幕上创建一个导航链接。主页应该有一个链接指引访问者去访问给出的 **Board** 的 topics 页面。同样的，topics 页面也应当有一个返回主页的链接。
+下一步是在屏幕上创建一个导航链接。主页应该有一个链接指引访问者去访问指定板块下面的主题列表页面。同样地，topics 页面也应当有一个返回主页的链接。
 
-![此处输入图片的描述][9]
+![3-8.png](./statics/3-8.png)
 
 我们可以先为 `HomeTests` 类编写一些测试：
 
@@ -458,15 +465,15 @@ class HomeTests(TestCase):
 
 注意到现在我们同样在 **HomeTests** 中添加了 **setUp** 方法。这是因为我们现在需要一个 **Board** 实例，并且我们将 **url** 和 **response** 移到了 **setUp**，所以我们能在新测试中重用相同的 response。
 
-这里的新测试是 **test_home_view_contains_link_to_topics_page**。这里我们使用 **assertContains** 方法来测试 response 主体部分是否包含给定的文本。我们在测试中使用的文本是 `a` 标签的 `href` 部分。所以基本上我们是在测试 response 主体是否包含文本 `href="/boards/1/"`。
+这里的新测试是 **test_home_view_contains_link_to_topics_page**。我们使用 **assertContains** 方法来测试 response 主体部分是否包含给定的文本。我们在测试中使用的文本是 `a` 标签的 `href` 部分。所以基本上我们是在测试 response 主体是否包含文本 `href="/boards/1/"`。
 
 让我们运行这个测试：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ....F.
@@ -508,7 +515,7 @@ Destroying test database for alias 'default'...
 <!-- code suppressed for brevity -->
 ```
 
-基本上我们是改动了这一行：
+我们只改动了这一行：
 
 ```python
 {{ board.name }}
@@ -525,11 +532,11 @@ Destroying test database for alias 'default'...
 如果是一个像主页这种简单的 URL, 那就是 `{% url 'home' %}`。
 保存文件然后再运行一下测试：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ......
@@ -542,7 +549,7 @@ Destroying test database for alias 'default'...
 
 很棒！现在我们可以看到它在浏览器是什么样子。
 
-![此处输入图片的描述][10]
+![3-9.png](./statics/3-9.png)
 
 现在轮到返回的链接了，我们可以先写测试：
 
@@ -561,11 +568,11 @@ class BoardTopicsTests(TestCase):
 
 运行测试：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .F.....
@@ -584,11 +591,11 @@ FAILED (failures=1)
 Destroying test database for alias 'default'...
 ```
 
-更新 board topics template：
+更新主题列表模版：
 
 **templates/topics.html**
 
-```python
+```html
 {% load static %}<!DOCTYPE html>
 <html>
   <head><!-- code suppressed for brevity --></head>
@@ -605,11 +612,11 @@ Destroying test database for alias 'default'...
 
 运行测试：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .......
@@ -620,16 +627,16 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-![此处输入图片的描述][11]
+![3-10.png](./statics/3-10.png)
 
-就如我之前所说的， URL 路由是一个 web 应用程序的基本组成部分。有了这些知识，我们才能继续开发。下一步是完成 URL 的部分，你会看到一些总结的有用的 URL patterns。
+就如我之前所说的， URL 路由是一个 web 应用程序的基本组成部分。有了这些知识，我们才能继续开发。下一步是完成 URL 的部分，你会看到一些使用 URL patterns 的总结。
 
 
-**List of Useful URL Patterns**
+## 实用URL模式列表
 
 技巧部分是正则表达式。我准备了一个最常用的 URL patterns 的列表。当你需要一个特定的 URL 时你可以参考这个列表。
 
-**Primary Key AutoField**
+**主键自增字段**
 
 
 ----------
