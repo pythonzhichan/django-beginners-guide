@@ -14,9 +14,10 @@
 * [Django入门指南-第7章：第一个单元测试][8]
 * [Django入门指南-第8章：静态文件设置][9]
 * [Django入门指南-第9章：Django Admin 介绍][10]
-* [Django入门指南-第10章：URLconf][13]
-* [Django入门指南-第4部分][11]
-* [Django入门指南-第4部分：用户注册][12]
+* [Django入门指南-第10章：URL 分发](./AdvancedConcepts.md)
+* [Django入门指南-第11章：复用模板](./AdvancedConcept2.md)
+* [Django入门指南-第12章：表单处理](./AdvancedConcept3.md)
+* [Django入门指南-第4部分：][12]
 
 
 ### TODO
