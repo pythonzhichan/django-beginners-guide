@@ -636,161 +636,73 @@ Destroying test database for alias 'default'...
 
 技巧部分是正则表达式。我准备了一个最常用的 URL patterns 的列表。当你需要一个特定的 URL 时你可以参考这个列表。
 
-**主键自增字段**
+
+
+| **主键 自增字段** |
+| ------------- |:-------------:|
+| 正则表达式    | `(?P<pk>\d+)` | 
+| 举例     | `url(r'^questions/(?P<pk>\d+)/$', views.question, name='question')`      |
+| 有效 URL| `/questions/934/`     |
+|捕获数据|`    {'pk': '934'}`|
+----------
+
+
+| **Slug 字段** |
+| ------------- |:-------------:|
+| 正则表达式    | `(?P<slug>[-\w]+)` | 
+| 举例     | `url(r'^posts/(?P<slug>[-\w]+)/$', views.post, name='post')`    |
+| 有效 URL| `/posts/hello-world/`   |
+|捕获数据|`{'slug': 'hello-world'}`|
+
+
+-------
+
+| **有主键的 Slug 字段** |
+| ------------- |:-------------:|
+| 正则表达式    |  `(?P<slug>[-\w]+)-(?P<pk>\d+)` | 
+| 举例     |`url(r'^blog/(?P<slug>[-\w]+)-(?P<pk>\d+)/$', views.blog_post, name='blog_post')`  |
+| 有效 URL|`/blog/hello-world-159/`  |
+|捕获数据|`{'slug': 'hello-world', 'pk': '159'}`|
 
 
 ----------
 
-**Regex(正则表达式)**     `(?P<pk>\d+)`
+| **Django 用户名** |
+| ------------- |:-------------:|
+| 正则表达式    | `(?P<username>[\w.@+-]+)` | 
+| 举例     |`url(r'^profile/(?P<username>[\w.@+-]+)/$', views.user_profile, name='user_profile')` |
+| 有效 URL|`/profile/vitorfs/` |
+|捕获数据|` {'username': 'vitorfs'}`|
 
+---------
 
-----------
-
-**Example(举例)**    `url(r'^questions/(?P<pk>\d+)/$', views.question, name='question')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `	/questions/934/`
-
-
-----------
-
-**Captures(捕获数据)**    `	{'pk': '934'}`
-
-----------
-
-
-**Slug Field**
+| **Year** |
+| ------------- |:-------------:|
+| 正则表达式    |  `(?P<year>[0-9]{4})` | 
+| 举例     | `url(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive, name='year')` |
+| 有效 URL| `/articles/2016/` |
+|捕获数据| `{'year': '2016'}`|
 
 ----------
 
-**Regex(正则表达式)**     `(?P<slug>[-\w]+)`
-
-
-----------
-
-**Example(举例)**    `url(r'^posts/(?P<slug>[-\w]+)/$', views.post, name='post')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `	/posts/hello-world/`
-
+|**Year / Month**|
+| ------------- |:-------------:|
+| 正则表达式    |  `(?P<year>[0-9]{4})/(?P<month>[0-9]{2})` | 
+| 举例     |  `url(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.month_archive, name='month')`|
+| 有效 URL| `/articles/2016/01/` |
+|捕获数据| `{'year': '2016', 'month': '01'}`|
 
 ----------
 
-**Captures(捕获数据)**    `{'slug': 'hello-world'}`
+
+你可以在这篇文章中看到更多关于正则表达式匹配的细节：[List of Useful URL Patterns](https://simpleisbetterthancomplex.com/references/2016/10/10/url-patterns.html)。
 
 
-----------
-
-**Slug Field with Primary Key**
-
-----------
-
-**Regex(正则表达式)**     `(?P<slug>[-\w]+)-(?P<pk>\d+)`
-
-
-----------
-
-**Example(举例)**    `url(r'^blog/(?P<slug>[-\w]+)-(?P<pk>\d+)/$', views.blog_post, name='blog_post')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `/blog/hello-world-159/`
-
-
-----------
-
-**Captures(捕获数据)**    `{'slug': 'hello-world', 'pk': '159'}`
-
-
-----------
-
-**Django User Username**
-
-----------
-
-**Regex(正则表达式)**     `(?P<username>[\w.@+-]+)`
-
-
-----------
-
-**Example(举例)**    `url(r'^profile/(?P<username>[\w.@+-]+)/$', views.user_profile, name='user_profile')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `/profile/vitorfs/`
-
-
-----------
-
-**Captures(捕获数据)**    `	{'username': 'vitorfs'}`
-
-
-----------
-
-**Year**
-
-----------
-
-**Regex(正则表达式)**     `(?P<year>[0-9]{4})`
-
-
-----------
-
-**Example(举例)**    `url(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive, name='year')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `/articles/2016/`
-
-
-----------
-
-**Captures(捕获数据)**    `{'year': '2016'}`
-
-
-----------
-
-**Year / Month**
-
-----------
-
-**Regex(正则表达式)**     `(?P<year>[0-9]{4})/(?P<month>[0-9]{2})`
-
-
-----------
-
-**Example(举例)**    `url(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.month_archive, name='month')`
-
-
-----------
-
-**Valid URL(有效的 URL)**    `/articles/2016/01/`
-
-
-----------
-
-**Captures(捕获数据)**    `{'year': '2016', 'month': '01'}`
-
-
-----------
-
-你可以在这篇文章中看到更多关于这些 patterns 的细节：[List of Useful URL Patterns][12]。
-
-
-----------
-
-**Reusable Templates**
+## 可复用的末班
 
 到目前为止，我们一直在复制和粘贴 HTML 文档的多个部分。从长远来看是不可行的。这也是一个坏的做法。
 
-在这一节我们将重写我们的 HTML 模板，创建一个 **master page(母版页)**，只为每个模板添加它所独特的部分。
+在这一节我们将重写 HTML 模板，创建一个 **master page(母版页)**，其他模板添加它所独特的部分。
 
 在 **templates** 文件夹中创建一个名为 **base.html** 的文件：
 
@@ -817,7 +729,7 @@ Destroying test database for alias 'default'...
 </html>
 ```
 
-这是我们的母版页。每个我们创建的模板都 **extend(继承)** 这个特殊的模板。现在看到我们的 `{% block %}` 标签。它用于在模板中保留一个空间，一个"子"模板(继承这个母版页的模板)可以在这个空间中插入代码和 HTML。
+这是我们的母版页。每个我们创建的模板都 **extend(继承)** 这个特殊的模板。现在我们介绍 `{% block %}` 标签。它用于在模板中保留一个空间，一个"子"模板(继承这个母版页的模板)可以在这个空间中插入代码和 HTML。
 
 在 `{% block title %}` 中我们还设置了一个默认值 "Django Boards."。如果我们在子模板中未设置 `{% block title %}` 的值它就会被使用。
 
@@ -882,13 +794,13 @@ Destroying test database for alias 'default'...
 
 在 **topics.html** 中，我们改变了 `{% block title %}` 的默认值。注意我们可以通过调用 `{{ block.super }}` 来重用 block 的默认值。这里我们使用的网页标题是 **base.html** 中定义的 "Django Boards"。所以对于 "Python" 的 board 页面，这个标题是 "Python - Django Boards",对于 "Random" board 标题会是 "Random - Django Boards"。
 
-现在我们运行测试然后会看到我们没有破坏任何东西：
+现在我们运行测试，然后会看到我们没有破坏任何东西：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 .......
@@ -933,17 +845,17 @@ Destroying test database for alias 'default'...
 </html>
 ```
 
-![此处输入图片的描述][13]
+![3-11.png](./statics/3-11.png)
   
-![此处输入图片的描述][14]
+![3-12.png](./statics/3-12.png)
 
-我使用的 HTML 是 [Bootstrap 4 Navbar 组件][15] 的一部分。
+我使用的 HTML 是 [Bootstrap 4 Navbar 组件](https://getbootstrap.com/docs/4.0/components/navbar/) 的一部分。
 
 我喜欢的一个比较好的改动是改变页面的 "logo"(`.navbar-brand`)。
 
-前往 [fonts.google.com][16]，输入 "Django Boards" 或者任何你项目给定的名字然后点击 **apply to all fonts(应用于所有字体)**。浏览一下，找到一个你喜欢的字体。
+前往 [fonts.google.com](https://fonts.google.com/)，输入 "Django Boards" 或者任何你项目给定的名字然后点击 **apply to all fonts(应用于所有字体)**。浏览一下，找到一个你喜欢的字体。
 
-![此处输入图片的描述][17]
+![3-13.png](./statics/3-13.png)
 
 在 **bast.html** 模板中添加这个字体：
 
@@ -973,36 +885,35 @@ Destroying test database for alias 'default'...
 }
 ```
 
-![此处输入图片的描述][18]
+![3-14.png](./statics/3-14.png)
 
 
-**Forms**
+## 表单处理
 
 Forms(表单) 用来处理我们的输入。这在任何 web 应用或者网站中都是很常见的任务。标准的做法是通过 HTML 表单实现，用户输入一些数据，将其提交给服务器，然后服务器处理它。
 
-![此处输入图片的描述][19]
-图1：你会在这个 *Django Boards* 应用中取什么用户名？
-图2：我想会是 **Ball');DROP TABLE auth_user;--**。 哈哈哈！
-图3：**所有的输入都是恶意非法的！**我们不能相信用户的输入。
+![3-15.png](./statics/3-15.png)
+
 
 表单处理是一项非常复杂的任务，因为它涉及到与应用多个层面的交互。有很多需要关心的问题。例如，提交给服务器的所有数据都是字符串的形式，所以在我们使用它之前需要将其转换为需要的数据类型(整形，浮点型，日期等)。我们必须验证有关应用程序业务逻辑的数据。我们还需要妥善地清理和审查数据，以避免一些诸如 SQL 注入和 XSS 攻击等安全问题。
 
-好消息是，Django Forms API 使整个过程变的更加简单，从而实现了大量工作的自动化。而且，最终的结果比大多数程序员自己去实现的代码更加安全。所以，不管 HTML 的表单多么简单，总是使用表单 API。
+好消息是，Django Forms API 使整个过程变的更加简单，从而实现了大量工作的自动化。而且，最终的结果比大多数程序员自己去实现的代码更加安全。所以，不管 HTML 的表单多么简单，总是使用Form API。
 
 
-**How Not Implement a Form**
+### 自己实现表单
+
 
 起初，我想直接跳到表单 API。但是我觉得花点时间去了解一下表单处理的基本细节是一个不错的主意。否则，这玩意儿将会看起来像魔术一样，这是一件坏事，因为当出现错误时，你将不知道怎么去找到问题所在。
 
-随着对一些编程概念的深入理解，我们可以感觉到自己能更好地掌控一些情况。掌控是很重要的，因为它让我们写代码的时候更有信心。一旦我们能确切地知道发生了什么，实现可预见行为的代码就容易多了。调试和查找错误也变得很容易，因为你知道在哪里去查找。
+随着对一些编程概念的深入理解，我们可以感觉到自己能更好地掌控一些情况。掌控是很重要的，因为它让我们写代码的时候更有信心。一旦我们能确切地知道发生了什么，实现可预见行为的代码就容易多了。调试和查找错误也变得很容易，因为你知道去哪里查找。
 
 无论如何，让我们开始实现下面的表单：
 
-![此处输入图片的描述][20]
+![3-16.png](./statics/3-16.png)
 
-这是我们在前一个教程绘制的一个线框图。我现在意识到这个可能是一个不好的例子，因为这个特殊的表单涉及到处理两个不同 model 的数据：**Topic**(subject) 和 **Post**(message)。
+这是我们在前一个教程绘制的线框图。我现在意识到这个可能是一个不好的例子，因为这个特殊的表单涉及到处理两个不同模型数据：**Topic**(subject) 和 **Post**(message)。
 
-还有一点很重要的我们到现在为止还没讨论过，就是用户认证。我们应该只为认证过的用户去显示这个页面。通过这种方式，我们能知道是创建了 **Topic** 或者 **Post**。
+还有一点很重要的我们到现在为止还没讨论过，就是用户认证。我们应该只为登录认证过的用户去显示这个页面。通过这种方式，我们才能知道是谁创建了 **Topic** 或者 **Post**。
 
 现在让我们抽象一些细节，重点了解一下怎么在数据库中保存用户的输入。
 
@@ -1024,9 +935,9 @@ urlpatterns = [
 ]
 ```
 
-我们创建的这个 URL 能帮我们确定正确的 **Board**
+我们创建的这个 URL 能帮我们标识正确的 **Board**
 
-现在来创建 **new_topic** 的 view function(视图函数)：
+现在来创建 **new_topic** 的 视图函数：
 
 **boards/views.py**
 
@@ -1061,18 +972,17 @@ def new_topic(request, pk):
 {% endblock %}
 ```
 
-现在我们只有 breadcrumb 保证了导航。注意我们在 URL 中包含了 **board_topics** 视图的返回。
+现在我们只有 breadcrumb 导航。注意我们包含了返回到 **board_topics** 视图 URL。
 
 打开 URL **http://127.0.0.1:8000/boards/1/new/**。显示结果是下面这个页面：
 
-![此处输入图片的描述][21]
+!(3-17.png)[./statics/3-17.png]
 
 我们依然还没有实现到达这个新页面的方法，但是如果我们将 URL 改为 **http://127.0.0.1:8000/boards/2/new/**，它会把我们带到 **Python Board** 的页面：
 
-![此处输入图片的描述][22]
+![3-18.png](./statics/3-18.png)
 
-`注意：
-如果你没有跟着上一节课程一步步地做，你的结果和我的可能有些不一样。在我这个例子中，我的数据库有 3 个 **Board** 实例，分别是 Django = 1, Python = 2, 和 Random = 3。这些数字是数据库中的 ID，用来找到正确的资源。
+>注意：如果你没有跟着上一节课程一步步地做，你的结果和我的可能有些不一样。在我这个例子中，我的数据库有 3 个 **Board** 实例，分别是 Django = 1, Python = 2, 和 Random = 3。这些数字是数据库中的 ID，用来找到正确的资源。
 `
 
 我们可以增加一些测试了：
@@ -1127,11 +1037,11 @@ class NewTopicTests(TestCase):
 
 运行测试：
 
-```python
+```shell
 python manage.py test
 ```
 
-```python
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ...........
@@ -1175,15 +1085,15 @@ Destroying test database for alias 'default'...
 
 这是一个使用 Bootstrap 4 提供的 CSS 类手动创建的 HTML 表单。它看起来是这个样子：
 
-![此处输入图片的描述][23]
+![3-19.png][./statics/3-19.png]
 
 在 `<form>` 标签中，我们定义了 `method` 属性。它会告诉浏览器我们想如何与服务器通信。HTTP 规范定义了几种 request methods(请求方法)。但是在大部分情况下，我们只需要使用 **GET** 和 **POST** 两种 request(请求)类型。
 
-**GET** 可能是最常见的请求类型了。它用于从服务器请求数据。每当你点击了一个连接或者直接在浏览器中输入了一个网址时，你就创建一个一个 **GET** 请求。
+**GET** 可能是最常见的请求类型了。它用于从服务器请求数据。每当你点击了一个链接或者直接在浏览器中输入了一个网址时，你就创建一个 **GET** 请求。
 
 **POST** 用于当我们想更改服务器上的数据的时候。一般来说，每次我们发送数据给服务器都会导致资源状态的变化，我们应该使用 **POST** 请求发送数据。
 
-Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 **POST** 请求。这是一个避免外部站点或者应用程序向我们的应用程序提交数据的安全措施。应用程序每次接收一个 **POST** 时，都会先检查 **CSRF Token**。如果这个 request 没有 token，或者这个 token() 是无效的，它就会抛弃提交的数据。
+Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 **POST** 请求。这是一个避免外部站点或者应用程序向我们的应用程序提交数据的安全措施。应用程序每次接收一个 **POST** 时，都会先检查 **CSRF Token**。如果这个 request 没有 token，或者这个 token是无效的，它就会抛弃提交的数据。
 
 **csrf_token** 的模板标签：
 
@@ -1197,7 +1107,7 @@ Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 *
 <input type="hidden" name="csrfmiddlewaretoken" value="jG2o6aWj65YGaqzCpl0TYTg5jn6SctjzRZ9KmluifVx0IVaxlwh97YarZKs54Y32">
 ```
 
-另外一件事是，我们需要设置 HTML 输入的 **name**，**name** 将被用来在服务器检索数据。
+另外一件事是，我们需要设置 HTML 输入的 **name**，**name** 将被用来在服务器获取数据。
 
 ```html
 <input type="text" class="form-control" id="id_subject" name="subject">
@@ -1225,7 +1135,7 @@ def new_topic(request, pk):
         subject = request.POST['subject']
         message = request.POST['message']
 
-        user = User.objects.first()  # TODO: get the currently logged in user
+        user = User.objects.first()  # TODO: 临时使用一个账号作为登录用户
 
         topic = Topic.objects.create(
             subject=subject,
@@ -1246,15 +1156,15 @@ def new_topic(request, pk):
 
 这个视图函数只考虑能接收数据并且保存进数据库的乐观合法的 path，但是还缺少一些部分。我们没有验证数据。用户可以提交空表单或者提交一个大于 255 个字符的 **subject**。
 
-到目前为止我们都在对 **User** 字段进行硬编码，因为我们还没有实现身份验证。有一个简单的方法来识别登录的用户。我们会在下一个课程将这一块。此外，我们还没有实现列出 topic 的所有 posts 的视图，实现了它，我们就可以将用户重定向到列出所有 board topics 的页面。
+到目前为止我们都在对 **User** 字段进行硬编码，因为我们还没有实现身份验证。有一个简单的方法来识别登录的用户。我们会在下一个课程将这一块。此外，我们还没有实现列出 topic 的所有 posts 的视图，实现了它，我们就可以将用户重定向到列出所有主题的列表页面。
 
-![此处输入图片的描述][24]
+![3-20.png](./statics/3-20.png)
 
 点击 **Post** 按钮提交表单：
 
-![此处输入图片的描述][25]
+![3-21.png](./statics/3-21.png)
 
-看起来成功了。但是我们还没有实现 topic 的列表页面，所以没有东西可以看。让我们来编辑 **templates/topics.html** 来实现一个合适的列表：
+看起来成功了。但是我们还没有实现主题的列表页面，所以没有东西可以看。让我们来编辑 **templates/topics.html** 来实现一个合适的列表：
 
 **templates/topics.html**
 
@@ -1296,13 +1206,13 @@ def new_topic(request, pk):
 {% endblock %}
 ```
 
-![此处输入图片的描述][26]
+![3-22.png](./statics/3-22.png)
 
 我们创建的 **Topic** 显示在这上面了。
 
 这里有两个新概念。
 
-我们首次使用 **Board** model 中的 **topics** 属性。**topics** 属性由 Django 使用反向关系自动创建。在之前的步骤中，我们创建了一个 **Topic** 实例：
+我们首次使用 **Board** 模型中的 **topics** 属性。**topics** 属性由 Django 使用反向关系自动创建。在之前的步骤中，我们创建了一个 **Topic** 实例：
 
 ```python
 def new_topic(request, pk):
@@ -1317,7 +1227,7 @@ def new_topic(request, pk):
     )
 ```
 
-在 `board=board` 这行，我们设置了 **Topic** model 中的 board 字段，它是 `ForeignKey(Board)`。因此，我们的 **Board** 实例就知道了与它关联的 **Topic** 实例。
+在 `board=board` 这行，我们设置了 **Topic** 模型中的 board 字段，它是 `ForeignKey(Board)`。因此，我们的 **Board** 实例就知道了与它关联的 **Topic** 实例。
 
 之所以我们使用 `board.topics.all` 而不是 `board.topics`，是因为 `board.topics` 是一个 **Related Manager**,它与 **Model Manager** 很相似，通常在 `board.objects` 可得到。所以，要返回给定 board 的所有 topic 我们必须使用 `board.topics.all()`，要过滤一些数据，我们可以这样用 `board.topics.filter(subject__contains='Hello')`。
 
@@ -1329,7 +1239,7 @@ def new_topic(request, pk):
 {{ topic.starter.username }}
 ```
 
-使用一个点加上属性这种写法，我们几乎可以访问 **User** model 的所有属性。如果我们想得到用户的 email，我们可以使用 `topic.starter.email`。
+使用一个点加上属性这种写法，我们几乎可以访问 **User** 模型的所有属性。如果我们想得到用户的 email，我们可以使用 `topic.starter.email`。
 
 我们已经修改了 **topics.html** 模板，让我们创建一个能让我们转到 **new topic** 页面的按钮：
 
@@ -1347,7 +1257,7 @@ def new_topic(request, pk):
 {% endblock %}
 ```
 
-![此处输入图片的描述][27]
+![3-23.png](./statics/3-23.png)
 
 我们可以写一个测试以确保用户可以通过此页面访问到 **New Topic** 页面：
 
@@ -1371,7 +1281,8 @@ class BoardTopicsTests(TestCase):
 我在这里基本上重命名了 **test_board_topics_view_contains_link_back_to_homepage** 方法并添加了一个额外的 `assertContains`。这个测试现在负责确保我们的 view 包含所需的导航链接。
 
 
-**Testing The Form View**
+### 测试表单
+
 
 在我们使用 Django 的方式编写之前的表单示例之前, 让我们先为表单处理写一些测试：
 
@@ -1477,7 +1388,7 @@ Destroying test database for alias 'default'...
 有一个失败的测试和一个错误。两个都与验证用户的输入有关。不要试图用当前的实现来修复它，让我们通过使用 Django Forms API 来通过这些测试
 
 
-**Creating Forms The Right Way**
+### 创建表单正确的姿势
 
 自从我们开始使用 Forms，我们已经走了很长一段路。终于，是时候使用 Forms API 了。
 
@@ -1598,11 +1509,11 @@ Django Forms API 不仅仅是处理和验证数据。它还为我们生成 HTML�
 {% endblock %}
 ```
 
-这个 `form` 有三个渲染选项：`form.as_table`，`form.as_ul` 和 `form.as_p`。这是一个快速的渲染表单所有字段的方法。顾名思义，`as_table` 使用 table 标签来格式化输入，`as_ul` 创建一个输入的 HTML 列表等等。
+这个 `form` 有三个渲染选项：`form.as_table`，`form.as_ul` 和 `form.as_p`。这是一个快速的渲染表单所有字段的方法。顾名思义，`as_table` 使用 table 标签来格式化输入，`as_ul` 使用 li 标签。
 
 看看效果：
 
-![此处输入图片的描述][28]
+![3-24.png](./statics/3-24.png)
 
 我们以前的 form 看起来更好，是吧？我们将立即修复它。
 
@@ -1610,17 +1521,17 @@ Django Forms API 不仅仅是处理和验证数据。它还为我们生成 HTML�
 
 此外，使用 Forms API，Django 会验证数据并且向每个字段添加错误消息。让我们尝试提交一个空的表单：
 
-![此处输入图片的描述][29]
+![3-25.png](./statics/3-25.png)
 
-`注意：
-如果你提交表单时看到类似这样的东西：![此处输入图片的描述][30]，这不是 Django 做的。这是你的浏览器进行预验证。要禁用它可以在你的表单标签中添加 **novalidate** 属性：**<form method="post" novalidate>**
+>注意：
+如果你提交表单时看到类似这样的东西：![3-26.png](./statics/3-26.png)，这不是 Django 导致的，而是你的浏览器进行预验证。要禁用它可以在你的表单标签中添加 **novalidate** 属性：**<form method="post" novalidate>**
 
-你可以不修改它，不会有问题。这只是因为我们的表单现在非常简单，而且我们没有太多的数据验证可以看到。
+>你可以不修改它，不会有问题。这只是因为我们的表单现在非常简单，而且我们没有太多的数据验证可以看到。
 
-另外一件需要注意的事情是：没有 “客户端验证” 这样的事情。JavaScript 验证或者浏览器验证仅用于可用性目的。同时也减少了对服务器的请求数量。数据验证应该始终在服务器端完成，这样我们可以完全掌控数据。
+>另外一件需要注意的事情是：没有 “只客户端验证” 这样的事情。JavaScript 验证或者浏览器验证仅用于可用性目的。同时也减少了对服务器的请求数量。数据验证应该始终在服务器端完成，这样我们可以完全掌控数据。
 `
 
-它还可以处理在 **Form** 类或者 **Model** 类中定义的 help texts(帮助文本)。
+它还可以处理在 **Form** 类或者 **Model** 类中定义的帮助文本。
 
 **boards/forms.py**
 
@@ -1640,7 +1551,7 @@ class NewTopicForm(forms.ModelForm):
         fields = ['subject', 'message']
 ```
 
-![此处输入图片的描述][31]
+![3-27.png](./statics/3-27.png)
   
 我们也可以为表单字段设置额外的属性：
 
@@ -1664,16 +1575,17 @@ class NewTopicForm(forms.ModelForm):
         fields = ['subject', 'message']
 ```
 
-![此处输入图片的描述][32]
+![3-28.png](./statics/3-28.png)
 
 
-**Renderint Bootstrap Forms**
+## 用BootStrap 表单渲染
 
-让我们把事情做得更完善。
 
-当使用 Bootstrap 或者其他的前端库时，我比较喜欢使用一个叫做 **django-widget-tweaks** 的 Django 包。它可以让我们更好地控制渲染的处理，保证默认值，只需在上面添加额外的自定义设置。
+现在让我们把事情做得更完善。
 
-让我们开始安装它：
+当使用 Bootstrap 或者其他的前端库时，我比较喜欢使用一个叫做 **django-widget-tweaks** 的 Django 库。它可以让我们更好地控制渲染的处理，在保证默认值的情况下，只需在上面添加额外的自定义设置。
+
+开始安装它：
 
 ```python
 pip install django-widget-tweaks
@@ -1738,7 +1650,7 @@ INSTALLED_APPS = [
 {% endblock %}
 ```
 
-![此处输入图片的描述][33]
+![3-29.png](./statics/3-29.png)
 
 这就是我们使用的 **django-widget-tweaks** 的效果。首先，我们使用 **{% load widget_tweaks %}** 模板标签将其加载到模板。然后这样使用它：
 
@@ -1800,9 +1712,9 @@ INSTALLED_APPS = [
 
 效果是：
 
-![此处输入图片的描述][34]
+![3-30.png](./statics/3-30.png)
 
-![此处输入图片的描述][35]
+![3-31.png](./statics/3-31.png)
 
 所以，我们有三种不同的渲染状态：
 
@@ -1810,13 +1722,14 @@ INSTALLED_APPS = [
  - **Invalid**：我们添加了 `.is-invalid` 这个 CSS class 并将错误消息添加到具有 `.invalid-feedback` class 的元素中
  - **Valid**：我们添加了 `.is-valid` 的 CSS class，以绿色绘制表单域，并向用户反馈它是否可行。
 
-**Reusable Forms Templates**
+
+## 复用表单模板
 
 模板看起来有点复杂，是吧？有个好消息是我们可以在项目中重复使用它。
 
 在 **templates** 文件夹中，创建一个新的文件夹命名为 **includes**：
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- boards/
@@ -1927,17 +1840,18 @@ class NewTopicTests(TestCase):
 
 这是我们第一次使用 `assertIsInstance` 方法。基本上我们的处理是抓取上下文的表单实例，检查它是否是一个 `NewTopicForm`。在最后的测试中，我添加了 `self.assertTrue(form.errors)` 以确保数据无效的时候表单会显示错误。
 
-**Conclusions**
+
+## 总结
 
 在这个课程，我们学习了 URLs, 可重用模板和表单。像往常一样，我们也实现了几个测试用例。这能使我们开发中更自信。
 
-我们的测试文件变的越来越大，所以在下一节中，我们重构了它以提高它的可维护性，从而维持我们代码的增加。
+我们的测试文件变的越来越大，所以在下一节中，我们重构它以提高它的可维护性，从而维持我们代码的增加。
 
 我们也达到了我们需要与登录的用户进行交互的目的。在下一节，我们学习了关于认证的一切知识和怎么去保护我们的视图和资源。
 
 该项目的源代码在 GitHub 可用。项目的当前状态可以在发布标签 **v0.3-lw** 下找到。下面是链接：
 
-[https://github.com/sibtc/django-beginners-guide/tree/v0.3-lw][36]
+[https://github.com/sibtc/django-beginners-guide/tree/v0.3-lw](https://github.com/sibtc/django-beginners-guide/tree/v0.3-lw)
 
  
 
