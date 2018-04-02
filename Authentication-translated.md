@@ -373,7 +373,7 @@ def signup(request):
 
 ![Sign up](./statics/4-17.png)
 
-## 在模板中引用已认证的用户
+### 在模板中引用已认证的用户
 
 我们要怎么才能知道上述操作是否有效呢？我们可以编辑**base.html**模板来在顶部栏上添加用户名称：
 
@@ -1229,13 +1229,13 @@ LOGIN_REDIRECT_URL = 'home'
 
 尽管如此，我们仍然需要处理密码字段。问题在于，Django从不将密码字段的数据返回给客户端。因此，在某些情况下，不要试图做一次自作聪明的事情，我们可以直接忽略`is-valid`和`is-invalid` 的CSS类。但是我们的表单模板看起来十分的复杂，我们可以将一些代码移动到模板标记中去。
 
-##### 创建自定义模板标签
+### 创建自定义模板标签
 
 在**boards**应用中，创建一个名为**templatetags**的新文件夹。然后在该文件夹内创建两个名为 **__init__.py** 和 **form_tags.py**的空文件。
 
 文件结构应该如下：
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- accounts/
@@ -1263,7 +1263,7 @@ myproject/
 
 **boards/templatetags/form_tags.py**
 
-```
+```python
 from django import template
 
 register = template.Library()
@@ -1309,7 +1309,7 @@ def input_class(bound_field):
 
 或者在 **input_class**的情况下：
 
-```
+```python
 {{ form.username|input_class }}
 
 <!-- if the form is not bound, it will simply return: -->
@@ -1327,7 +1327,7 @@ def input_class(bound_field):
 
 **templates/includes/form.html**
 
-```
+```html
 {% load form_tags widget_tweaks %}
 
 {% if form.non_field_errors %}
@@ -1359,17 +1359,17 @@ def input_class(bound_field):
 
 
 
-这样的话就好多了是吧？这样做降低了模板的复杂性，它现在看起来更加清洁。并且它还解决了显示绿色边框的密码字段的问题：
+这样的话就好多了是吧？这样做降低了模板的复杂性，它现在看起来更加整洁。并且它还解决了密码字段显示绿色边框的问题：
 
 ![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login-4.jpg)
 
-##### 测试模板标签
+### 测试模板标签
 
-首先，让我们稍微组织一下**boards**的测试。就像我们对账户应用程序所做的那样，创建一个**accounts**应用程序做的那样。创建一个新的文件夹名为**tests**，添加一个**init.py**，复制**test.py**并且将其重命名为**test_views.py**。
+首先，让我们稍微组织一下**boards**的测试。就像我们对account app 所做的那样。创建一个新的文件夹名为**tests**，添加一个**init.py**，复制**test.py**并且将其重命名为**test_views.py**。
 
 添加一个名为 **test_templatetags.py**的新空文件。
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- accounts/
@@ -1394,11 +1394,11 @@ myproject/
 
 ```
 
-修复**test_views.py**的导入：
+修复**test_views.py**的导入问题：
 
 **boards/tests/test_views.py**
 
-```
+```python
 from ..views import home, board_topics, new_topic
 from ..models import Board, Topic, Post
 from ..forms import NewTopicForm
@@ -1409,7 +1409,7 @@ from ..forms import NewTopicForm
 
 **boards/tests/test_templatetags.py**
 
-```
+```python
 from django import forms
 from django.test import TestCase
 from ..templatetags.form_tags import field_type, input_class
@@ -1444,12 +1444,12 @@ class InputClassTests(TestCase):
 
 我们创建了一个用于测试的表单类，然后添加了覆盖两个模板标记中可能出现的场景的测试用例。
 
-```
+```shell
 python manage.py test
 
 ```
 
-```
+```shell
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ................................
@@ -1460,41 +1460,41 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-### 密码重置
+## 密码重置
 
-密码重置过程中涉及一些令人讨厌的URL模式。但正如我们在前面的教程中讨论的那样，我们并不需要正则表达式的专家。我们只需要了解常见问题和它们的解决办法。
+密码重置过程中涉及一些不友好的 URL 模式。但正如我们在前面的教程中讨论的那样，我们并不需要成为正则表达式专家。我们只需要了解常见问题和它们的解决办法。
 
-在我们开始之前另一件重要的事情是，对于密码重置过程，我们需要发送电子邮件。一开始有点复杂，因为我们需要外部服务。目前，我们不会配置生产质量的电子邮件服务。实际上，在开发阶段，我们可以使用Django的调试工具检查电子邮件是否正确发送。
+在我们开始之前另一件重要的事情是，对于密码重置过程，我们需要发送电子邮件。一开始有点复杂，因为我们需要外部服务。目前，我们不会配置生产环境使用的电子邮件服务。实际上，在开发阶段，我们可以使用Django的调试工具检查电子邮件是否正确发送。
 
 ![](./statics/4-31.jpg)
 
-#### 控制台电子邮件后端
+### 控制台收发Email
 
-这个主意产生于项目开发过程中，而不是发送真实的电子邮件，我们只需要记录它们。我们有两种选择：将所有电子邮件写入文本文件或仅将其显示在控制台中。我发现第二个方式更加方便，因为我们已经在使用控制台来运行开发服务器，并且设置更容易一些。
+这个主意来自于项目开发过程中，而不是发送真实的电子邮件，我们只需要记录它们。我们有两种选择：将所有电子邮件写入文本文件或仅将其显示在控制台中。我发现第二个方式更加方便，因为我们已经在使用控制台来运行开发服务器，并且设置更容易一些。
 
 编辑 **settings.py**模块并将`EMAIL_BACKEND`变量添加到文件的末尾。
 
 **myproject/settings.py**
 
-```
+```python
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ```
 
-#### 配置路由
+### 配置路由
 
 密码重置过程需要四个视图：
 
 - 带有表单的页面，用于启动重置过程；
-- 一个成功的页面，表示该过程已启动，指示用户检查其垃圾邮件文件夹等；
+- 一个成功的页面，表示该过程已启动，指示用户检查其邮件文件夹等；
 - 检查通过电子邮件发送token的页面
 - 一个告诉用户重置是否成功的页面
 
-视图是内置的，我们不需要执行任何操作，我们所需要做的就是将路径添加到 **urls.py**并且创建模板。
+这些视图是内置的，我们不需要执行任何操作，我们所需要做的就是将路径添加到 **urls.py**并且创建模板。
 
-**myproject/urls.py** [(view complete file contents)](https://gist.github.com/vitorfs/117e300e00d5685f7186e09260f82736#file-urls-py-L14)
+**myproject/urls.py** [(完整代码)](https://gist.github.com/vitorfs/117e300e00d5685f7186e09260f82736#file-urls-py-L14)
 
-```
+```python
 url(r'^reset/$',
     auth_views.PasswordResetView.as_view(
         template_name='password_reset.html',
@@ -1517,7 +1517,7 @@ url(r'^reset/complete/$',
 
 在密码重置视图中，`template_name`参数是可选的。但我认为重新定义它是个好主意，因此视图和模板之间的链接比仅使用默认值更加明显。
 
-在 **templates**文件夹红，一下模板文件
+在 **templates**文件夹中，新增如下模板文件
 
 - **password_reset.html**
 - **password_reset_email.html**:这个模板是发送给用户的电子邮件正文
@@ -1526,17 +1526,17 @@ url(r'^reset/complete/$',
 - **password_reset_confirm.html**
 - **password_reset_complete.html**
 
-在我们开始实施模板之前，让我们准备一个新的测试文件。
+在我们开始实现模板之前，让我们准备一个新的测试文件。
 
 我们可以添加一些基本的测试，因为这些视图和表单已经在Django代码中进行了测试。我们将只测试我们应用程序的细节。
 
 在**accounts/tests** 文件夹中创建一个名为 **test_view_password_reset.py** 的新测试文件。
 
-#### 密码重置视图
+### 密码重置视图
 
 **templates/password_reset.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -1565,7 +1565,7 @@ url(r'^reset/complete/$',
 
 **accounts/tests/test_view_password_reset.py**
 
-```
+```python
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
@@ -1647,7 +1647,7 @@ class InvalidPasswordResetTests(TestCase):
 
 **templates/password_reset_email.html**
 
-```
+```text
 Hi there,
 
 Someone asked for a password reset for the email address {{ email }}.
@@ -1676,7 +1676,7 @@ The Django Boards Team
 
 **accounts/tests/test_mail_password_reset.py**
 
-```
+```python
 from django.core import mail
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -1710,11 +1710,11 @@ class PasswordResetMailTests(TestCase):
 
 此测试用例抓取应用程序发送的电子邮件，并检查主题行，正文内容以及发送给谁。
 
-#### 密码重置完成视图
+### 密码重置完成视图
 
 **templates/password_reset_done.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -1739,7 +1739,7 @@ class PasswordResetMailTests(TestCase):
 
 **accounts/tests/test_view_password_reset.py**
 
-```
+```python
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -1759,11 +1759,11 @@ class PasswordResetDoneTests(TestCase):
 
 ```
 
-#### 密码重置确认视图
+### 密码重置确认视图
 
 **templates/password_reset_confirm.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}
@@ -1815,7 +1815,7 @@ class PasswordResetDoneTests(TestCase):
 
 **accounts/tests/test_view_password_reset.py**
 
-```
+```python
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -1889,11 +1889,11 @@ class InvalidPasswordResetConfirmTests(TestCase):
 
 ```
 
-#### 密码重置完成视图
+### 密码重置完成视图
 
 **templates/password_reset_complete.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}Password changed!{% endblock %}
@@ -1920,7 +1920,7 @@ class InvalidPasswordResetConfirmTests(TestCase):
 
 **accounts/tests/test_view_password_reset.py** [(view complete file contents)](https://gist.github.com/vitorfs/c9657d39d28c2a0cfb0933e715bfc9cf#file-test_view_password_reset-py-L149)
 
-```
+```html
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -1948,7 +1948,7 @@ class PasswordResetCompleteTests(TestCase):
 
 **myproject/urls.py** [(view complete file contents)](https://gist.github.com/vitorfs/0927898f37831cad0d6a4ec538b8a002#file-urls-py-L31)
 
-```
+```python
 url(r'^settings/password/$', auth_views.PasswordChangeView.as_view(template_name='password_change.html'),
     name='password_change'),
 url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'),
@@ -1969,7 +1969,7 @@ LOGIN_URL = 'login'
 
 **templates/password_change.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% block title %}Change password{% endblock %}
@@ -1996,7 +1996,7 @@ LOGIN_URL = 'login'
 
 **templates/password_change_done.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% block title %}Change password successful{% endblock %}
@@ -2023,7 +2023,7 @@ LOGIN_URL = 'login'
 
 **accounts/tests/test_view_password_change.py** [(view complete file contents)](https://gist.github.com/vitorfs/03e2f20a4c1e693c9b22b343503fb461#file-test_view_password_change-py-L40)
 
-```
+```python
 class LoginRequiredPasswordChangeTests(TestCase):
     def test_redirection(self):
         url = reverse('password_change')
@@ -2037,7 +2037,7 @@ class LoginRequiredPasswordChangeTests(TestCase):
 
 **accounts/tests/test_view_password_change.py** [(view complete file contents)](https://gist.github.com/vitorfs/03e2f20a4c1e693c9b22b343503fb461#file-test_view_password_change-py-L48)
 
-```
+```python
 class PasswordChangeTestCase(TestCase):
     def setUp(self, data={}):
         self.user = User.objects.create_user(username='john', email='john@doe.com', password='old_password')
@@ -2051,7 +2051,7 @@ class PasswordChangeTestCase(TestCase):
 
 **accounts/tests/test_view_password_change.py** [(view complete file contents)](https://gist.github.com/vitorfs/03e2f20a4c1e693c9b22b343503fb461#file-test_view_password_change-py-L60)
 
-```
+```python
 class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
     def setUp(self):
         super().setUp({
@@ -2109,7 +2109,7 @@ class InvalidPasswordChangeTests(PasswordChangeTestCase):
 
 ------
 
-### 总结
+## 总结
 
 对于大多数Django应用程序，身份验证是一种非常常见的用例。在本教程中，我们实现了所有重要视图：注册、登录、注销、密码重置和更改密码。现在我们有了一种方法来创建用户并进行身份验证，我们将能够继续开发应用程序和其他视图。
 
