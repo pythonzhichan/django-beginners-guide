@@ -16,49 +16,51 @@
 同时你还会了解到如何保护某些试图以防未授权的用户访问，以及如何访问已登录用户的个人信息。
 
 
-在接下来的部分，你会看到一些和身份验证有关线框图，将在本教程中实现。之后是一个全新Django 应用的初始化设置。至今为止我们一直在一个名叫boards的应用中开发。不过，所有身份认证相关的内容都将在另一个应用中，这样能更良好的组织代码。
+在接下来的部分，你会看到一些和身份验证有关线框图，将在本教程中实现。之后是一个全新Django 应用的初始化设置。至今为止我们一直在一个名叫 boards 的应用中开发。不过，所有身份认证相关的内容都将在另一个应用中，这样能更良好的组织代码。
 ![](./statics/4-2.jpg)
 
 
-### 线框图（原型图）
+### 线框图
 
 我们必须更新一下应用的线框图。首先，我们需要在顶部菜单添加一些新选项，如果用户未通过身份验证，应该有两个按钮：分别是注册和登录按钮。
-![Wireframe Top Menu](./statics/4-2.png)
+
+![Wireframe Top Menu](./statics/4-3.png)
 
 图1: 未认证用户的菜单顶部
 
 如果用户已经通过身份认证，我们应该显示他们的名字，和带有“我的账户”，“修改密码”，“登出”这三个选项的下拉框
 
-![Wireframe Top Menu](./statics/4-3.png)
+![Wireframe Top Menu](./statics/4-4.png)
 
 图2: 认证用户的顶部菜单
 
 在登录页面，我们需要一个带有**username**和**password**的表单， 一个登录的按钮和可跳转到注册页面和密码重置页面的链接。
 
-![Wireframe log in page](./statics/4-4.png)
+![Wireframe log in page](./statics/4-5.png)
 
 图3：登录页面
 
 在注册页面，我们应该有包含四个字段的表单：**username，email address, password**和**password confirmation**。同时，也应该有一个能够访问登录页面链接。
 
-![Wireframe sign up page](./statics/4-5.png)
+![Wireframe sign up page](./statics/4-6.png)
+
 图4：注册页面
 
 在密码重置页面上，只有**email address**字段的表单。
 
-![Wireframe password reset page](./statics/4-6.png)
+![Wireframe password reset page](./statics/4-7.png)
 
 图5: 密码重置
 
 之后，用户在点击带有特殊token的重置密码链接以后，用户将被重定向到一个页面，在那里他们可以设置新的密码。
 
-![Wireframe change password page](./statics/4-7.png)
+![Wireframe change password page](./statics/4-8.png)
 
 图6：修改密码
 
 ## 初始设置
 
-要管理这些功能，我们可以在另一个app中将其拆解。在项目根目录中的 manage.py 文件所在的同一目录下，运行以下命令以创建一个新的app：
+要管理这些功能，我们可以在另一个应用（app）中将其拆解。在项目根目录中的 manage.py 文件所在的同一目录下，运行以下命令以创建一个新的app：
 
 ```shell
 django-admin startapp accounts
@@ -161,7 +163,7 @@ def signup(request):
 
 **accounts/tests.py**
 
-```
+```python
 from django.core.urlresolvers import reverse
 from django.urls import resolve
 from django.test import TestCase
@@ -196,7 +198,7 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-对于认证视图（注册、登录、密码重置等），我们不会顶部导航栏。但我们仍然能够使用**base.html** 模板.不过我们需要对它做出一些修改：
+对于认证视图（注册、登录、密码重置等），我们不需要顶部条和breadcrumb导航栏，但仍然能够复用**base.html** 模板，不过我们需要对它做出一些修改，只需要微调：
 
 
 
@@ -251,7 +253,7 @@ Destroying test database for alias 'default'...
 
 ![Sign up](./statics/4-11.png)
 
-![Too Empty](./statics/4-12.png)
+![Too Empty](./statics/4-12.jpg)
 
 是时候创建注册表单了。Django有一个名为 **UserCreationForm**的内置表单，我们就使用它吧：
 
@@ -297,7 +299,7 @@ def signup(request):
     <h2>Sign up</h2>
     <form method="post" novalidate>
       {% csrf_token %}
-      {{ form.as_p }}
+      {% include 'includes/form.html' %}
       <button type="submit" class="btn btn-primary">Create an account</button>
     </form>
   </div>
@@ -444,7 +446,7 @@ class SignUpTests(TestCase):
         self.assertIsInstance(form, UserCreationForm)
 ```
 
-我们稍微改变了**SighUpTests**类，定义了一个**setUp**方法，将response对象移到那里，现在我们测试响应中是否有表单和CSRF令牌。
+我们稍微改变了**SighUpTests**类，定义了一个**setUp**方法，将response对象移到那里，现在我们测试响应中是否有表单和CSRF token。
 
 现在我们要测试一个成功的注册功能。这次，让我们来创建一个新类，以便于更好地组织测试。
 
@@ -580,7 +582,7 @@ def signup(request):
 
 
 
-```
+```python
 from .forms import SignUpForm
 
 class SignUpTests(TestCase):
@@ -644,7 +646,7 @@ class SignUpTests(TestCase):
 
 最终的结果应该如下：
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- accounts/
@@ -670,7 +672,7 @@ myproject/
 
 **accounts/tests/test_view_signup.py**
 
-```
+```python
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -686,9 +688,8 @@ from ..forms import SignUpForm
 
 **accounts/tests/test_form_signup.py**
 
-**
 
-```
+```python
 from django.test import TestCase
 from ..forms import SignUpForm
 
@@ -708,13 +709,13 @@ class SignUpFormTest(TestCase):
 
 #### 改进注册模板
 
-让我们稍微讨论一下，在这里，我们可以使用Bootstrap4组建来使它看起来不错。
+让我们稍微讨论一下，在这里，我们可以使用Bootstrap4 组件来使它看起来不错。
 
 访问：https://www.toptal.com/designers/subtlepatterns/ 并找到一个很好地背景图案作为账户页面的背景，下载下来再静态文件夹中创建一个名为img的新文件夹，并将图像放置再那里。
 
 之后，再static/css中创建一个名为accounts.css的新CSS文件。结果应该如下：
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- accounts/
@@ -737,7 +738,7 @@ myproject/
 
 **static/css/accounts.css**
 
-```
+```css
 body {
   background-image: url(../img/shattered.png);
 }
@@ -760,7 +761,7 @@ body {
 
 **templates/signup.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% load static %}
@@ -801,11 +802,11 @@ body {
 
 ### 注销
 
-为了在实现中保持自然流畅，我们添加注销视图，实现，编辑**urls.py**以添加新路线：
+为了在实现过程保持完整自然流畅的功能，我们还添加注销视图，编辑**urls.py**以添加新的路由：
 
 **myproject/urls.py**
 
-```
+```python
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -835,7 +836,7 @@ LOGOUT_REDIRECT_URL = 'home'
 
 ```
 
-在这里我们传递了我们希望在注销后重定向用户的URL模式的名称。
+在这里我们给变量指定了一个URL模型的名称，以告诉Django当用户退出登录之后跳转的地址。
 
 在这之后，这次重定向就算完成了。只需要访问URL **127.0.0.1:8000/logout/** 然后您就将被注销。但是再等一下，在你注销之前，让我们为登录用户创建下拉菜单。
 
@@ -861,7 +862,7 @@ Bootstrap4还需要一个名为**Popper** 的库才能工作，前往 [popper.js
 
 同样，将 **bootstrap.min.js**文件复制到我们的js文件夹中。最终的结果应该是：
 
-```
+```shell
 myproject/
  |-- myproject/
  |    |-- accounts/
@@ -884,7 +885,7 @@ myproject/
 
 **templates/base.html**
 
-```
+```html
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -907,19 +908,19 @@ myproject/
 
 ```
 
-如果你发现说明混淆了，只需要直接在链接下载文件
+如果你发现上面的说明很模糊，只需要直接在下面的链接下载文件
 
 - <https://code.jquery.com/jquery-3.2.1.min.js>
 - <https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js>
 - <https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js>
 
-右键单击：保存链接为
+打开链接，右键另存为
 
 现在我们可以添加Bootstrap4下拉菜单了：
 
 **templates/base.html**
 
-```
+```html
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -956,7 +957,7 @@ myproject/
 
 我们可以改进一点：
 
-```
+```html
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -1004,7 +1005,7 @@ myproject/
 
 **myproject/urls.py**
 
-```
+```python
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -1024,7 +1025,7 @@ urlpatterns = [
 
 ```
 
-在`as_view()`中，我们可以传递一些额外的参数，以覆盖默认值。在这种情况下，我们让**LoginView** 在**login.html**l处寻找模板。
+在`as_view()`中，我们可以传递一些额外的参数，以覆盖默认值。在这种情况下，我们让**LoginView** 使用**login.html**模板。
 
 编辑**settings.py**然后添加
 
@@ -1046,11 +1047,11 @@ LOGIN_REDIRECT_URL = 'home'
 
 ```
 
-我们可以创建一个类似于注册页面的模板。创建一个名为 **login.html**的新文件：
+我们可以创建一个类似于注册页面的模板。创建一个名为 **login.html** 的新文件：
 
 **templates/login.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% load static %}
@@ -1093,13 +1094,13 @@ LOGIN_REDIRECT_URL = 'home'
 
 ![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login.jpg)
 
-我们重复一下HTML模板，让我们重构一下它。
+我们看到HTML模板中的内容重复了，现在来重构一下它。
 
 创建一个名为**base_accounts.html**的新模板：
 
 **templates/base_accounts.html**
 
-```
+```html
 {% extends 'base.html' %}
 
 {% load static %}
@@ -1124,7 +1125,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 **templates/login.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}Log in to Django Boards{% endblock %}
@@ -1156,11 +1157,11 @@ LOGIN_REDIRECT_URL = 'home'
 
 ```
 
-我们仍然有密码重置网址，因此现在让我们将其保留为`#`。
+我们有密码重置的功能，因此现在让我们将其暂时保留为`#`。
 
 **templates/signup.html**
 
-```
+```html
 {% extends 'base_accounts.html' %}
 
 {% block title %}Sign up to Django Boards{% endblock %}
@@ -1187,7 +1188,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 ```
 
-请注意，我们添加了登录网址： `<a href="{% url 'login' %}">Log in</a>`.
+请注意，我们添加了登录链接： `<a href="{% url 'login' %}">Log in</a>`.
 
 ##### 无登录信息错误
 
@@ -1201,11 +1202,11 @@ LOGIN_REDIRECT_URL = 'home'
 
 有点误导，这个区域是绿色的，表明它们是良好运行的，此外，没有其他额外的信息。
 
-这是因为表单有一种特殊类型的错误，成为**non-field errors**（无区域错误）。这是一组与特定字段无关的错误。让我们重构**form.html**部分模板以显示这些错误：
+这是因为表单有一种特殊类型的错误，叫做 **non-field errors**。这是一组与特定字段无关的错误。让我们重构**form.html**部分模板以显示这些错误：
 
 **templates/includes/form.html**
 
-```
+```html
 {% load widget_tweaks %}
 
 {% if form.non_field_errors %}
