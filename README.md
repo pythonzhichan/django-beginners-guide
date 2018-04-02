@@ -17,17 +17,22 @@
 * [Django入门实践指南-第10章：URL 分发](./AdvancedConcepts.md)
 * [Django入门实践指南-第11章：复用模板](./AdvancedConcept2.md)
 * [Django入门实践指南-第12章：表单处理](./AdvancedConcept3.md)
-* [Django入门实践指南-第4部分：][12]
+* [Django入门实践指南-第13章：用户注册](./Authentication0.md)
+* [Django入门实践指南-第14章：用户注销](./Authentication1.md)
+* [Django入门实践指南-第15章：用户登录](./Authentication2.md)
+* [Django入门实践指南-第16章：保护视图](./DjangoORM0.md)
+* [Django入门实践指南-第17章：实现主题回复列表](./DjangoORM1.md)
+* [Django入门实践指南-第18章：实现主题回复功能](./DjangoORM2.md)
+* [Django入门实践指南-第19章：查询结果集](./DjangoORM3.md)
+* [Django入门实践指南-第20章：Django数据迁移](./DjangoORM.md)
+* [Django入门实践指南-第21章：基于类的视图](./ClassBasedViews0.md)
+* [Django入门实践指南-第22章：分页实现](./ClassBasedViews1.md)
+* [Django入门实践指南-第23章：我的账户](./ClassBasedViews2.md)
+* [Django入门实践指南-第24章：Markdown支持](./ClassBasedViews3.md)
+* [Django入门实践指南-第25章：个性化设置](./ClassBasedViews4.md)
+* [Django入门实践指南-第26章：项目部署](./Deployment.md)
 
 
-### TODO
-
-* Part 4 - [Authentication][14]   待校稿
-* Part 5 - [Django ORM][15]  已完成
-* Part 6 - [Class-Based Views][16]  已完成
-* Part 7 - [Deployment][17]  待认领
-
-前五部分已被认领翻译
 
 
 [1]:	https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/
@@ -46,4 +51,4 @@
 [14]:	./Authentication.md
 [15]:	./DjangoORM.md
 [16]:	./ClassBasedViews.md
-[17]:	./Deployment.md
+[17]:	
