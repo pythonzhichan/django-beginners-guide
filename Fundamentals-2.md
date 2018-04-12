@@ -62,7 +62,7 @@ Django自动创建这种反向关系，`related_name`是可选项。但是，如
 
 下面您可以看到类图和Django模型的源代码之间的比较，绿线表示我们如何处理反向关系。
 
-![relate](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram-django-models.png)
+![relate](./statics/2-2-2.png)
 
 这时，你可能会问自己：“主键/ ID呢？”？如果我们没有为模型指定主键，Django会自动为我们生成它。所以现在一切正常。在下一节中，您将看到它是如何工作的。
 ### 迁移模型

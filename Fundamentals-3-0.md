@@ -32,7 +32,7 @@ def home(request):
 
 我们可以从这里开始写。如果你回想起我们的原型图，图5显示了主页应该是什么样子。我们想要做的是在表格中列出一些版块的名单以及它们的描述信息。
 
-![board](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-boards.png)
+![2-2-3.png](./statics/2-2-3.png)
 
 首先要做的是导入Board模型并列出所有的版块
 
@@ -56,7 +56,7 @@ def home(request):
 
  结果就是这个简单的HTML页面：
 
-![boards](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-httpresponse.png)
+![boards](./statics/2-2-4.png)
 
 等等，我们在这里先停一下。真正的项目里面我们不会这样去渲染HTML。对于这个简单视图函数，我们做的就是列出所有版块，然后渲染部分是Django模板引擎的职责。
 

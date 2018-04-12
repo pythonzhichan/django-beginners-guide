@@ -103,7 +103,7 @@ def home(request):
 
 生成的HTML：
 
-![html](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render.png)
+![2-2-5.png](./statics/2-2-5.png)
 
 我们可以用一个更漂亮的表格来替换，改进HTML模板：
 
@@ -147,5 +147,5 @@ def home(request):
 
 ```
 
-![table](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-render-2.png)
+![2-2-6.png](./statics/2-2-6.png)
 

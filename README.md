@@ -51,4 +51,12 @@
 [14]:	./Authentication.md
 [15]:	./DjangoORM.md
 [16]:	./ClassBasedViews.md
-[17]:	
+
+### Contributors
+
+* [liuzhijun](https://github.com/lzjun567)
+* [vimiix](https://github.com/vimiix)
+* [jiangyanglinlan](https://github.com/jiangyanglinlan)
+* [wzhbingo](https://github.com/wzhbingo)
+* [CasualJi](https://github.com/CasualJi)
+* [hellodabin](https://github.com/hellodabin)
