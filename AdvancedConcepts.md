@@ -260,7 +260,7 @@ def board_topics(request, pk):
 在 **templates** 目录中，创建一个名为 **topics.html** 的模板：
 
 **templates/topics.html**
-```html
+```htmlz
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
