@@ -1,13 +1,5 @@
 # Django入门指南-第3章：系统设计
 
->译者：liuzhijun  
->原文：
-https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
-
-
-
-![featured](./statics/2-1.jpg)
-
 
 ### 前言
 

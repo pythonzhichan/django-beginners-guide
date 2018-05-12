@@ -1,4 +1,4 @@
-## 人性化
+# # Django入门与实践-第25章：个性化工具
 
 我觉得只添加内置的人性化(**humanize**)包就会很不错。它包含一组为数据添加“人性化（human touch）”的工具集。
 
@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 **templates/topics.html** [查看完整文件](https://gist.github.com/vitorfs/45521a289677a1a406b4fb743e8141ee)
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load humanize %}
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
 
 你当然可以将它添加到其他你需要的地方。
 
-## Gravatar(添加头像用的库)
+###  Gravatar(添加头像用的库)
 
 给用户个人信息添加图片的一种非常简单的方法就是使用 **[Gravatar](https://gravatar.com/)**。
 
@@ -86,6 +87,7 @@ def gravatar(user):
 **templates/topic_posts.html** [查看完整文件](https://gist.github.com/vitorfs/23d5c5bc9e6c7ac94506a2660a61012c)
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load gravatar %}
@@ -102,7 +104,7 @@ def gravatar(user):
 ![](./statics/6-13.png)
 
 
-## 最后调整
+###  最后调整
 
 也许你已经注意到了，如果有人回复帖子时有一个小问题。我们没有更新 `last_update` 字段，因此主题的排序被打乱顺序了。
 
@@ -195,6 +197,7 @@ class Topic(models.Model):
 **templates/topics.html**
 
 ```html
+
 <table class="table table-striped mb-4">
     <thead class="thead-inverse">
       <tr>
@@ -252,6 +255,7 @@ class Topic(models.Model):
 **templates/reply_topic.html**
 
 ```html
+
 {% block content %}
 
   <form method="post" class="mb-4" novalidate>
@@ -278,6 +282,7 @@ class Topic(models.Model):
 **templates/topic_posts.html**
 
 ```html
+
 {% block content %}
 
   <div class="mb-4">
@@ -357,6 +362,7 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
 **templates/includes/pagination.html**
 
 ```html
+
 {% if is_paginated %}
   <nav aria-label="Topics pagination" class="mb-4">
     <ul class="pagination">
@@ -421,7 +427,7 @@ class SuccessfulReplyTopicTests(ReplyTopicTestCase):
 
 ![](./statics/6-17.png)
 
-## 总结
+###  总结
 
 在本教程中，我们完成了**Django board**项目应用的实现。我可能会发布一个后续的实现教程来改进代码。我们可以一起研究很多事情。例如数据库优化，改进用户界面，文件上传操作，创建审核系统等等。
 

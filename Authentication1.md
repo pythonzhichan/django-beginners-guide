@@ -1,4 +1,4 @@
-## 注销
+# Django入门与实践-第14章：用户注销
 
 为了在实现过程保持完整自然流畅的功能，我们还添加注销视图，编辑**urls.py**以添加新的路由：
 
@@ -79,11 +79,12 @@ myproject/
 
 ```
 
-在**base.html**文件底部，在{% endblock body %}后面添加脚本：
+在**base.html**文件底部，在{% raw %}{% endblock body %} {% endraw %}后面添加脚本：
 
 **templates/base.html**
 
 ```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -103,7 +104,7 @@ myproject/
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>
-
+{% endraw %}
 ```
 
 如果你发现上面的说明很模糊，只需要直接在下面的链接下载文件
@@ -119,6 +120,7 @@ myproject/
 **templates/base.html**
 
 ```html
+{% raw %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -156,6 +158,7 @@ myproject/
 我们可以改进一点：
 
 ```html
+{% raw %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>

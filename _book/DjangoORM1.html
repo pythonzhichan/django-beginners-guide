@@ -1,0 +1,854 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Django入门与实践-第17章：实现主题回复列表 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="DjangoORM2.html" />
+    
+    
+    <link rel="prev" href="DjangoORM0.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Django入门与实践-第1章：环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="GettingStarted-2.html">
+            
+                <a href="GettingStarted-2.html">
+            
+                    
+                    Django入门与实践-第2章：创建项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Fundamentals-1.html">
+            
+                <a href="Fundamentals-1.html">
+            
+                    
+                    Django入门与实践-第3章：系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Fundamentals-2.html">
+            
+                <a href="Fundamentals-2.html">
+            
+                    
+                    Django入门与实践-第4章：模型设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Fundamentals-3-0.html">
+            
+                <a href="Fundamentals-3-0.html">
+            
+                    
+                    Django入门与实践-第5章：第一个视图函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Fundamentals-3-1.html">
+            
+                <a href="Fundamentals-3-1.html">
+            
+                    
+                    Django入门与实践-第6章：模板引擎设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Fundamentals-3-1-1.html">
+            
+                <a href="Fundamentals-3-1-1.html">
+            
+                    
+                    Django入门与实践-第7章：第一个单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Fundamentals-3-2.html">
+            
+                <a href="Fundamentals-3-2.html">
+            
+                    
+                    Django入门与实践-第8章：静态文件设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="Fundamentals-4.html">
+            
+                <a href="Fundamentals-4.html">
+            
+                    
+                    Django入门与实践-第9章：Django Admin 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="AdvancedConcepts.html">
+            
+                <a href="AdvancedConcepts.html">
+            
+                    
+                    Django入门与实践-第10章：URL 分发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="AdvancedConcept2.html">
+            
+                <a href="AdvancedConcept2.html">
+            
+                    
+                    Django入门与实践-第11章：复用模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="AdvancedConcept3.html">
+            
+                <a href="AdvancedConcept3.html">
+            
+                    
+                    Django入门与实践-第12章：表单处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="Authentication0.html">
+            
+                <a href="Authentication0.html">
+            
+                    
+                    Django入门与实践-第13章：用户注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="Authentication1.html">
+            
+                <a href="Authentication1.html">
+            
+                    
+                    Django入门与实践-第14章：用户注销
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="Authentication2.html">
+            
+                <a href="Authentication2.html">
+            
+                    
+                    Django入门与实践-第15章：用户登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="DjangoORM0.html">
+            
+                <a href="DjangoORM0.html">
+            
+                    
+                    Django入门与实践-第16章：保护视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.18" data-path="DjangoORM1.html">
+            
+                <a href="DjangoORM1.html">
+            
+                    
+                    Django入门与实践-第17章：实现主题回复列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="DjangoORM2.html">
+            
+                <a href="DjangoORM2.html">
+            
+                    
+                    Django入门与实践-第18章：实现主题回复功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="DjangoORM3.html">
+            
+                <a href="DjangoORM3.html">
+            
+                    
+                    Django入门与实践-第19章：查询结果集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="DjangoORM.html">
+            
+                <a href="DjangoORM.html">
+            
+                    
+                    Django入门与实践-第20章：Django数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="ClassBasedViews0.html">
+            
+                <a href="ClassBasedViews0.html">
+            
+                    
+                    Django入门与实践-第21章：基于类的视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="ClassBasedViews1.html">
+            
+                <a href="ClassBasedViews1.html">
+            
+                    
+                    Django入门与实践-第22章：分页实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="ClassBasedViews2.html">
+            
+                <a href="ClassBasedViews2.html">
+            
+                    
+                    Django入门与实践-第23章：我的账户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="ClassBasedViews3.html">
+            
+                <a href="ClassBasedViews3.html">
+            
+                    
+                    Django入门与实践-第24章：Markdown支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="ClassBasedViews4.html">
+            
+                <a href="ClassBasedViews4.html">
+            
+                    
+                    Django入门与实践-第25章：个性化设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="Deployment.html">
+            
+                <a href="Deployment.html">
+            
+                    
+                    Django入门与实践-第26章：项目部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contributors</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/lzjun567">
+            
+                    
+                    liuzhijun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <a target="_blank" href="https://github.com/vimiix">
+            
+                    
+                    vimiix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <a target="_blank" href="https://github.com/jiangyanglinlan">
+            
+                    
+                    jiangyanglinlan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://github.com/wzhbingo">
+            
+                    
+                    wzhbingo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <a target="_blank" href="https://github.com/CasualJi">
+            
+                    
+                    CasualJi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" >
+            
+                <a target="_blank" href="https://github.com/hellodabin">
+            
+                    
+                    hellodabin
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Django入门与实践-第17章：实现主题回复列表</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;17&#x7AE0;&#xFF1A;&#x8BBF;&#x95EE;&#x5DF2;&#x767B;&#x5F55;&#x7528;&#x6237;">Django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;17&#x7AE0;&#xFF1A;&#x8BBF;&#x95EE;&#x5DF2;&#x767B;&#x5F55;&#x7528;&#x6237;</h1>
+<p>&#x73B0;&#x5728;&#x6211;&#x4E48;&#x53EF;&#x4EE5;&#x6539;&#x8FDB; <strong>new_topic</strong> &#x89C6;&#x56FE;&#xFF0C;&#x5C06;&#x53D1;&#x5E03;&#x4E3B;&#x9898;&#x7684;&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x767B;&#x5F55;&#x7684;&#x7528;&#x6237;&#xFF0C;&#x53D6;&#x4EE3;&#x4E4B;&#x524D;&#x76F4;&#x63A5;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#xFF0C;&#x4E4B;&#x524D;&#x8FD9;&#x4EFD;&#x4EE3;&#x7801;&#x662F;&#x4E34;&#x65F6;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x90A3;&#x65F6;&#x5019;&#x8FD8;&#x6CA1;&#x6709;&#x65B9;&#x6CD5;&#x53BB;&#x83B7;&#x53D6;&#x767B;&#x5F55;&#x7528;&#x6237;&#xFF0C;&#x4F46;&#x662F;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x4E86;&#xFF1A;</p>
+<p><strong>boards/views.py</strong> (<a href="https://gist.github.com/vitorfs/483936caca4618dc275545ad2dfbef24#file-views-py-L19" target="_blank">&#x5B8C;&#x6574;&#x4EE3;&#x7801;</a>)</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib.auth.decorators <span class="hljs-keyword">import</span> login_required
+<span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404, redirect, render
+
+<span class="hljs-keyword">from</span> .forms <span class="hljs-keyword">import</span> NewTopicForm
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Board, Post
+
+<span class="hljs-meta">@login_required</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">new_topic</span><span class="hljs-params">(request, pk)</span>:</span>
+    board = get_object_or_404(Board, pk=pk)
+    <span class="hljs-keyword">if</span> request.method == <span class="hljs-string">&apos;POST&apos;</span>:
+        form = NewTopicForm(request.POST)
+        <span class="hljs-keyword">if</span> form.is_valid():
+            topic = form.save(commit=<span class="hljs-keyword">False</span>)
+            topic.board = board
+            topic.starter = request.user  <span class="hljs-comment"># &lt;- here</span>
+            topic.save()
+            Post.objects.create(
+                message=form.cleaned_data.get(<span class="hljs-string">&apos;message&apos;</span>),
+                topic=topic,
+                created_by=request.user  <span class="hljs-comment"># &lt;- and here</span>
+            )
+            <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;board_topics&apos;</span>, pk=board.pk)  <span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> redirect to the created topic page</span>
+    <span class="hljs-keyword">else</span>:
+        form = NewTopicForm()
+    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;new_topic.html&apos;</span>, {<span class="hljs-string">&apos;board&apos;</span>: board, <span class="hljs-string">&apos;form&apos;</span>: form})
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E3B;&#x9898;&#x5FEB;&#x901F;&#x9A8C;&#x8BC1;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<p><img src="statics/5-5.png" alt="5-5.png"></p>
+<h3 id="&#x4E3B;&#x9898;&#x56DE;&#x590D;&#x5217;&#x8868;">&#x4E3B;&#x9898;&#x56DE;&#x590D;&#x5217;&#x8868;</h3>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x82B1;&#x70B9;&#x65F6;&#x95F4;&#x6765;&#x5B9E;&#x73B0;&#x4E3B;&#x9898;&#x7684;&#x56DE;&#x590D;&#x5217;&#x8868;&#x9875;&#x9762;&#xFF0C;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E0B;&#x4E0B;&#x9762;&#x7684;&#x7EBF;&#x6846;&#x56FE;&#xFF1A;</p>
+<p><img src="statics/5-6.png" alt="5-6.png"></p>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5199;URL&#x8DEF;&#x7531;&#xFF1A;</p>
+<p><strong>myproject/urls.py</strong>(<a href="https://gist.github.com/vitorfs/aede6d3b7dc3494cf0df48f796075403#file-urls-py-L38" target="_blank">&#x5B8C;&#x6210;&#x4EE3;&#x7801;</a>)</p>
+<pre><code class="lang-python">url(<span class="hljs-string">r&apos;^boards/(?P&lt;pk&gt;\d+)/topics/(?P&lt;topic_pk&gt;\d+)/$&apos;</span>, views.topic_posts, name=<span class="hljs-string">&apos;topic_posts&apos;</span>),
+</code></pre>
+<p>&#x6709;&#x4E24;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#xFF0C;<code>pk</code>&#x7528;&#x4E8E;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x7248;&#x5757;&#xFF08;Board&#xFF09;&#xFF0C;<code>topic_pk</code>&#x7528;&#x4E8E;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x8BE5;&#x56DE;&#x590D;&#x6765;&#x81EA;&#x54EA;&#x4E2A;&#x4E3B;&#x9898;&#x3002;</p>
+<p><strong>boards/views.py</strong>&#xFF08;<a href="https://gist.github.com/vitorfs/3d73ef25a01eceea07ef3ad8538437cf#file-views-py-L39" target="_blank">&#x5B8C;&#x6574;&#x4EE3;&#x7801;</a>)</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404, render
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Topic
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">topic_posts</span><span class="hljs-params">(request, pk, topic_pk)</span>:</span>
+    topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;topic_posts.html&apos;</span>, {<span class="hljs-string">&apos;topic&apos;</span>: topic})
+</code></pre>
+<p>&#x6CE8;&#x610F;&#x6211;&#x4EEC;&#x6B63;&#x5728;&#x95F4;&#x63A5;&#x5730;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684;&#x7248;&#x5757;&#xFF0C;&#x8BB0;&#x4F4F;&#xFF0C;&#x4E3B;&#x9898;&#xFF08;topic&#xFF09;&#x6A21;&#x578B;&#x662F;&#x5173;&#x8054;&#x7248;&#x5757;&#xFF08;Board&#xFF09;&#x6A21;&#x578B;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x5F53;&#x524D;&#x7684;&#x7248;&#x5757;&#xFF0C;&#x4F60;&#x5C06;&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x4EE3;&#x7801;&#x6BB5;&#x4E2D;&#x770B;&#x5230;&#xFF1A;</p>
+<p><strong>templates/topic_posts.html</strong>(<a href="https://gist.github.com/vitorfs/17e583f4f0068850c5929bd307dd436a" target="_blank">&#x5B8C;&#x6574;&#x4EE3;&#x7801;</a>)</p>
+<pre><code class="lang-html">
+{% extends &apos;base.html&apos; %}
+
+{% block title %}{{ topic.subject }}{% endblock %}
+
+{% block breadcrumb %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;home&apos; %}&quot;</span>&gt;</span>Boards<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;board_topics&apos; topic.board.pk %}&quot;</span>&gt;</span>{{ topic.board.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item active&quot;</span>&gt;</span>{{ topic.subject }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x5728;&#x6A21;&#x677F;&#x4E2D; <code>board.name</code>&#x88AB;&#x66FF;&#x6362;&#x6389;&#x4E86;&#xFF0C;&#x5728;&#x5BFC;&#x822A;&#x6761;&#xFF0C;&#x662F;&#x4F7F;&#x7528;&#x7684;topic&#x7684;&#x5C5E;&#x6027;&#xFF1A;<code>topic.board.name</code>&#x3002;</p>
+<p><img src="statics/5-7.png" alt="5-7.png"></p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x7ED9;<strong>topic_posts</strong>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;&#xFF1A;</p>
+<p><strong>boards/tests/test_view_topic_posts.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib.auth.models <span class="hljs-keyword">import</span> User
+<span class="hljs-keyword">from</span> django.test <span class="hljs-keyword">import</span> TestCase
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> resolve, reverse
+
+<span class="hljs-keyword">from</span> ..models <span class="hljs-keyword">import</span> Board, Post, Topic
+<span class="hljs-keyword">from</span> ..views <span class="hljs-keyword">import</span> topic_posts
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopicPostsTests</span><span class="hljs-params">(TestCase)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span><span class="hljs-params">(self)</span>:</span>
+        board = Board.objects.create(name=<span class="hljs-string">&apos;Django&apos;</span>, description=<span class="hljs-string">&apos;Django board.&apos;</span>)
+        user = User.objects.create_user(username=<span class="hljs-string">&apos;john&apos;</span>, email=<span class="hljs-string">&apos;john@doe.com&apos;</span>, password=<span class="hljs-string">&apos;123&apos;</span>)
+        topic = Topic.objects.create(subject=<span class="hljs-string">&apos;Hello, world&apos;</span>, board=board, starter=user)
+        Post.objects.create(message=<span class="hljs-string">&apos;Lorem ipsum dolor sit amet&apos;</span>, topic=topic, created_by=user)
+        url = reverse(<span class="hljs-string">&apos;topic_posts&apos;</span>, kwargs={<span class="hljs-string">&apos;pk&apos;</span>: board.pk, <span class="hljs-string">&apos;topic_pk&apos;</span>: topic.pk})
+        self.response = self.client.get(url)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_status_code</span><span class="hljs-params">(self)</span>:</span>
+        self.assertEquals(self.response.status_code, <span class="hljs-number">200</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_view_function</span><span class="hljs-params">(self)</span>:</span>
+        view = resolve(<span class="hljs-string">&apos;/boards/1/topics/1/&apos;</span>)
+        self.assertEquals(view.func, topic_posts)
+</code></pre>
+<p>&#x6CE8;&#x610F;&#x5230;&#xFF0C;setup&#x51FD;&#x6570;&#x53D8;&#x5F97;&#x8D8A;&#x6765;&#x8D8A;&#x590D;&#x6742;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; minxin &#x6216;&#x8005;&#x62BD;&#x8C61;&#x7C7B;&#x6765;&#x91CD;&#x7528;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x6765;&#x521D;&#x59CB;&#x5316;&#x8BBE;&#x7F6E;&#x4E00;&#x4E9B;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#xFF0C;&#x6765;&#x51CF;&#x5C11;&#x8FD9;&#x4E9B;&#x6837;&#x677F;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x540C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#xFF0C;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x5F00;&#x59CB;&#x9010;&#x6E10;&#x53D8;&#x5F97;&#x6162;&#x8D77;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7528;&#x6D4B;&#x8BD5;&#x5957;&#x4EF6;&#x7684;&#x65B9;&#x5F0F;&#x6D4B;&#x8BD5;&#x6307;&#x5B9A;&#x7684;app&#x3002;</p>
+<pre><code class="lang-shell">python manage.py test boards
+</code></pre>
+<pre><code class="lang-shell">Creating test database for alias &apos;default&apos;...
+System check identified no issues (0 silenced).
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 1.246s
+
+OK
+Destroying test database for alias &apos;default&apos;...
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x53EA;&#x8FD0;&#x884C;&#x6307;&#x5B9A;&#x7684;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;</p>
+<pre><code class="lang-shell">python manage.py test boards.tests.test_view_topic_posts
+</code></pre>
+<pre><code class="lang-shell">Creating test database for alias &apos;default&apos;...
+System check identified no issues (0 silenced).
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.129s
+
+OK
+Destroying test database for alias &apos;default&apos;...
+</code></pre>
+<p>&#x6291;&#x6216;&#x662F;&#x6307;&#x5B9A;&#x5355;&#x4E2A;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;</p>
+<pre><code class="lang-shell">python manage.py test boards.tests.test_view_topic_posts.TopicPostsTests.test_status_code
+</code></pre>
+<pre><code class="lang-shell">Creating test database for alias &apos;default&apos;...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.100s
+
+OK
+Destroying test database for alias &apos;default&apos;...
+</code></pre>
+<p>&#x5F88;&#x9177;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#xFF1F;</p>
+<p>&#x7EE7;&#x7EED;&#x524D;&#x884C;&#xFF01;</p>
+<p>&#x5728; topic_posts.html &#x9875;&#x9762;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;for&#x5FAA;&#x73AF;&#x8FED;&#x4EE3;&#x4E3B;&#x9898;&#x4E0B;&#x7684;&#x56DE;&#x590D;</p>
+<p><strong>templates/topic_posts.html</strong></p>
+<pre><code class="lang-html">
+{% extends &apos;base.html&apos; %}
+
+{% load static %}
+
+{% block title %}{{ topic.subject }}{% endblock %}
+
+{% block breadcrumb %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;home&apos; %}&quot;</span>&gt;</span>Boards<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;board_topics&apos; topic.board.pk %}&quot;</span>&gt;</span>{{ topic.board.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item active&quot;</span>&gt;</span>{{ topic.subject }}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+{% endblock %}
+
+{% block content %}
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Reply<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  {% for post in topic.posts.all %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card mb-2&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body p-3&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-2&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;{% static &apos;img/avatar.svg&apos; %}&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;{{ post.created_by.username }}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;w-100&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">small</span>&gt;</span>Posts: {{ post.created_by.posts.count }}<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-10&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row mb-3&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-6&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-muted&quot;</span>&gt;</span>{{ post.created_by.username }}<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-6 text-right&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-muted&quot;</span>&gt;</span>{{ post.created_at }}<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            {{ post.message }}
+            {% if post.created_by == user %}
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mt-3&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary btn-sm&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Edit<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            {% endif %}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  {% endfor %}
+
+{% endblock %}
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x8FD8;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x53BB;&#x4E0A;&#x4F20;&#x7528;&#x6237;&#x56FE;&#x7247;&#xFF0C;&#x6240;&#x4EE5;&#x5148;&#x653E;&#x4E00;&#x5F20;&#x7A7A;&#x7684;&#x56FE;&#x7247;&#xFF0C;&#x6211;&#x4ECE;<a href="https://www.iconfinder.com/search/?q=user&amp;license=2&amp;price=free" target="_blank"> IconFinder</a>&#x4E0B;&#x8F7D;&#x4E86;&#x4E00;&#x5F20;&#x514D;&#x8D39;&#x56FE;&#x7247;&#xFF0C;&#x7136;&#x540E;&#x4FDD;&#x5B58;&#x5728;&#x9879;&#x76EE;&#x7684; static/img &#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x63A2;&#x7D22;&#x8FC7;Django&#x7684;ORM&#xFF0C;&#x4F46;&#x4EE3;&#x7801;<code>{{ post.created_by.posts.count }}</code> &#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x4F1A;&#x6267;&#x884C;&#x4E00;&#x4E2A;<code>select count</code>&#x67E5;&#x8BE2;&#x3002;&#x5C3D;&#x7BA1;&#x7ED3;&#x679C;&#x662F;&#x6B63;&#x786E;&#x7684;&#xFF0C;&#x4F46;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x65B9;&#x6CD5;&#x3002;&#x56E0;&#x4E3A;&#x5B83;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x9020;&#x6210;&#x4E86;&#x591A;&#x6B21;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x67E5;&#x8BE2;&#x3002;&#x4E0D;&#x8FC7;&#x73B0;&#x5728;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#xFF0C;&#x5148;&#x4E13;&#x6CE8;&#x4E8E;&#x5982;&#x4F55;&#x4E0E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x3002;&#x7A0D;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6539;&#x8FDB;&#x6B64;&#x4EE3;&#x7801;&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x6539;&#x8FDB;&#x90A3;&#x4E9B;&#x590D;&#x6742;&#x7B28;&#x91CD;&#x7684;&#x67E5;&#x8BE2;&#x3002;&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x8FC7;&#x65E9;&#x4F18;&#x5316;&#x662F;&#x4E07;&#x6076;&#x4E4B;&#x6E90;&#xFF09;</p>
+<p>&#x53E6;&#x4E00;&#x4E2A;&#x6709;&#x610F;&#x601D;&#x7684;&#x5730;&#x65B9;&#x662F;&#x6211;&#x4EEC;&#x6B63;&#x5728;&#x6D4B;&#x8BD5;&#x5F53;&#x524D;&#x5E16;&#x5B50;&#x662F;&#x5426;&#x5C5E;&#x4E8E;&#x5F53;&#x524D;&#x767B;&#x5F55;&#x7528;&#x6237;&#xFF1A;<code>{% if post.created_by == user %}</code>&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x7ED9;&#x5E16;&#x5B50;&#x7684;&#x62E5;&#x6709;&#x8005;&#x663E;&#x793A;&#x7F16;&#x8F91;&#x6309;&#x94AE;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x8981;&#x5728;&#x4E3B;&#x9898;&#x9875;&#x9762;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;URL&#x8DEF;&#x7531;&#x5230;&#x4E3B;&#x9898;&#x7684;&#x5E16;&#x5B50;&#x5217;&#x8868;&#xFF0C;&#x66F4;&#x65B0; topic.html &#x6A21;&#x7248;&#xFF0C;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;&#x94FE;&#x63A5;&#xFF1A;</p>
+<p><strong>templates/topics.html</strong> (<a href="https://gist.github.com/vitorfs/cb4b7c9ff382ddeafb4114d0c84b3869" target="_blank">&#x5B8C;&#x6574;&#x4EE3;&#x7801;</a>)</p>
+<pre><code class="lang-python">{% for topic in board.topics.all %}
+  &lt;tr&gt;
+    &lt;td&gt;&lt;a href=&quot;{% url &apos;topic_posts&apos; board.pk topic.pk %}&quot;&gt;{{ topic.subject }}&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;{{ topic.starter.username }}&lt;/td&gt;
+    &lt;td&gt;0&lt;/td&gt;
+    &lt;td&gt;0&lt;/td&gt;
+    &lt;td&gt;{{ topic.last_updated }}&lt;/td&gt;
+  &lt;/tr&gt;
+{% endfor %}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="DjangoORM0.html" class="navigation navigation-prev " aria-label="Previous page: Django入门与实践-第16章：保护视图">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="DjangoORM2.html" class="navigation navigation-next " aria-label="Next page: Django入门与实践-第18章：实现主题回复功能">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Django入门与实践-第17章：实现主题回复列表","level":"1.18","depth":1,"next":{"title":"Django入门与实践-第18章：实现主题回复功能","level":"1.19","depth":1,"path":"DjangoORM2.md","ref":"./DjangoORM2.md","articles":[]},"previous":{"title":"Django入门与实践-第16章：保护视图","level":"1.17","depth":1,"path":"DjangoORM0.md","ref":"./DjangoORM0.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["include-codeblock","livereload"],"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"livereload":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"DjangoORM1.md","mtime":"2018-05-12T01:29:41.889Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-12T01:19:40.393Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

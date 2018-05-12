@@ -1,4 +1,4 @@
-## QuerySets（查询结果集）
+# Django入门与实践-第19章：QuerySets（查询结果集）
 
 现在我们花点时间来探索关于模型的 API。首先，我们来改进主页：
 
@@ -141,6 +141,7 @@ class Board(models.Model):
 **templates/home.html**
 
 ```html
+
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
@@ -332,6 +333,7 @@ def board_topics(request, pk):
 
 
 ```html
+
 {% for topic in topics %}
   <tr>
     <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>

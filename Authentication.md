@@ -185,7 +185,9 @@ Destroying test database for alias 'default'...
     {% endblock body %}  <!-- AND HERE -->
   </body>
 </html>
+{% endraw %}
 ```
+
 我在**base.html**模板中标记了新的注释。代码块`{% block stylesheet %}{% endblock %}`将被用来引入额外的CSS文件，这对于页面来说，更清晰明确。
 
 代码块`{% block body %}`用来包含整个HTML文件，我们可以用它来使一个空白的文档借用**base.html**的头部。注意一下我们是如何命名代码块尾部`{% endblock body %}`。
@@ -799,7 +801,9 @@ myproject/
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>
+{% endraw %}
 ```
+
 如果你觉得说明混乱，只要通过以下链接下载文件：
 *   [https://code.jquery.com/jquery-3.2.1.min.js](https://code.jquery.com/jquery-3.2.1.min.js)
 *   [https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js](https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js)

@@ -1,0 +1,1042 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Django入门与实践-第21章：基于类的视图 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ClassBasedViews1.html" />
+    
+    
+    <link rel="prev" href="DjangoORM.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Django入门与实践-第1章：环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="GettingStarted-2.html">
+            
+                <a href="GettingStarted-2.html">
+            
+                    
+                    Django入门与实践-第2章：创建项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Fundamentals-1.html">
+            
+                <a href="Fundamentals-1.html">
+            
+                    
+                    Django入门与实践-第3章：系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Fundamentals-2.html">
+            
+                <a href="Fundamentals-2.html">
+            
+                    
+                    Django入门与实践-第4章：模型设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Fundamentals-3-0.html">
+            
+                <a href="Fundamentals-3-0.html">
+            
+                    
+                    Django入门与实践-第5章：第一个视图函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Fundamentals-3-1.html">
+            
+                <a href="Fundamentals-3-1.html">
+            
+                    
+                    Django入门与实践-第6章：模板引擎设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Fundamentals-3-1-1.html">
+            
+                <a href="Fundamentals-3-1-1.html">
+            
+                    
+                    Django入门与实践-第7章：第一个单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Fundamentals-3-2.html">
+            
+                <a href="Fundamentals-3-2.html">
+            
+                    
+                    Django入门与实践-第8章：静态文件设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="Fundamentals-4.html">
+            
+                <a href="Fundamentals-4.html">
+            
+                    
+                    Django入门与实践-第9章：Django Admin 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="AdvancedConcepts.html">
+            
+                <a href="AdvancedConcepts.html">
+            
+                    
+                    Django入门与实践-第10章：URL 分发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="AdvancedConcept2.html">
+            
+                <a href="AdvancedConcept2.html">
+            
+                    
+                    Django入门与实践-第11章：复用模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="AdvancedConcept3.html">
+            
+                <a href="AdvancedConcept3.html">
+            
+                    
+                    Django入门与实践-第12章：表单处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="Authentication0.html">
+            
+                <a href="Authentication0.html">
+            
+                    
+                    Django入门与实践-第13章：用户注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="Authentication1.html">
+            
+                <a href="Authentication1.html">
+            
+                    
+                    Django入门与实践-第14章：用户注销
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="Authentication2.html">
+            
+                <a href="Authentication2.html">
+            
+                    
+                    Django入门与实践-第15章：用户登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="DjangoORM0.html">
+            
+                <a href="DjangoORM0.html">
+            
+                    
+                    Django入门与实践-第16章：保护视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="DjangoORM1.html">
+            
+                <a href="DjangoORM1.html">
+            
+                    
+                    Django入门与实践-第17章：实现主题回复列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="DjangoORM2.html">
+            
+                <a href="DjangoORM2.html">
+            
+                    
+                    Django入门与实践-第18章：实现主题回复功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="DjangoORM3.html">
+            
+                <a href="DjangoORM3.html">
+            
+                    
+                    Django入门与实践-第19章：查询结果集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="DjangoORM.html">
+            
+                <a href="DjangoORM.html">
+            
+                    
+                    Django入门与实践-第20章：Django数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.22" data-path="ClassBasedViews0.html">
+            
+                <a href="ClassBasedViews0.html">
+            
+                    
+                    Django入门与实践-第21章：基于类的视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="ClassBasedViews1.html">
+            
+                <a href="ClassBasedViews1.html">
+            
+                    
+                    Django入门与实践-第22章：分页实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="ClassBasedViews2.html">
+            
+                <a href="ClassBasedViews2.html">
+            
+                    
+                    Django入门与实践-第23章：我的账户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="ClassBasedViews3.html">
+            
+                <a href="ClassBasedViews3.html">
+            
+                    
+                    Django入门与实践-第24章：Markdown支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="ClassBasedViews4.html">
+            
+                <a href="ClassBasedViews4.html">
+            
+                    
+                    Django入门与实践-第25章：个性化设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="Deployment.html">
+            
+                <a href="Deployment.html">
+            
+                    
+                    Django入门与实践-第26章：项目部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contributors</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/lzjun567">
+            
+                    
+                    liuzhijun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <a target="_blank" href="https://github.com/vimiix">
+            
+                    
+                    vimiix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <a target="_blank" href="https://github.com/jiangyanglinlan">
+            
+                    
+                    jiangyanglinlan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://github.com/wzhbingo">
+            
+                    
+                    wzhbingo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <a target="_blank" href="https://github.com/CasualJi">
+            
+                    
+                    CasualJi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" >
+            
+                <a target="_blank" href="https://github.com/hellodabin">
+            
+                    
+                    hellodabin
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Django入门与实践-第21章：基于类的视图</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;21&#x7AE0;&#xFF1A;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;"># Django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;21&#x7AE0;&#xFF1A;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;</h1>
+<p><img src="https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-6/featured.jpg" alt=""></p>
+<h3 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h3>
+<p>&#x6B22;&#x8FCE;&#x6765;&#x5230;&#x7CFB;&#x5217;&#x6559;&#x7A0B;&#x7684;&#x7B2C;&#x516D;&#x90E8;&#x5206;&#xFF01;&#x5728;&#x8FD9;&#x7BC7;&#x6559;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8BE6;&#x7EC6;&#x63A2;&#x8BA8;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;&#xFF08;&#x7B80;&#x79F0;CBV&#xFF09;&#x3002;&#x6211;&#x4EEC;&#x4E5F;&#x5C06;&#x91CD;&#x6784;&#x4E00;&#x4E9B;&#x73B0;&#x6709;&#x7684;&#x89C6;&#x56FE;&#xFF0C;&#x4EE5;&#x4FBF;&#x5229;&#x7528;&#x5185;&#x7F6E;&#x7684;<strong>&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x901A;&#x7528;&#x89C6;&#x56FE;</strong>&#xFF08;Generic Class-Based Views&#xFF09;&#x3002;</p>
+<p>&#x8FD9;&#x7BC7;&#x6559;&#x7A0B;&#x6211;&#x4EEC;&#x8FD8;&#x5C06;&#x8BA8;&#x8BBA;&#x8BB8;&#x591A;&#x5176;&#x4ED6;&#x4E3B;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5206;&#x9875;&#xFF0C;&#x5982;&#x4F55;&#x4F7F;&#x7528;markdown&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x6DFB;&#x52A0;&#x7B80;&#x5355;&#x7684;&#x7F16;&#x8F91;&#x5668;&#x3002;&#x6211;&#x4EEC;&#x8FD8;&#x5C06;&#x63A2;&#x7D22;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <strong>Humanize</strong> &#x7684;&#x5185;&#x7F6E;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x7528;&#x4E8E;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x201C;&#x4EBA;&#x4E3A;&#x64CD;&#x4F5C;&#x201D;&#x3002;</p>
+<p>&#x597D;&#x4E86;&#xFF0C;&#x4F19;&#x8BA1;&#x4EEC;&#xFF01;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x5B9E;&#x73B0;&#x4E00;&#x4E9B;&#x4EE3;&#x7801;&#x3002;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x8FD8;&#x6709;&#x5F88;&#x591A;&#x5DE5;&#x4F5C;&#x8981;&#x505A;&#xFF01;</p>
+<h3 id="&#x89C6;&#x56FE;&#x7B56;&#x7565;">&#x89C6;&#x56FE;&#x7B56;&#x7565;</h3>
+<p>&#x5230;&#x5934;&#x6765;&#xFF0C;&#x6240;&#x6709;&#x7684;Django&#x89C6;&#x56FE;&#x5176;&#x5B9E;&#x90FD;&#x662F;<em>&#x51FD;&#x6570;</em>&#x3002;&#x5373;&#x4FBF;&#x662F;CBV&#x3002;&#x5728;&#x7C7B;&#x7684;&#x5E95;&#x5C42;&#xFF0C;&#x5B83;&#x5B8C;&#x6210;&#x4E86;&#x6240;&#x6709;&#x7684;&#x529F;&#x80FD;&#x5E76;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x5F15;&#x5165;&#x4E86;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;&#xFF0C;&#x4F7F;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x66F4;&#x8F7B;&#x677E;&#x5730;&#x91CD;&#x65B0;&#x4F7F;&#x7528;&#x548C;&#x6269;&#x5C55;&#x89C6;&#x56FE;&#x3002;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x6709;&#x5F88;&#x591A;&#x597D;&#x5904;&#xFF0C;&#x4F8B;&#x5982;&#x53EF;&#x6269;&#x5C55;&#x6027;&#xFF0C;&#x591A;&#x91CD;&#x7EE7;&#x627F;&#x4E4B;&#x7C7B;&#x7684;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x6280;&#x672F;&#x7684;&#x8FD0;&#x7528;&#xFF0C;HTTP &#x65B9;&#x6CD5;&#x7684;&#x5904;&#x7406;&#x662F;&#x5728;&#x5355;&#x72EC;&#x7684;&#x65B9;&#x6CD5;&#x4E2D;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x6761;&#x4EF6;&#x5206;&#x652F;&#xFF0C;&#x5E76;&#x4E14;&#x8FD8;&#x6709;&#x901A;&#x7528;&#x7684;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;&#xFF08;&#x7B80;&#x79F0;GCBV&#xFF09;&#x3002;</p>
+<p>&#x5728;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x6559;&#x7A0B;&#x4E4B;&#x524D;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x6E05;&#x695A;&#x8FD9;&#x4E09;&#x4E2A;&#x672F;&#x8BED;&#x7684;&#x542B;&#x4E49;&#xFF1A;</p>
+<ul>
+<li>&#x57FA;&#x4E8E;&#x51FD;&#x6570;&#x7684;&#x89C6;&#x56FE;&#xFF08;FBV&#xFF09;</li>
+<li>&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;&#xFF08;CBV&#xFF09;</li>
+<li>&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x901A;&#x7528;&#x89C6;&#x56FE;&#xFF08;GCBV&#xFF09;</li>
+</ul>
+<p>FBV&#x662F;Django&#x89C6;&#x56FE;&#x4E2D;&#x6700;&#x7B80;&#x5355;&#x7684;&#x8868;&#x793A;&#xFF1A;&#x5B83;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x6536; <strong>HttpRequest</strong> &#x5BF9;&#x8C61;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; <strong>HttpResponse</strong> &#x7684;&#x51FD;&#x6570;&#x3002;</p>
+<p>CBV&#x662F;&#x6BCF;&#x4E2A;Django&#x89C6;&#x56FE;&#x90FD;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x4E00;&#x4E2A;&#x6269;&#x5C55; <code>django.views.generic.view</code> &#x62BD;&#x8C61;&#x7C7B;&#x540E;&#x7684; Python &#x7C7B;&#x3002;</p>
+<p>GCBV&#x662F;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x4E00;&#x4E9B;&#x5177;&#x4F53;&#x95EE;&#x9898;&#x7684;&#x5185;&#x7F6E;&#x7684;CBV&#x96C6;&#x5408;&#xFF0C;&#x6BD4;&#x5982;&#x5217;&#x8868;&#x89C6;&#x56FE;&#xFF0C;&#x521B;&#x5EFA;&#xFF0C;&#x66F4;&#x65B0;&#x548C;&#x5220;&#x9664;&#x89C6;&#x56FE;&#x7B49;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x5C06;&#x63A2;&#x8BA8;&#x4E00;&#x4E9B;&#x4E0D;&#x540C;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+<h3 id="&#x57FA;&#x4E8E;&#x51FD;&#x6570;&#x7684;&#x89C6;&#x56FE;-fbv">&#x57FA;&#x4E8E;&#x51FD;&#x6570;&#x7684;&#x89C6;&#x56FE; (FBV)</h3>
+<p><strong>views.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">new_post</span><span class="hljs-params">(request)</span>:</span>
+    <span class="hljs-keyword">if</span> request.method == <span class="hljs-string">&apos;POST&apos;</span>:
+        form = PostForm(request.POST)
+        <span class="hljs-keyword">if</span> form.is_valid():
+            form.save()
+            <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;post_list&apos;</span>)
+    <span class="hljs-keyword">else</span>:
+        form = PostForm()
+    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;new_post.html&apos;</span>, {<span class="hljs-string">&apos;form&apos;</span>: form})
+</code></pre>
+<p><strong>urls.py</strong></p>
+<pre><code class="lang-python">urlpatterns = [
+    url(<span class="hljs-string">r&apos;^new_post/$&apos;</span>, views.new_post, name=<span class="hljs-string">&apos;new_post&apos;</span>),
+]
+</code></pre>
+<h3 id="&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;-cbv">&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE; (CBV)</h3>
+<p>CBV&#x662F;<strong>View</strong>&#x7C7B;&#x7684;&#x96C6;&#x6210;&#x7C7B;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x8BF7;&#x6C42;&#x662F;&#x4EE5;HTTP&#x65B9;&#x6CD5;&#x547D;&#x540D;&#x7684;&#x7C7B;&#x65B9;&#x6CD5;&#x5185;&#x5904;&#x7406;&#x7684;&#xFF0C;&#x4F8B;&#x5982;<strong>GET</strong> &#xFF0C;<strong>POST</strong> &#xFF0C;<strong>PUT</strong> &#xFF0C;<strong>HEAD</strong> &#x7B49;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#x6765;&#x5224;&#x65AD;&#x8BF7;&#x6C42;&#x662F;&#x4E00;&#x4E2A; <strong>POST</strong> &#x8FD8;&#x662F;&#x5B83;&#x662F;&#x4E00;&#x4E2A; <strong>GET</strong> &#x3002;&#x4EE3;&#x7801;&#x4F1A;&#x76F4;&#x63A5;&#x8DF3;&#x8F6C;&#x5230;&#x6B63;&#x786E;&#x7684;&#x65B9;&#x6CD5;&#x4E2D;&#x3002;&#x5728; <strong>View</strong> &#x7C7B;&#x4E2D;&#x5185;&#x90E8;&#x5904;&#x7406;&#x4E86;&#x8FD9;&#x4E2A;&#x903B;&#x8F91;&#x3002;</p>
+<p><strong>views.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> View
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewPostView</span><span class="hljs-params">(View)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span><span class="hljs-params">(self, request)</span>:</span>
+        form = PostForm(request.POST)
+        <span class="hljs-keyword">if</span> form.is_valid():
+            form.save()
+            <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;post_list&apos;</span>)
+        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;new_post.html&apos;</span>, {<span class="hljs-string">&apos;form&apos;</span>: form})
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request)</span>:</span>
+        form = PostForm()
+        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;new_post.html&apos;</span>, {<span class="hljs-string">&apos;form&apos;</span>: form})
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5728; <strong>urls.py</strong> &#x6A21;&#x5757;&#x4E2D;&#x5F15;&#x7528;CBV&#x7684;&#x65B9;&#x5F0F;&#x4E5F;&#x4F1A;&#x6709;&#x70B9;&#x4E0D;&#x540C;&#xFF1A;</p>
+<p><strong>urls.py</strong></p>
+<pre><code class="lang-python">urlpatterns = [
+    url(<span class="hljs-string">r&apos;^new_post/$&apos;</span>, views.NewPostView.as_view(), name=<span class="hljs-string">&apos;new_post&apos;</span>),
+]
+</code></pre>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8C03;&#x7528; <code>as_view()</code> &#x8FD9;&#x4E2A;&#x7C7B;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x5C06;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7B26;&#x5408;url&#x6A21;&#x5F0F;&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x3002;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5C06;&#x4E00;&#x4E9B;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9; <code>as_view()</code>&#xFF0C;&#x4EE5;&#x4FBF;&#x81EA;&#x5B9A;&#x4E49;CBV&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x7528;&#x4E00;&#x4E9B;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x89C6;&#x56FE;&#x6765;&#x5B9A;&#x5236;&#x6A21;&#x677F;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x603B;&#x4E4B;&#xFF0C;&#x5173;&#x4E8E;CBV&#x7684;&#x597D;&#x5904;&#x662F;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x7C7B;&#x91CC;&#x9762;&#x6DFB;&#x52A0;&#x66F4;&#x591A;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x8BB8;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x505A;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> View
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewPostView</span><span class="hljs-params">(View)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">render</span><span class="hljs-params">(self, request)</span>:</span>
+        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;new_post.html&apos;</span>, {<span class="hljs-string">&apos;form&apos;</span>: self.form})
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span><span class="hljs-params">(self, request)</span>:</span>
+        self.form = PostForm(request.POST)
+        <span class="hljs-keyword">if</span> self.form.is_valid():
+            self.form.save()
+            <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;post_list&apos;</span>)
+        <span class="hljs-keyword">return</span> self.render(request)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, request)</span>:</span>
+        self.form = PostForm()
+        <span class="hljs-keyword">return</span> self.render(request)
+</code></pre>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E9B;&#x901A;&#x7528;&#x89C6;&#x56FE;&#x6765;&#x5B8C;&#x6210;&#x4E00;&#x4E9B;&#x4EFB;&#x52A1;&#xFF0C;&#x4EE5;&#x4FBF;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x6574;&#x4E2A;&#x9879;&#x76EE;&#x4E2D;&#x91CD;&#x590D;&#x5229;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x4F60;&#x9700;&#x8981;&#x77E5;&#x9053;&#x7684;&#x5173;&#x4E8E;CBV&#x7684;&#x57FA;&#x672C;&#x5C31;&#x662F;&#x8FD9;&#x4E9B;&#x3002;&#x5C31;&#x8FD9;&#x4E48;&#x7B80;&#x5355;&#x3002;</p>
+<h3 id="&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x901A;&#x8FC7;&#x89C6;&#x56FE;&#xFF08;gcbv&#xFF09;">&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x901A;&#x8FC7;&#x89C6;&#x56FE;&#xFF08;GCBV&#xFF09;</h3>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5173;&#x4E8E;GCBV&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x6B63;&#x5982;&#x6211;&#x524D;&#x9762;&#x63D0;&#x5230;&#x7684;&#xFF0C;GCBV&#x662F;&#x5185;&#x7F6E;CBV&#x7684;&#x5E38;&#x89C1;&#x7528;&#x4F8B;&#x3002;&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x73B0;&#x5F80;&#x5F80;&#x4F1A;&#x5927;&#x91CF;&#x4F7F;&#x7528;&#x591A;&#x91CD;&#x7EE7;&#x627F;&#xFF08;&#x6DF7;&#x5408;&#x7EE7;&#x627F;&#xFF09;&#x548C;&#x5176;&#x4ED6;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x7B56;&#x7565;&#x3002;</p>
+<p>&#x4ED6;&#x4EEC;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#xFF0C;&#x53EF;&#x4EE5;&#x8282;&#x7701;&#x5F88;&#x591A;&#x7684;&#x5DE5;&#x4F5C;&#x91CF;&#x3002;&#x4F46;&#x662F;&#x4E00;&#x5F00;&#x59CB;&#x53EF;&#x80FD;&#x76F8;&#x5BF9;&#x6BD4;&#x8F83;&#x96BE;&#x4E0A;&#x624B;&#x3002;</p>
+<p>&#x5F53;&#x6211;&#x7B2C;&#x4E00;&#x6B21;&#x5F00;&#x59CB;&#x4F7F;&#x7528;Django&#x65F6;&#xFF0C;&#x6211;&#x53D1;&#x73B0;GCBV&#x5F88;&#x96BE;&#x4F7F;&#x7528;&#x3002;&#x8D77;&#x521D;&#xFF0C;&#x5F88;&#x96BE;&#x8BF4;&#x51FA;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF0C;&#x56E0;&#x4E3A;&#x4EE3;&#x7801;&#x6267;&#x884C;&#x6D41;&#x7A0B;&#x770B;&#x8D77;&#x6765;&#x5E76;&#x4E0D;&#x660E;&#x663E;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x7236;&#x7C7B;&#x4E2D;&#x9690;&#x85CF;&#x4E86;&#x5927;&#x91CF;&#x4EE3;&#x7801;&#x3002;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x4E5F;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x96BE;&#x5EA6;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x56E0;&#x4E3A;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#x6709;&#x65F6;&#x5206;&#x5E03;&#x5728;&#x516B;&#x4E2A;&#x7236;&#x7C7B;&#x4E2D;&#x3002;&#x4F7F;&#x7528;GCBV&#x65F6;&#xFF0C;&#x6700;&#x597D;&#x6253;&#x5F00; <a href="https://ccbv.co.uk/" target="_blank">ccbv.co.uk</a> <em>(&#x9700;&#x79D1;&#x5B66;&#x4E0A;&#x7F51;)</em> &#x4EE5;&#x4FBF;&#x5FEB;&#x901F;&#x53C2;&#x8003;&#x3002;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4E00;&#x8D77;&#x63A2;&#x7D22;&#x5B83;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E00;&#x4E2A;GCBV&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+<p><strong>views.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> CreateView
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewPostView</span><span class="hljs-params">(CreateView)</span>:</span>
+    model = Post
+    form_class = PostForm
+    success_url = reverse_lazy(<span class="hljs-string">&apos;post_list&apos;</span>)
+    template_name = <span class="hljs-string">&apos;new_post.html&apos;</span>
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x6A21;&#x578B;&#x5BF9;&#x8C61;&#x7684;&#x901A;&#x7528;&#x89C6;&#x56FE;&#x3002;&#x5B83;&#x4F1A;&#x5904;&#x7406;&#x6240;&#x6709;&#x8868;&#x5355;&#x5904;&#x7406;&#x5E76;&#x5728;&#x8868;&#x5355;&#x6709;&#x6548;&#x65F6;&#x4FDD;&#x5B58;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x5B83;&#x662F;&#x4E00;&#x4E2A;CBV&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728; <strong>urls.py</strong> &#x4E2D;&#x4EE5;&#x4E0E;&#x5176;&#x4ED6;CBV&#x76F8;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x5F15;&#x7528;&#x5B83;&#xFF1A;</p>
+<p><strong>urls.py</strong></p>
+<pre><code class="lang-python">urlpatterns = [
+    url(<span class="hljs-string">r&apos;^new_post/$&apos;</span>, views.NewPostView.as_view(), name=<span class="hljs-string">&apos;new_post&apos;</span>),
+]
+</code></pre>
+<p>GCBV &#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x4F8B;&#x5B50;&#x8FD8;&#x6709;&#xFF1A;<strong>detailview</strong>&#xFF0C;<strong>deleteview</strong>&#xFF0C;<strong>formview</strong>&#xFF0C;<strong>updateview</strong>&#xFF0C;<strong>listview</strong>&#x3002;</p>
+<h3 id="&#x66F4;&#x65B0;&#x89C6;&#x56FE;">&#x66F4;&#x65B0;&#x89C6;&#x56FE;</h3>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x56DE;&#x5230;&#x6211;&#x4EEC;&#x9879;&#x76EE;&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x8FD9;&#x6B21;&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528; GCBV &#x6765;&#x5B9E;&#x73B0;<strong>&#x7F16;&#x8F91;&#x5E16;&#x5B50;</strong>&#x7684;&#x89C6;&#x56FE;&#xFF1A;</p>
+<p><img src="statics/6-2.png" alt=""></p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/376657085570a3dedf7e5f6e6fffc5e3#file-views-py-L66" target="_blank">(&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x5185;&#x5BB9;)</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> redirect
+<span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> UpdateView
+<span class="hljs-keyword">from</span> django.utils <span class="hljs-keyword">import</span> timezone
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostUpdateView</span><span class="hljs-params">(UpdateView)</span>:</span>
+    model = Post
+    fields = (<span class="hljs-string">&apos;message&apos;</span>, )
+    template_name = <span class="hljs-string">&apos;edit_post.html&apos;</span>
+    pk_url_kwarg = <span class="hljs-string">&apos;post_pk&apos;</span>
+    context_object_name = <span class="hljs-string">&apos;post&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_valid</span><span class="hljs-params">(self, form)</span>:</span>
+        post = form.save(commit=<span class="hljs-keyword">False</span>)
+        post.updated_by = self.request.user
+        post.updated_at = timezone.now()
+        post.save()
+        <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;topic_posts&apos;</span>, pk=post.topic.board.pk, topic_pk=post.topic.pk)
+</code></pre>
+<p>&#x4F7F;&#x7528; <strong>UPDATEVIEW</strong> &#x548C; <strong>CREATEVIEW</strong> &#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x5B9A;&#x4E49; <strong>form_class</strong> &#x6216; <strong>fields</strong> &#x5C5E;&#x6027;&#x3002;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <strong>fields</strong> &#x5C5E;&#x6027;&#x6765;&#x5373;&#x65F6;&#x521B;&#x5EFA;&#x6A21;&#x578B;&#x8868;&#x5355;&#x3002;&#x5728;&#x5185;&#x90E8;&#xFF0C;Django &#x5C06;&#x4F7F;&#x7528;&#x6A21;&#x578B;&#x8868;&#x5355;&#x5DE5;&#x5382;&#x51FD;&#x6570;&#x6765;&#x7EC4;&#x6210; <strong>POST</strong> &#x6A21;&#x578B;&#x7684;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x3002;&#x56E0;&#x4E3A;&#x5B83;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#x8868;&#x5355;&#xFF0C;&#x53EA;&#x6709; <strong>message</strong> &#x5B57;&#x6BB5;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x4E48;&#x505A;&#x3002;&#x4F46;&#x5BF9;&#x4E8E;&#x590D;&#x6742;&#x7684;&#x8868;&#x5355;&#x5B9A;&#x4E49;&#xFF0C;&#x6700;&#x597D;&#x4ECE;&#x5916;&#x90E8;&#x5B9A;&#x4E49;&#x6A21;&#x578B;&#x8868;&#x5355;&#x7136;&#x540E;&#x5728;&#x8FD9;&#x91CC;&#x5F15;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x7CFB;&#x7EDF;&#x5C06;&#x4F7F;&#x7528; <strong>pk_url_kwarg</strong> &#x6765;&#x6807;&#x8BC6;&#x7528;&#x4E8E;&#x68C0;&#x7D22; <strong>Post</strong> &#x5BF9;&#x8C61;&#x7684;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x7684;&#x540D;&#x79F0;&#x3002;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x5728; <strong>urls.py</strong> &#x4E2D;&#x5B9A;&#x4E49;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E; <strong>context_object_name</strong> &#x5C5E;&#x6027;&#xFF0C;<strong>Post</strong> &#x5BF9;&#x8C61;&#x5C06;&#x4F5C;&#x4E3A;&#x201C;Object&#x201D;&#x5728;&#x6A21;&#x677F;&#x4E2D;&#x53EF;&#x7528;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <strong>context_object_name</strong> &#x6765;&#x91CD;&#x547D;&#x540D;&#x5B83;&#x6765;&#x53D1;&#x5E03;&#x3002;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x6A21;&#x677F;&#x4E2D;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x5F97;&#x4E0D;&#x91CD;&#x5199; <code>form_valid()</code> &#x65B9;&#x6CD5;&#x6765;&#x8BBE;&#x7F6E;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x4F8B;&#x5982;<strong>updated_by</strong> &#x548C; <strong>updated_at</strong> &#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x770B;&#x5230; <code>form_valid()</code> &#x65B9;&#x6CD5;&#x539F;&#x672C;&#x7684;&#x6837;&#x5B50;&#xFF1A;<a href="https://ccbv.co.uk/projects/Django/1.11/django.views.generic.edit/UpdateView/#form_valid" target="_blank">updateview&#xFF03;form_valid</a>&#x3002;</p>
+<p><strong>myproject/urls.py</strong> <a href="https://gist.github.com/vitorfs/376657085570a3dedf7e5f6e6fffc5e3#file-urls-py-L40" target="_blank">(&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x5185;&#x5BB9;)</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
+<span class="hljs-keyword">from</span> boards <span class="hljs-keyword">import</span> views
+
+urlpatterns = [
+    <span class="hljs-comment"># ...</span>
+    url(<span class="hljs-string">r&apos;^boards/(?P&lt;pk&gt;\d+)/topics/(?P&lt;topic_pk&gt;\d+)/posts/(?P&lt;post_pk&gt;\d+)/edit/$&apos;</span>,
+        views.PostUpdateView.as_view(), name=<span class="hljs-string">&apos;edit_post&apos;</span>),
+]
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x94FE;&#x63A5;&#x6DFB;&#x52A0;&#x5230;&#x7F16;&#x8F91;&#x9875;&#x9762;&#xFF1A;</p>
+<p><strong>templates/topic_posts.html</strong> <a href="https://gist.github.com/vitorfs/589d31af9d06c5b21ec9b1623be0c357#file-topic_posts-html-L40" target="_blank">(&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x5185;&#x5BB9;)</a></p>
+<pre><code class="lang-html">
+{% if post.created_by == user %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mt-3&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;edit_post&apos; post.topic.board.pk post.topic.pk post.pk %}&quot;</span>
+       <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary btn-sm&quot;</span>
+       <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Edit<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+{% endif %}
+</code></pre>
+<p><strong>templates/edit_post.html</strong> <a href="https://gist.github.com/vitorfs/376657085570a3dedf7e5f6e6fffc5e3#file-edit_post-html" target="_blank">(&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5168;&#x90E8;&#x5185;&#x5BB9;)</a></p>
+<pre><code class="lang-html">
+{% extends &apos;base.html&apos; %}
+
+{% block title %}Edit post{% endblock %}
+
+{% block breadcrumb %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;home&apos; %}&quot;</span>&gt;</span>Boards<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;board_topics&apos; post.topic.board.pk %}&quot;</span>&gt;</span>{{ post.topic.board.name }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;topic_posts&apos; post.topic.board.pk post.topic.pk %}&quot;</span>&gt;</span>{{ post.topic.subject }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;breadcrumb-item active&quot;</span>&gt;</span>Edit post<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+{% endblock %}
+
+{% block content %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span> <span class="hljs-attr">novalidate</span>&gt;</span>
+    {% csrf_token %}
+    {% include &apos;includes/form.html&apos; %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-success&quot;</span>&gt;</span>Save changes<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;topic_posts&apos; post.topic.board.pk post.topic.pk %}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-outline-secondary&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Cancel<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+{% endblock %}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x89C2;&#x5BDF;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x5F15;&#x5BFC;&#x5230; post &#x5BF9;&#x8C61;&#xFF1A;post.topic.board.pk&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;<strong>context_object_name</strong> &#x6765;<strong>&#x53D1;&#x5E03;</strong>&#xFF0C;&#x5B83;&#x5C06;&#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x4F5C;&#xFF1A;object.topic.board.pk&#x3002;&#x660E;&#x767D;&#x4E86;&#x5417;&#xFF1F;</p>
+<p><img src="statics/6-3.png" alt=""></p>
+<h3 id="&#x6D4B;&#x8BD5;&#x66F4;&#x65B0;&#x89C6;&#x56FE;">&#x6D4B;&#x8BD5;&#x66F4;&#x65B0;&#x89C6;&#x56FE;</h3>
+<p>&#x5728; <strong>boards/tests</strong> &#x6587;&#x4EF6;&#x5939;&#x5185;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <strong>test_view_edit_post.py</strong> &#x7684;&#x65B0;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;&#x3002;&#x70B9;&#x51FB;&#x4E0B;&#x9762;&#x7684;&#x94FE;&#x63A5;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x5F88;&#x591A;&#x5E38;&#x7528;&#x6D4B;&#x8BD5;&#xFF0C;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x5728;&#x672C;&#x6559;&#x7A0B;&#x4E2D;&#x505A;&#x7684;&#x4E00;&#x6837;&#x3002;&#x6211;&#x4F1A;&#x5728;&#x8FD9;&#x91CC;&#x91CD;&#x70B9;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;&#x65B0;&#x7684;&#x5185;&#x5BB9;&#xFF1A;</p>
+<p><strong>boards/tests/test_view_edit_post.py</strong> <a href="https://gist.github.com/vitorfs/286917ce31687732eba4e545fc3cbdea" target="_blank">&#xFF08;&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;&#xFF09;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib.auth.models <span class="hljs-keyword">import</span> User
+<span class="hljs-keyword">from</span> django.test <span class="hljs-keyword">import</span> TestCase
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> reverse
+<span class="hljs-keyword">from</span> ..models <span class="hljs-keyword">import</span> Board, Post, Topic
+<span class="hljs-keyword">from</span> ..views <span class="hljs-keyword">import</span> PostUpdateView
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostUpdateViewTestCase</span><span class="hljs-params">(TestCase)</span>:</span>
+    <span class="hljs-string">&apos;&apos;&apos;
+    Base test case to be used in all `PostUpdateView` view tests
+    &apos;&apos;&apos;</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span><span class="hljs-params">(self)</span>:</span>
+        self.board = Board.objects.create(name=<span class="hljs-string">&apos;Django&apos;</span>, description=<span class="hljs-string">&apos;Django board.&apos;</span>)
+        self.username = <span class="hljs-string">&apos;john&apos;</span>
+        self.password = <span class="hljs-string">&apos;123&apos;</span>
+        user = User.objects.create_user(username=self.username, email=<span class="hljs-string">&apos;john@doe.com&apos;</span>, password=self.password)
+        self.topic = Topic.objects.create(subject=<span class="hljs-string">&apos;Hello, world&apos;</span>, board=self.board, starter=user)
+        self.post = Post.objects.create(message=<span class="hljs-string">&apos;Lorem ipsum dolor sit amet&apos;</span>, topic=self.topic, created_by=user)
+        self.url = reverse(<span class="hljs-string">&apos;edit_post&apos;</span>, kwargs={
+            <span class="hljs-string">&apos;pk&apos;</span>: self.board.pk,
+            <span class="hljs-string">&apos;topic_pk&apos;</span>: self.topic.pk,
+            <span class="hljs-string">&apos;post_pk&apos;</span>: self.post.pk
+        })
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginRequiredPostUpdateViewTests</span><span class="hljs-params">(PostUpdateViewTestCase)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_redirection</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        Test if only logged in users can edit the posts
+        &apos;&apos;&apos;</span>
+        login_url = reverse(<span class="hljs-string">&apos;login&apos;</span>)
+        response = self.client.get(self.url)
+        self.assertRedirects(response, <span class="hljs-string">&apos;{login_url}?next={url}&apos;</span>.format(login_url=login_url, url=self.url))
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnauthorizedPostUpdateViewTests</span><span class="hljs-params">(PostUpdateViewTestCase)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setUp</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        Create a new user different from the one who posted
+        &apos;&apos;&apos;</span>
+        super().setUp()
+        username = <span class="hljs-string">&apos;jane&apos;</span>
+        password = <span class="hljs-string">&apos;321&apos;</span>
+        user = User.objects.create_user(username=username, email=<span class="hljs-string">&apos;jane@doe.com&apos;</span>, password=password)
+        self.client.login(username=username, password=password)
+        self.response = self.client.get(self.url)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_status_code</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-string">&apos;&apos;&apos;
+        A topic should be edited only by the owner.
+        Unauthorized users should get a 404 response (Page Not Found)
+        &apos;&apos;&apos;</span>
+        self.assertEquals(self.response.status_code, <span class="hljs-number">404</span>)
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostUpdateViewTests</span><span class="hljs-params">(PostUpdateViewTestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SuccessfulPostUpdateViewTests</span><span class="hljs-params">(PostUpdateViewTestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InvalidPostUpdateViewTests</span><span class="hljs-params">(PostUpdateViewTestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#xFF0C;&#x91CD;&#x8981;&#x7684;&#x90E8;&#x5206;&#x662F;&#xFF1A;<strong>PostUpdateViewTestCase</strong>&#x662F;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x5728;&#x5176;&#x4ED6;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x4E2D;&#x590D;&#x7528;&#x3002;&#x5B83;&#x53EA;&#x5305;&#x542B;&#x57FA;&#x672C;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x521B;&#x5EFA;user&#xFF0C;topic&#xFF0C;boards&#x7B49;&#x7B49;&#x3002;</p>
+<p><strong>LoginRequiredPostUpdateViewTests</strong> &#x8FD9;&#x4E2A;&#x7C7B;&#x5C06;&#x6D4B;&#x8BD5;&#x68C0;&#x67E5;&#x8BE5;&#x89C6;&#x56FE;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x4E86;<code>@login_required</code>&#x88C5;&#x9970;&#x5668;&#x3002;&#x5373;&#x53EA;&#x6709;&#x7ECF;&#x8FC7;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x7684;&#x7528;&#x6237;&#x624D;&#x80FD;&#x8BBF;&#x95EE;&#x7F16;&#x8F91;&#x9875;&#x9762;&#x3002;</p>
+<p><strong>UnauthorizedPostUpdateViewTests</strong> &#x8FD9;&#x4E2A;&#x7C7B;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7528;&#x6237;&#xFF0C;&#x4E0E;&#x53D1;&#x5E03;&#x5E76;&#x5C1D;&#x8BD5;&#x8BBF;&#x95EE;&#x7F16;&#x8F91;&#x9875;&#x9762;&#x7684;&#x7528;&#x6237;&#x4E0D;&#x540C;&#x3002;&#x672C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5E94;&#x8BE5;&#x53EA;&#x80FD;&#x6388;&#x6743;&#x8BE5;&#x6587;&#x7AE0;&#x7684;&#x6240;&#x6709;&#x8005;&#x8FDB;&#x884C;&#x7F16;&#x8F91;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x8FD0;&#x884C;&#x4E00;&#x4E0B;&#x8FD9;&#x4E9B;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code class="lang-bash">python manage.py <span class="hljs-built_in">test</span> boards.tests.test_view_edit_post
+</code></pre>
+<pre><code class="lang-bash">Creating <span class="hljs-built_in">test</span> database <span class="hljs-keyword">for</span> <span class="hljs-built_in">alias</span> <span class="hljs-string">&apos;default&apos;</span>...
+System check identified no issues (0 silenced).
+..F.......F
+======================================================================
+FAIL: <span class="hljs-built_in">test</span>_redirection (boards.tests.test_view_edit_post.LoginRequiredPostUpdateViewTests)
+----------------------------------------------------------------------
+...
+AssertionError: 200 != 302 : Response didn<span class="hljs-string">&apos;t redirect as expected: Response code was 200 (expected 302)
+
+======================================================================
+FAIL: test_status_code (boards.tests.test_view_edit_post.UnauthorizedPostUpdateViewTests)
+----------------------------------------------------------------------
+...
+AssertionError: 200 != 404
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.360s
+
+FAILED (failures=2)
+Destroying test database for alias &apos;</span>default<span class="hljs-string">&apos;...
+</span></code></pre>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x4FEE;&#x590D;<code>@login_required</code>&#x88C5;&#x9970;&#x5668;&#x7684;&#x95EE;&#x9898;&#x3002;&#x5728; CBV &#x4E0A;&#x4F7F;&#x7528;&#x89C6;&#x56FE;&#x88C5;&#x9970;&#x5668;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x4E00;&#x4E9B;&#x4E0D;&#x540C;&#x3002;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x5BFC;&#x5165;&#xFF1A;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/826a6d421ebbeb80a0aee8e1b9b70398#file-views-py-L67" target="_blank">(&#x67E5;&#x770B;&#x6587;&#x7AE0;&#x6587;&#x4EF6;)</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib.auth.decorators <span class="hljs-keyword">import</span> login_required
+<span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> redirect
+<span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> UpdateView
+<span class="hljs-keyword">from</span> django.utils <span class="hljs-keyword">import</span> timezone
+<span class="hljs-keyword">from</span> django.utils.decorators <span class="hljs-keyword">import</span> method_decorator
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Post
+
+<span class="hljs-meta">@method_decorator(login_required, name=&apos;dispatch&apos;)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostUpdateView</span><span class="hljs-params">(UpdateView)</span>:</span>
+    model = Post
+    fields = (<span class="hljs-string">&apos;message&apos;</span>, )
+    template_name = <span class="hljs-string">&apos;edit_post.html&apos;</span>
+    pk_url_kwarg = <span class="hljs-string">&apos;post_pk&apos;</span>
+    context_object_name = <span class="hljs-string">&apos;post&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_valid</span><span class="hljs-params">(self, form)</span>:</span>
+        post = form.save(commit=<span class="hljs-keyword">False</span>)
+        post.updated_by = self.request.user
+        post.updated_at = timezone.now()
+        post.save()
+        <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;topic_posts&apos;</span>, pk=post.topic.board.pk, topic_pk=post.topic.pk)
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x4E0D;&#x80FD;&#x7528; <code>@login_required</code> &#x88C5;&#x9970;&#x5668;&#x76F4;&#x63A5;&#x88C5;&#x9970;&#x7C7B;&#x3002;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x5DE5;&#x5177;<code>@method_decorator</code>&#xFF0C;&#x5E76;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x88C5;&#x9970;&#x5668;&#xFF08;&#x6216;&#x4E00;&#x4E2A;&#x88C5;&#x9970;&#x5668;&#x5217;&#x8868;&#xFF09;&#x5E76;&#x544A;&#x8BC9;&#x5E94;&#x8BE5;&#x88C5;&#x9970;&#x54EA;&#x4E2A;&#x7C7B;&#x3002;&#x5728; CBV &#x4E2D;&#xFF0C;&#x88C5;&#x9970;<strong>&#x8C03;&#x5EA6;&#x7C7B;</strong>&#x662F;&#x5F88;&#x5E38;&#x89C1;&#x7684;&#x3002;&#x5B83;&#x662F;&#x4E00;&#x4E2A;Django&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF08;&#x5728;<strong>View</strong>&#x7C7B;&#x4E2D;&#x5B9A;&#x4E49;&#xFF09;&#x3002;&#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#x90FD;&#x4F1A;&#x7ECF;&#x8FC7;&#x8FD9;&#x4E2A;&#x7C7B;&#xFF0C;&#x6240;&#x4EE5;&#x88C5;&#x9970;&#x5B83;&#x4F1A;&#x76F8;&#x5BF9;&#x5B89;&#x5168;&#x3002;</p>
+<p>&#x518D;&#x6B21;&#x8FD0;&#x884C;&#x4E00;&#x4E0B;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code class="lang-bash">python manage.py <span class="hljs-built_in">test</span> boards.tests.test_view_edit_post
+</code></pre>
+<pre><code class="lang-bash">Creating <span class="hljs-built_in">test</span> database <span class="hljs-keyword">for</span> <span class="hljs-built_in">alias</span> <span class="hljs-string">&apos;default&apos;</span>...
+System check identified no issues (0 silenced).
+..........F
+======================================================================
+FAIL: <span class="hljs-built_in">test</span>_status_code (boards.tests.test_view_edit_post.UnauthorizedPostUpdateViewTests)
+----------------------------------------------------------------------
+...
+AssertionError: 200 != 404
+
+----------------------------------------------------------------------
+Ran 11 tests <span class="hljs-keyword">in</span> 1.353s
+
+FAILED (failures=1)
+Destroying <span class="hljs-built_in">test</span> database <span class="hljs-keyword">for</span> <span class="hljs-built_in">alias</span> <span class="hljs-string">&apos;default&apos;</span>...
+</code></pre>
+<p>&#x597D;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x89E3;&#x51B3;&#x4E86; <code>@login_required</code> &#x7684;&#x95EE;&#x9898;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x5904;&#x7406;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;&#x6240;&#x6709;&#x5E16;&#x5B50;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x91CD;&#x5199;<strong>UpdateView</strong>&#x7684; <code>get_queryset</code> &#x65B9;&#x6CD5;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x770B;&#x5230;&#x539F;&#x59CB;&#x65B9;&#x6CD5;&#x7684;&#x6E90;&#x7801;--- <a href="https://ccbv.co.uk/projects/Django/1.11/django.views.generic.edit/UpdateView/#get_queryset" target="_blank">UpdateView#get_queryset.</a>&#x3002;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/667d8439ecf05e58f14fcc74672e48da" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-meta">@method_decorator(login_required, name=&apos;dispatch&apos;)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostUpdateView</span><span class="hljs-params">(UpdateView)</span>:</span>
+    model = Post
+    fields = (<span class="hljs-string">&apos;message&apos;</span>, )
+    template_name = <span class="hljs-string">&apos;edit_post.html&apos;</span>
+    pk_url_kwarg = <span class="hljs-string">&apos;post_pk&apos;</span>
+    context_object_name = <span class="hljs-string">&apos;post&apos;</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        queryset = super().get_queryset()
+        <span class="hljs-keyword">return</span> queryset.filter(created_by=self.request.user)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_valid</span><span class="hljs-params">(self, form)</span>:</span>
+        post = form.save(commit=<span class="hljs-keyword">False</span>)
+        post.updated_by = self.request.user
+        post.updated_at = timezone.now()
+        post.save()
+        <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">&apos;topic_posts&apos;</span>, pk=post.topic.board.pk, topic_pk=post.topic.pk)
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x884C; <code>queryset = super().get_queryset()</code>, &#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86;&#x91CD;&#x7528;&#x7236;&#x7C7B;&#xFF0C;&#x5373;&#xFF0C;<strong>UpateView</strong> &#x7C7B;&#x7684; <code>get_queryset</code> &#x65B9;&#x6CD5;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x7ED9; <code>queryset</code> &#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x8FC7;&#x6EE4;&#x6761;&#x4EF6;&#xFF0C;&#x8BE5;&#x8FC7;&#x6EE4;&#x6761;&#x4EF6;&#x662F;&#x901A;&#x8FC7;&#x8BF7;&#x6C42;&#x4E2D;&#x83B7;&#x53D6;&#x767B;&#x5F55;&#x7684;&#x7528;&#x6237;&#x6765;&#x8FC7;&#x6EE4;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x518D;&#x6B21;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<pre><code class="lang-bash">python manage.py <span class="hljs-built_in">test</span> boards.tests.test_view_edit_post
+</code></pre>
+<pre><code class="lang-bash">Creating <span class="hljs-built_in">test</span> database <span class="hljs-keyword">for</span> <span class="hljs-built_in">alias</span> <span class="hljs-string">&apos;default&apos;</span>...
+System check identified no issues (0 silenced).
+...........
+----------------------------------------------------------------------
+Ran 11 tests <span class="hljs-keyword">in</span> 1.321s
+
+OK
+Destroying <span class="hljs-built_in">test</span> database <span class="hljs-keyword">for</span> <span class="hljs-built_in">alias</span> <span class="hljs-string">&apos;default&apos;</span>...
+</code></pre>
+<p>&#x4E00;&#x5207;&#x987A;&#x5229;&#xFF01;</p>
+<h3 id="&#x5217;&#x8868;&#x89C6;&#x56FE;">&#x5217;&#x8868;&#x89C6;&#x56FE;</h3>
+<p>&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x5229;&#x7528; <strong>CBV</strong> &#x7684;&#x529F;&#x80FD;&#x6765;&#x91CD;&#x6784;&#x4E00;&#x4E9B;&#x73B0;&#x6709;&#x7684;&#x89C6;&#x56FE;&#x3002;&#x4EE5;&#x4E3B;&#x9875;&#x4E3A;&#x4F8B;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x5148;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6293;&#x53D6;&#x6240;&#x6709;&#x7684; <strong>boards</strong> &#x5E76;&#x5C06;&#x5176;&#x7F57;&#x5217;&#x5728;HTML&#x4E2D;&#xFF1A;</p>
+<p><strong>boards/views.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> render
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Board
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">home</span><span class="hljs-params">(request)</span>:</span>
+    boards = Board.objects.all()
+    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;home.html&apos;</span>, {<span class="hljs-string">&apos;boards&apos;</span>: boards})
+</code></pre>
+<p>&#x4E0B;&#x9762;&#x662F;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x4F7F;&#x7528; GCBV &#x4E3A;&#x6A21;&#x578B;&#x5217;&#x8868;&#x6765;&#x91CD;&#x5199;&#x5B83;&#xFF1A;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/5e248d9a4499e2a796c6ffee9cbb1125#file-views-py-L12" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> ListView
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Board
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BoardListView</span><span class="hljs-params">(ListView)</span>:</span>
+    model = Board
+    context_object_name = <span class="hljs-string">&apos;boards&apos;</span>
+    template_name = <span class="hljs-string">&apos;home.html&apos;</span>
+</code></pre>
+<p>&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5F97;&#x4FEE;&#x6539;&#x4E00;&#x4E0B; <strong>urls.py</strong> &#x6A21;&#x5757;&#x4E2D;&#x7684;&#x5F15;&#x7528;&#xFF1A;</p>
+<p><strong>myproject/urls.py</strong> <a href="https://gist.github.com/vitorfs/a0a826233d95a4cc53a75afc441db1e9#file-urls-py-L10" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
+<span class="hljs-keyword">from</span> boards <span class="hljs-keyword">import</span> views
+
+urlpatterns = [
+    url(<span class="hljs-string">r&apos;^$&apos;</span>, views.BoardListView.as_view(), name=<span class="hljs-string">&apos;home&apos;</span>),
+    <span class="hljs-comment"># ...</span>
+]
+</code></pre>
+<p>&#x5982;&#x679C;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x4E3B;&#x9875;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x770B;&#x5230;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x53D8;&#x5316;&#xFF0C;&#x4E00;&#x5207;&#x90FD;&#x6309;&#x9884;&#x671F;&#x7684;&#x8FD0;&#x884C;&#x3002;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x7A0D;&#x5FAE;&#x8C03;&#x6574;&#x6211;&#x4EEC;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x7684;&#x89C6;&#x56FE;&#x662F; CBV &#x7C7B;&#x578B;&#x4E86;&#x3002;</p>
+<p><strong>boards/tests/test_view_home.py</strong> <a href="https://gist.github.com/vitorfs/e17216ce3d92110cf7e005ce3288c587" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.test <span class="hljs-keyword">import</span> TestCase
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> resolve
+<span class="hljs-keyword">from</span> ..views <span class="hljs-keyword">import</span> BoardListView
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HomeTests</span><span class="hljs-params">(TestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_home_url_resolves_home_view</span><span class="hljs-params">(self)</span>:</span>
+        view = resolve(<span class="hljs-string">&apos;/&apos;</span>)
+        self.assertEquals(view.func.view_class, BoardListView)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="DjangoORM.html" class="navigation navigation-prev " aria-label="Previous page: Django入门与实践-第20章：Django数据迁移">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ClassBasedViews1.html" class="navigation navigation-next " aria-label="Next page: Django入门与实践-第22章：分页实现">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Django入门与实践-第21章：基于类的视图","level":"1.22","depth":1,"next":{"title":"Django入门与实践-第22章：分页实现","level":"1.23","depth":1,"path":"ClassBasedViews1.md","ref":"./ClassBasedViews1.md","articles":[]},"previous":{"title":"Django入门与实践-第20章：Django数据迁移","level":"1.21","depth":1,"path":"DjangoORM.md","ref":"./DjangoORM.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["include-codeblock","livereload"],"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"livereload":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"ClassBasedViews0.md","mtime":"2018-05-12T01:41:40.717Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-12T01:19:40.393Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

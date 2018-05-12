@@ -1,10 +1,5 @@
 # Django入门指南-第5章：第一个视图函数
 
->译者：liuzhijun  
->原文：
-https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
-
-
 目前我们已经有一个视图函数叫`home`,这个视图在我们的应用程序主页上显示为“Hello，World！” 
 
 **myproject/urls.py**

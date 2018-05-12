@@ -1,4 +1,4 @@
-## 添加 Markdown 支持
+# Django入门与实践-第24章：Markdown 支持
 
 让我们在文本区域添加 Markdown 支持来改善用户体验。你会看到要实现这个功能非常简单。
 
@@ -51,6 +51,7 @@ class Post(models.Model):
 可以下载 JavaScript 库，后者使用他们的CDN：
 
 ```html
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 ```
@@ -60,6 +61,7 @@ class Post(models.Model):
 **templates/base.html** [查看完整文件](https://gist.github.com/vitorfs/5a7ad8e7eae88d64f62fec82d037b168#file-base-html-L57)
 
 ```html
+
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -71,6 +73,7 @@ class Post(models.Model):
 **templates/reply_topic.html** [查看完整文件](https://gist.github.com/vitorfs/fb63bb7530690d62787c3ed8b7e15241)
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -98,6 +101,7 @@ class Post(models.Model):
 **templates/edit_post.html** [查看完整文件](https://gist.github.com/vitorfs/ee9d8c91888b0bc60013b8f037bae7bb)
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load static %}

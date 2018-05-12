@@ -1,13 +1,9 @@
-# 一个完整的 Django 入门指南 - 第6部分
-
-> 译者：[vimiix](https://github.com/vimiix)
-> 
-> 原文地址：[https://simpleisbetterthancomplex.com/series/2017/10/09/a-complete-beginners-guide-to-django-part-6.html](https://simpleisbetterthancomplex.com/series/2017/10/09/a-complete-beginners-guide-to-django-part-6.html)
+# # Django入门与实践-第21章：基于类的视图
 
 
 ![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-6/featured.jpg)
 
-## 前言
+###  前言
 
 欢迎来到系列教程的第六部分！在这篇教程中，我们将详细探讨基于类的视图（简称CBV）。我们也将重构一些现有的视图，以便利用内置的**基于类的通用视图**（Generic Class-Based Views）。
 
@@ -15,7 +11,7 @@
 
 好了，伙计们！让我们来实现一些代码。今天我们还有很多工作要做！
 
-## 视图策略
+###  视图策略
 
 到头来，所有的Django视图其实都是*函数*。即便是CBV。在类的底层，它完成了所有的功能并最终返回一个视图函数。
 
@@ -157,7 +153,7 @@ urlpatterns = [
 GCBV 中的其他例子还有：**detailview**，**deleteview**，**formview**，**updateview**，**listview**。
 
 
-## 更新视图
+###  更新视图
 
 让我们回到我们项目的实现。这次我们将使用 GCBV 来实现**编辑帖子**的视图：
 
@@ -211,6 +207,7 @@ urlpatterns = [
 **templates/topic_posts.html** [(查看文件全部内容)](https://gist.github.com/vitorfs/589d31af9d06c5b21ec9b1623be0c357#file-topic_posts-html-L40)
 
 ```html
+
 {% if post.created_by == user %}
   <div class="mt-3">
     <a href="{% url 'edit_post' post.topic.board.pk post.topic.pk post.pk %}"
@@ -223,6 +220,7 @@ urlpatterns = [
 **templates/edit_post.html** [(查看文件全部内容)](https://gist.github.com/vitorfs/376657085570a3dedf7e5f6e6fffc5e3#file-edit_post-html)
 
 ```html
+
 {% extends 'base.html' %}
 
 {% block title %}Edit post{% endblock %}
@@ -453,7 +451,7 @@ Destroying test database for alias 'default'...
 
 一切顺利！
  
-## 列表视图
+###  列表视图
 
 我们现在可以利用 **CBV** 的功能来重构一些现有的视图。以主页为例，我们就先从数据库中抓取所有的 **boards** 并将其罗列在HTML中：
 

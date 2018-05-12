@@ -1,4 +1,4 @@
-# 表单处理
+Django入门与实践-第12章：表单处理
 
 Forms(表单) 用来处理我们的输入。这在任何 web 应用或者网站中都是很常见的任务。标准的做法是通过 HTML 表单实现，用户输入一些数据，将其提交给服务器，然后服务器处理它。
 
@@ -67,6 +67,7 @@ def new_topic(request, pk):
 **templates/new_topic.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -167,6 +168,7 @@ Destroying test database for alias 'default'...
 **templates/new_topic.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -208,18 +210,21 @@ Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 *
 **csrf_token** 的模板标签：
 
 ```html
+{% raw %}
 {% csrf_token %}
 ```
 
 它是与其他表单数据一起提交的隐藏字段：
 
 ```html
+{% raw %}
 <input type="hidden" name="csrfmiddlewaretoken" value="jG2o6aWj65YGaqzCpl0TYTg5jn6SctjzRZ9KmluifVx0IVaxlwh97YarZKs54Y32">
 ```
 
 另外一件事是，我们需要设置 HTML 输入的 **name**，**name** 将被用来在服务器获取数据。
 
 ```html
+{% raw %}
 <input type="text" class="form-control" id="id_subject" name="subject">
 <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
 ```
@@ -279,6 +284,7 @@ def new_topic(request, pk):
 **templates/topics.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -346,6 +352,7 @@ def new_topic(request, pk):
 第二件事是我们在使用 `ForeignKey`：
 
 ```html
+{% raw %}
 {{ topic.starter.username }}
 ```
 
@@ -356,6 +363,7 @@ def new_topic(request, pk):
 **templates/topics.html**
 
 ```html
+{% raw %}
 {% block content %}
   <div class="mb-4">
     <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
@@ -600,6 +608,7 @@ Django Forms API 不仅仅是处理和验证数据。它还为我们生成 HTML�
 **templates/new_topic.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -688,7 +697,7 @@ class NewTopicForm(forms.ModelForm):
 ![3-28.png](./statics/3-28.png)
 
 
-## 用BootStrap 表单渲染
+###  用BootStrap 表单渲染
 
 
 现在让我们把事情做得更完善。
@@ -765,6 +774,7 @@ INSTALLED_APPS = [
 这就是我们使用的 **django-widget-tweaks** 的效果。首先，我们使用 **{% load widget_tweaks %}** 模板标签将其加载到模板。然后这样使用它：
 
 ```html
+{% raw %}
 {% render_field field class="form-control" %}
 ```
 
@@ -773,6 +783,7 @@ INSTALLED_APPS = [
 一些 `render_field` 模板标签的例子：
 
 ```html
+{% raw %}
 {% render_field form.subject class="form-control" %}
 {% render_field form.message class="form-control" placeholder=form.message.label %}
 {% render_field field class="form-control" placeholder="Write a message!" %}
@@ -784,6 +795,7 @@ INSTALLED_APPS = [
 **templates/new_topic.html**
 
 ```html
+{% raw %}
 <form method="post" novalidate>
   {% csrf_token %}
 
@@ -833,7 +845,7 @@ INSTALLED_APPS = [
  - **Valid**：我们添加了 `.is-valid` 的 CSS class，以绿色绘制表单域，并向用户反馈它是否可行。
 
 
-## 复用表单模板
+###  复用表单模板
 
 模板看起来有点复杂，是吧？有个好消息是我们可以在项目中重复使用它。
 
@@ -859,6 +871,7 @@ myproject/
 **templates/includes/form.html**
 
 ```html
+{% raw %}
 {% load widget_tweaks %}
 
 {% for field in form %}
@@ -894,6 +907,7 @@ myproject/
 **templates/new_topic.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -951,7 +965,7 @@ class NewTopicTests(TestCase):
 这是我们第一次使用 `assertIsInstance` 方法。基本上我们的处理是抓取上下文的表单实例，检查它是否是一个 `NewTopicForm`。在最后的测试中，我添加了 `self.assertTrue(form.errors)` 以确保数据无效的时候表单会显示错误。
 
 
-## 总结
+###  总结
 
 在这个课程，我们学习了 URLs, 可重用模板和表单。像往常一样，我们也实现了几个测试用例。这能使我们开发中更自信。
 

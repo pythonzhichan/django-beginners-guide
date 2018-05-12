@@ -1,6 +1,6 @@
-# URL 调度
+# Django入门与实践-第10章：URL 分发
 
-## 前言
+###  前言
 
 在本节课中，我们将深入理解两个基本概念: URLs 和 Forms。在这个过程中，我们还将学习其它很多概念，如创建可重用模板和安装第三方库。同时我们还将编写大量单元测试。
 
@@ -36,7 +36,7 @@ python manage.py migrate
 
 
 
-## URLs 
+###  URLs 
 
 随着我们项目的开发，我们需要实现一个新的功能，就是列出某个板块下的所有主题列表，再来回顾一下，你可以看到上一节中我们画的线框图。
 
@@ -221,7 +221,7 @@ def board_topics(request, id):
 > 如果你给model定义了一个不同的主键，例如，假设 email 是你的主键，你就可以这样访问：obj.email 或者 obj.pk，二者是等价的。
 
 
-## 使用 URLs API
+###  使用 URLs API
 
 
 现在到了写代码的时候了。我们来实现我在开头提到的主题列表页面
@@ -260,7 +260,8 @@ def board_topics(request, pk):
 在 **templates** 目录中，创建一个名为 **topics.html** 的模板：
 
 **templates/topics.html**
-```htmlz
+```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -277,7 +278,9 @@ def board_topics(request, pk):
     </div>
   </body>
 </html>
+{% endraw %}
 ```
+
 
 >注意：我们现在只是创建新的 HTML 模板。不用担心，在下一节中我会向你展示如何创建可重用模板。
 
@@ -495,6 +498,7 @@ Destroying test database for alias 'default'...
 **templates/home.html**
 
 ```html
+{% raw %}
 <!-- code suppressed for brevity -->
 <tbody>
   {% for board in boards %}
@@ -521,6 +525,7 @@ Destroying test database for alias 'default'...
 变为：
 
 ```html
+{% raw %}
 <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
 ```
 
@@ -593,6 +598,7 @@ Destroying test database for alias 'default'...
 **templates/topics.html**
 
 ```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head><!-- code suppressed for brevity --></head>
@@ -605,7 +611,9 @@ Destroying test database for alias 'default'...
     </div>
   </body>
 </html>
+{% endraw %}
 ```
+
 
 运行测试：
 
@@ -629,7 +637,7 @@ Destroying test database for alias 'default'...
 就如我之前所说的， URL 路由是一个 web 应用程序的基本组成部分。有了这些知识，我们才能继续开发。下一步是完成 URL 的部分，你会看到一些使用 URL patterns 的总结。
 
 
-## 实用URL模式列表
+###  实用URL模式列表
 
 技巧部分是正则表达式。我准备了一个最常用的 URL patterns 的列表。当你需要一个特定的 URL 时你可以参考这个列表。
 

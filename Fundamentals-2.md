@@ -1,9 +1,5 @@
 # Django入门指南-第4章：模型设计
 
->译者：liuzhijun  
->原文：
-https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
-
 ![featured](./statics/2-1.jpg)
 
 ### 模型

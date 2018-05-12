@@ -1,9 +1,5 @@
 # Django入门指南-第8章：静态文件设置
 
->译者：liuzhijun  
->原文：
-https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
-
 
 静态文件是指 CSS，JavaScript，字体，图片或者是用来组成用户界面的任何其他资源。
 
@@ -103,6 +99,7 @@ STATICFILES_DIRS = [
 </html>
 ```
 
+
 首先，我们在模板的开头使用了 Static Files App 模板标签 `{% load static %}`。
 
 
@@ -159,9 +156,12 @@ STATICFILES_DIRS = [
 </html>
 ```
 
+
 显示效果：
 
 ![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-2.png)
 
 
 到目前为止，我们使用交互式控制台（python manage.py shell）添加了几个新的版块。但我们需要一个更好的方式来实现。在下一节中，我们将为网站管理员实现一个管理界面来管理这些数据。
+
+{% raw%} {% endraw %}

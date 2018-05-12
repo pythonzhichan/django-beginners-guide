@@ -1,4 +1,4 @@
-## 分页
+# Django入门与实践-第2章：分页实现
 
 我们可以非常容易地使用 CBV 来实现分页功能。但首先我想手工分页，这样就更有助于我们理解背后的机制，这样它就不那么神秘了。
 
@@ -173,6 +173,7 @@ def board_topics(request, pk):
 **templates/topics.html** [查看完整文件](https://gist.github.com/vitorfs/3101a1bd72125aeb45829659a5532bc6)
 
 ```html
+
 {% if topics.has_other_pages %}
   <nav aria-label="Topics pagination" class="mb-4">
     <ul class="pagination">
@@ -265,6 +266,7 @@ urlpatterns = [
 **templates/topics.html** [查看完整文件](https://gist.github.com/vitorfs/65095aa3eda78bafd22d5e2f94086d40#file-topics-html-L40)
 
 ```html
+
 {% block content %}
   <div class="mb-4">
     <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
@@ -395,6 +397,7 @@ myproject/
 **templates/includes/pagination.html**
 
 ```html
+
 {% if is_paginated %}
   <nav aria-label="Topics pagination" class="mb-4">
     <ul class="pagination">
@@ -442,6 +445,7 @@ myproject/
 **templates/topic_posts.html** [查看完整文件](https://gist.github.com/vitorfs/df5b16bb16c1134ba4e03218dce250d7)
 
 ```html
+
 {% block content %}
 
   <div class="mb-4">
@@ -494,6 +498,7 @@ myproject/
 **templates/topics.html** [查看完整文件](https://gist.github.com/vitorfs/9198ad8f91cd889f315ade7e4eb62710#file-topics-html-L40)
 
 ```html
+
 {% block content %}
   <div class="mb-4">
     <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>

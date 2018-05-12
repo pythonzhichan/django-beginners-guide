@@ -1,4 +1,4 @@
-## 主题回复功能
+# Django入门与实践-第18章：主题回复
 
 现在让我们来实现回复帖子的功能，以便我们可以添加更多的数据和改进功能实现与单元测试。
 
@@ -76,6 +76,7 @@ def new_topic(request, pk):
 **templates/reply_topic.html**
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -128,6 +129,7 @@ def new_topic(request, pk):
 **templates/topic_posts.html**([完整代码](https://gist.github.com/vitorfs/3e4ad94ac3ae9d72194af4006d4aeaff#file-topic_posts-html-L20))
 
 ```html
+
 {% for post in topic.posts.all %}
   <div class="card mb-2 {% if forloop.first %}border-dark{% endif %}">
     {% if forloop.first %}

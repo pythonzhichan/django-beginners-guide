@@ -1,15 +1,7 @@
 # Django入门指南-第2章：创建项目
 
-> 译者：[vimiix](https://github.com/vimiix)
-> 
-> 原文地址：[https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html](https://simpleisbetterthancomplex.com/series/2017/09/04/a-complete-beginners-guide-to-django-part-1.html)
 
-
-![](./statics/1-1.jpg)
-
-
-
-## 启动一个新项目
+### 启动一个新项目
 
 执行下面的命令来创建一个新的 Django 项目：
 
@@ -60,7 +52,7 @@ python manage.py runserver
 ----
 
 
-## Django 应用
+### Django 应用
 
 在Django的哲学中，我们有两个重要的概念：
 
@@ -151,7 +143,7 @@ INSTALLED_APPS = [
 
 ----
 
-## Hello, World!
+### Hello, World!
 
 现在来写我们的第一个**视图(view)**。我们将在下一篇教程中详细探讨它。但现在，让我们试试看看如何用Django创建一个新页面。
 
@@ -205,9 +197,7 @@ python manage.py runserver
 
 就是这样！你刚刚成功创建了你的第一个视图。
 
-----
-
-## 总结
+### 总结
 
 这是本系列教程的第一部分。在本教程中，我们学习了如何安装最新的Python版本以及如何设置开发环境。我们还介绍了虚拟环境，开始了我们的第一个django项目，并已经创建了我们的初始应用程序。
 

@@ -1,4 +1,4 @@
-## 迁移
+# Django入门与实践-第20章：迁移
 
 迁移（Migration）是Django做Web开发的基本组成部分，它使得我们在演进应用的models时，它能使得models文件与数据库保持同步
 
@@ -81,6 +81,7 @@ def topic_posts(request, pk, topic_pk):
 **templates/topics.html**([完整代码](https://gist.github.com/vitorfs/70ebb1a06e1044387943ee83bafcd526))
 
 ```html
+
 {% for topic in topics %}
   <tr>
     <td><a href="{% url 'topic_posts' board.pk topic.pk %}">{{ topic.subject }}</a></td>
@@ -98,7 +99,7 @@ def topic_posts(request, pk, topic_pk):
 ![5-17.png](./statics/5-17.png)
 
 
-## 总结
+###  总结
 
 在这节课中，我们在留言板的基础功能上取得了一些进步，还剩下一些东西等待去实现，比如：编辑帖子、我的账户（更改个人信息）等等。之后我们将提供markdown语法和列表的分页功能。
 

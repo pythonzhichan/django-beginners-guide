@@ -1,4 +1,4 @@
-## 访问已登录用户
+# Django入门与实践-第17章：访问已登录用户
 
 
 现在我么可以改进 **new_topic** 视图，将发布主题的用户设置当前登录的用户，取代之前直接从数据库查询出来的第一个用户，之前这份代码是临时的，因为那时候还没有方法去获取登录用户，但是现在可以了：
@@ -38,7 +38,7 @@ def new_topic(request, pk):
 ![5-5.png](./statics/5-5.png)
 
 
-## 主题回复列表
+###  主题回复列表
 
 现在我们花点时间来实现主题的回复列表页面，先来看一下下面的线框图：
 
@@ -71,6 +71,7 @@ def topic_posts(request, pk, topic_pk):
 **templates/topic_posts.html**([完整代码](https://gist.github.com/vitorfs/17e583f4f0068850c5929bd307dd436a))
 
 ```html
+
 {% extends 'base.html' %}
 
 {% block title %}{{ topic.subject }}{% endblock %}
@@ -185,6 +186,7 @@ Destroying test database for alias 'default'...
 **templates/topic_posts.html**
 
 ```html
+
 {% extends 'base.html' %}
 
 {% load static %}

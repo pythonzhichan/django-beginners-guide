@@ -1,4 +1,4 @@
-# 复用模板
+# Django入门与实践-第11章：复用模板
 
 到目前为止，我们一直在复制和粘贴 HTML 文档的多个部分。从长远来看是不可行的。这也是一个坏的做法。
 
@@ -9,6 +9,7 @@
 **templates/base.html**
 
 ```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -27,7 +28,9 @@
     </div>
   </body>
 </html>
+{% endraw %}
 ```
+
 
 这是我们的母版页。每个我们创建的模板都 **extend(继承)** 这个特殊的模板。现在我们介绍 `{% block %}` 标签。它用于在模板中保留一个空间，一个"子"模板(继承这个母版页的模板)可以在这个空间中插入代码和 HTML。
 
@@ -38,6 +41,7 @@
 **templates/home.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
@@ -76,6 +80,7 @@
 **templates/topics.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -118,6 +123,7 @@ Destroying test database for alias 'default'...
 **templates/base.html**
 
 ```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -143,7 +149,9 @@ Destroying test database for alias 'default'...
     </div>
   </body>
 </html>
+{% endraw %}
 ```
+
 
 ![3-11.png](./statics/3-11.png)
   
@@ -173,7 +181,9 @@ Destroying test database for alias 'default'...
     <!-- code suppressed for brevity -->
   </body>
 </html>
+{% endraw %}
 ```
+
 
 现在在 **static/css** 文件夹中创建一个新的 CSS 文件命名为 **app.css**：
 

@@ -1,8 +1,4 @@
-# 一个完整的Django入门指南 - 第4部分
-
-> 译者：wangzhihao、CasualJi   
-> 校稿：liuzhijun  
-> 原文：https://simpleisbetterthancomplex.com/series/2017/09/25/a-complete-beginners-guide-to-django-part-4.html
+# Django入门与实践-第13章：用户注册
 
 ![](./statics/4-1.jpg)
 
@@ -56,7 +52,7 @@
 
 图6：修改密码
 
-## 初始设置
+###  初始设置
 
 要管理这些功能，我们可以在另一个应用（app）中将其拆解。在项目根目录中的 manage.py 文件所在的同一目录下，运行以下命令以创建一个新的app：
 
@@ -100,7 +96,7 @@ INSTALLED_APPS = [
 现在开始，我们将会在 **accounts** 这个app下操作。
 
 ![](./statics/4-9.jpg)
-## 注册
+###  注册
 
 我们从创建注册视图开始。首先，在`urls.py` 文件中创建一个新的路由：
 
@@ -146,6 +142,7 @@ def signup(request):
 **templates/signup.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block content %}
@@ -203,6 +200,7 @@ Destroying test database for alias 'default'...
 **templates/base.html**
 
 ```html
+{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -231,7 +229,9 @@ Destroying test database for alias 'default'...
     {% endblock body %}  <!-- 这里 -->
   </body>
 </html>
+{% endraw %}
 ```
+
 
 我在 **base.html** 模板中标注了注释，表示新加的代码。块代码`{% block stylesheet %}{% endblock %}` 表示添加一些额外的CSS，用于某些特定的页面。
 
@@ -269,6 +269,7 @@ def signup(request):
 **templates/signup.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block body %}
@@ -290,6 +291,7 @@ def signup(request):
 **templates/signup.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block body %}
@@ -311,6 +313,7 @@ def signup(request):
 **templates/includes/form.html**
 
 ```html
+{% raw %}
 {% load widget_tweaks %}
 
 {% for field in form %}
@@ -380,6 +383,7 @@ def signup(request):
 **templates/base.html**
 
 ```html
+{% raw %}
 {% block body %}
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
@@ -411,7 +415,7 @@ def signup(request):
 ![4-17](./statics/4-18.png)
 
 
-## 测试注册视图
+###  测试注册视图
 
 我们来改进测试用例：
 
@@ -530,7 +534,7 @@ class InvalidSignUpTests(TestCase):
         self.assertFalse(User.objects.exists())
 ```
 
-## 将Email字段添加到表单
+###  将Email字段添加到表单
 
 一切都正常，但还缺失 **email address**字段。**UserCreationForm**不提供 email 字段，但是我们可以对它进行扩展。
 
@@ -634,7 +638,7 @@ class SignUpTests(TestCase):
         self.assertContains(self.response, 'type="password"', 2)
 ```
 
-## 改进测试代码的组织结构
+###  改进测试代码的组织结构
 
 好的，现在我们正在测试输入和所有的功能，但是我们仍然必须测试表单本身。不要只是继续向`accounts/tests.py` 文件添加测试，我们稍微改进一下项目设计。
 
@@ -760,6 +764,7 @@ body {
 **templates/signup.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}

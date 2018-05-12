@@ -1,0 +1,878 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Django入门与实践-第4章：模型设计 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Fundamentals-3-0.html" />
+    
+    
+    <link rel="prev" href="Fundamentals-1.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Django入门与实践-第1章：环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="GettingStarted-2.html">
+            
+                <a href="GettingStarted-2.html">
+            
+                    
+                    Django入门与实践-第2章：创建项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Fundamentals-1.html">
+            
+                <a href="Fundamentals-1.html">
+            
+                    
+                    Django入门与实践-第3章：系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="Fundamentals-2.html">
+            
+                <a href="Fundamentals-2.html">
+            
+                    
+                    Django入门与实践-第4章：模型设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Fundamentals-3-0.html">
+            
+                <a href="Fundamentals-3-0.html">
+            
+                    
+                    Django入门与实践-第5章：第一个视图函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Fundamentals-3-1.html">
+            
+                <a href="Fundamentals-3-1.html">
+            
+                    
+                    Django入门与实践-第6章：模板引擎设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Fundamentals-3-1-1.html">
+            
+                <a href="Fundamentals-3-1-1.html">
+            
+                    
+                    Django入门与实践-第7章：第一个单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Fundamentals-3-2.html">
+            
+                <a href="Fundamentals-3-2.html">
+            
+                    
+                    Django入门与实践-第8章：静态文件设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="Fundamentals-4.html">
+            
+                <a href="Fundamentals-4.html">
+            
+                    
+                    Django入门与实践-第9章：Django Admin 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="AdvancedConcepts.html">
+            
+                <a href="AdvancedConcepts.html">
+            
+                    
+                    Django入门与实践-第10章：URL 分发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="AdvancedConcept2.html">
+            
+                <a href="AdvancedConcept2.html">
+            
+                    
+                    Django入门与实践-第11章：复用模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="AdvancedConcept3.html">
+            
+                <a href="AdvancedConcept3.html">
+            
+                    
+                    Django入门与实践-第12章：表单处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="Authentication0.html">
+            
+                <a href="Authentication0.html">
+            
+                    
+                    Django入门与实践-第13章：用户注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="Authentication1.html">
+            
+                <a href="Authentication1.html">
+            
+                    
+                    Django入门与实践-第14章：用户注销
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="Authentication2.html">
+            
+                <a href="Authentication2.html">
+            
+                    
+                    Django入门与实践-第15章：用户登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="DjangoORM0.html">
+            
+                <a href="DjangoORM0.html">
+            
+                    
+                    Django入门与实践-第16章：保护视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="DjangoORM1.html">
+            
+                <a href="DjangoORM1.html">
+            
+                    
+                    Django入门与实践-第17章：实现主题回复列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="DjangoORM2.html">
+            
+                <a href="DjangoORM2.html">
+            
+                    
+                    Django入门与实践-第18章：实现主题回复功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="DjangoORM3.html">
+            
+                <a href="DjangoORM3.html">
+            
+                    
+                    Django入门与实践-第19章：查询结果集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="DjangoORM.html">
+            
+                <a href="DjangoORM.html">
+            
+                    
+                    Django入门与实践-第20章：Django数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="ClassBasedViews0.html">
+            
+                <a href="ClassBasedViews0.html">
+            
+                    
+                    Django入门与实践-第21章：基于类的视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="ClassBasedViews1.html">
+            
+                <a href="ClassBasedViews1.html">
+            
+                    
+                    Django入门与实践-第22章：分页实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="ClassBasedViews2.html">
+            
+                <a href="ClassBasedViews2.html">
+            
+                    
+                    Django入门与实践-第23章：我的账户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="ClassBasedViews3.html">
+            
+                <a href="ClassBasedViews3.html">
+            
+                    
+                    Django入门与实践-第24章：Markdown支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="ClassBasedViews4.html">
+            
+                <a href="ClassBasedViews4.html">
+            
+                    
+                    Django入门与实践-第25章：个性化设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="Deployment.html">
+            
+                <a href="Deployment.html">
+            
+                    
+                    Django入门与实践-第26章：项目部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contributors</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/lzjun567">
+            
+                    
+                    liuzhijun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <a target="_blank" href="https://github.com/vimiix">
+            
+                    
+                    vimiix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <a target="_blank" href="https://github.com/jiangyanglinlan">
+            
+                    
+                    jiangyanglinlan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://github.com/wzhbingo">
+            
+                    
+                    wzhbingo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <a target="_blank" href="https://github.com/CasualJi">
+            
+                    
+                    CasualJi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" >
+            
+                <a target="_blank" href="https://github.com/hellodabin">
+            
+                    
+                    hellodabin
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Django入门与实践-第4章：模型设计</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="django&#x5165;&#x95E8;&#x6307;&#x5357;-&#x7B2C;4&#x7AE0;&#xFF1A;&#x6A21;&#x578B;&#x8BBE;&#x8BA1;">Django&#x5165;&#x95E8;&#x6307;&#x5357;-&#x7B2C;4&#x7AE0;&#xFF1A;&#x6A21;&#x578B;&#x8BBE;&#x8BA1;</h1>
+<p><img src="statics/2-1.jpg" alt="featured"></p>
+<h3 id="&#x6A21;&#x578B;">&#x6A21;&#x578B;</h3>
+<p>&#x8FD9;&#x4E9B;&#x6A21;&#x578B;&#x57FA;&#x672C;&#x4E0A;&#x4EE3;&#x8868;&#x4E86;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8BBE;&#x8BA1;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x672C;&#x8282;&#x4E2D;&#x8981;&#x505A;&#x7684;&#x662F;&#x521B;&#x5EFA; Django &#x6240;&#x8868;&#x793A;&#x7684;&#x7C7B;&#xFF0C;&#x8FD9;&#x4E9B;&#x7C7B;&#x5C31;&#x662F;&#x5728;&#x4E0A;&#x4E00;&#x8282;&#x4E2D;&#x5EFA;&#x6A21;&#x7684;&#x7C7B;&#xFF1A;Board&#xFF0C;Topic&#x548C;Post&#x3002;User &#x6A21;&#x578B;&#x88AB;&#x547D;&#x540D;&#x4E3A;&#x5185;&#x7F6E;&#x5E94;&#x7528;&#x53EB; <strong>auth</strong>&#xFF0C;&#x5B83;&#x4EE5;&#x547D;&#x540D;&#x7A7A;&#x95F4; django.contrib.auth &#x7684;&#x5F62;&#x5F0F;&#x51FA;&#x73B0;&#x5728; <code>INSTALLED_APPS</code> &#x914D;&#x7F6E;&#x4E2D;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x8981;&#x505A;&#x7684;&#x5DE5;&#x4F5C;&#x90FD;&#x5728; boards/models.py &#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x4EE5;&#x4E0B;&#x662F;&#x6211;&#x4EEC;&#x5728;Django&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x5982;&#x4F55;&#x8868;&#x793A;&#x7C7B;&#x56FE;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models
+<span class="hljs-keyword">from</span> django.contrib.auth.models <span class="hljs-keyword">import</span> User
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Board</span><span class="hljs-params">(models.Model)</span>:</span>
+    name = models.CharField(max_length=<span class="hljs-number">30</span>, unique=<span class="hljs-keyword">True</span>)
+    description = models.CharField(max_length=<span class="hljs-number">100</span>)
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Topic</span><span class="hljs-params">(models.Model)</span>:</span>
+    subject = models.CharField(max_length=<span class="hljs-number">255</span>)
+    last_updated = models.DateTimeField(auto_now_add=<span class="hljs-keyword">True</span>)
+    board = models.ForeignKey(Board, related_name=<span class="hljs-string">&apos;topics&apos;</span>)
+    starter = models.ForeignKey(User, related_name=<span class="hljs-string">&apos;topics&apos;</span>)
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Post</span><span class="hljs-params">(models.Model)</span>:</span>
+    message = models.TextField(max_length=<span class="hljs-number">4000</span>)
+    topic = models.ForeignKey(Topic, related_name=<span class="hljs-string">&apos;posts&apos;</span>)
+    created_at = models.DateTimeField(auto_now_add=<span class="hljs-keyword">True</span>)
+    updated_at = models.DateTimeField(null=<span class="hljs-keyword">True</span>)
+    created_by = models.ForeignKey(User, related_name=<span class="hljs-string">&apos;posts&apos;</span>)
+    updated_by = models.ForeignKey(User, null=<span class="hljs-keyword">True</span>, related_name=<span class="hljs-string">&apos;+&apos;</span>)
+</code></pre>
+<p>&#x6240;&#x6709;&#x6A21;&#x578B;&#x90FD;&#x662F;<strong>django.db.models.Model</strong>&#x7C7B;&#x7684;&#x5B50;&#x7C7B;&#x3002;&#x6BCF;&#x4E2A;&#x7C7B;&#x5C06;&#x88AB;&#x8F6C;&#x6362;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x8868;&#x3002;&#x6BCF;&#x4E2A;&#x5B57;&#x6BB5;&#x7531; <strong>django.db.models.Field</strong>&#x5B50;&#x7C7B;&#xFF08;&#x5185;&#x7F6E;&#x5728;Django core&#xFF09;&#x7684;&#x5B9E;&#x4F8B;&#x8868;&#x793A;&#xFF0C;&#x5B83;&#x4EEC;&#x5E76;&#x5C06;&#x88AB;&#x8F6C;&#x6362;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5217;&#x3002;</p>
+<p>&#x5B57;&#x6BB5; CharField&#xFF0C;DateTimeField&#x7B49;&#x7B49;&#xFF0C;&#x90FD;&#x662F; <strong>django.db.models.Field</strong> &#x7684;&#x5B50;&#x7C7B;&#xFF0C;&#x5305;&#x542B;&#x5728;Django&#x7684;&#x6838;&#x5FC3;&#x91CC;&#x9762;-&#x968F;&#x65F6;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4EC5;&#x4F7F;&#x7528; CharField&#xFF0C;TextField&#xFF0C;DateTimeField&#xFF0C;&#x548C;ForeignKey &#x5B57;&#x6BB5;&#x6765;&#x5B9A;&#x4E49;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x578B;&#x3002;&#x4E0D;&#x8FC7;&#x5728;Django&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x5E7F;&#x6CDB;&#x7684;&#x9009;&#x62E9;&#x6765;&#x4EE3;&#x8868;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982; IntegerField&#xFF0C;BooleanField&#xFF0C; DecimalField&#x548C;&#x5176;&#x5B83;&#x4E00;&#x4E9B;&#x5B57;&#x6BB5;&#x3002;&#x6211;&#x4EEC;&#x4F1A;&#x5728;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x53CA;&#x5B83;&#x4EEC;&#x3002;</p>
+<p>&#x6709;&#x4E9B;&#x5B57;&#x6BB5;&#x9700;&#x8981;&#x53C2;&#x6570;&#xFF0C;&#x4F8B;&#x5982;CharField&#x3002;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x59CB;&#x7EC8;&#x8BBE;&#x5B9A;&#x4E00;&#x4E2A; <code>max_length</code>&#x3002;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x5C06;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#x5217;&#x3002;Django&#x9700;&#x8981;&#x77E5;&#x9053;&#x6570;&#x636E;&#x5E93;&#x5217;&#x9700;&#x8981;&#x591A;&#x5927;&#x3002;&#x8BE5; <code>max_length</code>&#x53C2;&#x6570;&#x4E5F;&#x5C06;&#x88AB;Django Forms API&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x7528;&#x6237;&#x8F93;&#x5165;&#x3002;</p>
+<p>&#x5728;<code>Board</code>&#x6A21;&#x578B;&#x5B9A;&#x4E49;&#x4E2D;&#xFF0C;&#x66F4;&#x5177;&#x4F53;&#x5730;&#x8BF4;&#xFF0C;&#x5728;<code>name</code>&#x5B57;&#x6BB5;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8BBE;&#x7F6E;&#x4E86;&#x53C2;&#x6570; <code>unique=True</code>&#xFF0C;&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x5B83;&#x5C06;&#x5F3A;&#x5236;&#x6570;&#x636E;&#x5E93;&#x7EA7;&#x522B;&#x5B57;&#x6BB5;&#x7684;&#x552F;&#x4E00;&#x6027;&#x3002;</p>
+<p>&#x5728;<code>Post</code>&#x6A21;&#x578B;&#x4E2D;&#xFF0C;<code>created_at</code>&#x5B57;&#x6BB5;&#x6709;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF0C;<code>auto_now_add</code>&#x8BBE;&#x7F6E;&#x4E3A;<code>True</code>&#x3002;&#x8FD9;&#x5C06;&#x544A;&#x8BC9;Django&#x521B;&#x5EFA;<code>Post</code>&#x5BF9;&#x8C61;&#x65F6;&#x4E3A;&#x5F53;&#x524D;&#x65E5;&#x671F;&#x548C;&#x65F6;&#x95F4;&#x3002;</p>
+<p>&#x6A21;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x4F7F;&#x7528;<code>ForeignKey</code>&#x5B57;&#x6BB5;&#x3002;&#x5B83;&#x5C06;&#x5728;&#x6A21;&#x578B;&#x4E4B;&#x95F4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#xFF0C;&#x5E76;&#x5728;&#x6570;&#x636E;&#x5E93;&#x7EA7;&#x522B;&#x521B;&#x5EFA;&#x9002;&#x5F53;&#x7684;&#x5173;&#x7CFB;&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x5916;&#x952E;&#x5173;&#x8054;&#xFF09;&#x3002;&#x8BE5;<code>ForeignKey</code>&#x5B57;&#x6BB5;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x53C2;&#x6570;<code>related_name</code>&#xFF0C;&#x7528;&#x4E8E;&#x5F15;&#x7528;&#x5B83;&#x5173;&#x8054;&#x7684;&#x6A21;&#x578B;&#x3002;&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x4F8B;&#x5982; created_by &#x662F;&#x5916;&#x952E;&#x5B57;&#x6BB5;&#xFF0C;&#x5173;&#x8054;&#x7684;User&#x6A21;&#x578B;&#xFF0C;&#x8868;&#x660E;&#x8FD9;&#x4E2A;&#x5E16;&#x5B50;&#x662F;&#x8C01;&#x521B;&#x5EFA;&#x7684;&#xFF0C;related_name=posts &#x8868;&#x793A;&#x5728; User &#x90A3;&#x8FB9;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; user.posts &#x6765;&#x67E5;&#x770B;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x4E86;&#x54EA;&#x4E9B;&#x5E16;&#x5B50;&#xFF09;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x5728;<code>Topic</code>&#x6A21;&#x578B;&#x4E2D;&#xFF0C;<code>board</code>&#x5B57;&#x6BB5;&#x662F;<code>Board</code>&#x6A21;&#x578B;&#x7684;<code>ForeignKey</code>&#x3002;&#x5B83;&#x544A;&#x8BC9;Django&#xFF0C;&#x4E00;&#x4E2A;<code>Topic</code>&#x5B9E;&#x4F8B;&#x53EA;&#x6D89;&#x53CA;&#x4E00;&#x4E2A;Board&#x5B9E;&#x4F8B;&#x3002;<code>related_name</code>&#x53C2;&#x6570;&#x5C06;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x53CD;&#x5411;&#x5173;&#x7CFB;&#xFF0C;<code>Board</code>&#x5B9E;&#x4F8B;&#x901A;&#x8FC7;&#x5C5E;&#x6027;<code>topics</code>&#x8BBF;&#x95EE;&#x5C5E;&#x4E8E;&#x8FD9;&#x4E2A;&#x7248;&#x5757;&#x4E0B;&#x7684;<code>Topic</code>&#x5217;&#x8868;&#x3002;</p>
+<p>Django&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x8FD9;&#x79CD;&#x53CD;&#x5411;&#x5173;&#x7CFB;&#xFF0C;<code>related_name</code>&#x662F;&#x53EF;&#x9009;&#x9879;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x4E0D;&#x4E3A;&#x5B83;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#xFF0C;Django&#x4F1A;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x5B83;&#xFF1A;<code>(class_name)_set</code>&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;<code>Board</code>&#x6A21;&#x578B;&#x4E2D;&#xFF0C;&#x6240;&#x6709;<code>Topic</code>&#x5217;&#x8868;&#x5C06;&#x7528;<code>topic_set</code>&#x5C5E;&#x6027;&#x8868;&#x793A;&#x3002;&#x800C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5C06;&#x5176;&#x91CD;&#x65B0;&#x547D;&#x540D;&#x4E3A;&#x4E86;<code>topics</code>&#xFF0C;&#x4EE5;&#x4F7F;&#x5176;&#x611F;&#x89C9;&#x66F4;&#x81EA;&#x7136;&#x3002;</p>
+<p>&#x5728;<code>Post</code>&#x6A21;&#x578B;&#x4E2D;&#xFF0C;&#x8BE5;<code>updated_by</code>&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;<code>related_name=&apos;+&apos;</code>&#x3002;&#x8FD9;&#x6307;&#x793A;Django&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x79CD;&#x53CD;&#x5411;&#x5173;&#x7CFB;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x5173;&#x7CFB;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x8FC7;&#x54EA;&#x4E9B;&#x5E16;&#x5B50;&#xFF09;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x60A8;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7C7B;&#x56FE;&#x548C;Django&#x6A21;&#x578B;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x4E4B;&#x95F4;&#x7684;&#x6BD4;&#x8F83;&#xFF0C;&#x7EFF;&#x7EBF;&#x8868;&#x793A;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x5904;&#x7406;&#x53CD;&#x5411;&#x5173;&#x7CFB;&#x3002;</p>
+<p><img src="statics/2-2-2.png" alt="relate"></p>
+<p>&#x8FD9;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x4F1A;&#x95EE;&#x81EA;&#x5DF1;&#xFF1A;&#x201C;&#x4E3B;&#x952E;/ ID&#x5462;&#xFF1F;&#x201D;&#xFF1F;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x4E3A;&#x6A21;&#x578B;&#x6307;&#x5B9A;&#x4E3B;&#x952E;&#xFF0C;Django&#x4F1A;&#x81EA;&#x52A8;&#x4E3A;&#x6211;&#x4EEC;&#x751F;&#x6210;&#x5B83;&#x3002;&#x6240;&#x4EE5;&#x73B0;&#x5728;&#x4E00;&#x5207;&#x6B63;&#x5E38;&#x3002;&#x5728;&#x4E0B;&#x4E00;&#x8282;&#x4E2D;&#xFF0C;&#x60A8;&#x5C06;&#x770B;&#x5230;&#x5B83;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;</p>
+<h3 id="&#x8FC1;&#x79FB;&#x6A21;&#x578B;">&#x8FC1;&#x79FB;&#x6A21;&#x578B;</h3>
+<p>&#x4E0B;&#x4E00;&#x6B65;&#x662F;&#x544A;&#x8BC9;Django&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4EE5;&#x4FBF;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x6253;&#x5F00;&#x7EC8;&#x7AEF; &#xFF0C;&#x6FC0;&#x6D3B;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#x8F6C;&#x5230; manage.py&#x6587;&#x4EF6;&#x6240;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7136;&#x540E;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code class="lang-python">python manage.py makemigrations
+</code></pre>
+<p>&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x8F93;&#x51FA;&#x7684;&#x5185;&#x5BB9;&#x662F;&#xFF1A;</p>
+<pre><code>Migrations for &apos;boards&apos;:
+  boards/migrations/0001_initial.py
+    - Create model Board
+    - Create model Post
+    - Create model Topic
+    - Add field topic to post
+    - Add field updated_by to post
+</code></pre><p>&#x6B64;&#x65F6;&#xFF0C;Django &#x5728; boards/migrations &#x76EE;&#x5F55;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>0001_initial.py</code>&#x7684;&#x6587;&#x4EF6;&#x3002;&#x5B83;&#x4EE3;&#x8868;&#x4E86;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6A21;&#x578B;&#x7684;&#x5F53;&#x524D;&#x72B6;&#x6001;&#x3002;&#x5728;&#x4E0B;&#x4E00;&#x6B65;&#xFF0C;Django&#x5C06;&#x4F7F;&#x7528;&#x8BE5;&#x6587;&#x4EF6;&#x521B;&#x5EFA;&#x8868;&#x548C;&#x5217;&#x3002;</p>
+<p>&#x8FC1;&#x79FB;&#x6587;&#x4EF6;&#x5C06;&#x88AB;&#x7FFB;&#x8BD1;&#x6210;SQL&#x8BED;&#x53E5;&#x3002;&#x5982;&#x679C;&#x60A8;&#x719F;&#x6089;SQL&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x6765;&#x68C0;&#x9A8C;&#x5C06;&#x662F;&#x8981;&#x88AB;&#x6570;&#x636E;&#x5E93;&#x6267;&#x884C;&#x7684;SQL&#x6307;&#x4EE4;</p>
+<pre><code class="lang-python">python manage.py sqlmigrate boards <span class="hljs-number">0001</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x719F;&#x6089;SQL&#xFF0C;&#x4E5F;&#x4E0D;&#x8981;&#x62C5;&#x5FC3;&#x3002;&#x5728;&#x672C;&#x7CFB;&#x5217;&#x6559;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x4F7F;&#x7528;SQL&#x3002;&#x6240;&#x6709;&#x7684;&#x5DE5;&#x4F5C;&#x90FD;&#x5C06;&#x4F7F;&#x7528;Django ORM&#x6765;&#x5B8C;&#x6210;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x7684;&#x62BD;&#x8C61;&#x5C42;&#x3002;</p>
+<p>&#x4E0B;&#x4E00;&#x6B65;&#x662F;&#x5C06;&#x6211;&#x4EEC;&#x751F;&#x6210;&#x7684;&#x8FC1;&#x79FB;&#x6587;&#x4EF6;&#x5E94;&#x7528;&#x5230;&#x6570;&#x636E;&#x5E93;&#xFF1A;</p>
+<pre><code class="lang-python">python manage.py migrate
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x5185;&#x5BB9;&#x5E94;&#x8BE5;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-python">Operations to perform:
+  Apply all migrations: admin, auth, boards, contenttypes, sessions
+Running migrations:
+  Applying contenttypes<span class="hljs-number">.0001</span>_initial... OK
+  Applying auth<span class="hljs-number">.0001</span>_initial... OK
+  Applying admin<span class="hljs-number">.0001</span>_initial... OK
+  Applying admin<span class="hljs-number">.0002</span>_logentry_remove_auto_add... OK
+  Applying contenttypes<span class="hljs-number">.0002</span>_remove_content_type_name... OK
+  Applying auth<span class="hljs-number">.0002</span>_alter_permission_name_max_length... OK
+  Applying auth<span class="hljs-number">.0003</span>_alter_user_email_max_length... OK
+  Applying auth<span class="hljs-number">.0004</span>_alter_user_username_opts... OK
+  Applying auth<span class="hljs-number">.0005</span>_alter_user_last_login_null... OK
+  Applying auth<span class="hljs-number">.0006</span>_require_contenttypes_0002... OK
+  Applying auth<span class="hljs-number">.0007</span>_alter_validators_add_error_messages... OK
+  Applying auth<span class="hljs-number">.0008</span>_alter_user_username_max_length... OK
+  Applying boards<span class="hljs-number">.0001</span>_initial... OK
+  Applying sessions<span class="hljs-number">.0001</span>_initial... OK
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x8FD9;&#x662F;&#x6211;&#x4EEC;&#x7B2C;&#x4E00;&#x6B21;&#x8FC1;&#x79FB;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6240;&#x4EE5;<code>migrate</code>&#x547D;&#x4EE4;&#x628A;Django contrib app &#x4E2D;&#x73B0;&#x6709;&#x7684;&#x8FC1;&#x79FB;&#x6587;&#x4EF6;&#x4E5F;&#x6267;&#x884C;&#x4E86;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x7F6E;app&#x5217;&#x5728;&#x4E86;<code>INSTALLED_APPS</code>&#x3002;&#x8FD9;&#x662F;&#x9884;&#x6599;&#x4E4B;&#x4E2D;&#x7684;&#x3002;</p>
+<p><code>Applying boards.0001_initial... OK</code>&#x662F;&#x6211;&#x4EEC;&#x5728;&#x4E0A;&#x4E00;&#x6B65;&#x4E2D;&#x751F;&#x6210;&#x7684;&#x8FC1;&#x79FB;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x597D;&#x4E86;&#xFF01;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E86;&#x3002;</p>
+<p><img src="statics/2-4.jpg" alt="featured"></p>
+<blockquote>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;SQLite&#x662F;&#x4E00;&#x4E2A;&#x4EA7;&#x54C1;&#x7EA7;&#x6570;&#x636E;&#x5E93;&#x3002;SQLite&#x88AB;&#x8BB8;&#x591A;&#x516C;&#x53F8;&#x7528;&#x4E8E;&#x6210;&#x5343;&#x4E0A;&#x4E07;&#x7684;&#x4EA7;&#x54C1;&#xFF0C;&#x5982;&#x6240;&#x6709;Android&#x548C;iOS&#x8BBE;&#x5907;&#xFF0C;&#x4E3B;&#x6D41;&#x7684;Web&#x6D4F;&#x89C8;&#x5668;&#xFF0C;Windows 10&#xFF0C;MacOS&#x7B49;&#x3002;</p>
+<p>&#x4F46;&#x8FD9;&#x4E0D;&#x9002;&#x5408;&#x6240;&#x6709;&#x60C5;&#x51B5;&#x3002;SQLite&#x4E0D;&#x80FD;&#x4E0E;MySQL&#xFF0C;PostgreSQL&#x6216;Oracle&#x7B49;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x3002;&#x5927;&#x5BB9;&#x91CF;&#x7684;&#x7F51;&#x7AD9;&#xFF0C;&#x5BC6;&#x96C6;&#x578B;&#x5199;&#x5165;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x5927;&#x7684;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x9AD8;&#x5E76;&#x53D1;&#x6027;&#x7684;&#x5E94;&#x7528;&#x4F7F;&#x7528;SQLite&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x5BFC;&#x81F4;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x5F00;&#x53D1;&#x9879;&#x76EE;&#x671F;&#x95F4;&#x4F7F;&#x7528;SQLite&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x5176;&#x4ED6;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#x3002;&#x5F53;&#x6211;&#x4EEC;&#x5C06;&#x9879;&#x76EE;&#x90E8;&#x7F72;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x65F6;&#xFF0C;&#x518D;&#x5C06;&#x5207;&#x6362;&#x5230;PostgreSQL&#xFF08;&#x8BD1;&#x6CE8;&#xFF1A;&#x540E;&#x7EED;&#xFF0C;&#x6211;&#x4EEC;&#x540E;&#x9762;&#x53EF;&#x80FD;&#x4F7F;&#x7528;MySQL&#xFF09;&#x3002;&#x5BF9;&#x4E8E;&#x7B80;&#x5355;&#x7684;&#x7F51;&#x7AD9;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x6CA1;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#x3002;&#x4F46;&#x5BF9;&#x4E8E;&#x590D;&#x6742;&#x7684;&#x7F51;&#x7AD9;&#xFF0C;&#x5EFA;&#x8BAE;&#x5728;&#x5F00;&#x53D1;&#x548C;&#x751F;&#x4EA7;&#x4E2D;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x5E93;&#x3002;</p>
+</blockquote>
+<h3 id="&#x8BD5;&#x9A8C;-models-api">&#x8BD5;&#x9A8C; Models API</h3>
+<p>&#x4F7F;&#x7528;Python&#x8FDB;&#x884C;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x4F18;&#x70B9;&#x662F;&#x4EA4;&#x4E92;&#x5F0F;shell&#x3002;&#x6211;&#x4E00;&#x76F4;&#x5728;&#x4F7F;&#x7528;&#x5B83;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5FEB;&#x901F;&#x5C1D;&#x8BD5;&#x548C;&#x8BD5;&#x9A8C;API&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;manage.py &#x5DE5;&#x5177;&#x52A0;&#x8F7D;&#x6211;&#x4EEC;&#x7684;&#x9879;&#x76EE;&#x6765;&#x542F;&#x52A8; Python shell &#xFF1A;</p>
+<pre><code class="lang-sh">python manage.py shell
+</code></pre>
+<pre><code>Python 3.6.2 (default, Jul 17 2017, 16:44:45)
+[GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+(InteractiveConsole)
+&gt;&gt;&gt;
+</code></pre><p>&#x8FD9;&#x4E0E;&#x76F4;&#x63A5;&#x8F93;&#x5165;<code>python</code>&#x6307;&#x4EE4;&#x6765;&#x8C03;&#x7528;&#x4EA4;&#x4E92;&#x5F0F;&#x63A7;&#x5236;&#x53F0;&#x662F;&#x975E;&#x5E38;&#x76F8;&#x4F3C;&#x7684;&#xFF0C;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x9879;&#x76EE;&#x5C06;&#x88AB;&#x6DFB;&#x52A0;&#x5230;<code>sys.path</code>&#x5E76;&#x52A0;&#x8F7D;Django&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5BFC;&#x5165;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x578B;&#x548C;&#x5176;&#x4ED6;&#x8D44;&#x6E90;&#x5E76;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x4ECE;&#x5BFC;&#x5165;Board&#x7C7B;&#x5F00;&#x59CB;&#xFF1A;</p>
+<pre><code class="lang-sh">from boards.models import Board
+</code></pre>
+<p>&#x8981;&#x521B;&#x5EFA;&#x65B0;&#x7684; boarrd &#x5BF9;&#x8C61;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code class="lang-python">board = Board(name=<span class="hljs-string">&apos;Django&apos;</span>, description=<span class="hljs-string">&apos;This is a board about Django.&apos;</span>)
+</code></pre>
+<p>&#x4E3A;&#x4E86;&#x5C06;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x8C03;&#x7528;save&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-python">board.save()
+</code></pre>
+<p><code>save</code>&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x548C;&#x66F4;&#x65B0;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x91CC;Django&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x65F6;Board &#x5B9E;&#x4F8B;&#x6CA1;&#x6709;id&#x3002;&#x7B2C;&#x4E00;&#x6B21;&#x4FDD;&#x5B58;&#x540E;&#xFF0C;Django&#x4F1A;&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;ID&#xFF1A;</p>
+<pre><code class="lang-python">board.id
+<span class="hljs-number">1</span>
+</code></pre>
+<p>&#x60A8;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x4F59;&#x7684;&#x5B57;&#x6BB5;&#x5F53;&#x505A;Python&#x5C5E;&#x6027;&#x8BBF;&#x95EE;&#xFF1A;</p>
+<pre><code class="lang-python">board.name
+<span class="hljs-string">&apos;Django&apos;</span>
+</code></pre>
+<pre><code class="lang-python">board.description
+<span class="hljs-string">&apos;This is a board about Django.&apos;</span>
+</code></pre>
+<p>&#x8981;&#x66F4;&#x65B0;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x505A;&#xFF1A;</p>
+<pre><code class="lang-python">board.description = <span class="hljs-string">&apos;Django discussion board.&apos;</span>
+board.save()
+</code></pre>
+<p>&#x6BCF;&#x4E2A;Django&#x6A21;&#x578B;&#x90FD;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5C5E;&#x6027;; &#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;<strong>&#x6A21;&#x578B;&#x7BA1;&#x7406;&#x5668;(Model Manager)</strong>&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5C5E;&#x6027;<code>objects</code> &#x6765;&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x5B83;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x6765;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Board&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code class="lang-python">board = Board.objects.create(name=<span class="hljs-string">&apos;Python&apos;</span>, description=<span class="hljs-string">&apos;General discussion about Python.&apos;</span>)
+</code></pre>
+<pre><code class="lang-python">board.id
+<span class="hljs-number">2</span>
+</code></pre>
+<pre><code class="lang-python">board.name
+<span class="hljs-string">&apos;Python&apos;</span>
+</code></pre>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6709;&#x4E24;&#x4E2A;&#x7248;&#x5757;&#x4E86;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>objects</code>&#x5217;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6240;&#x6709;&#x73B0;&#x6709;&#x7684;&#x7248;&#x5757;&#xFF1A;</p>
+<pre><code class="lang-python">Board.objects.all()
+&lt;QuerySet [&lt;Board: Board object&gt;, &lt;Board: Board object&gt;]&gt;
+</code></pre>
+<p>&#x7ED3;&#x679C;&#x662F;&#x4E00;&#x4E2A;QuerySet&#x3002;&#x7A0D;&#x540E;&#x6211;&#x4EEC;&#x4F1A;&#x8FDB;&#x4E00;&#x6B65;&#x4E86;&#x89E3;&#x3002;&#x57FA;&#x672C;&#x4E0A;&#xFF0C;&#x5B83;&#x662F;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x67E5;&#x8BE2;&#x7684;&#x5BF9;&#x8C61;&#x5217;&#x8868;&#x3002;&#x6211;&#x4EEC;&#x770B;&#x5230;&#x6709;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x663E;&#x793A;&#x7684;&#x540D;&#x79F0;&#x662F; Board object&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5C1A;&#x672A;&#x5B9E;&#x73B0; Board &#x7684;<code>__str__</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<p><code>__str__</code>&#x65B9;&#x6CD5;&#x662F;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x8868;&#x793A;&#x5F62;&#x5F0F;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7248;&#x5757;&#x7684;&#x540D;&#x79F0;&#x6765;&#x8868;&#x793A;&#x5B83;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x9000;&#x51FA;&#x4EA4;&#x4E92;&#x5F0F;&#x63A7;&#x5236;&#x53F0;&#xFF1A;</p>
+<pre><code class="lang-python">exit()
+</code></pre>
+<p>&#x73B0;&#x5728;&#x7F16;&#x8F91;boards app &#x4E2D;&#x7684; models.py &#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Board</span><span class="hljs-params">(models.Model)</span>:</span>
+    name = models.CharField(max_length=<span class="hljs-number">30</span>, unique=<span class="hljs-keyword">True</span>)
+    description = models.CharField(max_length=<span class="hljs-number">100</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> self.name
+</code></pre>
+<p> &#x8BA9;&#x6211;&#x4EEC;&#x91CD;&#x65B0;&#x67E5;&#x8BE2;&#xFF0C;&#x518D;&#x6B21;&#x6253;&#x5F00;&#x4EA4;&#x4E92;&#x5F0F;&#x63A7;&#x5236;&#x53F0;&#xFF1A;</p>
+<pre><code class="lang-python"> python manage.py shell
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> boards.models <span class="hljs-keyword">import</span> Board
+
+Board.objects.all()
+&lt;QuerySet [&lt;Board: Django&gt;, &lt;Board: Python&gt;]&gt;
+</code></pre>
+<p>&#x597D;&#x591A;&#x4E86;&#xFF0C;&#x5BF9;&#x5427;&#xFF1F;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x8FD9;&#x4E2A;QuerySet&#x770B;&#x4F5C;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x3002;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x60F3;&#x904D;&#x5386;&#x5B83;&#x5E76;&#x6253;&#x5370;&#x6BCF;&#x4E2A;&#x7248;&#x5757;&#x7684;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<pre><code class="lang-python">boards_list = Board.objects.all()
+<span class="hljs-keyword">for</span> board <span class="hljs-keyword">in</span> boards_list:
+    print(board.description)
+</code></pre>
+<p>&#x7ED3;&#x679C;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-python">Django discussion board.
+General discussion about Python.
+</code></pre>
+<p>&#x540C;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6A21;&#x578B;&#x7684; <strong>&#x7BA1;&#x7406;&#x5668;&#xFF08;Manager&#xFF09;</strong> &#x6765;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x5E76;&#x8FD4;&#x56DE;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;&#x4E3A;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x4F7F;&#x7528; <code>get</code> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-python">django_board = Board.objects.get(id=<span class="hljs-number">1</span>)
+
+django_board.name
+<span class="hljs-string">&apos;Django&apos;</span>
+</code></pre>
+<p>&#x4F46;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x5C0F;&#x5FC3;&#x8FD9;&#x79CD;&#x64CD;&#x4F5C;&#x3002;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8BD5;&#x56FE;&#x67E5;&#x627E;&#x4E00;&#x4E2A;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x67E5;&#x627E;id=3&#x7684;&#x7248;&#x5757;&#xFF0C;&#x5B83;&#x4F1A;&#x5F15;&#x53D1;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF1A;</p>
+<pre><code class="lang-python">board = Board.objects.get(id=<span class="hljs-number">3</span>)
+
+boards.models.DoesNotExist: Board matching query does <span class="hljs-keyword">not</span> exist.
+</code></pre>
+<p><code>get</code>&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x662F;&#x6A21;&#x578B;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x6BB5;&#xFF0C;&#x4F46;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x53EF;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x6BB5;&#x6765;&#x67E5;&#x8BE2;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x67E5;&#x8BE2;&#x53EF;&#x80FD;&#x4F1A;&#x8FD4;&#x56DE;&#x591A;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x5F02;&#x5E38;&#x3002;</p>
+<pre><code class="lang-python">Board.objects.get(name=<span class="hljs-string">&apos;Django&apos;</span>)
+&lt;Board: Django&gt;
+</code></pre>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x67E5;&#x8BE2;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF0C;&#x5C0F;&#x5199;&#x201C;django&#x201D;&#x4E0D;&#x5339;&#x914D;&#xFF1A;</p>
+<pre><code class="lang-python">Board.objects.get(name=<span class="hljs-string">&apos;django&apos;</span>)
+boards.models.DoesNotExist: Board matching query does <span class="hljs-keyword">not</span> exist.
+</code></pre>
+<h3 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h3>
+<p>&#x4E0B;&#x9762;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x672C;&#x8282;&#x4E2D;&#x5173;&#x4E8E;&#x6A21;&#x578B;&#x5B66;&#x5230;&#x7684;&#x65B9;&#x6CD5;&#x548C;&#x64CD;&#x4F5C;&#xFF0C;&#x4F7F;&#x7528;Board&#x6A21;&#x578B;&#x4F5C;&#x4E3A;&#x53C2;&#x8003;&#x3002;&#x5927;&#x5199;&#x7684; <strong>Board</strong>&#x6307;&#x7684;&#x662F;&#x7C7B;&#xFF0C;&#x5C0F;&#x5199;&#x7684;<strong>board</strong>&#x6307;<strong>Board</strong>&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF08;&#x6216;&#x5BF9;&#x8C61;&#xFF09;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x64CD;&#x4F5C;</th>
+<th style="text-align:left">&#x4EE3;&#x7801;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x800C;&#x4E0D;&#x4FDD;&#x5B58;</td>
+<td style="text-align:left">board = Board()</td>
+</tr>
+<tr>
+<td style="text-align:left">&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF08;&#x521B;&#x5EFA;&#x6216;&#x66F4;&#x65B0;&#xFF09;</td>
+<td style="text-align:left">board.save()</td>
+</tr>
+<tr>
+<td style="text-align:left">&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA;&#x5E76;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;</td>
+<td style="text-align:left">Board.objects.create(name=&apos;...&apos;, description=&apos;...&apos;)</td>
+</tr>
+<tr>
+<td style="text-align:left">&#x5217;&#x51FA;&#x6240;&#x6709;&#x5BF9;&#x8C61;</td>
+<td style="text-align:left">Board.objects.all()</td>
+</tr>
+<tr>
+<td style="text-align:left">&#x901A;&#x8FC7;&#x5B57;&#x6BB5;&#x6807;&#x8BC6;&#x83B7;&#x53D6;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;</td>
+<td style="text-align:left">Board.objects.get(id=1)</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5728;&#x4E0B;&#x4E00;&#x5C0F;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5F00;&#x59CB;&#x7F16;&#x5199;&#x89C6;&#x56FE;&#x5E76;&#x5728;HTML&#x9875;&#x9762;&#x4E2D;&#x663E;&#x793A;&#x6211;&#x4EEC;&#x7684;&#x7248;&#x5757;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Fundamentals-1.html" class="navigation navigation-prev " aria-label="Previous page: Django入门与实践-第3章：系统设计">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Fundamentals-3-0.html" class="navigation navigation-next " aria-label="Next page: Django入门与实践-第5章：第一个视图函数">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Django入门与实践-第4章：模型设计","level":"1.5","depth":1,"next":{"title":"Django入门与实践-第5章：第一个视图函数","level":"1.6","depth":1,"path":"Fundamentals-3-0.md","ref":"./Fundamentals-3-0.md","articles":[]},"previous":{"title":"Django入门与实践-第3章：系统设计","level":"1.4","depth":1,"path":"Fundamentals-1.md","ref":"./Fundamentals-1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["include-codeblock","livereload"],"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"livereload":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"Fundamentals-2.md","mtime":"2018-05-12T01:03:02.992Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-12T01:19:40.393Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

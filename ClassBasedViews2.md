@@ -1,4 +1,4 @@
-## 我的账户视图
+# # Django入门与实践-第23章：我的账户视图
 
 好的，那么，这部分将是我们最后的一个视图。之后，我们将专心来改进现有功能。
 
@@ -37,6 +37,7 @@ urlpatterns = [
 **templates/my_account.html** 
 
 ```html
+
 {% extends 'base.html' %}
 
 {% block title %}My account{% endblock %}

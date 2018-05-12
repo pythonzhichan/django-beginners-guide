@@ -1,0 +1,757 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Django入门与实践-第1章：环境搭建 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="GettingStarted-2.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Django入门与实践-第1章：环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="GettingStarted-2.html">
+            
+                <a href="GettingStarted-2.html">
+            
+                    
+                    Django入门与实践-第2章：创建项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Fundamentals-1.html">
+            
+                <a href="Fundamentals-1.html">
+            
+                    
+                    Django入门与实践-第3章：系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Fundamentals-2.html">
+            
+                <a href="Fundamentals-2.html">
+            
+                    
+                    Django入门与实践-第4章：模型设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Fundamentals-3-0.html">
+            
+                <a href="Fundamentals-3-0.html">
+            
+                    
+                    Django入门与实践-第5章：第一个视图函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Fundamentals-3-1.html">
+            
+                <a href="Fundamentals-3-1.html">
+            
+                    
+                    Django入门与实践-第6章：模板引擎设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Fundamentals-3-1-1.html">
+            
+                <a href="Fundamentals-3-1-1.html">
+            
+                    
+                    Django入门与实践-第7章：第一个单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Fundamentals-3-2.html">
+            
+                <a href="Fundamentals-3-2.html">
+            
+                    
+                    Django入门与实践-第8章：静态文件设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="Fundamentals-4.html">
+            
+                <a href="Fundamentals-4.html">
+            
+                    
+                    Django入门与实践-第9章：Django Admin 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="AdvancedConcepts.html">
+            
+                <a href="AdvancedConcepts.html">
+            
+                    
+                    Django入门与实践-第10章：URL 分发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="AdvancedConcept2.html">
+            
+                <a href="AdvancedConcept2.html">
+            
+                    
+                    Django入门与实践-第11章：复用模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="AdvancedConcept3.html">
+            
+                <a href="AdvancedConcept3.html">
+            
+                    
+                    Django入门与实践-第12章：表单处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="Authentication0.html">
+            
+                <a href="Authentication0.html">
+            
+                    
+                    Django入门与实践-第13章：用户注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="Authentication1.html">
+            
+                <a href="Authentication1.html">
+            
+                    
+                    Django入门与实践-第14章：用户注销
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="Authentication2.html">
+            
+                <a href="Authentication2.html">
+            
+                    
+                    Django入门与实践-第15章：用户登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="DjangoORM0.html">
+            
+                <a href="DjangoORM0.html">
+            
+                    
+                    Django入门与实践-第16章：保护视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="DjangoORM1.html">
+            
+                <a href="DjangoORM1.html">
+            
+                    
+                    Django入门与实践-第17章：实现主题回复列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="DjangoORM2.html">
+            
+                <a href="DjangoORM2.html">
+            
+                    
+                    Django入门与实践-第18章：实现主题回复功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="DjangoORM3.html">
+            
+                <a href="DjangoORM3.html">
+            
+                    
+                    Django入门与实践-第19章：查询结果集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="DjangoORM.html">
+            
+                <a href="DjangoORM.html">
+            
+                    
+                    Django入门与实践-第20章：Django数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="ClassBasedViews0.html">
+            
+                <a href="ClassBasedViews0.html">
+            
+                    
+                    Django入门与实践-第21章：基于类的视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.23" data-path="ClassBasedViews1.html">
+            
+                <a href="ClassBasedViews1.html">
+            
+                    
+                    Django入门与实践-第22章：分页实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="ClassBasedViews2.html">
+            
+                <a href="ClassBasedViews2.html">
+            
+                    
+                    Django入门与实践-第23章：我的账户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="ClassBasedViews3.html">
+            
+                <a href="ClassBasedViews3.html">
+            
+                    
+                    Django入门与实践-第24章：Markdown支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="ClassBasedViews4.html">
+            
+                <a href="ClassBasedViews4.html">
+            
+                    
+                    Django入门与实践-第25章：个性化设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="Deployment.html">
+            
+                <a href="Deployment.html">
+            
+                    
+                    Django入门与实践-第26章：项目部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contributors</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/lzjun567">
+            
+                    
+                    liuzhijun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <a target="_blank" href="https://github.com/vimiix">
+            
+                    
+                    vimiix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <a target="_blank" href="https://github.com/jiangyanglinlan">
+            
+                    
+                    jiangyanglinlan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://github.com/wzhbingo">
+            
+                    
+                    wzhbingo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <a target="_blank" href="https://github.com/CasualJi">
+            
+                    
+                    CasualJi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" >
+            
+                <a target="_blank" href="https://github.com/hellodabin">
+            
+                    
+                    hellodabin
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Django入门与实践-第1章：环境搭建</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="django&#x5165;&#x95E8;&#x6307;&#x5357;-&#x7B2C;1&#x7AE0;&#xFF1A;&#x73AF;&#x5883;&#x642D;&#x5EFA;">Django&#x5165;&#x95E8;&#x6307;&#x5357;-&#x7B2C;1&#x7AE0;&#xFF1A;&#x73AF;&#x5883;&#x642D;&#x5EFA;</h1>
+<h3 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h3>
+<p><img src="statics/1-2.jpg" alt=""></p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x5C06;&#x5F00;&#x59CB;&#x4E00;&#x4E2A;&#x5173;&#x4E8E; Django &#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x7684;&#x5168;&#x65B0;&#x7CFB;&#x5217;&#x6559;&#x7A0B;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x59CB;&#x5B66;&#x4E60; Django &#x7684;&#x5B8C;&#x6574;&#x5165;&#x95E8;&#x6307;&#x5357;&#x3002;&#x6559;&#x7A0B;&#x6750;&#x6599;&#x4E00;&#x5171;&#x4F1A;&#x88AB;&#x5206;&#x4E3A;&#x4E03;&#x4E2A;&#x90E8;&#x5206;&#x3002;&#x6211;&#x4EEC;&#x5C06;&#x4ECE;&#x5B89;&#x88C5;&#xFF0C;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x7684;&#x51C6;&#x5907;&#x3001;&#x6A21;&#x578B;&#x3001;&#x89C6;&#x56FE;&#x3001;&#x6A21;&#x677F;&#x3001;URL&#x5230;&#x66F4;&#x9AD8;&#x7EA7;&#x7684;&#x4E3B;&#x9898;&#xFF08;&#x5982;&#x8FC1;&#x79FB;&#x3001;&#x6D4B;&#x8BD5;&#x548C;&#x90E8;&#x7F72;&#xFF09;&#x4E2D;&#x8BE6;&#x7EC6;&#x63A2;&#x8BA8;&#x6240;&#x6709;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#x3002;</p>
+<p>&#x6211;&#x60F3;&#x505A;&#x4E00;&#x4E9B;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x4E00;&#x4E2A;&#x5BB9;&#x6613;&#x5B66;&#x4E60;&#xFF0C;&#x5185;&#x5BB9;&#x4E30;&#x5BCC;&#x4E14;&#x4E0D;&#x5931;&#x8DA3;&#x5473;&#x7684;&#x6559;&#x7A0B;&#x3002;&#x6211;&#x7684;&#x60F3;&#x6CD5;&#x662F;&#x5728;&#x6587;&#x7AE0;&#x4E2D;&#x7A7F;&#x63D2;&#x4E00;&#x4E9B;&#x6F2B;&#x753B;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x6F14;&#x793A;&#x8BF4;&#x660E;&#x76F8;&#x5E94;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x573A;&#x666F;&#x3002;&#x6211;&#x5E0C;&#x671B;&#x5927;&#x5BB6;&#x80FD;&#x591F;&#x4EAB;&#x53D7;&#x8FD9;&#x79CD;&#x9605;&#x8BFB;&#xFF01;</p>
+<p>&#x4F46;&#x662F;&#x5728;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x4E4B;&#x524D;...</p>
+<p>&#x5F53;&#x5E74;&#x6211;&#x5728;&#x4E00;&#x6240;&#x5927;&#x5B66;&#x62C5;&#x4EFB;&#x4EE3;&#x8BFE;&#x6559;&#x6388;&#x65F6;&#xFF0C;&#x6211;&#x66FE;&#x7ECF;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x79D1;&#x5B66;&#x4E13;&#x4E1A;&#x7ED9;&#x65B0;&#x6765;&#x7684;&#x5B66;&#x751F;&#x8BB2;&#x6388;&#x7F51;&#x7EDC;&#x5F00;&#x53D1;&#x5B66;&#x79D1;&#x3002;&#x90A3;&#x65F6;&#x6211;&#x603B;&#x662F;&#x4F1A;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x5B54;&#x592B;&#x5B50;&#x7684;&#x540D;&#x8A00;&#x5F00;&#x59CB;&#x65B0;&#x7684;&#x8BFE;&#x7A0B;&#xFF1A;</p>
+<p><img src="statics/1-3.jpg" alt=""></p>
+<p><em>(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x4E0D;&#x786E;&#x5B9A;&#x662F;&#x5B54;&#x5B50;&#x8BB2;&#x7684;&#xFF0C;&#x4F46;&#x8FD9;&#x53E5;&#x8BDD;&#x65E9;&#x5728;&#x4E2D;&#x56FD;&#x53E4;&#x4EE3;&#x5C31;&#x6709;&#x6240;&#x63D0;&#x5230;&#xFF0C;&#x51FA;&#x81EA;&#x8340;&#x5B50;&#x300A;&#x5112;&#x6548;&#x7BC7;&#x300B;&#x201C;&#x4E0D;&#x95FB;&#x4E0D;&#x82E5;&#x95FB;&#x4E4B;&#xFF0C;&#x95FB;&#x4E4B;&#x4E0D;&#x82E5;&#x89C1;&#x4E4B;&#xFF0C;&#x89C1;&#x4E4B;&#x4E0D;&#x82E5;&#x77E5;&#x4E4B;&#xFF0C;&#x77E5;&#x4E4B;&#x4E0D;&#x82E5;&#x884C;&#x4E4B;&#xFF1B;&#x5B66;&#x81F3;&#x4E8E;&#x884C;&#x4E4B;&#x800C;&#x6B62;&#x77E3;&#x201D;)</em></p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x8BF7;&#x52A8;&#x8D77;&#x624B;&#x6765;&#xFF01;&#x4E0D;&#x8981;&#x53EA;&#x662F;&#x9605;&#x8BFB;&#x6559;&#x7A0B;&#x3002;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x6765;&#x7EC3;&#x4E60;&#xFF01;&#x901A;&#x8FC7;&#x5B9E;&#x8DF5;&#x548C;&#x7EC3;&#x4E60;&#x4F60;&#x4F1A;&#x6536;&#x83B7;&#x7684;&#x66F4;&#x591A;&#x3002;</p>
+<hr>
+<h3 id="&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5B66;&#x4E60;django">&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5B66;&#x4E60;Django?</h3>
+<p>Django&#x662F;&#x4E00;&#x4E2A;&#x7528;python&#x7F16;&#x5199;&#x7684;Web&#x6846;&#x67B6;&#x3002;Web&#x6846;&#x67B6;&#x662F;&#x4E00;&#x79CD;&#x8F6F;&#x4EF6;&#xFF0C;&#x57FA;&#x4E8E;web&#x6846;&#x67B6;&#x53EF;&#x4EE5;&#x5F00;&#x53D1;&#x52A8;&#x6001;&#x7F51;&#x7AD9;&#xFF0C;&#x5404;&#x79CD;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE5;&#x53CA;&#x670D;&#x52A1;&#x3002;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x5DE5;&#x5177;&#x548C;&#x529F;&#x80FD;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x8BB8;&#x591A;&#x4E0E;Web&#x5F00;&#x53D1;&#x76F8;&#x5173;&#x7684;&#x5E38;&#x89C1;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;&#x5B89;&#x5168;&#x529F;&#x80FD;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x8BBF;&#x95EE;&#xFF0C;&#x4F1A;&#x8BDD;&#xFF0C;&#x6A21;&#x677F;&#x5904;&#x7406;&#xFF0C;URL&#x8DEF;&#x7531;&#xFF0C;&#x56FD;&#x9645;&#x5316;&#xFF0C;&#x672C;&#x5730;&#x5316;&#xFF0C;&#x7B49;&#x7B49;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x8BF8;&#x5982; Django &#x4E4B;&#x7C7B;&#x7684;&#x7F51;&#x7EDC;&#x6846;&#x67B6;&#xFF0C;&#x4F7F;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x4EE5;&#x6807;&#x51C6;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#x5B89;&#x5168;&#x53EF;&#x9760;&#x7684;Web&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x800C;&#x65E0;&#x9700;&#x91CD;&#x65B0;&#x53D1;&#x660E;&#x8F6E;&#x5B50;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#xFF0C;Django&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x522B;&#x4E4B;&#x5904;&#x5462;&#xFF1F;&#x5BF9;&#x4E8E;&#x521D;&#x5B66;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;Python Web&#x6846;&#x67B6;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4F60;&#x53EF;&#x4EE5;&#x53D7;&#x76CA;&#x4E8E;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5F00;&#x6E90;&#x5E93;&#x5305;&#x3002;<a href="https://pypi.python.org/pypi" target="_blank">python&#x8F6F;&#x4EF6;&#x5305;&#x8D44;&#x6599;&#x5E93;&#xFF08;pypi&#xFF09;</a>&#x62E5;&#x6709;&#x8D85;&#x8FC7;11.6&#x4E07;&#x4E2A;&#x8F6F;&#x4EF6;&#x5305;&#xFF08;2017&#x5E74;9&#x6708;6&#x65E5;&#x7684;&#x6570;&#x636E;&#xFF09;&#x3002;&#x5982;&#x679C;&#x5F53;&#x4F60;&#x60F3;&#x8981;&#x89E3;&#x51B3;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x95EE;&#x9898;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x80FD;&#x6709;&#x4EBA;&#x5DF2;&#x7ECF;&#x4E3A;&#x5B83;&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x5E93;&#x6765;&#x4F9B;&#x4F60;&#x4F7F;&#x7528;&#x3002;</p>
+<p>Django&#x662F;&#x7528;python&#x7F16;&#x5199;&#x7684;&#x6700;&#x6D41;&#x884C;&#x7684;web&#x6846;&#x67B6;&#x4E4B;&#x4E00;&#x3002;&#x5B83;&#x7EDD;&#x5BF9;&#x662F;&#x6700;&#x5B8C;&#x6574;&#x7684;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5F00;&#x7BB1;&#x5373;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x7528;&#x4E8E;&#x5F00;&#x53D1;&#x548C;&#x6D4B;&#x8BD5;&#x7684;&#x72EC;&#x7ACB;Web&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x7F13;&#x5B58;&#xFF0C;&#x4E2D;&#x95F4;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;ORM&#xFF0C;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#xFF0C;&#x8868;&#x5355;&#x5904;&#x7406;&#xFF0C;&#x57FA;&#x4E8E;Python&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x7684;&#x5DE5;&#x5177;&#x63A5;&#x53E3;&#x3002;Django&#x8FD8;&#x81EA;&#x5E26;<em>&#x5185;&#x90E8;&#x7535;&#x6C60;</em>&#xFF0C;&#x63D0;&#x4F9B;&#x5185;&#x7F6E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x6BD4;&#x5982;&#x4E00;&#x4E2A;&#x8BA4;&#x8BC1;&#x7CFB;&#x7EDF;&#xFF0C;&#x4E00;&#x4E2A;&#x53EF;&#x7528;&#x4E8E; <code>CRUD</code>(&#x589E;&#x5220;&#x6539;&#x67E5;) &#x64CD;&#x4F5C;&#x5E76;&#x4E14;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x9875;&#x9762;&#x7684;&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x754C;&#x9762;&#xFF0C;&#x751F;&#x6210;&#x8BA2;&#x9605;&#x6587;&#x6863;&#xFF08;RSS/Atom&#xFF09;,&#x7AD9;&#x70B9;&#x5730;&#x56FE;&#x7B49;&#x3002;&#x751A;&#x81F3;&#x5728;django&#x4E2D;&#x5185;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5730;&#x7406;&#x4FE1;&#x606F;&#x7CFB;&#x7EDF;&#xFF08;GIS&#xFF09;&#x6846;&#x67B6;&#x3002;</p>
+<p>Django&#x7684;&#x5F00;&#x53D1;&#x5F97;&#x5230;&#x4E86;<a href="https://www.djangoproject.com/foundation/" target="_blank">Django&#x8F6F;&#x4EF6;&#x57FA;&#x91D1;&#x4F1A;</a>&#x7684;&#x652F;&#x6301;&#xFF0C;&#x5E76;&#x4E14;&#x7531;jetbrains&#x548C;instagram&#x7B49;&#x516C;&#x53F8;&#x8D5E;&#x52A9;&#x3002;Django&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E86;&#x76F8;&#x5F53;&#x957F;&#x7684;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x4E86;&#x3002;&#x5230;&#x73B0;&#x5728;&#x4E3A;&#x6B62;&#xFF0C;&#x6D3B;&#x8DC3;&#x7684;&#x9879;&#x76EE;&#x5F00;&#x53D1;&#x65F6;&#x95F4;&#x5DF2;&#x7ECF;&#x8D85;&#x8FC7;12&#x5E74;&#xFF0C;&#x8FD9;&#x4E5F;&#x8BC1;&#x660E;&#x4E86;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x6210;&#x719F;&#xFF0C;&#x53EF;&#x9760;&#x548C;&#x5B89;&#x5168;&#x7684;&#x7F51;&#x7EDC;&#x6846;&#x67B6;&#x3002;</p>
+<h3 id="&#x8C01;&#x5728;&#x4F7F;&#x7528;django">&#x8C01;&#x5728;&#x4F7F;&#x7528;Django?</h3>
+<p>&#x77E5;&#x9053;&#x8C01;&#x5728;&#x4F7F;&#x7528;Django&#x662F;&#x5F88;&#x597D;&#x7684;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x60F3;&#x4E00;&#x60F3;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x5B83;&#x6765;&#x505A;&#x4E9B;&#x4EC0;&#x4E48;&#x3002;&#x5728;&#x4F7F;&#x7528;Django&#x7684;&#x5927;&#x578B;&#x7F51;&#x7AD9;&#x6709;&#xFF1A;<a href="https://instagram.com/" target="_blank">Instagram</a>&#xFF0C;<a href="https://disqus.com/" target="_blank">Disqus</a>&#xFF0C;<a href="https://www.mozilla.org/" target="_blank">Mozilla</a>&#xFF0C;<a href="https://bitbucket.org/" target="_blank">Bitbucket</a>&#xFF0C;<a href="https://www.last.fm/" target="_blank">Last.fm</a>&#xFF0C;<a href="http://www.nationalgeographic.com/" target="_blank">&#x56FD;&#x5BB6;&#x5730;&#x7406;</a>&#x3002;</p>
+<p>&#x60F3;&#x77E5;&#x9053;&#x66F4;&#x591A;&#x7684;&#x793A;&#x4F8B;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5230;<a href="https://www.djangosites.org/" target="_blank">Django Sites</a>&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x67E5;&#x770B;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x8D85;&#x8FC7;&#x4E94;&#x5343;&#x4E2A;Django&#x9A71;&#x52A8;&#x7684;&#x7F51;&#x7AD9;&#x5217;&#x8868;&#x3002;</p>
+<p>&#x987A;&#x4FBF;&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;&#x53BB;&#x5E74;&#x5728;Django 2016&#x5E74;&#x53D1;&#x5E03;&#x4F1A;&#x4E0A;&#xFF0C;Django&#x6838;&#x5FC3;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#xFF0C;Instagram&#x5458;&#x5DE5;
+<code>carl meyer</code>&#xFF0C;&#x5C31;<a href="https://www.youtube.com/watch?v=lx5WQjXLlq8" target="_blank">Instagram&#x5982;&#x4F55;&#x5927;&#x89C4;&#x6A21;&#x4F7F;&#x7528;Django&#x4EE5;&#x53CA;&#x5B83;&#x5982;&#x4F55;&#x652F;&#x6301;&#x4ED6;&#x4EEC;&#x7684;&#x7528;&#x6237;&#x589E;&#x957F;</a>&#x505A;&#x8FC7;&#x4E00;&#x6B21;&#x5206;&#x4EAB;&#x3002;&#x8FD9;&#x662F;&#x4E2A;&#x4E00;&#x5C0F;&#x65F6;&#x7684;&#x6F14;&#x8BB2;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x5174;&#x8DA3;&#x5B66;&#x4E60;&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x7684;&#x8BDD;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x6B21;&#x5F88;&#x6709;&#x8DA3;&#x7684;&#x6F14;&#x8BB2;&#x3002;</p>
+<hr>
+<h3 id="&#x5B89;&#x88C5;">&#x5B89;&#x88C5;</h3>
+<p>&#x6211;&#x4EEC;&#x9700;&#x8981;&#x505A;&#x7684;&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x7535;&#x8111;&#x4E0A;&#x5B89;&#x88C5;&#x4E00;&#x4E9B;&#x7A0B;&#x5E8F;&#xFF0C;&#x4EE5;&#x4FBF;&#x80FD;&#x591F;&#x5F00;&#x59CB;&#x4F7F;&#x7528;django&#x3002;&#x57FA;&#x672C;&#x7684;&#x8BBE;&#x7F6E;&#x5305;&#x62EC;&#x5B89;&#x88C5;<strong>Python</strong>&#xFF0C;<strong>Virtualenv</strong>&#x548C;<strong>Django</strong>&#x3002;</p>
+<p><img src="statics/1-4.jpg" alt=""></p>
+<p>&#x4F7F;&#x7528;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x4E0D;&#x662F;&#x5F3A;&#x5236;&#x6027;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x8FD8;&#x662F;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x5927;&#x5BB6;&#x8FD9;&#x6837;&#x505A;&#x3002;&#x5982;&#x679C;&#x4F60;&#x662F;&#x4E00;&#x4E2A;&#x521D;&#x5B66;&#x8005;&#xFF0C;&#x90A3;&#x4E48;&#x6700;&#x597D;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x826F;&#x597D;&#x7684;&#x5F00;&#x7AEF;&#x3002;</p>
+<p>&#x5F53;&#x4F60;&#x5728;&#x7528; Django &#x5F00;&#x53D1;&#x4E00;&#x4E2A;&#x7F51;&#x7AD9;&#x6216;&#x8005;&#x4E00;&#x4E2A;Web&#x9879;&#x76EE;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x5F97;&#x4E0D;&#x5B89;&#x88C5;&#x5916;&#x90E8;&#x5E93;&#x4EE5;&#x652F;&#x6301;&#x5F00;&#x53D1;&#x662F;&#x975E;&#x5E38;&#x5E38;&#x89C1;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x4F7F;&#x7528;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF0C;&#x4F60;&#x5F00;&#x53D1;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x90FD;&#x4F1A;&#x6709;&#x5176;&#x72EC;&#x7ACB;&#x7684;&#x73AF;&#x5883;&#x3002;&#x8FD9;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x5305;&#x4E4B;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E0D;&#x4F1A;&#x53D1;&#x751F;&#x51B2;&#x7A81;&#x3002;&#x540C;&#x65F6;&#x4E5F;&#x4F7F;&#x5F97;&#x4F60;&#x80FD;&#x5728;&#x4E0D;&#x540C;Django&#x7248;&#x672C;&#x4E0A;&#x8FD0;&#x884C;&#x7684;&#x672C;&#x5730;&#x673A;&#x5668;&#x7684;&#x9879;&#x76EE;&#x3002;</p>
+<p>&#x5728;&#x540E;&#x9762;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x4F7F;&#x7528;&#x5B83;&#x662F;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#xFF01;</p>
+<h3 id="&#x5B89;&#x88C5;-python-362">&#x5B89;&#x88C5; Python 3.6.2</h3>
+<p>&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x505A;&#x7684;&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#x662F;&#x5B89;&#x88C5;&#x6700;&#x65B0;&#x7248;&#x7684;Python&#xFF0C;&#x90A3;&#x5C31;&#x662F;<strong>Python 3.6.2</strong>&#x3002;&#x81F3;&#x5C11;&#x662F;&#x5728;&#x6211;&#x5199;&#x8FD9;&#x7BC7;&#x6559;&#x7A0B;&#x7684;&#x65F6;&#x5019;&#x3002;&#x5982;&#x679C;&#x6709;&#x66F4;&#x65B0;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x65B0;&#x7248;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6B65;&#x9AA4;&#x4E5F;&#x5E94;&#x8BE5;&#x4FDD;&#x6301;&#x5927;&#x81F4;&#x76F8;&#x540C;&#x7684;&#x505A;&#x6CD5;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528;Python 3&#xFF0C;&#x56E0;&#x4E3A;&#x5927;&#x90E8;&#x5206;&#x4E3B;&#x8981;&#x7684;Python&#x5E93;&#x5DF2;&#x7ECF;&#x88AB;&#x79FB;&#x690D;&#x5230;python 3&#xFF0C;&#x5E76;&#x4E14;&#x4E0B;&#x4E00;&#x4E2A;&#x4E3B;&#x8981;&#x7684;django&#x7248;&#x672C;&#xFF08;2.x&#xFF09;&#x4E5F;&#x5C06;&#x4E0D;&#x518D;&#x652F;&#x6301;python 2&#x3002;&#x6240;&#x4EE5;Python 3&#x662F;&#x6B63;&#x786E;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
+<p>&#x6700;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x901A;&#x8FC7;<a href="https://brew.sh/" target="_blank"><strong>Homebrew</strong></a>&#x5B89;&#x88C5;&#x3002; &#x5982;&#x679C;&#x4F60;&#x7684;Mac&#x8FD8;&#x6CA1;&#x6709;&#x5B89;&#x88C5;Homebrew&#x7684;&#x8BDD;&#xFF0C;&#x5728;&#x7EC8;&#x7AEF;&#x4E2D;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code class="lang-bash">/usr/bin/ruby <span class="hljs-_">-e</span> <span class="hljs-string">&quot;<span class="hljs-variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x6CA1;&#x6709;&#x5B89;&#x88C5;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#xFF08;<strong>Command Line Tools</strong>&#xFF09;&#xFF0C;Homebrew&#x7684;&#x5B89;&#x88C5;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x7A0D;&#x957F;&#x4E00;&#x70B9;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x4F46;&#x5B83;&#x4F1A;&#x5E2E;&#x52A9;&#x4F60;&#x5904;&#x7406;&#x597D;&#x4E00;&#x5207;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x3002;&#x53EA;&#x9700;&#x8981;&#x5750;&#x4E0B;&#x6765;&#x7B49;&#x5230;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5F53;&#x4F60;&#x770B;&#x5230;&#x4EE5;&#x4E0B;&#x6D88;&#x606F;&#x65F6;&#xFF0C;&#x5C31;&#x4EE3;&#x8868;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x4E86;&#xFF1A;</p>
+<pre><code>==&gt; Installation successful!
+
+==&gt; Homebrew has enabled anonymous aggregate user behaviour analytics.
+Read the analytics documentation (and how to opt-out) here:
+  https://docs.brew.sh/Analytics.html
+
+==&gt; Next steps:
+- Run `brew help` to get started
+- Further documentation:
+    https://docs.brew.sh
+</code></pre><p>&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x6765;&#x5B89;&#x88C5;Python 3:</p>
+<pre><code class="lang-bash">brew install python3
+</code></pre>
+<p>&#x7531;&#x4E8E;macOS&#x539F;&#x672C;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x4E86;python 2&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x5B89;&#x88C5;python 3&#x4E4B;&#x540E;&#xFF0C;&#x4F60;&#x5C06;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x8FD9;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x8FD0;&#x884C;Python 2&#x7684;&#x8BDD;&#xFF0C;&#x5728;&#x7EC8;&#x7AEF;&#x4E2D;&#x901A;&#x8FC7;&#x547D;&#x4EE4; <code>python</code> &#x542F;&#x52A8;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8FD0;&#x884C;Python 3&#xFF0C;&#x5219;&#x4F7F;&#x7528;<code>python3</code> &#x6765;&#x542F;&#x52A8;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x7EC8;&#x7AEF;&#x4E2D;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-bash">python3 --version
+Python 3.6.2
+</code></pre>
+<p><img src="statics/1-5.png" alt=""></p>
+<p>&#x5F88;&#x68D2;&#xFF0C;python&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x5E76;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x3002;&#x4E0B;&#x4E00;&#x6B65;&#xFF1A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#xFF01;</p>
+<h3 id="&#x5B89;&#x88C5;-virtualenv">&#x5B89;&#x88C5; Virtualenv</h3>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x901A;&#x8FC7;<strong>pip</strong>(<em>&#x4E00;&#x4E2A;&#x7BA1;&#x7406;&#x548C;&#x5B89;&#x88C5;Python&#x5305;&#x7684;&#x5DE5;&#x5177;</em>)&#x6765;&#x5B89;&#x88C5;<strong>Virtualenv</strong>&#x3002;</p>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;Homebrew&#x5DF2;&#x7ECF;&#x4E3A;&#x4F60;&#x5B89;&#x88C5;&#x597D;&#x4E86;<strong>pip</strong>&#xFF0C;&#x5728;python 3.6.2&#x4E0B;&#x7684;&#x540D;&#x79F0;&#x4E3A; <code>pip3</code>&#x3002;</p>
+<p>&#x5728;&#x7EC8;&#x7AEF;&#x4E2D;&#xFF0C;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code class="lang-bash">sudo pip3 install virtualenv
+</code></pre>
+<p><img src="statics/1-6.png" alt=""></p>
+<p>&#x5230;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#xFF0C;&#x6211;&#x4EEC;&#x6267;&#x884C;&#x7684;&#x5B89;&#x88C5;&#x90FD;&#x662F;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x73AF;&#x5883;&#x4E0B;&#x8FD0;&#x884C;&#x7684;&#x3002;&#x4ECE;&#x73B0;&#x5728;&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x4EEC;&#x5B89;&#x88C5;&#x7684;&#x6240;&#x6709;&#x4E1C;&#x897F;&#xFF0C;&#x5305;&#x62EC;django&#x672C;&#x8EAB;&#xFF0C;&#x90FD;&#x5C06;&#x5B89;&#x88C5;&#x5728;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x4E2D;&#x3002;</p>
+<p>&#x8FD9;&#x6837;&#x60F3;&#x4E00;&#x4E0B;&#xFF1A;&#x5BF9;&#x4E8E;&#x4F60;&#x5F00;&#x59CB;&#x7684;&#x6BCF;&#x4E2A;Django&#x9879;&#x76EE;&#xFF0C;&#x4F60;&#x9996;&#x5148;&#x4F1A;&#x4E3A;&#x5B83;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x6BCF;&#x4E2A;Django&#x9879;&#x76EE;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x6C99;&#x76D2;&#x3002;&#x6240;&#x4EE5;&#x4F60;&#x968F;&#x610F;&#x8FD0;&#x884C;&#xFF0C;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#x800C;&#x4E0D;&#x4F1A;&#x7834;&#x574F;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#x3002;</p>
+<p>&#x6211;&#x4E60;&#x60EF;&#x5728;&#x7535;&#x8111;&#x4E0A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;<strong>Development</strong>&#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6211;&#x7528;&#x5B83;&#x6765;&#x7EC4;&#x7EC7;&#x6211;&#x6240;&#x6709;&#x7684;&#x9879;&#x76EE;&#x548C;&#x7F51;&#x7AD9;&#x3002;&#x4F46;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6B65;&#x9AA4;&#x521B;&#x5EFA;&#x9002;&#x5408;&#x4F60;&#x81EA;&#x5DF1;&#x7684;&#x76EE;&#x5F55;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#xFF0C;&#x6211;&#x9996;&#x5148;&#x5728;<strong>Development</strong>&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x540D;&#x79F0;&#x7684;&#x65B0;&#x6587;&#x4EF6;&#x5939;&#x3002;&#x65E2;&#x7136;&#x8FD9;&#x5C06;&#x662F;&#x6211;&#x4EEC;&#x7B2C;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x6211;&#x4EEC;&#x6CA1;&#x5FC5;&#x8981;&#x6311;&#x9009;&#x4E00;&#x4E2A;&#x72EC;&#x7279;&#x7684;&#x540D;&#x5B57;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x79F0;&#x4E4B;&#x4E3A;<strong>myproject</strong>&#x3002;</p>
+<pre><code class="lang-bash">mkdir myproject
+<span class="hljs-built_in">cd</span> myproject
+</code></pre>
+<p><img src="statics/1-7.png" alt=""></p>
+<p>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#x662F;&#x7EA7;&#x522B;&#x8F83;&#x9AD8;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x5C06;&#x5B58;&#x50A8;&#x4E0E;&#x6211;&#x4EEC;&#x7684;Django&#x9879;&#x76EE;&#x76F8;&#x5173;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x548C;&#x4E1C;&#x897F;&#xFF0C;&#x5305;&#x62EC;&#x5B83;&#x7684;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x8BA9;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x521B;&#x5EFA;&#x6211;&#x4EEC;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5E76;&#x5B89;&#x88C5;django&#x3002;</p>
+<p>&#x5728;<strong>myproject</strong>&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-bash">virtualenv venv -p python3
+</code></pre>
+<p><img src="statics/1-8.png" alt=""></p>
+<p>&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x7684;&#x865A;&#x62DF;&#x73AF;&#x5883;&#x5C31;&#x521B;&#x5EFA;&#x597D;&#x4E86;&#x3002;&#x5728;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x5B83;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5148;&#x6FC0;&#x6D3B;&#x4E00;&#x4E0B;&#x73AF;&#x5883;&#xFF1A;</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">source</span> venv/bin/activate
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x524D;&#x9762;&#x770B;&#x5230; <strong>(venv)</strong>&#xFF0C;&#x5C31;&#x4EE3;&#x8868;&#x6FC0;&#x6D3B;&#x6210;&#x529F;&#x4E86;&#xFF0C;&#x5C31;&#x50CF;&#x8FD9;&#x6837;&#xFF1A;</p>
+<p><img src="statics/1-9.png" alt=""></p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x8BD5;&#x7740;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x8FD9;&#x91CC;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#x3002;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;<strong>venv</strong>&#x7684;&#x7279;&#x6B8A;&#x6587;&#x4EF6;&#x5939;&#x3002;&#x8BE5;&#x6587;&#x4EF6;&#x5939;&#x5185;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E2A;python&#x7684;&#x526F;&#x672C;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x6FC0;&#x6D3B;&#x4E86;<strong>venv</strong>&#x73AF;&#x5883;&#x4E4B;&#x540E;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x8FD0;&#x884C;<code>Python</code>&#x547D;&#x4EE4;&#x65F6;&#xFF0C;&#x5B83;&#x5C06;&#x4F7F;&#x7528;&#x6211;&#x4EEC;&#x5B58;&#x50A8;&#x5728;venv&#x91CC;&#x9762;&#x7684;&#x672C;&#x5730;&#x526F;&#x672C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x5B89;&#x88C5;&#x7684;&#x90A3;&#x4E2A;&#x3002;</p>
+<p>&#x53E6;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x4E8B;&#x60C5;&#x662F;&#xFF0C;<strong>pip</strong>&#x7A0B;&#x5E8F;&#x4E5F;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x597D;&#x4E86;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5B83;&#x6765;&#x5B89;&#x88C5;Python&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#xFF08;&#x6BD4;&#x5982;Django&#xFF09;&#x65F6;&#xFF0C;&#x5B83;&#x5C06;&#x88AB;&#x5B89;&#x88C5;&#x5728;<strong>venv</strong>&#x73AF;&#x5883;&#x4E2D;&#x3002;</p>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x542F;&#x7528;venv&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528;&#x547D;&#x4EE4;<code>python</code>&#xFF08;&#x800C;&#x4E0D;&#x662F;<code>python3</code>&#xFF09;&#x6765;&#x8C03;&#x7528;Python 3.6.2&#xFF0C;&#x5E76;&#x4E14;&#x4EC5;&#x4F7F;&#x7528;<code>pip</code>&#xFF08;&#x800C;&#x4E0D;&#x662F;<code>pip3</code>&#xFF09;&#x6765;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x5305;&#x3002;</p>
+<p>&#x987A;&#x4FBF;&#x8BF4;&#x4E00;&#x53E5;&#xFF0C;&#x8981;&#x60F3;&#x9000;&#x51FA;<strong>venv</strong>&#x73AF;&#x5883;&#xFF0C;&#x8FD0;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code class="lang-bash">deactivate
+</code></pre>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x5148;&#x4FDD;&#x6301;&#x6FC0;&#x6D3B;&#x72B6;&#x6001;&#x6765;&#x8FDB;&#x884C;&#x4E0B;&#x4E00;&#x6B65;&#x3002;</p>
+<h3 id="&#x5B89;&#x88C5;-django-1114">&#x5B89;&#x88C5; Django 1.11.4</h3>
+<p>&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x4E86;<strong>venv</strong>&#xFF0C;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x6765;&#x5B89;&#x88C5;django&#xFF1A;</p>
+<pre><code class="lang-bash">pip install django==1.11.4
+
+<span class="hljs-comment"># &#x8BD1;&#x6CE8;&#xFF1A;&#x76EE;&#x524D;django&#x5DF2;&#x7ECF;&#x5347;&#x7EA7;&#x5230;2.x&#x7248;&#x672C;&#xFF0C;&#x8FD9;&#x91CC;&#x4E3A;&#x4E86;&#x8DDF;&#x540E;&#x7EED;&#x6559;&#x7A0B;&#x5185;&#x5BB9;&#x4FDD;&#x6301;&#x4E00;&#x76F4;&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x7248;&#x672C;&#x53F7;&#x8FDB;&#x884C;&#x5B89;&#x88C5;</span>
+<span class="hljs-comment"># &#x9664;&#x975E;&#x4F60;&#x6709;&#x80FD;&#x529B; debug&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F60;&#x4F7F;&#x7528;django 2.x&#xFF0C;&#x7B49;&#x4F60;&#x719F;&#x6089;Django&#x540E;&#xFF0C;&#x518D;&#x5347;&#x7EA7;&#x90FD;Django2.0 &#x4E5F;&#x4E0D;&#x8FDF;&#xFF0C;&#x56E0;&#x4E3A;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#x7684;&#x5DEE;&#x5F02;&#x975E;&#x5E38;&#x5C0F;</span>
+</code></pre>
+<p><img src="statics/1-10.png" alt=""></p>
+<p>&#x73B0;&#x5728;&#x4E00;&#x5207;&#x5C31;&#x7EEA;&#xFF01;</p>
+<p><img src="statics/1-11.png" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="GettingStarted-2.html" class="navigation navigation-next " aria-label="Next page: Django入门与实践-第2章：创建项目">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Django入门与实践-第1章：环境搭建","level":"1.2","depth":1,"next":{"title":"Django入门与实践-第2章：创建项目","level":"1.3","depth":1,"path":"GettingStarted-2.md","ref":"./GettingStarted-2.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["include-codeblock","livereload"],"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"livereload":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"GettingStarted.md","mtime":"2018-05-12T01:14:11.913Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-12T01:19:40.393Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

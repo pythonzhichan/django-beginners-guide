@@ -1,4 +1,4 @@
-## 登录
+# Django入门与实践-第15章：用户登录
 
 首先，添加一个新的URL路径：
 
@@ -51,6 +51,7 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/login.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}
@@ -100,6 +101,7 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/base_accounts.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}
@@ -125,6 +127,7 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/login.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Log in to Django Boards{% endblock %}
@@ -161,6 +164,7 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/signup.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Sign up to Django Boards{% endblock %}
@@ -206,6 +210,7 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/includes/form.html**
 
 ```html
+{% raw %}
 {% load widget_tweaks %}
 
 {% if form.non_field_errors %}
@@ -327,6 +332,7 @@ def input_class(bound_field):
 **templates/includes/form.html**
 
 ```html
+{% raw %}
 {% load form_tags widget_tweaks %}
 
 {% if form.non_field_errors %}
@@ -459,7 +465,7 @@ OK
 Destroying test database for alias 'default'...
 ```
 
-## 密码重置
+###  密码重置
 
 密码重置过程中涉及一些不友好的 URL 模式。但正如我们在前面的教程中讨论的那样，我们并不需要成为正则表达式专家。我们只需要了解常见问题和它们的解决办法。
 
@@ -536,6 +542,7 @@ url(r'^reset/complete/$',
 **templates/password_reset.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -714,6 +721,7 @@ class PasswordResetMailTests(TestCase):
 **templates/password_reset_done.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -763,6 +771,7 @@ class PasswordResetDoneTests(TestCase):
 **templates/password_reset_confirm.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}
@@ -893,6 +902,7 @@ class InvalidPasswordResetConfirmTests(TestCase):
 **templates/password_reset_complete.html**
 
 ```html
+{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Password changed!{% endblock %}
@@ -920,6 +930,7 @@ class InvalidPasswordResetConfirmTests(TestCase):
 **accounts/tests/test_view_password_reset.py** [(view complete file contents)](https://gist.github.com/vitorfs/c9657d39d28c2a0cfb0933e715bfc9cf#file-test_view_password_reset-py-L149)
 
 ```html
+{% raw %}
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -969,6 +980,7 @@ LOGIN_URL = 'login'
 **templates/password_change.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Change password{% endblock %}
@@ -996,6 +1008,7 @@ LOGIN_URL = 'login'
 **templates/password_change_done.html**
 
 ```html
+{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Change password successful{% endblock %}
@@ -1108,7 +1121,7 @@ class InvalidPasswordChangeTests(PasswordChangeTestCase):
 
 ------
 
-## 总结
+###  总结
 
 对于大多数Django应用程序，身份验证是一种非常常见的用例。在本教程中，我们实现了所有重要视图：注册、登录、注销、密码重置和更改密码。现在我们有了一种方法来创建用户并进行身份验证，我们将能够继续开发应用程序和其他视图。
 

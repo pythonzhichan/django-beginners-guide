@@ -1,9 +1,5 @@
 # Django入门指南-第6章：模板引擎设置
 
->译者：liuzhijun  
->原文：
-https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html
-
 
 在manage.py所在的目录创建一个名为 **templates**的新文件夹：
 
@@ -38,6 +34,7 @@ myproject/
   </body>
 </html>
 ```
+
 
 在上面的例子中，我们混入了原始HTML和一些特殊标签 `{% for ... in ... %}` 和 `{{ variable }}` 。它们是Django模板语言的一部分。上面的例子展示了如何使用 `for`遍历列表对象。`{{ board.name }}`会在 HTML 模板中会被渲染成版块的名称，最后生成动态HTML文档。
 

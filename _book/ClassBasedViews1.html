@@ -1,0 +1,1098 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Django入门与实践-第22章：分页实现 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ClassBasedViews2.html" />
+    
+    
+    <link rel="prev" href="ClassBasedViews0.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Django入门与实践-第1章：环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="GettingStarted-2.html">
+            
+                <a href="GettingStarted-2.html">
+            
+                    
+                    Django入门与实践-第2章：创建项目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Fundamentals-1.html">
+            
+                <a href="Fundamentals-1.html">
+            
+                    
+                    Django入门与实践-第3章：系统设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Fundamentals-2.html">
+            
+                <a href="Fundamentals-2.html">
+            
+                    
+                    Django入门与实践-第4章：模型设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Fundamentals-3-0.html">
+            
+                <a href="Fundamentals-3-0.html">
+            
+                    
+                    Django入门与实践-第5章：第一个视图函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Fundamentals-3-1.html">
+            
+                <a href="Fundamentals-3-1.html">
+            
+                    
+                    Django入门与实践-第6章：模板引擎设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Fundamentals-3-1-1.html">
+            
+                <a href="Fundamentals-3-1-1.html">
+            
+                    
+                    Django入门与实践-第7章：第一个单元测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Fundamentals-3-2.html">
+            
+                <a href="Fundamentals-3-2.html">
+            
+                    
+                    Django入门与实践-第8章：静态文件设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="Fundamentals-4.html">
+            
+                <a href="Fundamentals-4.html">
+            
+                    
+                    Django入门与实践-第9章：Django Admin 介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="AdvancedConcepts.html">
+            
+                <a href="AdvancedConcepts.html">
+            
+                    
+                    Django入门与实践-第10章：URL 分发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="AdvancedConcept2.html">
+            
+                <a href="AdvancedConcept2.html">
+            
+                    
+                    Django入门与实践-第11章：复用模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="AdvancedConcept3.html">
+            
+                <a href="AdvancedConcept3.html">
+            
+                    
+                    Django入门与实践-第12章：表单处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="Authentication0.html">
+            
+                <a href="Authentication0.html">
+            
+                    
+                    Django入门与实践-第13章：用户注册
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" data-path="Authentication1.html">
+            
+                <a href="Authentication1.html">
+            
+                    
+                    Django入门与实践-第14章：用户注销
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" data-path="Authentication2.html">
+            
+                <a href="Authentication2.html">
+            
+                    
+                    Django入门与实践-第15章：用户登录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="DjangoORM0.html">
+            
+                <a href="DjangoORM0.html">
+            
+                    
+                    Django入门与实践-第16章：保护视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.18" data-path="DjangoORM1.html">
+            
+                <a href="DjangoORM1.html">
+            
+                    
+                    Django入门与实践-第17章：实现主题回复列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.19" data-path="DjangoORM2.html">
+            
+                <a href="DjangoORM2.html">
+            
+                    
+                    Django入门与实践-第18章：实现主题回复功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.20" data-path="DjangoORM3.html">
+            
+                <a href="DjangoORM3.html">
+            
+                    
+                    Django入门与实践-第19章：查询结果集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.21" data-path="DjangoORM.html">
+            
+                <a href="DjangoORM.html">
+            
+                    
+                    Django入门与实践-第20章：Django数据迁移
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.22" data-path="ClassBasedViews0.html">
+            
+                <a href="ClassBasedViews0.html">
+            
+                    
+                    Django入门与实践-第21章：基于类的视图
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.23" data-path="ClassBasedViews1.html">
+            
+                <a href="ClassBasedViews1.html">
+            
+                    
+                    Django入门与实践-第22章：分页实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.24" data-path="ClassBasedViews2.html">
+            
+                <a href="ClassBasedViews2.html">
+            
+                    
+                    Django入门与实践-第23章：我的账户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.25" data-path="ClassBasedViews3.html">
+            
+                <a href="ClassBasedViews3.html">
+            
+                    
+                    Django入门与实践-第24章：Markdown支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.26" data-path="ClassBasedViews4.html">
+            
+                <a href="ClassBasedViews4.html">
+            
+                    
+                    Django入门与实践-第25章：个性化设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.27" data-path="Deployment.html">
+            
+                <a href="Deployment.html">
+            
+                    
+                    Django入门与实践-第26章：项目部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Contributors</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" >
+            
+                <a target="_blank" href="https://github.com/lzjun567">
+            
+                    
+                    liuzhijun
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" >
+            
+                <a target="_blank" href="https://github.com/vimiix">
+            
+                    
+                    vimiix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" >
+            
+                <a target="_blank" href="https://github.com/jiangyanglinlan">
+            
+                    
+                    jiangyanglinlan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" >
+            
+                <a target="_blank" href="https://github.com/wzhbingo">
+            
+                    
+                    wzhbingo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" >
+            
+                <a target="_blank" href="https://github.com/CasualJi">
+            
+                    
+                    CasualJi
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" >
+            
+                <a target="_blank" href="https://github.com/hellodabin">
+            
+                    
+                    hellodabin
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Django入门与实践-第22章：分页实现</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;2&#x7AE0;&#xFF1A;&#x5206;&#x9875;&#x5B9E;&#x73B0;">Django&#x5165;&#x95E8;&#x4E0E;&#x5B9E;&#x8DF5;-&#x7B2C;2&#x7AE0;&#xFF1A;&#x5206;&#x9875;&#x5B9E;&#x73B0;</h1>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x5730;&#x4F7F;&#x7528; CBV &#x6765;&#x5B9E;&#x73B0;&#x5206;&#x9875;&#x529F;&#x80FD;&#x3002;&#x4F46;&#x9996;&#x5148;&#x6211;&#x60F3;&#x624B;&#x5DE5;&#x5206;&#x9875;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x66F4;&#x6709;&#x52A9;&#x4E8E;&#x6211;&#x4EEC;&#x7406;&#x89E3;&#x80CC;&#x540E;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x8FD9;&#x6837;&#x5B83;&#x5C31;&#x4E0D;&#x90A3;&#x4E48;&#x795E;&#x79D8;&#x4E86;&#x3002;</p>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x5BF9; boards &#x5217;&#x8868;&#x89C6;&#x56FE;&#x5206;&#x9875;&#x5E76;&#x6CA1;&#x6709;&#x610F;&#x4E49;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4E0D;&#x671F;&#x671B;&#x6709;&#x5F88;&#x591A; boards&#x3002;&#x4F46;&#x65E0;&#x7591;&#x5BF9;&#x4E8E;&#x4E3B;&#x9898;&#x5217;&#x8868;&#x548C;&#x5E16;&#x5B50;&#x5217;&#x8868;&#x6765;&#x8BF4;&#x662F;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x5206;&#x9875;&#x7684;&#x3002;</p>
+<p>&#x4ECE;&#x73B0;&#x5728;&#x8D77;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5728; <strong>board_topics</strong> &#x8FD9;&#x4E2A;&#x89C6;&#x56FE;&#x4E2D;&#x6765;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x5E16;&#x5B50;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x7528;&#x6237;&#x754C;&#x9762;&#x6765;&#x6DFB;&#x52A0;&#x51E0;&#x4E2A;&#x5E16;&#x5B50;&#xFF0C;&#x6216;&#x8005;&#x6253;&#x5F00; python shell &#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x5C0F;&#x811A;&#x672C;&#x6765;&#x4E3A;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#xFF1A;</p>
+<pre><code class="lang-bash">python manage.py shell
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.contrib.auth.models <span class="hljs-keyword">import</span> User
+<span class="hljs-keyword">from</span> boards.models <span class="hljs-keyword">import</span> Board, Topic, Post
+
+user = User.objects.first()
+
+board = Board.objects.get(name=<span class="hljs-string">&apos;Django&apos;</span>)
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):
+    subject = <span class="hljs-string">&apos;Topic test #{}&apos;</span>.format(i)
+    topic = Topic.objects.create(subject=subject, board=board, starter=user)
+    Post.objects.create(message=<span class="hljs-string">&apos;Lorem ipsum...&apos;</span>, topic=topic, created_by=user)
+</code></pre>
+<p><img src="statics/6-4.png" alt=""></p>
+<p>&#x5F88;&#x597D;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E9B;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x73A9;&#x4E86;&#x3002;</p>
+<p>&#x5728;&#x6211;&#x4EEC;&#x8FD4;&#x56DE;&#x53BB;&#x5199;&#x4EE3;&#x7801;&#x4E4B;&#x524D;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x7528; python shell &#x6765;&#x505A;&#x4E00;&#x4E9B;&#x66F4;&#x591A;&#x7684;&#x5B9E;&#x9A8C;&#xFF1A;</p>
+<pre><code class="lang-bash">python manage.py shell
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> boards.models <span class="hljs-keyword">import</span> Topic
+
+<span class="hljs-comment"># All the topics in the app</span>
+Topic.objects.count()
+<span class="hljs-number">107</span>
+
+<span class="hljs-comment"># Just the topics in the Django board</span>
+Topic.objects.filter(board__name=<span class="hljs-string">&apos;Django&apos;</span>).count()
+<span class="hljs-number">104</span>
+
+<span class="hljs-comment"># Let&apos;s save this queryset into a variable to paginate it</span>
+queryset = Topic.objects.filter(board__name=<span class="hljs-string">&apos;Django&apos;</span>).order_by(<span class="hljs-string">&apos;-last_updated&apos;</span>)
+</code></pre>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x4F60;&#x8981;&#x5206;&#x9875;&#x7684;&#x67E5;&#x8BE2;&#x96C6;(<strong>QuerySet</strong>)&#x7684;&#x6392;&#x5E8F;&#x662F;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;&#x7ED9;&#x4F60;&#x9519;&#x8BEF;&#x7684;&#x7ED3;&#x679C;&#x3002;</p>
+<p>&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x5BFC;&#x5165; <strong>Paginator</strong> &#x5DE5;&#x5177;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.core.paginator <span class="hljs-keyword">import</span> Paginator
+
+paginator = Paginator(queryset, <span class="hljs-number">20</span>)
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x544A;&#x8BC9;Django&#x5C06;&#x67E5;&#x8BE2;&#x96C6;&#x6309;&#x7167;&#x6BCF;&#x9875;20&#x4E2A;&#x5143;&#x7D20;&#x5206;&#x9875;&#x3002;&#x73B0;&#x5728;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x7814;&#x7A76;&#x4E00;&#x4E9B; paginator &#x7684;&#x5C5E;&#x6027;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-comment"># count the number of elements in the paginator</span>
+paginator.count
+<span class="hljs-number">104</span>
+
+<span class="hljs-comment"># total number of pages</span>
+<span class="hljs-comment"># 104 elements, paginating 20 per page gives you 6 pages</span>
+<span class="hljs-comment"># where the last page will have only 4 elements</span>
+paginator.num_pages
+<span class="hljs-number">6</span>
+
+<span class="hljs-comment"># range of pages that can be used to iterate and create the</span>
+<span class="hljs-comment"># links to the pages in the template</span>
+paginator.page_range
+range(<span class="hljs-number">1</span>, <span class="hljs-number">7</span>)
+
+<span class="hljs-comment"># returns a Page instance</span>
+paginator.page(<span class="hljs-number">2</span>)
+&lt;Page <span class="hljs-number">2</span> of <span class="hljs-number">6</span>&gt;
+
+page = paginator.page(<span class="hljs-number">2</span>)
+
+type(page)
+django.core.paginator.Page
+
+type(paginator)
+django.core.paginator.Paginator
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x6CE8;&#x610F;&#xFF0C;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8BD5;&#x56FE;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x5206;&#x9875;&#x5668;&#x4F1A;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;:</p>
+<pre><code class="lang-bash">paginator.page(7)
+EmptyPage: That page contains no results
+</code></pre>
+<p>&#x6216;&#x8005;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x968F;&#x610F;&#x4F20;&#x9012;&#x8FDB;&#x53BB;&#x4E00;&#x4E2A;&#x4E0D;&#x662F;&#x9875;&#x7801;&#x6570;&#x5B57;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4E5F;&#x4F1A;&#x62A5;&#x9519;&#xFF1A;</p>
+<pre><code class="lang-bash">paginator.page(<span class="hljs-string">&apos;abc&apos;</span>)
+PageNotAnInteger: That page number is not an <span class="hljs-built_in">integer</span>
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x5728;&#x8BBE;&#x8BA1;&#x7528;&#x6237;&#x754C;&#x9762;&#x65F6;&#x7262;&#x8BB0;&#x8FD9;&#x4E9B;&#x7EC6;&#x8282;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x7B80;&#x5355;&#x770B;&#x4E00;&#x4E0B; <strong>Page</strong> &#x7C7B;&#x63D0;&#x4F9B;&#x7684;&#x5C5E;&#x6027;&#x548C;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-python">page = paginator.page(<span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># Check if there is another page after this one</span>
+page.has_next()
+<span class="hljs-keyword">True</span>
+
+<span class="hljs-comment"># If there is no previous page, that means this one is the first page</span>
+page.has_previous()
+<span class="hljs-keyword">False</span>
+
+page.has_other_pages()
+<span class="hljs-keyword">True</span>
+
+page.next_page_number()
+<span class="hljs-number">2</span>
+
+<span class="hljs-comment"># Take care here, since there is no previous page,</span>
+<span class="hljs-comment"># if we call the method `previous_page_number() we will get an exception:</span>
+page.previous_page_number()
+EmptyPage: That page number <span class="hljs-keyword">is</span> less than <span class="hljs-number">1</span>
+</code></pre>
+<h3 id="fbv-&#x5206;&#x9875;">FBV &#x5206;&#x9875;</h3>
+<p>&#x8FD9;&#x91CC;&#x662F;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x4F7F;&#x7528; FBV &#x6765;&#x5B9E;&#x73B0;&#x5206;&#x9875;&#xFF1A;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/16f0ac257439245fa6645af259d8846f#file-views-py-L19" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.db.models <span class="hljs-keyword">import</span> Count
+<span class="hljs-keyword">from</span> django.core.paginator <span class="hljs-keyword">import</span> Paginator, EmptyPage, PageNotAnInteger
+<span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> get_object_or_404, render
+<span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> ListView
+<span class="hljs-keyword">from</span> .models <span class="hljs-keyword">import</span> Board
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">board_topics</span><span class="hljs-params">(request, pk)</span>:</span>
+    board = get_object_or_404(Board, pk=pk)
+    queryset = board.topics.order_by(<span class="hljs-string">&apos;-last_updated&apos;</span>).annotate(replies=Count(<span class="hljs-string">&apos;posts&apos;</span>) - <span class="hljs-number">1</span>)
+    page = request.GET.get(<span class="hljs-string">&apos;page&apos;</span>, <span class="hljs-number">1</span>)
+
+    paginator = Paginator(queryset, <span class="hljs-number">20</span>)
+
+    <span class="hljs-keyword">try</span>:
+        topics = paginator.page(page)
+    <span class="hljs-keyword">except</span> PageNotAnInteger:
+        <span class="hljs-comment"># fallback to the first page</span>
+        topics = paginator.page(<span class="hljs-number">1</span>)
+    <span class="hljs-keyword">except</span> EmptyPage:
+        <span class="hljs-comment"># probably the user tried to add a page number</span>
+        <span class="hljs-comment"># in the url, so we fallback to the last page</span>
+        topics = paginator.page(paginator.num_pages)
+
+    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&apos;topics.html&apos;</span>, {<span class="hljs-string">&apos;board&apos;</span>: board, <span class="hljs-string">&apos;topics&apos;</span>: topics})
+</code></pre>
+<p>&#x8FD9;&#x90E8;&#x5206;&#x7684;&#x5B9E;&#x73B0;&#x662F;&#x4F7F;&#x7528;&#x4E86; Bootstrap &#x7684;&#x56DB;&#x4E2A;&#x5206;&#x9875;&#x7EC4;&#x4EF6;&#x6765;&#x6B63;&#x786E;&#x7684;&#x6E32;&#x67D3;&#x9875;&#x9762;&#x3002;&#x4F60;&#x9700;&#x8981;&#x82B1;&#x65F6;&#x95F4;&#x9605;&#x8BFB;&#x4EE3;&#x7801;&#xFF0C;&#x770B;&#x770B;&#x5B83;&#x662F;&#x5426;&#x9002;&#x5408;&#x4F60;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x91CC;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x7528;&#x8FC7;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>topics</code> &#x4E0D;&#x518D;&#x662F;&#x4E00;&#x4E2A;&#x67E5;&#x8BE2;&#x96C6;&#xFF08;<code>QuerySet</code>&#xFF09;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x4E2A; <code>paginator.page</code> &#x7684;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p>&#x5728; topics HTML&#x5217;&#x8868;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6E32;&#x67D3;&#x5206;&#x9875;&#x7EC4;&#x4EF6;&#xFF1A;</p>
+<p><strong>templates/topics.html</strong> <a href="https://gist.github.com/vitorfs/3101a1bd72125aeb45829659a5532bc6" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-html">
+{% if topics.has_other_pages %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Topics pagination&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span>
+      {% if topics.has_previous %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ topics.previous_page_number }}&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% else %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% endif %}
+
+      {% for page_num in topics.paginator.page_range %}
+        {% if topics.number == page_num %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item active&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>
+              {{ page_num }}
+              <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sr-only&quot;</span>&gt;</span>(current)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% else %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_num }}&quot;</span>&gt;</span>{{ page_num }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% endif %}
+      {% endfor %}
+
+      {% if topics.has_next %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ topics.next_page_number }}&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% else %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% endif %}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+{% endif %}
+</code></pre>
+<p><img src="statics/6-5.png" alt=""></p>
+<h3 id="gcbv-&#x5206;&#x9875;">GCBV &#x5206;&#x9875;</h3>
+<p>&#x4E0B;&#x9762;&#xFF0C;&#x76F8;&#x540C;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x8FD9;&#x6B21;&#x4F7F;&#x7528;<strong>ListView</strong>&#x3002;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/323173bc56dec48fd83caf983d459421#file-views-py-L19" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopicListView</span><span class="hljs-params">(ListView)</span>:</span>
+    model = Topic
+    context_object_name = <span class="hljs-string">&apos;topics&apos;</span>
+    template_name = <span class="hljs-string">&apos;topics.html&apos;</span>
+    paginate_by = <span class="hljs-number">20</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_context_data</span><span class="hljs-params">(self, **kwargs)</span>:</span>
+        kwargs[<span class="hljs-string">&apos;board&apos;</span>] = self.board
+        <span class="hljs-keyword">return</span> super().get_context_data(**kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        self.board = get_object_or_404(Board, pk=self.kwargs.get(<span class="hljs-string">&apos;pk&apos;</span>))
+        queryset = self.board.topics.order_by(<span class="hljs-string">&apos;-last_updated&apos;</span>).annotate(replies=Count(<span class="hljs-string">&apos;posts&apos;</span>) - <span class="hljs-number">1</span>)
+        <span class="hljs-keyword">return</span> queryset
+</code></pre>
+<p>&#x5728;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x7C7B;&#x7684;&#x89C6;&#x56FE;&#x5206;&#x9875;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x4E0E;&#x6A21;&#x677F;&#x4E2D;paginator&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x70B9;&#x4E0D;&#x540C;&#x3002;&#x5B83;&#x4F1A;&#x5728;&#x6A21;&#x677F;&#x4E2D;&#x63D0;&#x4F9B;&#x4EE5;&#x4E0B;&#x53D8;&#x91CF;:<strong>paginator</strong>,<strong>page_obj</strong>,<strong>is_paginated</strong>,<strong>object_list</strong>,&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x6211;&#x4EEC;&#x5728; <strong>context_object_name</strong> &#x4E2D;&#x5B9A;&#x4E49;&#x540D;&#x5B57;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x53D8;&#x91CF;&#x5C06;&#x88AB;&#x547D;&#x540D;&#x4E3A; <strong>topics</strong> &#xFF0C;&#x5E76;&#x4E14;&#x5B83;&#x5C06;&#x7B49;&#x540C;&#x4E8E; <strong>object_list</strong>&#x3002;</p>
+<p>&#x5173;&#x4E8E;&#x8FD9;&#x4E2A; <strong>get_context_data</strong> &#xFF0C;&#x5176;&#x5B9E;&#xFF0C;&#x5B83;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x6269;&#x5C55; <strong>GCBV</strong> &#x65F6;&#x5411;&#x8BF7;&#x6C42;&#x4E0A;&#x4E0B;&#x6587;&#x6DFB;&#x52A0;&#x5185;&#x5BB9;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x4F46;&#x8FD9;&#x91CC;&#x7684;&#x4E3B;&#x8981;&#x662F; <strong>paginate_by</strong> &#x5C5E;&#x6027;&#x3002;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EA;&#x9700;&#x6DFB;&#x52A0;&#x5B83;&#x5C31;&#x8DB3;&#x591F;&#x4E86;&#x3002;</p>
+<p>&#x8981;&#x8BB0;&#x5F97;&#x66F4;&#x65B0; <strong>urls.py</strong> &#x54E6;&#xFF1A;</p>
+<p><strong>myproject/urls.py</strong> <a href="https://gist.github.com/vitorfs/61f5345b7cf8b006b2901a61b8f8e348#file-urls-py-L37" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
+<span class="hljs-keyword">from</span> boards <span class="hljs-keyword">import</span> views
+
+urlpatterns = [
+    <span class="hljs-comment"># ...</span>
+    url(<span class="hljs-string">r&apos;^boards/(?P&lt;pk&gt;\d+)/$&apos;</span>, views.TopicListView.as_view(), name=<span class="hljs-string">&apos;board_topics&apos;</span>),
+]
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6765;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#x6A21;&#x677F;&#xFF1A;</p>
+<p><strong>templates/topics.html</strong> <a href="https://gist.github.com/vitorfs/65095aa3eda78bafd22d5e2f94086d40#file-topics-html-L40" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-html">
+{% block content %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;new_topic&apos; board.pk %}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary&quot;</span>&gt;</span>New topic<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table mb-4&quot;</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- table content suppressed --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+
+  {% if is_paginated %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Topics pagination&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span>
+        {% if page_obj.has_previous %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_obj.previous_page_number }}&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% else %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% endif %}
+
+        {% for page_num in paginator.page_range %}
+          {% if page_obj.number == page_num %}
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item active&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>
+                {{ page_num }}
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sr-only&quot;</span>&gt;</span>(current)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          {% else %}
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_num }}&quot;</span>&gt;</span>{{ page_num }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_obj.next_page_number }}&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% else %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% endif %}
+      <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+  {% endif %}
+
+{% endblock %}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x82B1;&#x70B9;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x4E00;&#x4E0B;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x9700;&#x8981;&#x8C03;&#x6574;&#x7684;&#x5730;&#x65B9;&#x5C31;&#x4FEE;&#x4E00;&#x4E0B;&#x3002;</p>
+<p><strong>boards/tests/test_view_board_topics.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.test <span class="hljs-keyword">import</span> TestCase
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> resolve
+<span class="hljs-keyword">from</span> ..views <span class="hljs-keyword">import</span> TopicListView
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BoardTopicsTests</span><span class="hljs-params">(TestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_board_topics_url_resolves_board_topics_view</span><span class="hljs-params">(self)</span>:</span>
+        view = resolve(<span class="hljs-string">&apos;/boards/1/&apos;</span>)
+        self.assertEquals(view.func.view_class, TopicListView)
+</code></pre>
+<h3 id="&#x53EF;&#x590D;&#x7528;&#x7684;&#x5206;&#x9875;&#x6A21;&#x677F;">&#x53EF;&#x590D;&#x7528;&#x7684;&#x5206;&#x9875;&#x6A21;&#x677F;</h3>
+<p>&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x5728; <strong>form.html</strong> &#x4E2D;&#x5C01;&#x88C5;&#x6A21;&#x677F;&#x65F6;&#x505A;&#x7684;&#x4E00;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4E3A;&#x5206;&#x9875;&#x7684;HTML&#x4EE3;&#x7801;&#x7247;&#x521B;&#x5EFA;&#x7C7B;&#x4F3C;&#x7684;&#x4E1C;&#x897F;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x5BF9;&#x4E3B;&#x9898;&#x5E16;&#x5B50;&#x9875;&#x9762;&#x8FDB;&#x884C;&#x5206;&#x9875;&#xFF0C;&#x8FDB;&#x800C;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x590D;&#x7528;&#x5206;&#x9875;&#x7EC4;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p><strong>boards/views.py</strong> <a href="https://gist.github.com/vitorfs/53139ca0fd7c01b8459c2ff62828f963" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PostListView</span><span class="hljs-params">(ListView)</span>:</span>
+    model = Post
+    context_object_name = <span class="hljs-string">&apos;posts&apos;</span>
+    template_name = <span class="hljs-string">&apos;topic_posts.html&apos;</span>
+    paginate_by = <span class="hljs-number">2</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_context_data</span><span class="hljs-params">(self, **kwargs)</span>:</span>
+        self.topic.views += <span class="hljs-number">1</span>
+        self.topic.save()
+        kwargs[<span class="hljs-string">&apos;topic&apos;</span>] = self.topic
+        <span class="hljs-keyword">return</span> super().get_context_data(**kwargs)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_queryset</span><span class="hljs-params">(self)</span>:</span>
+        self.topic = get_object_or_404(Topic, board__pk=self.kwargs.get(<span class="hljs-string">&apos;pk&apos;</span>), pk=self.kwargs.get(<span class="hljs-string">&apos;topic_pk&apos;</span>))
+        queryset = self.topic.posts.order_by(<span class="hljs-string">&apos;created_at&apos;</span>)
+        <span class="hljs-keyword">return</span> queryset
+</code></pre>
+<p>&#x66F4;&#x65B0;&#x4E00;&#x4E0B; <strong>url.py</strong> <a href="https://gist.github.com/vitorfs/428d58dbb61f9c2601bb7434150ea37f" target="_blank">[&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;]</a></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url
+<span class="hljs-keyword">from</span> boards <span class="hljs-keyword">import</span> views
+
+urlpatterns = [
+    <span class="hljs-comment"># ...</span>
+    url(<span class="hljs-string">r&apos;^boards/(?P&lt;pk&gt;\d+)/topics/(?P&lt;topic_pk&gt;\d+)/$&apos;</span>, views.PostListView.as_view(), name=<span class="hljs-string">&apos;topic_posts&apos;</span>),
+]
+</code></pre>
+<p>&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x4ECE;<strong>topics.html</strong>&#x6A21;&#x677F;&#x4E2D;&#x83B7;&#x53D6;&#x5206;&#x9875;&#x90E8;&#x5206;&#x7684;html&#x4EE3;&#x7801;&#x7247;&#xFF0C;&#x5E76;&#x5728; <strong>templates/includes</strong> &#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x9762;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <strong>pagination.html</strong> &#x7684;&#x65B0;&#x6587;&#x4EF6;&#xFF0C;&#x548C; <strong>forms.html</strong> &#x540C;&#x7EA7;&#x76EE;&#x5F55;:</p>
+<pre><code class="lang-bash">myproject/
+ |-- myproject/
+ |    |-- accounts/
+ |    |-- boards/
+ |    |-- myproject/
+ |    |-- static/
+ |    |-- templates/
+ |    |    |-- includes/
+ |    |    |    |-- form.html
+ |    |    |    +-- pagination.html  &lt;-- here!
+ |    |    +-- ...
+ |    |-- db.sqlite3
+ |    +-- manage.py
+ +-- venv/
+</code></pre>
+<p><strong>templates/includes/pagination.html</strong></p>
+<pre><code class="lang-html">
+{% if is_paginated %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Topics pagination&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span>
+      {% if page_obj.has_previous %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_obj.previous_page_number }}&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% else %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Previous<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% endif %}
+
+      {% for page_num in paginator.page_range %}
+        {% if page_obj.number == page_num %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item active&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>
+              {{ page_num }}
+              <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sr-only&quot;</span>&gt;</span>(current)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% else %}
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_num }}&quot;</span>&gt;</span>{{ page_num }}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;?page={{ page_obj.next_page_number }}&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% else %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>Next<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      {% endif %}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+{% endif %}
+</code></pre>
+<p>&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x5728; <strong>topic_posts.html</strong> &#x6587;&#x4EF6;&#x4E2D;&#x6765;&#x4F7F;&#x7528;&#x5B83;&#xFF1A;</p>
+<p><strong>templates/topic_posts.html</strong> <a href="https://gist.github.com/vitorfs/df5b16bb16c1134ba4e03218dce250d7" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-html">
+{% block content %}
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;reply_topic&apos; topic.board.pk topic.pk %}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Reply<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  {% for post in posts %}
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card {% if forloop.last %}mb-4{% else %}mb-2{% endif %} {% if forloop.first %}border-dark{% endif %}&quot;</span>&gt;</span>
+      {% if forloop.first %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-header text-white bg-dark py-2 px-3&quot;</span>&gt;</span>{{ topic.subject }}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      {% endif %}
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body p-3&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-2&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;{% static &apos;img/avatar.svg&apos; %}&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;{{ post.created_by.username }}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;w-100&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">small</span>&gt;</span>Posts: {{ post.created_by.posts.count }}<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-10&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row mb-3&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-6&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-muted&quot;</span>&gt;</span>{{ post.created_by.username }}<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-6 text-right&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-muted&quot;</span>&gt;</span>{{ post.created_at }}<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            {{ post.message }}
+            {% if post.created_by == user %}
+              <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mt-3&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;edit_post&apos; post.topic.board.pk post.topic.pk post.pk %}&quot;</span>
+                   <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary btn-sm&quot;</span>
+                   <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;button&quot;</span>&gt;</span>Edit<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            {% endif %}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  {% endfor %}
+
+  {% include &apos;includes/pagination.html&apos; %}
+
+{% endblock %}
+</code></pre>
+<p>&#x522B;&#x5FD8;&#x4E86;&#x4FEE;&#x6539;&#x4E3B;&#x5FAA;&#x73AF;&#x4E3A; <code>{% for post in posts %}</code>&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x540C;&#x6837;&#x4E5F;&#x53EF;&#x4EE5;&#x66F4;&#x65B0;&#x4E00;&#x4E0B;&#x5148;&#x524D;&#x7684;&#x6A21;&#x677F;&#xFF0C;<strong>topics.html</strong> &#x6A21;&#x677F;&#x540C;&#x6837;&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x4E2A;&#x5C01;&#x88C5;&#x7684;&#x5206;&#x9875;&#x6A21;&#x677F;&#x3002;</p>
+<p><strong>templates/topics.html</strong> <a href="https://gist.github.com/vitorfs/9198ad8f91cd889f315ade7e4eb62710#file-topics-html-L40" target="_blank">&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;</a></p>
+<pre><code class="lang-html">
+{% block content %}
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;mb-4&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{% url &apos;new_topic&apos; board.pk %}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-primary&quot;</span>&gt;</span>New topic<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table mb-4&quot;</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- table code suppressed --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+
+  {% include &apos;includes/pagination.html&apos; %}
+
+{% endblock %}
+</code></pre>
+<p>&#x4E3A;&#x4E86;&#x6D4B;&#x8BD5;&#x76EE;&#x7684;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x5E16;&#x5B50;&#xFF08;&#x6216;&#x8005;&#x901A;&#x8FC7; python shell &#x53BB;&#x521B;&#x5EFA;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x4E2D;&#x7684; <strong> paginate_by</strong> &#x5230;&#x4E00;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x6BD4;&#x5982; <strong>2</strong> &#xFF0C;&#x7136;&#x540E;&#x770B;&#x770B;&#x9875;&#x9762;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#x53D8;&#x5316;&#x3002;</p>
+<p><img src="statics/6-6.png" alt=""></p>
+<p><a href="https://gist.github.com/vitorfs/6b3cd0769f805ab38626f5bd97b4e5e3" target="_blank">&#xFF08;&#x67E5;&#x770B;&#x5B8C;&#x6574;&#x6587;&#x4EF6;&#xFF09;</a></p>
+<p>&#x66F4;&#x65B0;&#x4E00;&#x4E0B;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#xFF1A;</p>
+<p><strong>boards/tests/test_view_topic_posts.py</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.test <span class="hljs-keyword">import</span> TestCase
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> resolve
+<span class="hljs-keyword">from</span> ..views <span class="hljs-keyword">import</span> PostListView
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopicPostsTests</span><span class="hljs-params">(TestCase)</span>:</span>
+    <span class="hljs-comment"># ...</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_view_function</span><span class="hljs-params">(self)</span>:</span>
+        view = resolve(<span class="hljs-string">&apos;/boards/1/topics/1/&apos;</span>)
+        self.assertEquals(view.func.view_class, PostListView)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ClassBasedViews0.html" class="navigation navigation-prev " aria-label="Previous page: Django入门与实践-第21章：基于类的视图">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ClassBasedViews2.html" class="navigation navigation-next " aria-label="Next page: Django入门与实践-第23章：我的账户">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Django入门与实践-第22章：分页实现","level":"1.23","depth":1,"next":{"title":"Django入门与实践-第23章：我的账户","level":"1.24","depth":1,"path":"ClassBasedViews2.md","ref":"./ClassBasedViews2.md","articles":[]},"previous":{"title":"Django入门与实践-第21章：基于类的视图","level":"1.22","depth":1,"path":"ClassBasedViews0.md","ref":"./ClassBasedViews0.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["include-codeblock","livereload"],"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"livereload":{},"highlight":{},"search":{},"lunr":{"ignoreSpecialCharacters":false,"maxIndexSize":1000000},"sharing":{"all":["facebook","google","instapaper","twitter","weibo"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"ClassBasedViews1.md","mtime":"2018-05-12T01:40:28.049Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-12T01:19:40.393Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
