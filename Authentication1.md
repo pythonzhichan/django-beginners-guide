@@ -1,4 +1,4 @@
-# Django入门与实践-第14章：用户注销
+# Django入门与实践-第15章：用户注销
 
 为了在实现过程保持完整自然流畅的功能，我们还添加注销视图，编辑**urls.py**以添加新的路由：
 
@@ -22,6 +22,8 @@ urlpatterns = [
 ]
 
 ```
+
+{% raw %}
 
 我们从Django的contrib模块导入了**views** ，我们将其更名为**auth_views** 以避免与**boards.views**发生冲突。注意这个视图有点不同： `LogoutView.as_view()`。这是一个Django的“基于类”的视图，到目前为止，我们只将类实现为python函数。基于类的视图提供了一种更加灵活的方式来扩展和重用视图。稍后我们将讨论更多这个主题。
 
@@ -48,7 +50,7 @@ Bootstrap 4 下拉组件需要jQuery才能工作。
 
 首先，我们前往 [jquery.com/download/](https://jquery.com/download/)，然后下载压缩的 jQuery 3.2.1版本。
 
-![jQuery Download](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/jquery-download.jpg)
+![jQuery Download](./statics/jquery-download.jpg)
 
 在静态文件夹中，创建一个名为js的新文件夹。将jquery-3.2.1.min.js文件复制到那里。
 
@@ -79,12 +81,11 @@ myproject/
 
 ```
 
-在**base.html**文件底部，在{% raw %}{% endblock body %} {% endraw %}后面添加脚本：
+在**base.html**文件底部，在{% endblock body %}后面添加脚本：
 
 **templates/base.html**
 
 ```html
-{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -104,7 +105,6 @@ myproject/
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>
-{% endraw %}
 ```
 
 如果你发现上面的说明很模糊，只需要直接在下面的链接下载文件
@@ -120,7 +120,6 @@ myproject/
 **templates/base.html**
 
 ```html
-{% raw %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -147,18 +146,17 @@ myproject/
 
 ```
 
-![Dropdown menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/dropdown.png)
+![Dropdown menu](./statics/dropdown.png)
 
 我们来试试吧，点击注销：
 
-![Logout](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/logout.png)
+![Logout](./statics/logout.png)
 
 现在已经成功显示出来了，但是无论用户登录与否，下拉菜单都会显示。不同的是在未登录时用户名显示是空的，我们只能看到一个箭头。
 
 我们可以改进一点：
 
 ```html
-{% raw %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">Django Boards</a>
@@ -194,5 +192,7 @@ myproject/
 
 现在，我们告诉Django程序，要在用户登录时显示下拉菜单，如果没有，则显示登录并注册按钮：
 
-![Main Menu](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/mainmenu.png)
+![Main Menu](./statics/mainmenu.png)
 
+
+{% endraw %}

@@ -1,5 +1,4 @@
-# Django入门与实践-第10章：URL 分发
-
+# Django入门与实践-第11章：URL 分发
 ###  前言
 
 在本节课中，我们将深入理解两个基本概念: URLs 和 Forms。在这个过程中，我们还将学习其它很多概念，如创建可重用模板和安装第三方库。同时我们还将编写大量单元测试。
@@ -91,7 +90,7 @@ def url(regex, view, kwargs=None, name=None):
  - **kwargs**：传递给目标视图函数的任意关键字参数，它通常用于在可重用视图上进行一些简单的定制，我们不是经常使用它。
  - **name:**： 该 URL 的唯一标识符。这是一个非常重要的特征。要始终记得为你的 URLs 命名。所以，很重要的一点是：不要在 views(视图) 或者 templates(模板) 中硬编码 URL，而是通过它的名字去引用 URL。
 
-![3-3.png][./statics/3-3.png]
+![3-3.png](./statics/3-3.png)
 
 ### 基础 URLs 路由
 
@@ -258,10 +257,10 @@ def board_topics(request, pk):
 ```
 
 在 **templates** 目录中，创建一个名为 **topics.html** 的模板：
+{% raw %} 
 
 **templates/topics.html**
 ```html
-{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -278,9 +277,7 @@ def board_topics(request, pk):
     </div>
   </body>
 </html>
-{% endraw %}
 ```
-
 
 >注意：我们现在只是创建新的 HTML 模板。不用担心，在下一节中我会向你展示如何创建可重用模板。
 
@@ -496,9 +493,8 @@ Destroying test database for alias 'default'...
 编写 **home.html** 模板：
 
 **templates/home.html**
-
-```html
 {% raw %}
+```html
 <!-- code suppressed for brevity -->
 <tbody>
   {% for board in boards %}
@@ -515,7 +511,6 @@ Destroying test database for alias 'default'...
 </tbody>
 <!-- code suppressed for brevity -->
 ```
-
 我们只改动了这一行：
 
 ```python
@@ -523,11 +518,10 @@ Destroying test database for alias 'default'...
 ```
 
 变为：
-
 ```html
-{% raw %}
 <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
 ```
+
 
 始终使用 `{% url %}` 模板标签去写应用的 URL。第一个参数是 URL 的名字(定义在 URLconf， 即 **urls.py**)，然后你可以根据需求传递任意数量的参数。
 
@@ -598,7 +592,6 @@ Destroying test database for alias 'default'...
 **templates/topics.html**
 
 ```html
-{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head><!-- code suppressed for brevity --></head>
@@ -611,7 +604,6 @@ Destroying test database for alias 'default'...
     </div>
   </body>
 </html>
-{% endraw %}
 ```
 
 
@@ -701,3 +693,6 @@ Destroying test database for alias 'default'...
 
 
 你可以在这篇文章中看到更多关于正则表达式匹配的细节：[List of Useful URL Patterns](https://simpleisbetterthancomplex.com/references/2016/10/10/url-patterns.html)。
+
+
+{% endraw %}

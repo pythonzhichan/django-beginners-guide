@@ -1,4 +1,4 @@
-# # Django入门与实践-第21章：基于类的视图
+# Django入门与实践-第22章：基于类的视图
 
 
 ![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-6/featured.jpg)

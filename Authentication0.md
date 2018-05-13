@@ -1,4 +1,4 @@
-# Django入门与实践-第13章：用户注册
+# Django入门与实践-第14章：用户注册
 
 ![](./statics/4-1.jpg)
 
@@ -8,7 +8,7 @@
 这一章节将会全面介绍 Django 的身份认证系统，我们将实现注册、登录、注销、密码重置和密码修改的整套流程。
 
 同时你还会了解到如何保护某些试图以防未授权的用户访问，以及如何访问已登录用户的个人信息。
-
+{% raw %}
 
 在接下来的部分，你会看到一些和身份验证有关线框图，将在本教程中实现。之后是一个全新Django 应用的初始化设置。至今为止我们一直在一个名叫 boards 的应用中开发。不过，所有身份认证相关的内容都将在另一个应用中，这样能更良好的组织代码。
 ![](./statics/4-2.jpg)
@@ -142,7 +142,6 @@ def signup(request):
 **templates/signup.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block content %}
@@ -200,7 +199,6 @@ Destroying test database for alias 'default'...
 **templates/base.html**
 
 ```html
-{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -229,7 +227,6 @@ Destroying test database for alias 'default'...
     {% endblock body %}  <!-- 这里 -->
   </body>
 </html>
-{% endraw %}
 ```
 
 
@@ -269,7 +266,6 @@ def signup(request):
 **templates/signup.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block body %}
@@ -291,7 +287,6 @@ def signup(request):
 **templates/signup.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block body %}
@@ -313,7 +308,6 @@ def signup(request):
 **templates/includes/form.html**
 
 ```html
-{% raw %}
 {% load widget_tweaks %}
 
 {% for field in form %}
@@ -383,7 +377,6 @@ def signup(request):
 **templates/base.html**
 
 ```html
-{% raw %}
 {% block body %}
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container">
@@ -764,7 +757,6 @@ body {
 **templates/signup.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}
@@ -801,4 +793,6 @@ body {
 
 这就是我们现在的注册页面：
 
-![Sign up](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/signup-10.jpg)
+![Sign up](./statics/signup-10.jpg)
+
+{% endraw %}

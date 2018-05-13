@@ -1,10 +1,10 @@
-Django入门与实践-第12章：表单处理
+# Django入门与实践-第13章：表单处理
 
 Forms(表单) 用来处理我们的输入。这在任何 web 应用或者网站中都是很常见的任务。标准的做法是通过 HTML 表单实现，用户输入一些数据，将其提交给服务器，然后服务器处理它。
 
 ![3-15.png](./statics/3-15.png)
 
-
+{% raw %}
 表单处理是一项非常复杂的任务，因为它涉及到与应用多个层面的交互。有很多需要关心的问题。例如，提交给服务器的所有数据都是字符串的形式，所以在我们使用它之前需要将其转换为需要的数据类型(整形，浮点型，日期等)。我们必须验证有关应用程序业务逻辑的数据。我们还需要妥善地清理和审查数据，以避免一些诸如 SQL 注入和 XSS 攻击等安全问题。
 
 好消息是，Django Forms API 使整个过程变的更加简单，从而实现了大量工作的自动化。而且，最终的结果比大多数程序员自己去实现的代码更加安全。所以，不管 HTML 的表单多么简单，总是使用Form API。
@@ -67,7 +67,6 @@ def new_topic(request, pk):
 **templates/new_topic.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -168,7 +167,6 @@ Destroying test database for alias 'default'...
 **templates/new_topic.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -210,21 +208,18 @@ Django 使用 **CSRF Token**(Cross-Site Request Forgery Token) 保护所有的 *
 **csrf_token** 的模板标签：
 
 ```html
-{% raw %}
 {% csrf_token %}
 ```
 
 它是与其他表单数据一起提交的隐藏字段：
 
 ```html
-{% raw %}
 <input type="hidden" name="csrfmiddlewaretoken" value="jG2o6aWj65YGaqzCpl0TYTg5jn6SctjzRZ9KmluifVx0IVaxlwh97YarZKs54Y32">
 ```
 
 另外一件事是，我们需要设置 HTML 输入的 **name**，**name** 将被用来在服务器获取数据。
 
 ```html
-{% raw %}
 <input type="text" class="form-control" id="id_subject" name="subject">
 <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
 ```
@@ -284,7 +279,6 @@ def new_topic(request, pk):
 **templates/topics.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -352,7 +346,6 @@ def new_topic(request, pk):
 第二件事是我们在使用 `ForeignKey`：
 
 ```html
-{% raw %}
 {{ topic.starter.username }}
 ```
 
@@ -363,7 +356,6 @@ def new_topic(request, pk):
 **templates/topics.html**
 
 ```html
-{% raw %}
 {% block content %}
   <div class="mb-4">
     <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
@@ -608,7 +600,6 @@ Django Forms API 不仅仅是处理和验证数据。它还为我们生成 HTML�
 **templates/new_topic.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -774,7 +765,6 @@ INSTALLED_APPS = [
 这就是我们使用的 **django-widget-tweaks** 的效果。首先，我们使用 **{% load widget_tweaks %}** 模板标签将其加载到模板。然后这样使用它：
 
 ```html
-{% raw %}
 {% render_field field class="form-control" %}
 ```
 
@@ -783,7 +773,6 @@ INSTALLED_APPS = [
 一些 `render_field` 模板标签的例子：
 
 ```html
-{% raw %}
 {% render_field form.subject class="form-control" %}
 {% render_field form.message class="form-control" placeholder=form.message.label %}
 {% render_field field class="form-control" placeholder="Write a message!" %}
@@ -795,7 +784,6 @@ INSTALLED_APPS = [
 **templates/new_topic.html**
 
 ```html
-{% raw %}
 <form method="post" novalidate>
   {% csrf_token %}
 
@@ -871,7 +859,6 @@ myproject/
 **templates/includes/form.html**
 
 ```html
-{% raw %}
 {% load widget_tweaks %}
 
 {% for field in form %}
@@ -907,7 +894,6 @@ myproject/
 **templates/new_topic.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Start a New Topic{% endblock %}
@@ -982,3 +968,5 @@ class NewTopicTests(TestCase):
 
   [1]: https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-3/wireframe-topics.png
  
+
+ {% endraw %}

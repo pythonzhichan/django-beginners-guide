@@ -1,4 +1,4 @@
-# Django入门指南-第9章：Django Admin 介绍
+# Django入门指南-第10章：Django Admin 介绍
 
 
 ![featured](./statics/2-1.jpg)
@@ -32,12 +32,12 @@ Superuser created successfully.
 ```
 在浏览器中打开该URL：http://127.0.0.1:8000/admin/
 
-![https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-login.png](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-login.png)
+![./statics/django-admin-login.png](./statics/django-admin-login.png)
 
 
 输入用户名和密码登录到管理界面：
 
-![admin](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin.png)
+![admin](./statics/django-admin.png)
 
 它已经配置了一些功能。在这里，我们可以添加用户和组的权限管理，这些概念在后面我们将探讨更多。
 
@@ -55,23 +55,23 @@ admin.site.register(Board)
 
 保存admin.py文件，然后刷新网页浏览器中的页面：
 
-![baords](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards.png)
+![baords](./statics/django-admin-boards.png)
 
 对！它已准备好被使用了。点击Boards链接查看现有版块列表：
 
-![name](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-list.png)
+![name](./statics/django-admin-boards-list.png)
 
 我们可以通过点击 Add Board 按钮添加一个新的版块：
 
-![new](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-add.png)
+![new](./statics/django-admin-boards-add.png)
 
 点击保存按钮：
 
-![save](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/django-admin-boards-list-2.png)
+![save](./statics/django-admin-boards-list-2.png)
 
 我们可以检查一切是否正常，打开URL http://127.0.0.1:8000 
 
-![home](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-3.png)
+![home](./statics/boards-homepage-bootstrap-3.png)
 
 ### 总结
 

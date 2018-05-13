@@ -1,4 +1,4 @@
-# Django入门指南-第4章：模型设计
+# Django入门指南-第5章：模型设计
 
 ![featured](./statics/2-1.jpg)
 

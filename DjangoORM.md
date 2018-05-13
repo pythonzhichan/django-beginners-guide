@@ -1,4 +1,4 @@
-# Django入门与实践-第20章：迁移
+# Django入门与实践-第21章：迁移
 
 迁移（Migration）是Django做Web开发的基本组成部分，它使得我们在演进应用的models时，它能使得models文件与数据库保持同步
 

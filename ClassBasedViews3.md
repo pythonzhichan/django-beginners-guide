@@ -1,4 +1,4 @@
-# Django入门与实践-第24章：Markdown 支持
+# Django入门与实践-第25章：Markdown 支持
 
 让我们在文本区域添加 Markdown 支持来改善用户体验。你会看到要实现这个功能非常简单。
 

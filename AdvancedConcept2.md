@@ -1,15 +1,15 @@
-# Django入门与实践-第11章：复用模板
+# Django入门与实践-第12章：复用模板
 
 到目前为止，我们一直在复制和粘贴 HTML 文档的多个部分。从长远来看是不可行的。这也是一个坏的做法。
 
 在这一节我们将重写 HTML 模板，创建一个 **master page(母版页)**，其他模板添加它所独特的部分。
 
 在 **templates** 文件夹中创建一个名为 **base.html** 的文件：
+{% raw %}
 
 **templates/base.html**
-
 ```html
-{% raw %}
+
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -28,7 +28,7 @@
     </div>
   </body>
 </html>
-{% endraw %}
+
 ```
 
 
@@ -41,7 +41,6 @@
 **templates/home.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block breadcrumb %}
@@ -80,7 +79,6 @@
 **templates/topics.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -123,7 +121,6 @@ Destroying test database for alias 'default'...
 **templates/base.html**
 
 ```html
-{% raw %}
 {% load static %}<!DOCTYPE html>
 <html>
   <head>
@@ -149,7 +146,6 @@ Destroying test database for alias 'default'...
     </div>
   </body>
 </html>
-{% endraw %}
 ```
 
 
@@ -181,7 +177,6 @@ Destroying test database for alias 'default'...
     <!-- code suppressed for brevity -->
   </body>
 </html>
-{% endraw %}
 ```
 
 
@@ -196,3 +191,6 @@ Destroying test database for alias 'default'...
 ```
 
 ![3-14.png](./statics/3-14.png)
+
+
+{% endraw %}

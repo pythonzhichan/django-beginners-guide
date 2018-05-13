@@ -1,4 +1,4 @@
-# Django入门指南-第8章：静态文件设置
+# Django入门指南-第9章：静态文件设置
 
 
 静态文件是指 CSS，JavaScript，字体，图片或者是用来组成用户界面的任何其他资源。
@@ -24,7 +24,7 @@ myproject/
  转到[getbootstrap.com](https://getbootstrap.com/docs/4.0/getting-started/download/#compiled-css-and-js)并下载最新版本：
 
 
-![bootstrap](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/bootstrap-download.png)
+![bootstrap](./statics/bootstrap-download.png)
 
 
 下载编译版本的CSS和JS
@@ -111,7 +111,7 @@ STATICFILES_DIRS = [
 
 刷新页面 http://127.0.0.1:8000 ，我们可以看到它可以正常运行：
 
-![b](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap.png)
+![b](./statics/boards-homepage-bootstrap.png)
 
 现在我们可以编辑模板，以利用Bootstrap CSS：
 
@@ -159,7 +159,7 @@ STATICFILES_DIRS = [
 
 显示效果：
 
-![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/boards-homepage-bootstrap-2.png)
+![](./statics/boards-homepage-bootstrap-2.png)
 
 
 到目前为止，我们使用交互式控制台（python manage.py shell）添加了几个新的版块。但我们需要一个更好的方式来实现。在下一节中，我们将为网站管理员实现一个管理界面来管理这些数据。

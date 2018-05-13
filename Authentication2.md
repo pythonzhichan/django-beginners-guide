@@ -1,7 +1,7 @@
-# Django入门与实践-第15章：用户登录
+# Django入门与实践-第16章：用户登录
 
 首先，添加一个新的URL路径：
-
+{% raw %}
 **myproject/urls.py**
 
 ```python
@@ -51,7 +51,6 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/login.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}
@@ -92,7 +91,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 ```
 
-![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login.jpg)
+![Login](./statics/login.jpg)
 
 我们看到HTML模板中的内容重复了，现在来重构一下它。
 
@@ -101,7 +100,6 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/base_accounts.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% load static %}
@@ -127,7 +125,6 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/login.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Log in to Django Boards{% endblock %}
@@ -164,7 +161,6 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/signup.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Sign up to Django Boards{% endblock %}
@@ -197,11 +193,11 @@ LOGIN_REDIRECT_URL = 'home'
 
 如果我们提交空白的登录信息，我们会得到一些友好的错误提示信息：
 
-![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login-1.jpg)
+![Login](./statics/login-1.jpg)
 
 但是，如果我们提交一个不存在的用户名或一个无效的密码，现在就会发生这种情况：
 
-![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login-2.jpg)
+![Login](./statics/login-2.jpg)
 
 有点误导，这个区域是绿色的，表明它们是良好运行的，此外，没有其他额外的信息。
 
@@ -210,7 +206,6 @@ LOGIN_REDIRECT_URL = 'home'
 **templates/includes/form.html**
 
 ```html
-{% raw %}
 {% load widget_tweaks %}
 
 {% if form.non_field_errors %}
@@ -229,7 +224,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 `{% if forloop.last %}`只是一个小事情，因为`p`标签有一个空白的`margin-bottom`.一个表单可能有几个**non-field error**，我们呈现了一个带有错误的`p`标签。然后我要检查它是否是最后一次渲染的错误。如果是这样的，我们就添加一个 Bootstrap 4 CSS类 `mb-0` ，它的作用是代表了“margin bottom = 0”（底部边缘为0）。这样的话警告看起来就不那么奇怪了并且多了一些额外的空间。这只是一个非常小的细节。我这么做的原因只是为了保持间距的一致性。
 
-![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login-3.jpg)
+![Login](./statics/login-3.jpg)
 
 尽管如此，我们仍然需要处理密码字段。问题在于，Django从不将密码字段的数据返回给客户端。因此，在某些情况下，不要试图做一次自作聪明的事情，我们可以直接忽略`is-valid`和`is-invalid` 的CSS类。但是我们的表单模板看起来十分的复杂，我们可以将一些代码移动到模板标记中去。
 
@@ -332,7 +327,6 @@ def input_class(bound_field):
 **templates/includes/form.html**
 
 ```html
-{% raw %}
 {% load form_tags widget_tweaks %}
 
 {% if form.non_field_errors %}
@@ -366,7 +360,7 @@ def input_class(bound_field):
 
 这样的话就好多了是吧？这样做降低了模板的复杂性，它现在看起来更加整洁。并且它还解决了密码字段显示绿色边框的问题：
 
-![Login](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/login-4.jpg)
+![Login](./statics/login-4.jpg)
 
 ### 测试模板标签
 
@@ -542,7 +536,6 @@ url(r'^reset/complete/$',
 **templates/password_reset.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -567,7 +560,7 @@ url(r'^reset/complete/$',
 
 ```
 
-![Password Reset](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset.jpg)
+![Password Reset](./statics/password_reset.jpg)
 
 **accounts/tests/test_view_password_reset.py**
 
@@ -676,7 +669,7 @@ The Django Boards Team
 
 ```
 
-![Password Reset Email](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset_email.png)
+![Password Reset Email](./statics/password_reset_email.png)
 
 我们可以创建一个特定的文件来测试电子邮件。在**accounts/tests** 文件夹中创建一个名为**test_mail_password_reset.py**的新文件：
 
@@ -721,7 +714,6 @@ class PasswordResetMailTests(TestCase):
 **templates/password_reset_done.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Reset your password{% endblock %}
@@ -742,7 +734,7 @@ class PasswordResetMailTests(TestCase):
 
 ```
 
-![Password Reset Done](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset_done.jpg)
+![Password Reset Done](./statics/password_reset_done.jpg)
 
 **accounts/tests/test_view_password_reset.py**
 
@@ -771,7 +763,6 @@ class PasswordResetDoneTests(TestCase):
 **templates/password_reset_confirm.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}
@@ -815,11 +806,11 @@ class PasswordResetDoneTests(TestCase):
 
 如果链接是有效的：
 
-![Password Reset Confirm Valid](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset_confirm_valid.jpg)
+![Password Reset Confirm Valid](./statics/password_reset_confirm_valid.jpg)
 
 倘若链接已经被使用：
 
-![Password Reset Confirm Invalid](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset_confirm_invalid.jpg)
+![Password Reset Confirm Invalid](./statics/password_reset_confirm_invalid.jpg)
 
 **accounts/tests/test_view_password_reset.py**
 
@@ -902,7 +893,6 @@ class InvalidPasswordResetConfirmTests(TestCase):
 **templates/password_reset_complete.html**
 
 ```html
-{% raw %}
 {% extends 'base_accounts.html' %}
 
 {% block title %}Password changed!{% endblock %}
@@ -925,12 +915,11 @@ class InvalidPasswordResetConfirmTests(TestCase):
 
 ```
 
-![Password Reset Complete](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_reset_complete.jpg)
+![Password Reset Complete](./statics/password_reset_complete.jpg)
 
 **accounts/tests/test_view_password_reset.py** [(view complete file contents)](https://gist.github.com/vitorfs/c9657d39d28c2a0cfb0933e715bfc9cf#file-test_view_password_reset-py-L149)
 
 ```html
-{% raw %}
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
 from django.urls import resolve
@@ -980,7 +969,6 @@ LOGIN_URL = 'login'
 **templates/password_change.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Change password{% endblock %}
@@ -1003,12 +991,11 @@ LOGIN_URL = 'login'
 
 ```
 
-![Change Password](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_change.png)
+![Change Password](./statics/password_change.png)
 
 **templates/password_change_done.html**
 
 ```html
-{% raw %}
 {% extends 'base.html' %}
 
 {% block title %}Change password successful{% endblock %}
@@ -1027,7 +1014,7 @@ LOGIN_URL = 'login'
 
 ```
 
-![Change Password Successful](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-4/password_change_done.png)
+![Change Password Successful](./statics/password_change_done.png)
 
 关于密码更改视图，我们可以执行类似的测试用例，就像我们迄今为止所做的那样。创建一个名为**test_view_password_change.py**的新测试文件。
 
@@ -1135,6 +1122,7 @@ class InvalidPasswordChangeTests(PasswordChangeTestCase):
 
 
 
+{%　endraw %}
 
 
 

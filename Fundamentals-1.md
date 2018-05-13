@@ -1,4 +1,4 @@
-# Django入门指南-第3章：系统设计
+# Django入门指南-第4章：系统设计
 
 
 ### 前言
@@ -29,7 +29,7 @@
 
 我们需要找到一种方法来区分普通用户和管理员用户，因为只有管理员可以创建版块。下图概述了主要的用例和每种类型的用户角色：
 
-![usercase](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/use-case-diagram.png)
+![usercase](./statics/use-case-diagram.png)
 
 图1：Web Board提供的核心功能用例图
 
@@ -40,7 +40,7 @@
 
 为了能够实现上面描述的用例，我们需要至少实现下面几个模型：Board，Topic，Post和User。
 
-![class](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/basic-class-diagram.png)
+![class](./statics/basic-class-diagram.png)
 
 图2：Web Board类图
 
@@ -57,7 +57,7 @@
 
 但就目前而言，这是模型最基本的内容：
 
-![models](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram.png)
+![models](./statics/class-diagram.png)
 
 图3：强调类（模型）之间关系的类图
 
@@ -78,15 +78,15 @@
 
 一个topic 必须与一个（1）Board（这意味着它不能为空）相关联，但是 Board 下面可能与许多个或者0个 topic 关联 (0..*)。这意味着 Board 下面可能没有主题。（译注：一对多关系）
 
-![board](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram-board-topic.png)
+![board](./statics/class-diagram-board-topic.png)
 
 一个 Topic 至少有一个 Post（发起话题时，同时会发布一个帖子），并且它也可能有许多 Post（1..*）。一个Post 必须与一个并且只有一个Topic（1）相关联。
 
-![post](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram-topic-post.png)
+![post](./statics/class-diagram-topic-post.png)
 
 一个 Topic 必须有一个且只有一个 User 相关联，topic 的发起者是（1）。而一个用户可能有很多或者没有 topic（0..*）。
 
-![topic](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram-topic-user.png)
+![topic](./statics/class-diagram-topic-user.png)
 
 
 Post 必须有一个并且只有一个与之关联的用户，用户可以有许多或没有 Post（0..*）。Post 和 User之间的第二个关联是直接关联（参见该行最后的箭头），就是 Post 可以被用户修改（updated_by），updated_by 有可能是空（Post 没有被修改）
@@ -94,7 +94,7 @@ Post 必须有一个并且只有一个与之关联的用户，用户可以有许
 
 画这个类图的另一种方法是强调字段而不是模型之间的关系：
 
-![class](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/class-diagram-attributes.png)
+![class](./statics/class-diagram-attributes.png)
 
 图4：强调类（模型）与属性（字段）的类图
 
@@ -114,13 +114,13 @@ Post 必须有一个并且只有一个与之关联的用户，用户可以有许
 
 首先，我们需要在主页上显示所有版块：
 
-![boards](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-boards.png)
+![boards](./statics/wireframe-boards.png)
 
 图5：论坛项目线框主页列出所有可用的版块。
 
 如果用户点击一个链接，比如点击Django版块，它应该列出所有Django相关的主题：
 
-![topics](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-topics.png)
+![topics](./statics/wireframe-topics.png)
 
 图6：论坛项目线框图列出了Django版块中的所有主题
 
@@ -128,15 +128,15 @@ Post 必须有一个并且只有一个与之关联的用户，用户可以有许
 
 “new topic” 页面：
 
-![topic](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-new-topic.png)
+![topic](./statics/wireframe-new-topic.png)
 
 
 现在，主题页面显示了帖子和讨论：
 
-![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-posts.png)
+![](./statics/wireframe-posts.png)
 
 如果用户点击回复按钮，将看到下面这个页面，并以倒序的方式（最新的在第一个）显示帖子列表：
 
-![](https://simpleisbetterthancomplex.com/media/series/beginners-guide/1.11/part-2/wireframe-reply.png)
+![](./statics/wireframe-reply.png)
 
 绘制这些线框，你可以使用[draw.io](https://draw.io/)服务，它是免费的。
