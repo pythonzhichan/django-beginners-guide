@@ -1,11 +1,12 @@
 # Django入门与实践教程
 
-本教程是[A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/) 的翻译计划，由公众号「Python之禅」 发起，这个教程可能是史上最浅显易懂的 Django 入门教程，适合新手作为练手项目学习。
+Django 入门与实践教程是由咱们公众号「Python之禅」 发起的 [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/)翻译计划，可能是史上最浅显易懂的 Django 入门教程。
 
+如果你看了 Django 官方文档还是不知道如何做一个项目，那么这个教程将指引你从 0 到 1 完成一个贴近生产环境的真实项目，适合新手作为练手项目来学习。同时，它也是我们知识星球中实战项目的参考教程，中文翻译由咱们的球友协同完成。
 
-教程从最基础的软件安装、环境搭建开始，基于测试驱动开发。就算你没有任何实践经验，只要有基本的Python语法知识，你就可以跟着教程一步一步搭建出一个完成的论坛网站出来。
+教程从最基础的软件安装、环境搭建开始介绍，基于测试驱动开发，涉及到Django的各个方面，除了代码，还手把手教你如果购买云主机、域名、项目部署等。就算你没有任何实践经验，只要有基本的 Python 语法知识，你就可以跟着教程一步一步搭建出一个完整的论坛网站出来。
 
-教程总共有的7个大章节，我们把它拆分出更多的小节来学习，这样更有利于读者学习。目前还剩最后一个章节没有完成翻译，欢迎认领
+教程总共有7个大章节，我们把它拆分为 20 多个小节，这样更有利于读者循序渐进地学习。目前还剩最后一个章节没有完成翻译，欢迎大家认领（感兴趣的请联系我，完成后免费获得一本 Python 技术书）。已完成章节我校稿过一次，但难免还是有疏忽之处，如有错误欢迎指出。
 
 参与翻译的成员如下，感谢他们的付出
 
@@ -15,7 +16,6 @@
 * [wzhbingo](https://github.com/wzhbingo)
 * [CasualJi](https://github.com/CasualJi)
 * [hellodabin](https://github.com/hellodabin)
-
 
 
 ### 目录
@@ -69,4 +69,3 @@
 微信扫描二维码，关注公众号回复「django」可获取本教程的 PDF 电子书
 
 ![Python之禅](./statics/weixin.jpg)
-
