@@ -66,7 +66,7 @@
 [16]:	./ClassBasedViews.md
 [17]:   ./gettingstarted-3.md
 
-微信扫描二维码，关注公众号回复「django」可获取本教程的PDF电子书
+微信扫描二维码，关注公众号回复「django」可获取本教程的 PDF 电子书
 
 ![Python之禅](./statics/weixin.jpg)
 
